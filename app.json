@@ -1,0 +1,12 @@
+{
+  "name": "taskyn",
+  "displayName": "taskyn",
+  "expo": {
+    "name": "taskyn",
+    "slug": "taskyn",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
