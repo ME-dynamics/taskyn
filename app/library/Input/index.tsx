@@ -38,7 +38,10 @@ export const Input = (props: IInputProps) => {
     }
     const errors = [];
     for (let index = 0; index < validation.length; index++) {
-      errors.push(<Caption style={styles.error}>{`* ${validation[index]}`}</Caption>);
+      const text = validation[index];
+      errors.push(
+        <Caption key={text} style={styles.error}>{`* ${text}`}</Caption>
+      );
     }
     return errors;
   };
