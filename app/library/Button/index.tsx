@@ -22,7 +22,7 @@ export const Button = observer((props: IButtonProps) => {
     children,
     fullRadius,
   } = props;
-  const { styles } = styleGen({
+  const { styles, iconStyle } = styleGen({
     dark,
     disabled,
     mode,
@@ -30,11 +30,12 @@ export const Button = observer((props: IButtonProps) => {
     color,
     fullRadius,
   });
+  
   return (
     <View style={[styles.container]}>
       {Icon && !loading && (
         <View style={styles.icon}>
-          <Icon />
+          <Icon size={iconStyle.size} color={iconStyle.color} />
         </View>
       )}
       {loading && <Activity mode={mode} />}
@@ -46,4 +47,3 @@ export const Button = observer((props: IButtonProps) => {
     </View>
   );
 });
-

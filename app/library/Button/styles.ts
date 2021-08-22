@@ -85,5 +85,9 @@ export const styleGen = memoize((args: IButtonStyles) => {
       marginHorizontal: 4,
     },
   });
-  return { styles };
+  const iconStyle = {
+    size: 16,
+    color: getChosenColor()
+  };
+  return { styles, iconStyle };
 });
