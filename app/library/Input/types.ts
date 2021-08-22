@@ -8,7 +8,7 @@ import { ITime } from "../Timer/types";
 export interface IInputProps extends Omit<TextInputProps, "ref" | "onBlur"> {
   title: string;
   mode: "outlined" | "flat";
-  validate?: (text: string) => string;
+  validation?: string[];
   timer?: ITime;
 }
 
