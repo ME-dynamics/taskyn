@@ -1,8 +1,8 @@
 import { TextProps } from "react-native";
+import { TimerState } from "./state";
 
 export interface ITimerProps extends TextProps {
-  minute: number;
-  second: number;
+  state: TimerState;
 }
 
 export interface ITime {
