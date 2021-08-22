@@ -5,20 +5,26 @@ import { colors } from "../theme";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP("86"),
-    height: 46 + 24,
+    minHeight: 42 + 24,
     alignItems: "flex-end",
     justifyContent: "space-around",
     marginTop: 16
   },
-  paragraph: {
+  textContainer: {
+    width: "100%",
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 4,
+  },
+  paragraph: {
     fontSize: 16,
     fontWeight: "bold",
     color: colors.primaryPurple,
   },
   input: {
     width: widthPercentageToDP("86"),
-    height: 46,
+    height: 42,
     borderWidth: 1,
     borderRadius: 8,
   },
