@@ -10,15 +10,16 @@ export class InputState {
       setHeight: action,
     });
   }
+
   focused: boolean = false;
   height: number = 42;
-  focus() {
+  focus = () => {
     this.focused = true;
-  }
-  blur() {
+  };
+  blur = () => {
     this.focused = false;
-  }
-  setHeight(newHeight: number) {
+  };
+  setHeight = (newHeight: number) => {
     this.height = newHeight;
-  }
+  };
 }
