@@ -4,7 +4,7 @@ import { TapGestureHandler } from "react-native-gesture-handler";
 import { material } from "react-native-typography";
 import { Observer } from "mobx-react-lite";
 import { Timer } from "../Timer";
-import { Paragraph } from "../Typography";
+import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
 
@@ -14,7 +14,7 @@ import { colors } from "../theme";
 import { IInputProps, tOnContentSize } from "./types";
 
 export const Input = (props: IInputProps) => {
-  const { multiline, title, style, mode, timer } = props;
+  const { multiline, title, style, mode, timer, validation } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
   const onPress = () => {
@@ -31,6 +31,16 @@ export const Input = (props: IInputProps) => {
     if (height > 42) {
       state.setHeight(height);
     }
+  };
+  const renderErrors = () => {
+    if (!validation) {
+      return null;
+    }
+    const errors = [];
+    for (let index = 0; index < validation.length; index++) {
+      errors.push(<Caption style={styles.error}>{`* ${validation[index]}`}</Caption>);
+    }
+    return errors;
   };
   return (
     <Observer>
@@ -69,6 +79,7 @@ export const Input = (props: IInputProps) => {
               onContentSizeChange={multiline ? onContentSize : undefined}
             />
           </TapGestureHandler>
+          <View style={styles.errorContainer}>{renderErrors()}</View>
         </View>
       )}
     </Observer>
