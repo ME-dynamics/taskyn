@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { View, TextInput } from "react-native";
-import { TapGestureHandler } from "react-native-gesture-handler"
+import { View, TextInput, LayoutChangeEvent } from "react-native";
+import { TapGestureHandler } from "react-native-gesture-handler";
 import { material } from "react-native-typography";
 import { Observer } from "mobx-react-lite";
 import { Paragraph } from "../Typography";
@@ -10,9 +10,10 @@ import { InputState } from "./state";
 import { styles } from "./styles";
 import { colors } from "../theme";
 
-import { IInputProps } from "./types";
+import { IInputProps, tOnContentSize } from "./types";
 
 export const Input = (props: IInputProps) => {
+  const { multiline, title, style, mode } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
   const onPress = () => {
@@ -24,17 +25,24 @@ export const Input = (props: IInputProps) => {
   const onBlur = () => {
     state.blur();
   };
-  const { multiline, title, style, mode } = props;
+  const onContentSize = (event: tOnContentSize) => {
+    const { height } = event.nativeEvent.contentSize;
+    if(height > 42) {
+      state.setHeight(height);
+    } 
+    
+  };
   return (
     <Observer>
       {() => (
-        <TapGestureHandler onHandlerStateChange={onPress} >
-          <View
-            style={styles.container}
-            pointerEvents={state.focused ? "box-none" : "box-only"}
-          >
+        <View style={styles.container}>
+          <View style={styles.textContainer}>
             <Paragraph style={styles.paragraph}>{title}</Paragraph>
+            <Paragraph style={styles.paragraph}>timer</Paragraph>
+          </View>
+          <TapGestureHandler onHandlerStateChange={onPress}>
             <TextInput
+              pointerEvents={state.focused ? "box-none" : "box-only"}
               {...props}
               ref={inputRef}
               style={[
@@ -44,6 +52,7 @@ export const Input = (props: IInputProps) => {
                   : styles.disabledBorderColor,
                 material.body1,
                 mode === "flat" ? styles.flat : null,
+                multiline ? { height: state.height } : null,
                 style,
               ]}
               onBlur={onBlur}
@@ -51,9 +60,10 @@ export const Input = (props: IInputProps) => {
               textAlignVertical={multiline ? "top" : "center"}
               underlineColorAndroid={"transparent"}
               selectionColor={colors.primaryPurple}
+              onContentSizeChange={multiline ? onContentSize : undefined}
             />
-          </View>
-        </TapGestureHandler>
+          </TapGestureHandler>
+        </View>
       )}
     </Observer>
   );
