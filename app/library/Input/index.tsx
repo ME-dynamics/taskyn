@@ -3,6 +3,7 @@ import { View, TextInput, LayoutChangeEvent } from "react-native";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { material } from "react-native-typography";
 import { Observer } from "mobx-react-lite";
+import { Timer } from "../Timer";
 import { Paragraph } from "../Typography";
 
 import { InputState } from "./state";
@@ -13,7 +14,7 @@ import { colors } from "../theme";
 import { IInputProps, tOnContentSize } from "./types";
 
 export const Input = (props: IInputProps) => {
-  const { multiline, title, style, mode } = props;
+  const { multiline, title, style, mode, timer } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
   const onPress = () => {
@@ -27,10 +28,9 @@ export const Input = (props: IInputProps) => {
   };
   const onContentSize = (event: tOnContentSize) => {
     const { height } = event.nativeEvent.contentSize;
-    if(height > 42) {
+    if (height > 42) {
       state.setHeight(height);
-    } 
-    
+    }
   };
   return (
     <Observer>
@@ -38,7 +38,13 @@ export const Input = (props: IInputProps) => {
         <View style={styles.container}>
           <View style={styles.textContainer}>
             <Paragraph style={styles.paragraph}>{title}</Paragraph>
-            <Paragraph style={styles.paragraph}>timer</Paragraph>
+            {timer ? (
+              <Timer
+                style={styles.paragraph}
+                minute={timer.minute}
+                second={timer.second}
+              />
+            ) : null}
           </View>
           <TapGestureHandler onHandlerStateChange={onPress}>
             <TextInput
