@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Touchable } from "../Touchable";
 import { Paragraph } from "../Typography";
-import { Activity } from "./Activity";
+import { Loading } from "./Loading";
 // styles
 import { styleGen } from "./styles";
 // types
@@ -38,7 +38,7 @@ export const Button = observer((props: IButtonProps) => {
           <Icon size={iconStyle.size} color={iconStyle.color} />
         </View>
       )}
-      {loading && <Activity mode={mode} />}
+      {loading && <Loading mode={mode} />}
       <Paragraph numberOfLines={1} style={styles.text}>
         {children}
       </Paragraph>

@@ -7,7 +7,7 @@ import { activityStyleGen } from "./styles"
 // types
 import { IActivityProps } from "./types"
 
-export const Activity = observer((props: IActivityProps) => {
+export const Loading = observer((props: IActivityProps) => {
   const { mode } = props;
   const { activityColor, styles } = activityStyleGen(mode);
   return (
