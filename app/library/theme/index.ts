@@ -8,6 +8,7 @@ export const colors = {
   lightGrey: "#afafaf",
   grey: "#808080",
   darkGrey: "#545454",
+  error: "#b71c1c",
 };
 
 export const fonts = {
