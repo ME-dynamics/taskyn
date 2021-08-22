@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     minHeight: 42 + 24,
     alignItems: "flex-end",
     justifyContent: "space-around",
-    marginTop: 16
+    marginTop: 16,
   },
   textContainer: {
     width: "100%",
@@ -22,6 +22,15 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.primaryPurple,
   },
+  errorContainer: {
+    flexDirection: "row-reverse",
+    flexWrap: "wrap",
+    width: "100%",
+  },
+  error: {
+    color: colors.error,
+    marginLeft: 8,
+  },
   input: {
     width: widthPercentageToDP("86"),
     height: 42,
@@ -33,7 +42,7 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomWidth: 2,
-    borderRadius: 0
+    borderRadius: 0,
   },
   activeBorderColor: {
     borderColor: colors.primaryPurple,
