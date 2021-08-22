@@ -1,8 +1,8 @@
 export const colors = {
-  primaryPurple: "#7B1FA2",
-  lightPurple: "#ae52d4",
-  DarkPurple: "#4a0072",
-  transparentPurple: "rgba(114,0,202, 0.2)",
+  primaryPurple: "#5256c9",
+  lightPurple: "#8783fd",
+  darkPurple: "#082d97",
+  transparentPurple: "rgba(82, 86, 201, 0.2)",
   transparentGrey: "rgba(112,112,112,0.3)",
   transparentWhite: "rgba(255,255,255, 0.7)",
   lightGrey: "#afafaf",
