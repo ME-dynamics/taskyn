@@ -9,19 +9,26 @@ import { styles } from "./styles";
 export const Patients = observer(() => {
   return (
     <View style={styles.container}>
+    <View style={styles.searchBarContainer}>
       <SearchBar
-        value={""}
-        onChangeText={() => {}}
-        onClear={() => {}}
-        placeholder={"بیمار خود را اینجا سرچ کنید"}
+      onChangeText={()=>{}}
+      onClear={()=>{}}
+      value={""}
+      placeholder=""
+      
       />
+
+    </View>
+    <View style={styles.patientCardContainer}>
       <PatientCard
-        id={"uuid"}
-        name="سجاد سیف اله"
-        onPress={() => "hi"}
-        image="https://bootdey.com/img/Content/avatar/avatar7.png"
-        description="افسردگی ، مشکل اعصاب ، 25 جلسه ، تست ibtm افسردگی ، مشکل اعصاب ، 25 جلسه ، تست ibtm"
+      description={"سیجاد سجاد شسشسذ خ ب"}
+      id=""
+      image={""}
+      name="سجاد سیف اله"
+
+            
       />
+    </View>
     </View>
   );
 });
