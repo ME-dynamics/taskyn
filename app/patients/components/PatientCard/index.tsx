@@ -1,30 +1,27 @@
 import React from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { styles } from "./style";
+import { Caption, Title, Touchable } from "../../../library";
+import { styles } from "./styles";
 import { IPatientCardProps } from "./type";
 
 export const PatientCard = observer((props: IPatientCardProps) => {
   const { image, name, description, onPress } = props;
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.row}>
-        <Image source={{ uri: image }} style={styles.pic} />
-        <View>
-          <View style={styles.nameContainer}>
-            <Text style={styles.nameTxt}>{name}</Text>
-            <View style={styles.msgContainer}>
-              <Text style={styles.msgTxt}>{status}</Text>
-            </View>
-          </View>
-          <View style={styles.mblTxt1}>
-            <Text numberOfLines={2} style={styles.mblTxt}>
-              {description}
-            </Text>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image source={{ uri: image }} style={styles.patientImage} />
+      </View>
+      <View style={styles.infoContainer}>
+        <View style={styles.titleContainer}>
+          <Title>{name}</Title>
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Caption>{description}</Caption>
         </View>
       </View>
-    </TouchableOpacity>
+      <Touchable onPress={onPress} rippleColor={"grey"} />
+    </View>
   );
 });
