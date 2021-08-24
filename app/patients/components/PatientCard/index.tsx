@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Caption, Title, Touchable } from "../../../library";
 import { styles } from "./styles";
-import { IPatientCardProps } from "./type";
+import { IPatientCardProps } from "./types";
 
 export const PatientCard = observer((props: IPatientCardProps) => {
   const { image, name, description, onPress } = props;
