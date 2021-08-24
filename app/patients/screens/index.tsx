@@ -16,6 +16,7 @@ export const Patients = observer(() => {
         placeholder={"بیمار خود را اینجا سرچ کنید"}
       />
       <PatientCard
+        id={"uuid"}
         name="سجاد سیف اله"
         onPress={() => "hi"}
         image="https://bootdey.com/img/Content/avatar/avatar7.png"
