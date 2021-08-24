@@ -18,16 +18,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputContainer: {
-    flex: 6,
+    flex: 8,
   },
   input: {
     flex: 1,
-    fontFamily: "Vazir-Regular-UI"
+    fontFamily: "Vazir-Regular-UI",
   },
 });
 
 export const iconStyle = {
   size: 24,
   color: colors.grey,
-  selectionColor: colors.darkPurple
-}
+  selectionColor: colors.darkPurple,
+};
