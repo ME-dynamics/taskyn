@@ -1,9 +1,10 @@
 import React from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
+import { observer } from "mobx-react-lite";
 import { styles } from "./style";
 import { IPatientCardProps } from "./type";
 
-export const PatientCard = (props: IPatientCardProps) => {
+export const PatientCard = observer((props: IPatientCardProps) => {
   const { image, name, description, onPress } = props;
 
   return (
@@ -26,4 +27,4 @@ export const PatientCard = (props: IPatientCardProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
