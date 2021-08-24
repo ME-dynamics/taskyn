@@ -1,14 +1,20 @@
 import React from "react";
 import { View } from "react-native";
-import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react-lite";
 import { PatientCard } from "../components/PatientCard";
-// import { Se } from '../../library'
+import { SearchBar } from "../../library";
 
+import { styles } from "./styles";
 
 export const Patients = observer(() => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    {/* <Search/> */}
+    <View style={styles.container}>
+      <SearchBar
+        value={""}
+        onChangeText={() => {}}
+        onClear={() => {}}
+        placeholder={"بیمار خود را اینجا سرچ کنید"}
+      />
       <PatientCard
         name="سجاد سیف اله"
         onPress={() => "hi"}
@@ -17,4 +23,4 @@ export const Patients = observer(() => {
       />
     </View>
   );
-})
+});
