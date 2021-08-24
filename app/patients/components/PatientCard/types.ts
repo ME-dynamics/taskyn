@@ -1,7 +1,6 @@
-export interface IPatientCardProps{
+import { IPatients } from "../../entities/types";
+
+export interface IPatientCardProps extends IPatients{
   onPress?: () => any;
-  description: string;
-  image: string;
-  name: string;
   //status: "active" | " deactivate";
 }
