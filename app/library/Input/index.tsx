@@ -3,7 +3,7 @@ import { View, TextInput, LayoutChangeEvent } from "react-native";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { material } from "react-native-typography";
 import { Observer } from "mobx-react-lite";
-import { Timer } from "../Timer";
+import { Timer, TimerState } from "../Timer";
 import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
@@ -45,19 +45,23 @@ export const Input = (props: IInputProps) => {
     }
     return errors;
   };
+  const timerState = timer ? new TimerState(timer) : null;
+  const renderTimer = () => {
+    if (!timer) {
+      return null;
+    }
+    if(!timerState) {
+      return null
+    }
+    return <Timer state={timerState} />;
+  };
   return (
     <Observer>
       {() => (
         <View style={styles.container}>
           <View style={styles.textContainer}>
             <Paragraph style={styles.paragraph}>{title}</Paragraph>
-            {timer ? (
-              <Timer
-                style={styles.paragraph}
-                minute={timer.minute}
-                second={timer.second}
-              />
-            ) : null}
+            {renderTimer()}
           </View>
           <TapGestureHandler onHandlerStateChange={onPress}>
             <TextInput
