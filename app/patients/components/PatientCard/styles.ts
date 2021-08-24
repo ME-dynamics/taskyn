@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import { colors } from "../../../library/theme";
 export const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row-reverse",
+  container: {
     width: widthPercentageToDP("86"),
+    flexDirection: "row-reverse",
     alignItems: "center",
     borderColor: colors.lightGrey,
     backgroundColor: "white",
     borderBottomWidth: 1,
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 10,
   },
   pic: {
