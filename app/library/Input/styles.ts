@@ -5,17 +5,16 @@ import { colors } from "../theme";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP("86"),
-    minHeight: 42 + 24,
+    minHeight: 42 + 26,
     alignItems: "flex-end",
     justifyContent: "space-around",
-    marginTop: 16,
   },
   textContainer: {
     width: "100%",
     flexDirection: "row-reverse",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
-    marginBottom: 4,
+    paddingBottom: 4,
   },
   paragraph: {
     fontSize: 16,

@@ -12,7 +12,7 @@ export interface IButtonProps {
   dark?: boolean;
   loading?: boolean;
   Icon?: (props: IIconProps) => ReactElement;
-  onPress: () => void;
+  onPress?: () => void;
   rippleColor: "lightGrey" | "grey" | "darkGrey";
   disabled?: boolean;
   children: string;

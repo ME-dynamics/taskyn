@@ -1,33 +1,35 @@
 import { StyleSheet } from "react-native";
-import { color } from "react-native-reanimated";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../theme";
-
+import { colors } from "../../../library/theme";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP("86"),
-    height: 56,
+    height: 86,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 8,
     elevation: 2,
+    overflow: "hidden",
   },
-  iconContainer: {
-    flex: 1,
+  imageContainer: {
+    flex: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  inputContainer: {
-    flex: 8,
+  patientImage: {
+    width: 72,
+    height: 72,
+    borderRadius: 72 / 2,
   },
-  input: {
-    flex: 1,
-    fontFamily: "Vazir-Regular-UI",
+  infoContainer: {
+    flex: 10,
+  },
+  titleContainer: {
+    flex: 3,
+    justifyContent: "flex-end",
+  },
+  descriptionContainer: {
+    flex: 4,
+    justifyContent: "center",
   },
 });
-
-export const iconStyle = {
-  size: 24,
-  color: colors.grey,
-  selectionColor: colors.darkPurple,
-};
