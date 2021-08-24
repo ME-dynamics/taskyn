@@ -1,12 +1,14 @@
 import React from "react";
 import { View } from "react-native";
-import { PatientCard } from "../components/PatientCart";
-import { search } from '../../l'
-export default function index() {
+import { observer } from "mobx-react-lite"
+import { PatientCard } from "../components/PatientCard";
+// import { Se } from '../../library'
+
+
+export const Patients = observer(() => {
   return (
-    <View>
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Search/>
+    {/* <Search/> */}
       <PatientCard
         name="سجاد سیف اله"
         onPress={() => "hi"}
@@ -15,4 +17,4 @@ export default function index() {
       />
     </View>
   );
-}
+})
