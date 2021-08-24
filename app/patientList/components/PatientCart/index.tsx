@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 import { styles } from "./style";
 import { CartType } from "./type";
 
-export const PatiemtCart = (props: CartType) => {
+export const PatientCard = (props: CartType) => {
   const { image, patientName, description, onPress } = props;
 
   return (
