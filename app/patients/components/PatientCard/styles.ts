@@ -4,51 +4,32 @@ import { colors } from "../../../library/theme";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP("86"),
+    height: 86,
     flexDirection: "row-reverse",
-    alignItems: "center",
-    borderColor: colors.lightGrey,
     backgroundColor: "white",
-    borderBottomWidth: 1,
     borderRadius: 8,
-    padding: 10,
+    elevation: 2,
+    overflow: "hidden",
   },
-  pic: {
-    borderRadius: 30,
-    width: 70,
-    height: 70,
-  },
-  nameContainer: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
-    width: 280,
-  },
-  nameTxt: {
-    direction: "rtl",
-    fontWeight: "bold",
-    color: "black",
-    fontSize: 18,
-    marginRight: 10,
-  },
-  mblTxt: {
-    fontWeight: "200",
-    color: colors.darkGrey,
-    fontSize: 13,
-  },
-  mblTxt1: {
-    left: 20,
-    top: 5,
-    width: 250,
-  },
-
-  msgContainer: {
-    flexDirection: "row-reverse",
+  imageContainer: {
+    flex: 3,
     alignItems: "center",
+    justifyContent: "center",
   },
-  msgTxt: {
-    fontWeight: "400",
-    color: colors.darkPurple,
-    
-    fontSize: 16,
-    marginRight: 12,
+  patientImage: {
+    width: 72,
+    height: 72,
+    borderRadius: 72 / 2,
+  },
+  infoContainer: {
+    flex: 10,
+  },
+  titleContainer: {
+    flex: 3,
+    justifyContent: "flex-end",
+  },
+  descriptionContainer: {
+    flex: 4,
+    justifyContent: "center",
   },
 });
