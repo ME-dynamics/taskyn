@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
+import { Task } from './app/task/screens'
 function FirstTab() {
   return (
     <View
@@ -15,7 +16,11 @@ function FirstTab() {
 }
 
 function SecondTab() {
-  return <Patients />;
+  return (
+  
+    <Task />
+
+  );
 }
 
 function ThirdTab() {
