@@ -4,23 +4,18 @@ import { colors } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import {Patients} from './app/patients/screens'
+import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
 function FirstTab() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    </View>
+    <View
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    ></View>
   );
 }
 
 function SecondTab() {
-  return (
-   
-    <Patients>
-
-    </Patients>
-  
-  );
+  return <Patients />;
 }
 
 function ThirdTab() {
@@ -32,8 +27,7 @@ function ThirdTab() {
         alignItems: "center",
         backgroundColor: "white",
       }}
-    >
-     </View>
+    ></View>
   );
 }
 
@@ -45,6 +39,7 @@ function MyTabs() {
       initialRouteName="خانه"
       screenOptions={{
         tabBarActiveTintColor: colors.primaryPurple,
+        
       }}
     >
       <Tab.Screen
@@ -83,14 +78,13 @@ function MyTabs() {
   );
 }
 
- const App=() => {
+const App = () => {
   return (
-     <NavigationContainer>
+    <NavigationContainer>
       <MyTabs />
     </NavigationContainer>
- 
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
