@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.5",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/checkbox": "^0.5.8",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "expo": "^42.0.0",
+    "expo-secure-store": "~10.2.0",
     "expo-splash-screen": "~0.11.2",
     "expo-updates": "~0.8.2",
     "fast-memoize": "^2.5.2",
