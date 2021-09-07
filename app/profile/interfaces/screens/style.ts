@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     top: 90,
     justifyContent: "flex-start",
     borderRadius: 20,
+    
   },
   bodyShadow: {
     borderRadius: 20,

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Image, Alert } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons,FontAwesome5,Octicons ,Foundation} from "@expo/vector-icons";
 import { Shadow } from "react-native-shadow-2";
 
 
@@ -14,6 +14,36 @@ export const Profile = () => {
     return (
       <MaterialCommunityIcons
         name={"account-circle"}
+        size={size}
+        color={color}
+      />
+    );
+  };
+  const renderTasks = (props: IIconProps) => {
+    const { color, size } = props;
+    return (
+      <FontAwesome5
+        name={"tasks"}
+        size={size}
+        color={color}
+      />
+    );
+  };
+  const renderChecklist = (props: IIconProps) => {
+    const { color, size } = props;
+    return (
+      <Octicons
+        name={"checklist"}
+        size={size}
+        color={color}
+      />
+    );
+  };
+  const renderClipboardNotes = (props: IIconProps) => {
+    const { color, size } = props;
+    return (
+      <Foundation
+        name={"clipboard-notes"}
         size={size}
         color={color}
       />
@@ -34,17 +64,17 @@ export const Profile = () => {
             onPress={() => Alert.alert("hi1")}
           />
           <MenuItem
-            Icon={renderAccountCircle}
+            Icon={renderTasks}
             title="تمرین"
             onPress={() => Alert.alert("hi1")}
           />
           <MenuItem
-            Icon={renderAccountCircle}
+            Icon={renderChecklist}
             title="فرم ها"
             onPress={() => Alert.alert("hi1")}
           />
           <MenuItem
-            Icon={renderAccountCircle}
+            Icon={renderClipboardNotes}
             title="یادداشت"
             onPress={() => Alert.alert("hi1")}
           />
