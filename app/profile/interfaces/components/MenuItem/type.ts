@@ -8,7 +8,6 @@ interface IIconProps {
 }
 export interface IMenuItemProps {
     title: string;
-
     style?: StyleProp<ViewStyle>;
     Icon: (props:IIconProps) => ReactElement;
     onPress?: () => any;
