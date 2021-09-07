@@ -14,8 +14,9 @@ export function MenuItem(props: IMenuItemProps) {
         size={30}
         color={"grey"}
         />
-     
+        <View style={{flex:1,alignItems:"flex-end", paddingRight:12}}  > 
         <Text style={styles.text}>{title}</Text>
+        </View>
         <MaterialCommunityIcons name="chevron-left" color={"grey"} size={30} />
       </View>
       <Touchable onPress={onPress} rippleColor={"lightGrey"} />

@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
       height: 72,
     },
     text: {
-      right: 60,
       color: "black",
       fontSize: 20,
       fontWeight: "bold",
