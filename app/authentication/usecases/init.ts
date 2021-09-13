@@ -8,12 +8,12 @@ export async function init() {
       storage.retrieve("token_expires_at"),
       storage.retrieve("refresh_expires_at"),
     ]);
-  auth.setRefreshToken(refreshToken);
-  auth.setToken(token);
+  auth.setRefreshToken(refreshToken || "");
+  auth.setToken(token || "");
   auth.setTokenExpire(
-    tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : undefined
+    tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : -1
   );
   auth.setRefreshExpire(
-    refreshExpiresAt ? parseInt(refreshExpiresAt, 10) : undefined
+    refreshExpiresAt ? parseInt(refreshExpiresAt, 10) : -1
   );
 }
