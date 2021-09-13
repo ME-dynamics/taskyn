@@ -6,21 +6,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
-import { Task } from './app/task/screens'
+import { Task } from "./app/task/screens";
+import { Authentication } from "./app/authentication";
+
 function FirstTab() {
-  return (
-    <View
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    ></View>
-  );
+  return <Authentication />;
 }
 
 function SecondTab() {
-  return (
-  
-    <Task />
-
-  );
+  return <Task />;
 }
 
 function ThirdTab() {
@@ -44,7 +38,6 @@ function MyTabs() {
       initialRouteName="خانه"
       screenOptions={{
         tabBarActiveTintColor: colors.primaryPurple,
-        
       }}
     >
       <Tab.Screen
