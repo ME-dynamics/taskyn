@@ -7,9 +7,12 @@ export class Auth {
       token: observable,
       tokenExpiresAt: observable,
       refreshExpiresAt: observable,
+      otpToken: observable,
       setToken: action,
       setRefreshToken: action,
+      setOtpToken: action,
       loggedIn: computed,
+      otpMode: computed,
     });
   }
   refreshToken: string = "";
@@ -34,5 +37,8 @@ export class Auth {
   }
   get loggedIn(): boolean {
     return !!this.refreshToken && !!this.token;
+  }
+  get otpMode(): boolean {
+    return !!this.otpToken;
   }
 }
