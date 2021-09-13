@@ -49,4 +49,7 @@ export const styles = StyleSheet.create({
   disabledBorderColor: {
     borderColor: colors.transparentPurple,
   },
+  timerColor: {
+    color: colors.primaryPurple
+  }
 });
