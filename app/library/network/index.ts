@@ -1,6 +1,6 @@
 import { IRequest, IResponse } from "./types";
 
-const serverUrl = "https://localhost:13000";
+const serverUrl = "https://dangerous-hound-57.loca.lt";
 
 export async function request(info: IRequest): Promise<IResponse> {
   try {
@@ -10,17 +10,18 @@ export async function request(info: IRequest): Promise<IResponse> {
       headers: {
         Authorization: token || "no-token",
         "Content-type": "application/json",
+        Accept: "application/json",
         "Accept-Encoding": "gzip",
       },
       body: body ? JSON.stringify(body) : undefined,
     });
-    const payload = await response.json();
+    const data = await response.json();
     const { ok, status } = response;
     return {
       success: ok,
       httpStatus: status,
-      payload: ok ? payload : undefined,
-      error: !ok ? payload?.error : undefined,
+      payload: ok ? data.payload : undefined,
+      error: !ok ? data?.error : undefined,
     };
   } catch (err) {
     // show error
