@@ -4,17 +4,20 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
-  searchBarContainer:{
-    flex:1,
-    alignItems:"center",
-    justifyContent:"center",
+  searchBarContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row-reverse",
   },
-  patientCardContainer:{    
-    flex:9,
-    alignItems:"center",
-    
-
-  }
+  patientCardContainer: {
+    flex: 9,
+    //alignItems:"center",
+  },
+  iconContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
