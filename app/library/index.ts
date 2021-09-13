@@ -4,3 +4,5 @@ export { colors } from "./theme";
 export { Touchable } from "./Touchable";
 export { Caption, Headline, Paragraph, Subheading, Title } from "./Typography";
 export { SearchBar } from "./SearchBar";
+export { request } from "./network";
+export { secureStorage, storage } from "./storage";
