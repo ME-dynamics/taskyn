@@ -1,6 +1,6 @@
 import { deleteItemAsync, getItemAsync, setItemAsync } from "expo-secure-store";
 
-export async function remove(key: string): Promise<void> {
+async function remove(key: string): Promise<void> {
   try {
     await deleteItemAsync(key);
   } catch (error) {
@@ -9,7 +9,7 @@ export async function remove(key: string): Promise<void> {
   }
 }
 
-export async function retrieve(key: string): Promise<string | undefined> {
+async function retrieve(key: string): Promise<string | undefined> {
   try {
     const result = await getItemAsync(key);
     return result ? result : undefined;
@@ -19,10 +19,16 @@ export async function retrieve(key: string): Promise<string | undefined> {
   }
 }
 
-export async function add(key: string, value: string): Promise<void> {
+async function add(key: string, value: string): Promise<void> {
   try {
     await setItemAsync(key, value);
   } catch (error) {
     // send this error to sentry or some where
   }
 }
+
+export const secureStorage = {
+  remove,
+  retrieve,
+  add,
+};
