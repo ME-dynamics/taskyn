@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: "white",
+    fontSize: 26
   },
   authContainer: {
     flex: 3,
