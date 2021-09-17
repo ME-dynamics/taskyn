@@ -8,9 +8,13 @@ export class Auth {
       tokenExpiresAt: observable,
       refreshExpiresAt: observable,
       otpToken: observable,
+      role: observable,
       setToken: action,
       setRefreshToken: action,
       setOtpToken: action,
+      setRole: action,
+      setRefreshExpire: action,
+      setTokenExpire: action,
       loggedIn: computed,
       otpMode: computed,
     });
@@ -18,8 +22,9 @@ export class Auth {
   refreshToken: string = "";
   token: string = "";
   otpToken: string = "";
-  tokenExpiresAt: number = -1;
-  refreshExpiresAt: number = -1;
+  tokenExpiresAt: number = 0;
+  refreshExpiresAt: number = 0;
+  role: string = "";
   setToken(newToken: string) {
     this.token = newToken;
   }
@@ -34,6 +39,9 @@ export class Auth {
   }
   setRefreshExpire(time: number) {
     this.refreshExpiresAt = time;
+  }
+  setRole(role: string) {
+    this.role = role;
   }
   get loggedIn(): boolean {
     return !!this.refreshToken && !!this.token;
