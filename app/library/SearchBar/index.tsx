@@ -9,7 +9,7 @@ import { styles, iconStyle } from "./styles";
 
 import { ISearchBarProps } from "./types";
 
-export const SearchBar = observer((props: ISearchBarProps) => {
+function SearchBarComponent(props: ISearchBarProps) {
   const { onChangeText, onClear, value, placeholder } = props;
   const { size, color,selectionColor } = iconStyle;
   return (
@@ -36,4 +36,6 @@ export const SearchBar = observer((props: ISearchBarProps) => {
       </View>
     </View>
   );
-});
+};
+
+export const SearchBar = observer(SearchBarComponent);

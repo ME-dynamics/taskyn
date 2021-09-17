@@ -1,2 +1,2 @@
-export * as secureStorage from "./secureStorage";
-export * as storage from "./storage";
+export { secureStorage } from "./secureStorage";
+export { storage } from "./storage";
