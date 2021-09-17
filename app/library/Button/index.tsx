@@ -11,6 +11,7 @@ import { IButtonProps } from "./types";
 function ButtonComponent(props: IButtonProps) {
   const {
     mode,
+    bold,
     size,
     Icon,
     loading,
@@ -24,13 +25,14 @@ function ButtonComponent(props: IButtonProps) {
   } = props;
   const { styles, iconStyle } = styleGen({
     dark,
+    bold,
     disabled,
     mode,
     size,
     color,
     fullRadius,
   });
-  
+
   return (
     <View style={[styles.container]}>
       {Icon && !loading && (
