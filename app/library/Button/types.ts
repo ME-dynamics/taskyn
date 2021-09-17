@@ -6,9 +6,12 @@ interface IIconProps {
   color: string;
   size: number;
 }
+
+export type tSize = "small" | "medium" | "big";
+
 export interface IButtonProps {
   mode: tMode;
-  size: "small" | "medium" | "big";
+  size: tSize;
   dark?: boolean;
   loading?: boolean;
   Icon?: (props: IIconProps) => ReactElement;
@@ -24,9 +27,9 @@ export interface IActivityProps {
   mode: tMode;
 }
 
-export interface IButtonStyles {
-  mode: "text" | "outlined" | "contained";
-  size: "small" | "medium" | "big";
+export interface  IButtonStyles {
+  mode: tMode;
+  size: tSize;
   dark?: boolean;
   disabled?: boolean;
   color?: string;
