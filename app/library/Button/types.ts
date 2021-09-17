@@ -11,6 +11,7 @@ export type tSize = "small" | "medium" | "big";
 
 export interface IButtonProps {
   mode: tMode;
+  bold?: boolean;
   size: tSize;
   dark?: boolean;
   loading?: boolean;
@@ -29,6 +30,7 @@ export interface IActivityProps {
 
 export interface  IButtonStyles {
   mode: tMode;
+  bold?: boolean;
   size: tSize;
   dark?: boolean;
   disabled?: boolean;

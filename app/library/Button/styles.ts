@@ -58,12 +58,12 @@ function buttonColor(dark: boolean | undefined, mode: tMode, color: string | und
 
 
 function buttonStyle(args: IButtonStyles) {
-  const { mode, size, dark, disabled, color, fullRadius } = args;
+  const { mode,bold, size, dark, disabled, color, fullRadius } = args;
   
   const styles = StyleSheet.create({
     container: {
       minWidth: buttonMinWidthCalc(size),
-      maxWidth: size === "big" ? "86%" : widthPercentageToDP("52%"),
+      maxWidth: size === "big" ? widthPercentageToDP("86") : widthPercentageToDP("52"),
       height: buttonHeightCalc(size),
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
       backgroundColor:
@@ -82,16 +82,17 @@ function buttonStyle(args: IButtonStyles) {
       elevation: mode === "contained" ? 2 : 0,
     },
     text: {
-      fontSize: size === "big" ? 14 : 12,
+      fontSize: size === "big" ? 16 : 14,
+      fontFamily: bold ? "Vazir-Bold-UI": "Vazir-Regular-UI",
       color: buttonColor(dark, mode, color),
       marginHorizontal: 4,
     },
     icon: {
-      marginHorizontal: 4,
+      marginHorizontal: 1,
     },
   });
   const iconStyle = {
-    size: 16,
+    size: size === "big" ? 22 : 16 ,
     color: buttonColor(dark, mode, color)
   };
   return { styles, iconStyle };
