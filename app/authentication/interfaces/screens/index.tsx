@@ -1,5 +1,5 @@
 import React from "react";
-import { PlatformColor, View } from "react-native";
+import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Input, Button, Headline } from "../../../library";
 
@@ -8,6 +8,7 @@ import {
   onPhoneChange,
   passwordlessStart,
   onOtpNumberChange,
+  passwordlessVerify,
 } from "../../usecases";
 import { styles } from "./styles";
 import { confirm, phone } from "./constant";
@@ -18,7 +19,6 @@ export const Authentication = observer(() => {
       <View style={styles.titleContainer}>
         <Headline style={styles.title}>{"ورود به تسکین"}</Headline>
       </View>
-
       <View style={styles.authContainer}>
         <View style={styles.itemsContainer}>
           <View style={styles.itemsMargin}>
@@ -39,7 +39,7 @@ export const Authentication = observer(() => {
 
           <View style={styles.itemsMargin}>
             <Button
-              onPress={passwordlessStart}
+              onPress={auth.otpMode ? passwordlessVerify : passwordlessStart}
               mode={"contained"}
               rippleColor={"lightGrey"}
               size={"big"}
