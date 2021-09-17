@@ -5,11 +5,14 @@ import { material } from "react-native-typography";
 
 import { ITextProps } from "./types";
 
-export const Subheading =  observer((props: ITextProps) => {
+function SubheadingComponent(props: ITextProps)  {
   const { children, style} = props;
   return (
     <Text {...props} style={[material.subheading, style]}>
       {children}
     </Text>
   );
-})
+}
+
+
+export const Subheading = observer(SubheadingComponent);

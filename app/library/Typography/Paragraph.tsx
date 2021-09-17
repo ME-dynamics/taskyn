@@ -5,11 +5,13 @@ import { material } from "react-native-typography";
 
 import { ITextProps } from "./types";
 
-export const Paragraph = observer((props: ITextProps) => {
+function ParagraphComponent(props: ITextProps) {
   const { children, style } = props;
   return (
-    <Text {...props} style={[material.body1, style ]}>
+    <Text {...props} style={[material.body1, style]}>
       {children}
     </Text>
   );
-})
+}
+
+export const Paragraph = observer(ParagraphComponent);

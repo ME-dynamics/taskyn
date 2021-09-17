@@ -13,26 +13,26 @@ import { colors } from "../theme";
 
 import { IInputProps, tOnContentSize } from "./types";
 
-export const Input = (props: IInputProps) => {
+export function Input(props: IInputProps) {
   const { multiline, title, style, mode, timer, validation, value } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
-  const onPress = () => {
+  function onPress() {
     if (inputRef) {
       state.focus();
       inputRef.current?.focus();
     }
   };
-  const onBlur = () => {
+  function onBlur() {
     state.blur();
   };
-  const onContentSize = (event: tOnContentSize) => {
+  function onContentSize(event: tOnContentSize)  {
     const { height } = event.nativeEvent.contentSize;
     if (height > 42) {
       state.setHeight(height);
     }
   };
-  const renderErrors = () => {
+  function renderErrors(){
     if (!validation) {
       return null;
     }
@@ -46,7 +46,7 @@ export const Input = (props: IInputProps) => {
     return errors;
   };
   const timerState = timer ? new TimerState(timer) : null;
-  const renderTimer = () => {
+  function renderTimer() {
     if (!timer) {
       return null;
     }

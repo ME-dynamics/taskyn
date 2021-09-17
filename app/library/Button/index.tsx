@@ -8,7 +8,7 @@ import { Loading } from "./Loading";
 import { styleGen } from "./styles";
 // types
 import { IButtonProps } from "./types";
-export const Button = observer((props: IButtonProps) => {
+function ButtonComponent(props: IButtonProps) {
   const {
     mode,
     size,
@@ -46,4 +46,6 @@ export const Button = observer((props: IButtonProps) => {
       <Touchable onPress={onPress} rippleColor={rippleColor} />
     </View>
   );
-});
+}
+
+export const Button = observer(ButtonComponent);
