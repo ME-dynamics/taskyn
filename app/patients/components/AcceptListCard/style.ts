@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 9,
+   
   },
   titleContainer: {
     flex: 3,
@@ -32,4 +33,9 @@ export const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-start",
   },
+  buttonContainer:{
+    flexDirection:"row",
+    justifyContent:"flex-end",
+    bottom:15,
+  }
 });

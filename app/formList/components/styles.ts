@@ -1,35 +1,36 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../../../library/theme";
+import { colors } from "../../library";
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("100"),
-    height: 120,
+    width: widthPercentageToDP("86"),
+    height: 66,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 8,
     elevation: 2,
     overflow: "hidden",
   },
-  imageContainer: {
+  iconContainer: {
     flex: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  patientImage: {
-    width: 76,
-    height: 86,
-    borderRadius: 22 / 2,
+  formIcon: {
+    width: 72,
+    height: 72,
+    borderRadius: 72 / 2,
   },
   infoContainer: {
-    flex: 9,
+    flex: 10,
   },
-  titleContainer: {
-    flex: 3,
+  persianNameContainer: {
+    flex: 2,
+    justifyContent: "flex-end",
+  },
+  englishNameContainer: {
+    flex: 2,
     justifyContent: "center",
-  },
-  descriptionContainer: {
-    flex: 4,
-    justifyContent: "flex-start",
+    
   },
 });
