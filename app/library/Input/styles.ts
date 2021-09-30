@@ -36,6 +36,9 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
   },
+  inputFont: {
+    fontFamily: "Vazir-Regular-UI"
+  },
   flat: {
     borderTopWidth: 0,
     borderLeftWidth: 0,
@@ -49,4 +52,7 @@ export const styles = StyleSheet.create({
   disabledBorderColor: {
     borderColor: colors.transparentPurple,
   },
+  timerColor: {
+    color: colors.primaryPurple
+  }
 });

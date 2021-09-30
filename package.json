@@ -27,7 +27,7 @@
     "react-native-reanimated": "~2.2.0",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "3.2.0",
-    "react-native-screens": "^3.6.0",
+    "react-native-screens": "~3.4.0",
     "react-native-shadow-2": "^4.0.0",
     "react-native-svg": "12.1.1",
     "react-native-typography": "^1.4.1",
@@ -36,7 +36,7 @@
     "recyclerlistview": "^3.0.5"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
+    "@babel/core": "~7.15.5",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "babel-preset-expo": "8.3.0",

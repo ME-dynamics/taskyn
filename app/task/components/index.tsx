@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CheckBox from "@react-native-community/checkbox";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
@@ -10,15 +11,23 @@ export function TaskItem(props: ITaskItemProps) {
   const { text } = props;
   return (
     <View style={styles.checkboxContainer}>
-      <Paragraph style={styles.textContainer}>{text}</Paragraph>
+      <View style={styles.textContainer}>
+        <Paragraph>{text}</Paragraph>
+      </View>
+
       <View style={styles.buttonContainer}>
-        <Button mode={"text"} size={"small"} rippleColor={"lightGrey"}>
+        <Button
+          mode={"text"}
+          bold
+          size={"small"}
+          rippleColor={"lightGrey"}
+        >
           {"ویرایش"}
         </Button>
-        <Button mode={"text"} size={"small"} rippleColor={"lightGrey"}>
+        <Button mode={"text"} bold size={"small"} rippleColor={"lightGrey"}>
           {"حذف"}
         </Button>
-        <Button mode={"text"} size={"small"} rippleColor={"lightGrey"}>
+        <Button mode={"text"} bold size={"small"} rippleColor={"lightGrey"}>
           {"انجام شد"}
         </Button>
         {/* <CheckBox

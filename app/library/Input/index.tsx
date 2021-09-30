@@ -13,26 +13,26 @@ import { colors } from "../theme";
 
 import { IInputProps, tOnContentSize } from "./types";
 
-export const Input = (props: IInputProps) => {
-  const { multiline, title, style, mode, timer, validation } = props;
+export function Input(props: IInputProps) {
+  const { multiline, title, style, mode, timer, validation, value } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
-  const onPress = () => {
+  function onPress() {
     if (inputRef) {
       state.focus();
       inputRef.current?.focus();
     }
   };
-  const onBlur = () => {
+  function onBlur() {
     state.blur();
   };
-  const onContentSize = (event: tOnContentSize) => {
+  function onContentSize(event: tOnContentSize)  {
     const { height } = event.nativeEvent.contentSize;
     if (height > 42) {
       state.setHeight(height);
     }
   };
-  const renderErrors = () => {
+  function renderErrors(){
     if (!validation) {
       return null;
     }
@@ -46,14 +46,14 @@ export const Input = (props: IInputProps) => {
     return errors;
   };
   const timerState = timer ? new TimerState(timer) : null;
-  const renderTimer = () => {
+  function renderTimer() {
     if (!timer) {
       return null;
     }
-    if(!timerState) {
-      return null
+    if (!timerState) {
+      return null;
     }
-    return <Timer state={timerState} />;
+    return <Timer style={styles.timerColor} state={timerState} />;
   };
   return (
     <Observer>
@@ -63,28 +63,35 @@ export const Input = (props: IInputProps) => {
             <Paragraph style={styles.paragraph}>{title}</Paragraph>
             {renderTimer()}
           </View>
-          <TapGestureHandler onHandlerStateChange={onPress}>
-            <TextInput
-              pointerEvents={state.focused ? "box-none" : "box-only"}
-              {...props}
-              ref={inputRef}
-              style={[
-                styles.input,
-                state.focused
-                  ? styles.activeBorderColor
-                  : styles.disabledBorderColor,
-                material.body1,
-                mode === "flat" ? styles.flat : null,
-                multiline ? { height: state.height } : null,
-                style,
-              ]}
-              onBlur={onBlur}
-              textAlign={"right"}
-              textAlignVertical={multiline ? "top" : "center"}
-              underlineColorAndroid={"transparent"}
-              selectionColor={colors.primaryPurple}
-              onContentSizeChange={multiline ? onContentSize : undefined}
-            />
+          <TapGestureHandler onBegan={onPress}>
+            <View
+              pointerEvents={
+                state.focused ? "box-none" : value ? "box-none" : "box-only"
+              }
+            >
+              <TextInput
+                {...props}
+                ref={inputRef}
+                style={[
+                  styles.input,
+                  state.focused
+                    ? styles.activeBorderColor
+                    : styles.disabledBorderColor,
+                  value ? styles.activeBorderColor : null,
+                  material.body1,
+                  styles.inputFont,
+                  mode === "flat" ? styles.flat : null,
+                  multiline ? { height: state.height } : null,
+                  style,
+                ]}
+                onBlur={onBlur}
+                textAlign={"right"}
+                textAlignVertical={multiline ? "top" : "center"}
+                underlineColorAndroid={"transparent"}
+                selectionColor={colors.primaryPurple}
+                onContentSizeChange={multiline ? onContentSize : undefined}
+              />
+            </View>
           </TapGestureHandler>
           <View style={styles.errorContainer}>{renderErrors()}</View>
         </View>

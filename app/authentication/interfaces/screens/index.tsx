@@ -1,32 +1,54 @@
-import React, { Component } from "react";
-import { Text, View, Alert } from "react-native";
-import { Input, Button } from "../../../library";
-import {styles} from "./style";
+import React from "react";
+import { View } from "react-native";
+import { observer } from "mobx-react-lite";
+import { Input, Button, Headline } from "../../../library";
 
-export const Login = () => {
+import { auth, input } from "../../entities";
+import {
+  onPhoneChange,
+  passwordlessStart,
+  onOtpNumberChange,
+  passwordlessVerify,
+} from "../../usecases";
+import { styles } from "./styles";
+import { confirm, phone } from "./constant";
+
+export const Authentication = observer(() => {
   return (
     <View style={styles.container}>
-      <Text style={styles.loginTitle}>تسکین </Text>
-      <Text style={styles.loginTitle1}>ورود </Text>
-      <View style={styles.loginBox}>
-        <View style={styles.inputGroups}>
-          <Input
-            title={"شماره موبایل :"}
-            placeholder={"لطفا شماره موبایل خود را وارد کنید"}
-            mode={"outlined"}
-          />
-          <View style={styles.inputGroups1}>
+      <View style={styles.titleContainer}>
+        <Headline style={styles.title}>{"ورود به تسکین"}</Headline>
+      </View>
+      <View style={styles.authContainer}>
+        <View style={styles.itemsContainer}>
+          <View style={styles.itemsMargin}>
+            <Input
+              value={auth.otpMode ? input.otpNumber : input.phoneNumber}
+              onChangeText={auth.otpMode ? onOtpNumberChange : onPhoneChange}
+              title={auth.otpMode ? confirm.title : phone.title}
+              placeholder={
+                auth.otpMode ? confirm.placeholder : phone.placeholder
+              }
+              mode={"outlined"}
+              validation={
+                auth.otpMode ? input.otpValidation : input.phoneValidation
+              }
+              timer={auth.otpMode ? { minute: 1, second: 0 } : undefined}
+            />
+          </View>
+
+          <View style={styles.itemsMargin}>
             <Button
-            mode={"contained"}
-            rippleColor={"lightGrey"}
-            size={"big"}
-            > 
-            {"ورود"}
+              onPress={auth.otpMode ? passwordlessVerify : passwordlessStart}
+              mode={"contained"}
+              rippleColor={"lightGrey"}
+              size={"big"}
+            >
+              {auth.otpMode ? confirm.button : phone.button}
             </Button>
-         
           </View>
         </View>
       </View>
     </View>
   );
-};
+});

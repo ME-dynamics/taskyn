@@ -1,1 +1,2 @@
-export { Login } from "./interfaces/screens";
+export { Authentication } from "./interfaces/screens";
+export { auth } from "./entities"
