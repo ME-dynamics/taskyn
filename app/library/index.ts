@@ -6,4 +6,5 @@ export { Caption, Headline, Paragraph, Subheading, Title } from "./Typography";
 export { SearchBar } from "./SearchBar";
 export { request } from "./network";
 export { secureStorage, storage } from "./storage";
-export { Tap } from "./Tap"
+export { Tap } from "./Tap";
+export * as cropPicker from "./cropPicker";
