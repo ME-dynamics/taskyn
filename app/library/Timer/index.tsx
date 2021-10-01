@@ -3,8 +3,8 @@ import { Observer } from "mobx-react-lite";
 import { Paragraph } from "../Typography";
 import { ITimerProps } from "./types";
 
-export const Timer = (props: ITimerProps) => {
-  const {  state } = props;
+export function Timer(props: ITimerProps) {
+  const { state } = props;
   useEffect(() => {
     return () => {
       state.clear();
@@ -12,11 +12,15 @@ export const Timer = (props: ITimerProps) => {
   }, []);
   return (
     <Observer>
-      {() => (
-        <Paragraph {...props}>{`${state.minute}:${state.formattedSecond}`}</Paragraph>
-        )}
+      {function renderTimer() {
+        return (
+          <Paragraph
+            {...props}
+          >{`${state.minute}:${state.formattedSecond}`}</Paragraph>
+        );
+      }}
     </Observer>
   );
-};
+}
 
 export { TimerState } from "./state";
