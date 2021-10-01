@@ -23,7 +23,7 @@ function buttonHeightCalc(size: tSize) {
     case "medium":
       return 38;
     case "big":
-      return 42;
+      return 48;
     default:
       return 36;
   }
@@ -36,7 +36,7 @@ function buttonMinWidthCalc(size: tSize) {
     case "medium":
       return widthPercentageToDP("48%");
     case "big":
-      return widthPercentageToDP("86%");
+      return widthPercentageToDP("90%");
     default:
       return widthPercentageToDP("16%");
   }

@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  QuestionContainer: {
-    flex: 4,
+  scrollViewContainer: {
+    flex: 6,
   },
   answerContainer: {
     flex: 4,
@@ -28,11 +28,7 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "center",
-    paddingRight: 10,
   },
-
   buttonContainer: {
     flex: 1,
     flexDirection: "row-reverse",
