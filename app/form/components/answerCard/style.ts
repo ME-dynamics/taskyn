@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../../../library";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   answerContainer: {
@@ -15,11 +15,11 @@ export const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 8,
     paddingVertical: 6,
-    borderColor: colors.darkGrey,
+    borderColor: THEME.COLORS.GREY.DARK,
   },
   answerCardActive: {
     borderWidth: 1,
-    borderColor: colors.darkPurple,
+    borderColor: THEME.COLORS.PRIMARY.DARK,
   },
 
   textContainer: {
