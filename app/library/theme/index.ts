@@ -1,19 +1,39 @@
-export const colors = {
-  primaryPurple: "#5256c9",
-  lightPurple: "#8783fd",
-  darkPurple: "#082d97",
-  transparentPurple: "rgba(82, 86, 201, 0.2)",
-  transparentGrey: "rgba(112,112,112,0.3)",
-  transparentWhite: "rgba(255,255,255, 0.7)",
-  lightGrey: "#afafaf",
-  grey: "#808080",
-  darkGrey: "#545454",
-  error: "#b71c1c",
+import { widthPercentageToDP } from "react-native-responsive-screen";
+
+const COLORS = {
+  PRIMARY: {
+    LIGHT: "#8783fd",
+    NORMAL: "#5256c9",
+    DARK: "#082d97",
+  },
+  TRANSPARENT: {
+    PRIMARY: "rgba(82, 86, 201, 0.2)",
+    GREY: "rgba(112,112,112,0.2)",
+    WHITE: "rgba(255,255,255, 0.7)",
+  },
+  GREY: {
+    LIGHT: "##cfcfcf",
+    NORMAL: "#9e9e9e",
+    DARK: "##707070",
+  },
+  ERROR: "#b71c1c",
 };
 
-export const fonts = {
-  regular: "",
-  medium: "",
-  light: "",
-  thin: "",
+const FONTS = {
+  LIGHT: "Vazir-Light-UI",
+  THIN: "Vazir-Thin-UI",
+  REGULAR: "Vazir-Regular-UI",
+  MEDIUM: "Vazir-Medium-UI",
+  BOLD: "Vazir-Bold-UI",
+  BLACK: "Vazir-Black-UI",
+};
+
+const WIDTH = {
+  BIG: widthPercentageToDP("90"),
+};
+
+export const THEME = {
+  COLORS,
+  FONTS,
+  WIDTH,
 };

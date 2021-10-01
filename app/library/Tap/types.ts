@@ -1,7 +1,6 @@
 import { ReactChild, ReactChildren } from "react";
-import { TapGestureHandlerProps } from "react-native-gesture-handler";
 
-export interface ITapProps extends TapGestureHandlerProps{
+export interface ITapProps {
   children: ReactChild | ReactChildren;
   onPress?: () => void;
 }

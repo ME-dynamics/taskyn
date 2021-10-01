@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import { ITimerProps, ITime } from "./types";
+import { ITime } from "./types";
 
 export class TimerState {
   constructor(args: ITime) {

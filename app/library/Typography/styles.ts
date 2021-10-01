@@ -1,21 +1,21 @@
 import { StyleSheet } from "react-native"
-
+import { THEME } from "../theme"
 
 
 export const styles = StyleSheet.create({
     title: {
-        fontFamily: "Vazir-Black-UI"
+        fontFamily: THEME.FONTS.BLACK
     },
     headline: {
-        fontFamily: "Vazir-Medium-UI"
+        fontFamily: THEME.FONTS.MEDIUM
     },
     Subheading: {
-        fontFamily: "Vazir-Regular-UI"
+        fontFamily: THEME.FONTS.REGULAR
     },
     paragraph: {
-        fontFamily: "Vazir-Regular-UI"
+        fontFamily: THEME.FONTS.REGULAR
     },
     caption: {
-        fontFamily: "Vazir-Thin-UI"
+        fontFamily: THEME.FONTS.THIN
     }
 })

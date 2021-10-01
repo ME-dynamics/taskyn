@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../theme";
+import { THEME } from "../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("86"),
+    width: THEME.WIDTH.BIG,
     height: 56,
     flexDirection: "row-reverse",
     backgroundColor: "white",
@@ -27,6 +27,6 @@ export const styles = StyleSheet.create({
 
 export const iconStyle = {
   size: 24,
-  color: colors.grey,
-  selectionColor: colors.darkPurple,
+  color: THEME.COLORS.GREY.NORMAL,
+  selectionColor: THEME.COLORS.PRIMARY.DARK,
 };

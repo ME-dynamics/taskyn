@@ -1,5 +1,5 @@
 import ImagePicker, { Options } from "react-native-image-crop-picker";
-import { colors } from "../theme";
+import { THEME } from "../theme";
 
 import { tMode } from "./types";
 
@@ -11,10 +11,10 @@ function optGen(isProfile: boolean) {
     height: isProfile ? 320 : 1720,
     includeExif: true,
     includeBase64: false,
-    cropperTintColor: colors.primaryPurple,
-    cropperActiveWidgetColor: colors.primaryPurple,
-    cropperStatusBarColor: colors.primaryPurple,
-    cropperToolbarColor: colors.primaryPurple,
+    cropperTintColor: THEME.COLORS.PRIMARY.NORMAL,
+    cropperActiveWidgetColor: THEME.COLORS.PRIMARY.NORMAL,
+    cropperStatusBarColor: THEME.COLORS.PRIMARY.NORMAL,
+    cropperToolbarColor: THEME.COLORS.PRIMARY.NORMAL,
     cropperToolbarWidgetColor: "white",
     freeStyleCropEnabled: !isProfile,
     cropperToolbarTitle: "ویرایش عکس",

@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../theme";
+import { THEME } from "../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("86"),
+    width: THEME.WIDTH.BIG,
     minHeight: 42 + 26,
     alignItems: "flex-end",
     justifyContent: "space-around",
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   paragraph: {
     fontSize: 16,
     fontWeight: "bold",
-    color: colors.primaryPurple,
+    color: THEME.COLORS.PRIMARY.NORMAL,
   },
   errorContainer: {
     flexDirection: "row-reverse",
@@ -27,17 +27,17 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   error: {
-    color: colors.error,
+    color: THEME.COLORS.ERROR,
     marginLeft: 8,
   },
   input: {
-    width: widthPercentageToDP("86"),
+    width: THEME.WIDTH.BIG,
     height: 42,
     borderWidth: 1,
     borderRadius: 8,
   },
   inputFont: {
-    fontFamily: "Vazir-Regular-UI"
+    fontFamily: THEME.FONTS.REGULAR
   },
   flat: {
     borderTopWidth: 0,
@@ -47,12 +47,15 @@ export const styles = StyleSheet.create({
     borderRadius: 0,
   },
   activeBorderColor: {
-    borderColor: colors.primaryPurple,
+    borderColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   disabledBorderColor: {
-    borderColor: colors.transparentPurple,
+    borderColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   timerColor: {
-    color: colors.primaryPurple
+    color: THEME.COLORS.PRIMARY.NORMAL
   }
 });
+
+
+export const selectionColor = THEME.COLORS.TRANSPARENT.PRIMARY
