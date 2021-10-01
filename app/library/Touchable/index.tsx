@@ -2,32 +2,33 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { RectButton, RectButtonProperties } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
-import { colors } from "../theme";
+import { THEME } from "../theme";
 
-interface ITouchableProps extends RectButtonProperties {
-  rippleColor: "lightGrey" | "grey" | "darkGrey";
-}
+import { ITouchableProps } from "./types";
 
-export const Touchable =  observer((props: ITouchableProps) => {
+function TouchableComponent(props: ITouchableProps) {
+  const { rippleColor, onPress } = props;
   let color: string;
-  switch (props.rippleColor) {
+  switch (rippleColor) {
     case "lightGrey":
-      color = colors.lightGrey;
+      color = THEME.COLORS.GREY.LIGHT;
       break;
     case "grey":
-      color = colors.grey;
+      color = THEME.COLORS.GREY.NORMAL;
       break;
     case "darkGrey":
-      color = colors.darkGrey;
+      color = THEME.COLORS.GREY.DARK;
       break;
     default:
       throw new Error("color must be of valid types");
   }
   return (
     <RectButton
-      {...props}
+      onPress={onPress}
       rippleColor={color}
       style={StyleSheet.absoluteFill}
     />
   );
-})
+}
+
+export const Touchable = observer(TouchableComponent);

@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
   checkboxContainer: {
-    width: widthPercentageToDP("86"),
+    width: THEME.WIDTH.BIG,
     minHeight: 56,
     flexDirection: "column",   
     backgroundColor: "white",

@@ -1,14 +1,10 @@
 import { StyleSheet } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  widthPercentageToDP,
-} from "react-native-responsive-screen";
-import { colors } from "../../../library";
+import { widthPercentageToDP } from "react-native-responsive-screen";
+import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primaryPurple,
+    backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   titleContainer: {
     flex: 1,
@@ -18,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    fontSize: 26
+    fontSize: 26,
   },
   authContainer: {
     flex: 3,
@@ -33,6 +29,6 @@ export const styles = StyleSheet.create({
   },
   itemsMargin: {
     width: "100%",
-    marginVertical: 8
-  }
+    marginVertical: 8,
+  },
 });

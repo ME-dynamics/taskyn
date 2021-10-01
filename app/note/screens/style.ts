@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../../library";
+import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    backgroundColor: colors.transparentPurple,
+    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
     margin: 28,
     alignItems: "center",
     justifyContent: "center",

@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { View, TextInput, LayoutChangeEvent } from "react-native";
-import { TapGestureHandler } from "react-native-gesture-handler";
+import { View, TextInput } from "react-native";
+
 import { material } from "react-native-typography";
 import { Observer } from "mobx-react-lite";
+import { Tap } from "../Tap";
 import { Timer, TimerState } from "../Timer";
 import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
 
-import { styles } from "./styles";
-import { colors } from "../theme";
+import { styles, selectionColor } from "./styles";
 
 import { IInputProps, tOnContentSize } from "./types";
 
@@ -22,17 +22,17 @@ export function Input(props: IInputProps) {
       state.focus();
       inputRef.current?.focus();
     }
-  };
+  }
   function onBlur() {
     state.blur();
-  };
-  function onContentSize(event: tOnContentSize)  {
+  }
+  function onContentSize(event: tOnContentSize) {
     const { height } = event.nativeEvent.contentSize;
     if (height > 42) {
       state.setHeight(height);
     }
-  };
-  function renderErrors(){
+  }
+  function renderErrors() {
     if (!validation) {
       return null;
     }
@@ -44,7 +44,7 @@ export function Input(props: IInputProps) {
       );
     }
     return errors;
-  };
+  }
   const timerState = timer ? new TimerState(timer) : null;
   function renderTimer() {
     if (!timer) {
@@ -54,7 +54,7 @@ export function Input(props: IInputProps) {
       return null;
     }
     return <Timer style={styles.timerColor} state={timerState} />;
-  };
+  }
   return (
     <Observer>
       {() => (
@@ -63,7 +63,7 @@ export function Input(props: IInputProps) {
             <Paragraph style={styles.paragraph}>{title}</Paragraph>
             {renderTimer()}
           </View>
-          <TapGestureHandler onBegan={onPress}>
+          <Tap onPress={onPress}>
             <View
               pointerEvents={
                 state.focused ? "box-none" : value ? "box-none" : "box-only"
@@ -88,14 +88,14 @@ export function Input(props: IInputProps) {
                 textAlign={"right"}
                 textAlignVertical={multiline ? "top" : "center"}
                 underlineColorAndroid={"transparent"}
-                selectionColor={colors.primaryPurple}
+                selectionColor={selectionColor}
                 onContentSizeChange={multiline ? onContentSize : undefined}
               />
             </View>
-          </TapGestureHandler>
+          </Tap>
           <View style={styles.errorContainer}>{renderErrors()}</View>
         </View>
       )}
     </Observer>
   );
-};
+}

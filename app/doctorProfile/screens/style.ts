@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { colors } from "../../library";
+import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     height: 130,
     borderRadius: 130 / 2,
     borderWidth: 4,
-    borderColor: colors.darkPurple,
+    borderColor: THEME.COLORS.PRIMARY.DARK,
     alignSelf: "center",
     top: hp("8%"),
     zIndex: 100,
