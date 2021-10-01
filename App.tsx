@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { colors, Input } from "./app/library";
+import { THEME, Input } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
@@ -30,7 +30,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="خانه"
       screenOptions={{
-        tabBarActiveTintColor: colors.primaryPurple,
+        tabBarActiveTintColor: THEME.COLORS.PRIMARY.NORMAL,
       }}
     >
       <Tab.Screen
