@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { AcceptListCard } from "../components/AcceptListCard";
-import { SearchBar, colors, Touchable, Title } from "../../library";
+import { SearchBar, colors, Touchable, Title, Tap } from "../../library";
 import { Octicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { styles } from "./styles";
@@ -81,22 +81,20 @@ function PatientList({ navigation }) {
           value={""}
           placeholder=""
         />
-        <View style={styles.iconContainer}>
-          <View
-            style={{ flex: 1, alignSelf: "center", justifyContent: "center" }}
-          >
-            <Octicons name="request-changes" size={40} color="black" />
-          </View>
-          <View style={styles.redCircleContainer}>
-            <View style={styles.redCircle}>
-              <Text style={styles.numberStyle}>1</Text>
+        <Tap onPress={() => navigation.navigate("Details")}>
+          <View style={styles.iconContainer}>
+            <View
+              style={{ flex: 1, alignSelf: "center", justifyContent: "center" }}
+            >
+              <Octicons name="request-changes" size={40} color="black" />
+            </View>
+            <View style={styles.redCircleContainer}>
+              <View style={styles.redCircle}>
+                <Text style={styles.numberStyle}>1</Text>
+              </View>
             </View>
           </View>
-          <Touchable //replace with Tap
-            onPress={() => navigation.navigate("Details")}
-            rippleColor={"lightGrey"}
-          />
-        </View>
+        </Tap>
       </View>
       <View style={styles.patientCardContainer}>
         <PatientCard
