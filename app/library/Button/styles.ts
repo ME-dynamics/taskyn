@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import memoize from "fast-memoize";
-import { colors } from "../theme";
+import { THEME } from "../theme";
 import { tMode, IButtonStyles, tSize, } from "./types";
 
 export const activityStyles = StyleSheet.create({
@@ -11,7 +11,7 @@ export const activityStyles = StyleSheet.create({
 });
 
 export function activityStyleGen(mode: tMode) {
-  const activityColor = mode === "contained" ? "white" : colors.primaryPurple;
+  const activityColor = mode === "contained" ? "white" : THEME.COLORS.PRIMARY.NORMAL;
   return { activityColor, styles: activityStyles };
 }
 
@@ -47,12 +47,12 @@ function buttonColor(dark: boolean | undefined, mode: tMode, color: string | und
     if (mode === "contained") {
       return "white";
     } else {
-      return color ? color : colors.primaryPurple;
+      return color ? color : THEME.COLORS.PRIMARY.NORMAL;
     }
   } else if (dark === false && mode === "contained") {
     return color ? color : "rgba(0,0,0,0.87)";
   } else {
-    return color ? color : colors.primaryPurple;
+    return color ? color : THEME.COLORS.PRIMARY.NORMAL;
   }
 }
 
@@ -67,12 +67,12 @@ function buttonStyle(args: IButtonStyles) {
       height: buttonHeightCalc(size),
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
       backgroundColor:
-        mode === "contained" ? colors.primaryPurple : "transparent",
+        mode === "contained" ? THEME.COLORS.PRIMARY.NORMAL : "transparent",
       borderColor: disabled
-        ? colors.grey
+        ? THEME.COLORS.GREY.NORMAL
         : color
         ? color
-        : colors.primaryPurple,
+        : THEME.COLORS.PRIMARY.NORMAL,
       borderRadius: fullRadius ? buttonHeightCalc(size) / 2 : 4,
       flexDirection: "row-reverse",
       alignItems: "center",

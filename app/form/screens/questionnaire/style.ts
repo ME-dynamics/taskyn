@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { colors } from "../../../library";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
@@ -21,10 +21,10 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   answerCartActive: {
-    borderColor: colors.primaryPurple,
+    borderColor: THEME.COLORS.PRIMARY.NORMAL
   },
   answerCartDeActive: {
-    borderColor: colors.transparentPurple,
+    borderColor: THEME.COLORS.TRANSPARENT.PRIMARY,
   },
   textContainer: {
     flex: 1,

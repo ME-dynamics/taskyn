@@ -9,8 +9,7 @@ import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
 
-import { styles } from "./styles";
-import { colors } from "../theme";
+import { styles, selectionColor } from "./styles";
 
 import { IInputProps, tOnContentSize } from "./types";
 
@@ -89,7 +88,7 @@ export function Input(props: IInputProps) {
                 textAlign={"right"}
                 textAlignVertical={multiline ? "top" : "center"}
                 underlineColorAndroid={"transparent"}
-                selectionColor={colors.primaryPurple}
+                selectionColor={selectionColor}
                 onContentSizeChange={multiline ? onContentSize : undefined}
               />
             </View>
