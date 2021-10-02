@@ -9,6 +9,6 @@ export const confirm = {
 }
 export const phone = {
     title: "شماره همراه",
-    placeholder: "شماره همراه خود روا وارد کنید",
+    placeholder: "شماره همراه خود را وارد کنید",
     button: "دریافت کد"
 }
