@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     borderColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   disabledBorderColor: {
-    borderColor: THEME.COLORS.PRIMARY.NORMAL,
+    borderColor: THEME.COLORS.GREY.LIGHT,
   },
   timerColor: {
     color: THEME.COLORS.PRIMARY.NORMAL
