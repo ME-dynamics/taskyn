@@ -1,6 +1,6 @@
-import { request } from "../../library";
-import { auth } from "../entities";
-import { adapterTypes } from "../types";
+import { request } from "../../../library";
+import { auth } from "../../entities";
+import { adapterTypes } from "../../types";
 
 export async function fetchPasswordlessStart(
   phoneNumber: string
