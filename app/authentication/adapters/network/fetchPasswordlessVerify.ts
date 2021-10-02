@@ -1,6 +1,6 @@
-import { request, secureStorage, storage } from "../../library";
-import { auth } from "../entities";
-import { adapterTypes } from "../types";
+import { request } from "../../../library";
+import { auth } from "../../entities";
+import { adapterTypes } from "../../types";
 export async function fetchPasswordlessVerify(
   otpNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
@@ -35,7 +35,7 @@ export async function fetchPasswordlessVerify(
   const refreshExpires = Number(payload.refreshTokenExpiresAt);
   const jwtExpires = Number(payload.jwtTokenExpiresAt);
   const role = String(payload.role);
- 
+
   return {
     jwt,
     refreshToken,

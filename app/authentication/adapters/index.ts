@@ -1,2 +1,1 @@
-export { fetchPasswordlessStart } from "./fetchPasswordlessStart";
-export { fetchPasswordlessVerify } from "./fetchPasswordlessVerify";
+export { fetchPasswordlessStart, fetchPasswordlessVerify } from "./network";
