@@ -9,7 +9,7 @@ import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
 
-import { styles, selectionColor } from "./styles";
+import { styles, selectionColor, INPUT_HEIGHT  } from "./styles";
 
 import { IInputProps, tOnContentSize } from "./types";
 
@@ -28,7 +28,7 @@ export function Input(props: IInputProps) {
   }
   function onContentSize(event: tOnContentSize) {
     const { height } = event.nativeEvent.contentSize;
-    if (height > 42) {
+    if (height > INPUT_HEIGHT) {
       state.setHeight(height);
     }
   }
