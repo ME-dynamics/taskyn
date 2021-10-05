@@ -1,2 +1,2 @@
-export { Authentication } from "./interfaces/screens";
-export { auth } from "./entities"
+export { Authentication } from "./interfaces";
+export { auth } from "./entities";
