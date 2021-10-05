@@ -79,7 +79,7 @@ export function Input(props: IInputProps) {
                       ? styles.activeBorderColor
                       : styles.disabledBorderColor,
                     value ? styles.activeBorderColor : null,
-                    material.body1,
+                    material.subheading,
                     styles.inputFont,
                     mode === "flat" ? styles.flat : null,
                     multiline ? { height: state.height } : null,
