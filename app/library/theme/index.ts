@@ -12,9 +12,9 @@ const COLORS = {
     WHITE: "rgba(255,255,255, 0.7)",
   },
   GREY: {
-    LIGHT: "##cfcfcf",
+    LIGHT: "#cfcfcf",
     NORMAL: "#9e9e9e",
-    DARK: "##707070",
+    DARK: "#707070",
   },
   ERROR: "#b71c1c",
 };

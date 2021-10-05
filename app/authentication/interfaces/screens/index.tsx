@@ -13,7 +13,8 @@ import {
 import { styles } from "./styles";
 import { confirm, phone } from "./constant";
 
-export const Authentication = observer(() => {
+
+function AuthenticationScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -51,4 +52,5 @@ export const Authentication = observer(() => {
       </View>
     </View>
   );
-});
+}
+export const Authentication = observer(AuthenticationScreen);

@@ -57,45 +57,48 @@ export function Input(props: IInputProps) {
   }
   return (
     <Observer>
-      {() => (
-        <View style={styles.container}>
-          <View style={styles.textContainer}>
-            <Paragraph style={styles.paragraph}>{title}</Paragraph>
-            {renderTimer()}
-          </View>
-          <Tap onPress={onPress}>
-            <View
-              pointerEvents={
-                state.focused ? "box-none" : value ? "box-none" : "box-only"
-              }
-            >
-              <TextInput
-                {...props}
-                ref={inputRef}
-                style={[
-                  styles.input,
-                  state.focused
-                    ? styles.activeBorderColor
-                    : styles.disabledBorderColor,
-                  value ? styles.activeBorderColor : null,
-                  material.body1,
-                  styles.inputFont,
-                  mode === "flat" ? styles.flat : null,
-                  multiline ? { height: state.height } : null,
-                  style,
-                ]}
-                onBlur={onBlur}
-                textAlign={"right"}
-                textAlignVertical={multiline ? "top" : "center"}
-                underlineColorAndroid={"transparent"}
-                selectionColor={selectionColor}
-                onContentSizeChange={multiline ? onContentSize : undefined}
-              />
+      {function renderInput(){
+        return (
+          <View style={styles.container}>
+            <View style={styles.textContainer}>
+              <Paragraph style={styles.paragraph}>{title}</Paragraph>
+              {renderTimer()}
             </View>
-          </Tap>
-          <View style={styles.errorContainer}>{renderErrors()}</View>
-        </View>
-      )}
+            <Tap onPress={onPress}>
+              <View
+                pointerEvents={
+                  state.focused ? "box-none" : value ? "box-none" : "box-only"
+                }
+              >
+                <TextInput
+                  {...props}
+                  ref={inputRef}
+                  style={[
+                    styles.input,
+                    state.focused
+                      ? styles.activeBorderColor
+                      : styles.disabledBorderColor,
+                    value ? styles.activeBorderColor : null,
+                    material.body1,
+                    styles.inputFont,
+                    mode === "flat" ? styles.flat : null,
+                    multiline ? { height: state.height } : null,
+                    style,
+                    
+                  ]}
+                  onBlur={onBlur}
+                  textAlign={"right"}
+                  textAlignVertical={multiline ? "top" : "center"}
+                  underlineColorAndroid={"transparent"}
+                  selectionColor={selectionColor}
+                  onContentSizeChange={multiline ? onContentSize : undefined}
+                />
+              </View>
+            </Tap>
+            <View style={styles.errorContainer}>{renderErrors()}</View>
+          </View>
+        )
+      } }
     </Observer>
   );
 }
