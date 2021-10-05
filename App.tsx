@@ -31,6 +31,7 @@ function MyTabs() {
       initialRouteName="خانه"
       screenOptions={{
         tabBarActiveTintColor: THEME.COLORS.PRIMARY.NORMAL,
+         headerShown: false ,
       }}
     >
       <Tab.Screen
@@ -48,6 +49,7 @@ function MyTabs() {
       <Tab.Screen
         name="لیست بیماران"
         component={SecondTab}
+        
         options={{
           tabBarLabel: "بیماران",
           tabBarIcon: ({ color, size }) => (

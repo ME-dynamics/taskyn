@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../theme";
+
+export const INPUT_HEIGHT = 44;
 
 export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.BIG,
-    minHeight: 42 + 26,
+    minHeight:INPUT_HEIGHT + 26,
     alignItems: "flex-end",
     justifyContent: "space-around",
   },
@@ -32,12 +33,14 @@ export const styles = StyleSheet.create({
   },
   input: {
     width: THEME.WIDTH.BIG,
-    height: 42,
+    height: INPUT_HEIGHT,
     borderWidth: 1,
     borderRadius: 8,
+    paddingHorizontal:10,
+
   },
   inputFont: {
-    fontFamily: THEME.FONTS.REGULAR
+    fontFamily: THEME.FONTS.REGULAR,
   },
   flat: {
     borderTopWidth: 0,
