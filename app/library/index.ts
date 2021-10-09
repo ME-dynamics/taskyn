@@ -8,3 +8,4 @@ export { request } from "./network";
 export { secureStorage, storage } from "./storage";
 export { Tap } from "./Tap";
 export { openCamera, openCropper, openGallery } from "./cropPicker";
+export { Logo } from "./Logo";
