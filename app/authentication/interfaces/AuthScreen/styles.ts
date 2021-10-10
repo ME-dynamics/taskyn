@@ -7,10 +7,14 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   titleContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "center",
+    flex: 2,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    flexDirection:"column",
     paddingRight: widthPercentageToDP("4"),
+  },
+  logoContainer:{
+    left:widthPercentageToDP("5"),
   },
   title: {
     color: "white",
@@ -31,4 +35,13 @@ export const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 8,
   },
+  termsContainer:{
+    flex:1,
+    alignItems:"center",
+    paddingTop:10,
+  },
+  terms:{
+    width:widthPercentageToDP("90"),
+    color: THEME.COLORS.GREY.DARK
+  }
 });

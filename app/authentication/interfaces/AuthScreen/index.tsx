@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Input, Button, Headline } from "../../../library";
+import { Input, Button, Headline, Logo, Caption, Paragraph } from "../../../library";
 
 import { auth, input } from "../../entities";
 import {
@@ -13,11 +13,13 @@ import {
 import { styles } from "./styles";
 import { confirm, phone } from "./constant";
 
-
 function AuthenticationScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
+        <View style={styles.logoContainer}>
+          <Logo size={100} color={"white"} />
+        </View>
         <Headline style={styles.title}>{"ورود به تسکین"}</Headline>
       </View>
       <View style={styles.authContainer}>
@@ -47,8 +49,16 @@ function AuthenticationScreen() {
             >
               {auth.otpMode ? confirm.button : phone.button}
             </Button>
+           
           </View>
+          
         </View>
+        <View style={styles.termsContainer}>
+              <Paragraph style={styles.terms}>
+              {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
+
+              </Paragraph>
+            </View>
       </View>
     </View>
   );
