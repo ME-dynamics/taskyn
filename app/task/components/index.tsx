@@ -10,6 +10,7 @@ export function TaskItem(props: ITaskItemProps) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { text } = props;
   return (
+    <View style={{flex:1,marginVertical:6,}}>  
     <View style={styles.checkboxContainer}>
       <View style={styles.textContainer}>
         <Paragraph>{text}</Paragraph>
@@ -36,6 +37,7 @@ export function TaskItem(props: ITaskItemProps) {
           onValueChange={(newValue) => setToggleCheckBox(newValue)}
         /> */}
       </View>
+    </View>
     </View>
   );
 }
