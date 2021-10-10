@@ -17,6 +17,8 @@ const COLORS = {
     DARK: "#707070",
   },
   ERROR: "#b71c1c",
+  RED:"#ff1744",
+  BACKGROUND:"#fafafa"
 };
 
 const FONTS = {
