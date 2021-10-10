@@ -6,17 +6,17 @@ export function Dashboard() {
     <View style={styles.container}>
       <View style={styles.titleContainer}></View>
       <View style={styles.buttonContainer}>
-        <View style={styles.firstButtonRow}>
-          <View style={styles.historyButton}></View>
-          <View style={styles.formButton}></View>
+        <View style={styles.row}>
+          <View style={styles.button}></View>
+          <View style={styles.button}></View>
         </View>
-        <View style={styles.secondButtonRow}>
-          <View style={styles.patientFileButton}></View>
-          <View style={styles.taskButton}></View>
-        </View>
+        <View style={styles.row}>
+          <View style={styles.button}></View>
+          <View style={styles.button} />
+        </View> 
       </View>
       <View style={styles.noteContainer}>
-        <View style={styles.noteButton}></View>
+        <View style={styles.button}></View>
       </View>
     </View>
   );

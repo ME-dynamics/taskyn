@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-const BORDER_RADIUS = 8;
-const ELEVATION = 1;
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -11,49 +10,25 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flex: 7,
   },
-  firstButtonRow: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  secondButtonRow: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  historyButton: {
-    width: 152,
-    height: 152,
-    elevation: ELEVATION,
-    borderRadius: BORDER_RADIUS,
-  },
-  formButton: {
-    width: 152,
-    height: 152,
-    elevation: 1,
-    borderRadius: BORDER_RADIUS,
-  },
-  patientFileButton: {
-    width: 152,
-    height: 152,
-    elevation: ELEVATION,
-    borderRadius: BORDER_RADIUS,
-  },
-  taskButton: {
-    width: 152,
-    height: 152,
-    elevation: ELEVATION,
-    borderRadius: BORDER_RADIUS,
-  },
   noteContainer: {
     flex: 3,
-    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "center",
   },
-  noteButton: {
+  row: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  button: {
     width: 152,
     height: 152,
-    elevation: ELEVATION,
-    borderRadius: BORDER_RADIUS,
+    backgroundColor: "white",
+    borderRadius: 8,
+    borderWidth: StyleSheet.hairlineWidth,
+    shadowRadius: 2,
+    shadowColor: "black",
+    elevation: 1
   },
 });
