@@ -1,0 +1,44 @@
+import { action, makeObservable, observable, computed } from "mobx";
+import {ITask} from "./types"
+export class TaskState {
+  constructor() {
+    makeObservable(this, {
+      list:observable,
+      setList:action,
+      doneList: computed,
+        undoneList: computed
+
+    });
+  }
+  list: ITask[] = [];
+  
+  setList(list: ITask[]) {
+      this.list = list
+  }
+  get doneList() {
+      const done: ITask[] = [];
+      const len = this.list.length;
+      for (let index = 0; index < len; index++) {
+          const task = this.list[index];
+          if(task.done) {
+              done.push(task)
+          }
+      }
+      return done
+  }
+  get undoneList() {
+    const undone: ITask[] = [];
+    const len = this.list.length;
+    for (let index = 0; index < len; index++) {
+        const task = this.list[index];
+        if(!task.done) {
+            undone.push(task)
+        }
+    }
+    return undone
+}  
+}
+ 
+
+
+
