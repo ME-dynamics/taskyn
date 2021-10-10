@@ -2,8 +2,8 @@ import React from "react";
 import { Text, View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { AcceptListCard } from "../components/AcceptListCard";
-import { SearchBar, colors, Touchable, Title, Tap } from "../../library";
-import { Octicons } from "@expo/vector-icons";
+import { SearchBar, Touchable, Title, Tap } from "../../library";
+import { Octicons, SimpleLineIcons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { styles } from "./styles";
 import { PatientCard } from "../components/PatientCard";
@@ -83,11 +83,7 @@ function PatientList({ navigation }) {
         />
         <Tap onPress={() => navigation.navigate("Details")}>
           <View style={styles.iconContainer}>
-            <View
-              style={{ flex: 1, alignSelf: "center", justifyContent: "center" }}
-            >
-              <Octicons name="request-changes" size={40} color="black" />
-            </View>
+            <SimpleLineIcons name="user-follow" size={32} color="black" />
             <View style={styles.redCircleContainer}>
               <View style={styles.redCircle}>
                 <Text style={styles.numberStyle}>1</Text>
@@ -109,7 +105,7 @@ function PatientList({ navigation }) {
 }
 function AcceptPatientList() {
   return (
-    <View>
+    <View style={{flex:1,alignItems:"center",}}>
       <AcceptListCard
         description={"ادرس خ ازادی خ ازادی ک ازادی"}
         id=""
