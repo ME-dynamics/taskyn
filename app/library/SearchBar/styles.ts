@@ -4,8 +4,8 @@ import { THEME } from "../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.BIG,
-    height: 56,
+    width: THEME.WIDTH.BIG - widthPercentageToDP("6"),
+    height: 44,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 8,
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   },
   iconContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
   inputContainer: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
 });
 
 export const iconStyle = {
-  size: 24,
-  color: THEME.COLORS.GREY.NORMAL,
+  size: 28,
+  color: THEME.COLORS.GREY.DARK,
   selectionColor: THEME.COLORS.PRIMARY.DARK,
 };
