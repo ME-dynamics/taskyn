@@ -8,13 +8,17 @@ import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
 import { Task } from "./app/task/screens";
 import { Authentication } from "./app/authentication";
+import { Profile } from "./app/profile/interfaces/screens";
+import { DoctorProfile } from "./app/doctorProfile/screens";
+import { Dashboard } from "./app/dashboard/screens";
 
 function FirstTab() {
-  return <Authentication />;
+  return <DoctorProfile />;
 }
 
 function SecondTab() {
-  return <Task />;
+  
+  return <Dashboard  />;
 }
 
 function ThirdTab() {
@@ -38,6 +42,7 @@ function MyTabs() {
         name="مشخصات"
         component={ThirdTab}
         options={{
+          
           tabBarLabel: "مشخصات",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
