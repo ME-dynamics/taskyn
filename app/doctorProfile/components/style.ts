@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { widthPercentageToDP } from "react-native-responsive-screen";
+import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
     container: {
@@ -23,5 +25,10 @@ export const styles = StyleSheet.create({
       marginVertical: 2,
       letterSpacing: 0.4,
     },
+    line:{
+      width:widthPercentageToDP("80"),
+      height:1,
+      backgroundColor:THEME.COLORS.TRANSPARENT.PRIMARY,
+    }
   });
   
