@@ -9,12 +9,21 @@ import { Caption, Paragraph } from "../Typography";
 
 import { InputState } from "./state";
 
-import { styles, selectionColor, INPUT_HEIGHT  } from "./styles";
+import { styles, selectionColor, INPUT_HEIGHT } from "./styles";
 
 import { IInputProps, tOnContentSize } from "./types";
 
 export function Input(props: IInputProps) {
-  const { multiline, title, style, mode, timer, validation, value } = props;
+  const {
+    multiline,
+    title,
+    style,
+    mode,
+    timer,
+    validation,
+    value,
+    numberOfLines,
+  } = props;
   const inputRef = useRef<TextInput>(null);
   const state = new InputState();
   function onPress() {
@@ -27,6 +36,9 @@ export function Input(props: IInputProps) {
     state.blur();
   }
   function onContentSize(event: tOnContentSize) {
+    if (numberOfLines) {
+      return;
+    }
     const { height } = event.nativeEvent.contentSize;
     if (height > INPUT_HEIGHT) {
       state.setHeight(height);
@@ -57,11 +69,18 @@ export function Input(props: IInputProps) {
   }
   return (
     <Observer>
-      {function renderInput(){
+      {function renderInput() {
         return (
           <View style={styles.container}>
             <View style={styles.textContainer}>
-              <Paragraph style={styles.paragraph}>{title}</Paragraph>
+              <Paragraph
+                style={[
+                  styles.title,
+                  state.focused ? styles.focusedTitle : undefined,
+                ]}
+              >
+                {title}
+              </Paragraph>
               {renderTimer()}
             </View>
             <Tap onPress={onPress}>
@@ -74,17 +93,28 @@ export function Input(props: IInputProps) {
                   {...props}
                   ref={inputRef}
                   style={[
-                    styles.input,
-                    state.focused
-                      ? styles.activeBorderColor
-                      : styles.disabledBorderColor,
+                    [
+                      styles.input,
+                      multiline && numberOfLines
+                        ? { height: INPUT_HEIGHT + numberOfLines * 14 }
+                        : undefined,
+                    ],
                     value ? styles.activeBorderColor : null,
                     material.subheading,
                     styles.inputFont,
                     mode === "flat" ? styles.flat : null,
-                    multiline ? { height: state.height } : null,
+                    multiline && !numberOfLines
+                      ? { height: state.height }
+                      : null,
+                    state.focused
+                      ? [
+                          styles.activeBorderColor,
+                          mode === "outlined"
+                            ? styles.outlinedFocusedBorder
+                            : styles.flatFocusedBorder,
+                        ]
+                      : styles.disabledBorderColor,
                     style,
-                    
                   ]}
                   onBlur={onBlur}
                   textAlign={"right"}
@@ -97,8 +127,8 @@ export function Input(props: IInputProps) {
             </Tap>
             <View style={styles.errorContainer}>{renderErrors()}</View>
           </View>
-        )
-      } }
+        );
+      }}
     </Observer>
   );
 }
