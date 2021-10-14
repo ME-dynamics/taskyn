@@ -1,37 +1,66 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text } from "react-native";
-import { Button, colors, Input, Title, Touchable } from "../../library";
+import { ScrollView } from "react-native-gesture-handler";
+import {
+  Button,
+  THEME,
+  Input,
+  Title,
+  Subheading,
+  Touchable,
+  Headline,
+} from "../../library";
 import { styles } from "./style";
 export function NoteScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <MaterialCommunityIcons
-          name="camera-outline"
-          color={colors.darkPurple}
-          size={150}
-        />
-        <View style={styles.cameraText}>
-          <Title>{"عکس بگیرید"}</Title>
+        <View style={styles.cameraIcon}>
+          <View style={styles.cameraButton}>
+            <MaterialCommunityIcons
+              name="camera-outline"
+              color={THEME.COLORS.PRIMARY.DARK}
+              size={70}
+            />
+            <View style={styles.cameraText}>
+              <Subheading>{"دوربین"}</Subheading>
+            </View>
+            <Touchable rippleColor={"lightGrey"} />
+          </View>
+          <View style={styles.line} />
+          <View style={styles.cameraButton}>
+            <MaterialCommunityIcons
+              name="camera-outline"
+              color={THEME.COLORS.PRIMARY.DARK}
+              size={70}
+            />
+            <View style={styles.cameraText}>
+              <Subheading>{"گالری"}</Subheading>
+            </View>
+            <Touchable rippleColor={"lightGrey"} />
+          </View>
         </View>
-        <Touchable rippleColor={"lightGrey"} />
       </View>
       <View style={styles.bodyContainer}>
-        <View style={{ flex: 1 }}>
-          <Input mode={"flat"} title={"موضوع"} />
+        <View style={styles.inputs}>
+          <View>
+            <Input mode={"flat"} title={"موضوع"} />
+          </View>
+          <View>
+            <Input mode={"flat"} title={"تاریخ"} />
+          </View>
+          <ScrollView style={{ flex: 1 }}>
+            <View>
+              <Input mode={"flat"} title={"متن"} style={styles.note} />
+            </View>
+          </ScrollView>
         </View>
-        <View style={{ flex: 1 }}>
-          <Input mode={"flat"} title={"تاریخ"} />
-        </View>
-        <View style={styles.noteStyle}>
-          <Input mode={"flat"} title={"متن"} multiline={true} />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button mode={"contained"} size={"big"} rippleColor={"lightGrey"}>
-            {"ثبت کردن"}
-          </Button>
-        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button mode={"contained"} size={"big"} rippleColor={"lightGrey"}>
+          {"ثبت کردن"}
+        </Button>
       </View>
     </View>
   );
