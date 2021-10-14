@@ -6,7 +6,7 @@ import {
   MaterialCommunityIcons,
   Octicons,
 } from "@expo/vector-icons";
-const SIZE=40;
+const SIZE = 40;
 
 const state = true;
 import React from "react";
@@ -20,6 +20,7 @@ export function Dashboard() {
       <View style={styles.titleContainer}>
         <View style={styles.card}>
           <Card
+            id={""}
             name={state ? "نامشخص" : "سیف اله"}
             description={state ? "نامشخص" : "سیف اله"}
             image={require("../../../assets/image/images.png")}
