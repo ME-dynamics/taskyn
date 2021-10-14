@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.BACKGROUND,
   },
   imageContainer: {
-    flex: 2,
+    width: "100%",
+    height: heightPercentageToDP("28"),
     padding: 20,
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
@@ -37,22 +38,17 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 1,
   },
   bodyContainer: {
-    flex: 5,
-  },
-  noteStyle: {
-    flex: 4,
-  },
-  inputs: {
-    flex: 1,
+    width: "100%",
+    minHeight: heightPercentageToDP("50"),
     alignItems: "center",
-    justifyContent: "space-evenly",
-    // paddingBottom:50,
+    paddingTop: 12
   },
-  note: {
-    height: heightPercentageToDP("30"),
+  inputContainer: {
+    marginBottom: 8 
   },
   buttonContainer: {
-    flex: 1,
+    width: "100%",
+    height: heightPercentageToDP("10"),
     alignItems: "center",
     justifyContent: "center",
   },

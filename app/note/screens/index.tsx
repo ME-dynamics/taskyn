@@ -1,7 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { heightPercentageToDP } from "react-native-responsive-screen";
+
 import {
   Button,
   THEME,
@@ -14,7 +16,7 @@ import {
 import { styles } from "./style";
 export function NoteScreen() {
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView  style={styles.container} >
       <View style={styles.imageContainer}>
         <View style={styles.cameraIcon}>
           <View style={styles.cameraButton}>
@@ -43,18 +45,15 @@ export function NoteScreen() {
         </View>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.inputs}>
-          <View>
-            <Input mode={"flat"} title={"موضوع"} />
-          </View>
-          <View>
-            <Input mode={"flat"} title={"تاریخ"} />
-          </View>
-          <ScrollView style={{ flex: 1 }}>
-            <View>
-              <Input mode={"flat"} title={"متن"} style={styles.note} />
-            </View>
-          </ScrollView>
+        <View style={styles.inputContainer}>
+          <Input mode={"flat"} title={"موضوع"} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Input mode={"flat"} title={"تاریخ"} />
+        </View>
+        <View style={styles.inputContainer}>
+          <Input mode={"flat"} title={"متن"} multiline numberOfLines={5} />
         </View>
       </View>
       <View style={styles.buttonContainer}>
@@ -62,6 +61,6 @@ export function NoteScreen() {
           {"ثبت کردن"}
         </Button>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
