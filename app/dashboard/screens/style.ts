@@ -1,34 +1,55 @@
 import { StyleSheet } from "react-native";
-
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
+import { THEME } from "../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.COLORS.BACKGROUND,
   },
   titleContainer: {
-    flex: 3,
-  },
-  buttonContainer: {
-    flex: 7,
-  },
-  noteContainer: {
-    flex: 3,
+    flex: 2,
+    backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 101,
+  },
+  card: {
+    top: heightPercentageToDP("12"),
+  },
+  buttonContainer: {
+    flex: 6,
   },
   row: {
-    flex: 1,
+    width: widthPercentageToDP("100"),
+    height: 180,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
   },
   button: {
-    width: 152,
-    height: 152,
+    width: 154,
+    height: 154,
     backgroundColor: "white",
     borderRadius: 8,
-    borderWidth: StyleSheet.hairlineWidth,
     shadowRadius: 2,
     shadowColor: "black",
-    elevation: 1
+    elevation: 2,
+    overflow:"hidden",
   },
+  scrollViewContainer: {
+    flex: 1,
+  },
+  containerContentStyle: {
+    alignItems: "center",
+    paddingTop: heightPercentageToDP("10"),
+  },
+  iconContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  iconTitleContainer: {},
 });
