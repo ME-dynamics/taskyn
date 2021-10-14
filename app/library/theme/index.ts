@@ -9,7 +9,7 @@ const COLORS = {
   TRANSPARENT: {
     PRIMARY: "rgba(82, 86, 201, 0.2)",
     GREY: "rgba(112,112,112,0.2)",
-    WHITE: "rgba(255,255,255, 0.7)",
+    WHITE: "rgba(255,255,255, 0.6)",
   },
   GREY: {
     LIGHT: "#cfcfcf",
