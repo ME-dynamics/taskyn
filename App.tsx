@@ -11,19 +11,20 @@ import { Authentication } from "./app/authentication";
 import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
+import { NoteScreen } from "./app/note/screens";
 
 function FirstTab() {
-  return <DoctorProfile />;
+  return <Task />;
 }
 
 function SecondTab() {
   
-  return <Dashboard  />;
+  return <NoteScreen  />;
 }
 
 function ThirdTab() {
   return (
-    <Patients />
+    <Authentication />
   );
 }
 
