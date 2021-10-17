@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   titleContainer: {
-    flex: 2,
+    width:widthPercentageToDP("100"), 
+    height:heightPercentageToDP("30"),
     alignItems: "center",
     justifyContent: "space-evenly",
     flexDirection:"column",
@@ -21,7 +22,8 @@ export const styles = StyleSheet.create({
     fontSize: 26,
   },
   authContainer: {
-    flex: 3,
+    width:widthPercentageToDP("100"), 
+    height:heightPercentageToDP("70"),
     backgroundColor: "white",
     borderTopLeftRadius: widthPercentageToDP("6"),
     borderTopRightRadius: widthPercentageToDP("6"),

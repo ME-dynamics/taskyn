@@ -12,10 +12,11 @@ import {
 } from "../../usecases";
 import { styles } from "./styles";
 import { confirm, phone } from "./constant";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function AuthenticationScreen() {
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView style={styles.container}> 
       <View style={styles.titleContainer}>
         <View style={styles.logoContainer}>
           <Logo size={100} color={"white"} />
@@ -60,7 +61,7 @@ function AuthenticationScreen() {
               </Paragraph>
             </View>
       </View>
-    </View>
+      </KeyboardAwareScrollView>
   );
 }
 export const Authentication = observer(AuthenticationScreen);
