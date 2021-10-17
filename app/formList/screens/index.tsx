@@ -6,6 +6,7 @@ import { FormCard } from "../components";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { SearchBar } from "../../library";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ScrollView } from "react-native-gesture-handler";
 export const FormList = () => {
   return (
     <View style={styles.container}>
@@ -19,15 +20,83 @@ export const FormList = () => {
       </View>
 
       <View style={styles.formCardContainer}>
-        <FormCard
-          Icon={({ color, size }) => (
-            <FontAwesome5 name="neos" size={size} color={color} />
-          )}
-          id={"Neo"}
-          englishName={"NEO Personality Inventory"}
-          persianName={"پرسش نامه شخصیتی نئو"}
-          onPress={() => {}}
-        />
+        <KeyboardAwareScrollView
+          style={styles.container}
+          contentContainerStyle={styles.containerContentStyle}
+        >
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="neos" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"NEO Personality Inventory"}
+            persianName={"پرسش نامه شخصیتی نئو"}
+            onPress={() => {}}
+          />
+        </KeyboardAwareScrollView>
       </View>
     </View>
   );
