@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: THEME.COLORS.PRIMARY.DARK,
     alignSelf: "center",
-    top: hp("4%"),
+    // top: hp("4%"),
   },
 
   body: {

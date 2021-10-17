@@ -10,7 +10,6 @@ import {
   Ionicons,
   Feather,
 } from "@expo/vector-icons";
-import { Shadow } from "react-native-shadow-2";
 
 import { MenuItem } from "../components";
 import { styles } from "./style";
