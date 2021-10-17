@@ -9,6 +9,7 @@ import { styles } from "./styles";
 import { PatientCard } from "../components/PatientCard";
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // function AcceptListCardTap() {
 //   return (
@@ -92,20 +93,34 @@ function PatientList({ navigation }) {
           </View>
         </Tap>
       </View>
-      <View style={styles.patientCardContainer}>
-        <PatientCard
-          description={"ادرس خ ازادی خ ازادی ک ازادی"}
-          id=""
-          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-          name="محمد سجاد سیف اله طرقی"
-        />
-      </View>
+      <KeyboardAwareScrollView style={styles.container}>
+        <View style={styles.patientCardContainer}>
+          <PatientCard
+            description={"ادرس خ ازادی خ ازادی ک ازادی"}
+            id=""
+            image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+            name="محمد سجاد سیف اله طرقی"
+          />
+          <PatientCard
+            description={"ادرس خ ازادی خ ازادی ک ازادی"}
+            id=""
+            image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+            name="محمد سجاد سیف اله طرقی"
+          />
+          <PatientCard
+            description={"ادرس خ ازادی خ ازادی ک ازادی"}
+            id=""
+            image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+            name="محمد سجاد سیف اله طرقی"
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
 function AcceptPatientList() {
   return (
-    <View style={{flex:1,alignItems:"center",}}>
+    <View style={{ flex: 1, alignItems: "center" }}>
       <AcceptListCard
         description={"ادرس خ ازادی خ ازادی ک ازادی"}
         id=""

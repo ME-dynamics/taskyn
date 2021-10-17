@@ -1,26 +1,30 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#fafafa",
+    backgroundColor: THEME.COLORS.BACKGROUND,
   },
   searchBarContainer: {
-    flex: 1,
+    width: widthPercentageToDP("100"),
+    height: heightPercentageToDP("10"),
     alignItems: "center",
     justifyContent: "space-evenly",
     flexDirection: "row-reverse",
   },
   patientCardContainer: {
-    flex: 9,
-    alignItems:"center",
+    width: widthPercentageToDP("100"),
+    height: heightPercentageToDP("90"),
+    alignItems: "center",
   },
   iconContainer: {
-    width:widthPercentageToDP("10"),
-    height:"100%",
-
+    width: widthPercentageToDP("10"),
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -37,9 +41,12 @@ export const styles = StyleSheet.create({
     color: "white",
   },
   redCircleContainer: {
-    position:"absolute",
-    top:10,
-    right:2
-
+    position: "absolute",
+    top: 10,
+    right: 2,
   },
+  containerContentStyle: {
+     alignItems: "center",
+ 
+},
 });

@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 2,
     overflow: "hidden",
+    marginVertical:5,
   },
   imageContainer: {
     flex: 3,
