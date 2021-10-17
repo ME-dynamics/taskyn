@@ -7,30 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12E742B02D514C85A271EE67 /* Vazir-Regular-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2BACD54BE6042F9B8B78B98 /* Vazir-Regular-UI.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3414E3F901C949C2A61618D5 /* Vazir-Thin-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9CD9E61292A461282B513DC /* Vazir-Thin-UI.ttf */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		695CFD6D695D449C8444EE94 /* Vazir-Medium-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBACAF35F9B473580F42521 /* Vazir-Medium-UI.ttf */; };
-		876A4456AC4C4FE8AF1AD509 /* Vazir-Regular-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2067B3259D3C49FC91BE67A1 /* Vazir-Regular-UI.ttf */; };
-		96905EF65AED1B983A6B3ABC /* libPods-taskyn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-taskyn.a */; };
-		9AF6C7F9AD614C4387827C7B /* Vazir-Bold-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE5918B472304453AB7E881A /* Vazir-Bold-UI.ttf */; };
-		A6EF2624A8A445B6B084D456 /* Vazir-Thin-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 465FC868E1C8420DADA21FB4 /* Vazir-Thin-UI.ttf */; };
-		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		C22D2C48E7DA47D18E4D586E /* Vazir-Black-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62A7032F604E4C4C89D14EF6 /* Vazir-Black-UI.ttf */; };
-		F923DCAC631941C694840ADD /* Vazir-Light-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EFB1F4C503B4E199134F16B /* Vazir-Light-UI.ttf */; };
-		AE0AE84CC7AA4202B3B2427B /* Vazir-Black-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2DC3C0EE14E7DB3E9D7B2 /* Vazir-Black-UI.ttf */; };
-		D1780D01D4C343539D5D60BC /* Vazir-Bold-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81AA63D0B78A499298E63FFD /* Vazir-Bold-UI.ttf */; };
 		53B5A9639AAD4F12BE0C4ECF /* Vazir-Light-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8830207A55674E4BA652C978 /* Vazir-Light-UI.ttf */; };
 		62D2B0BBA63A48CCA8CDF9F0 /* Vazir-Medium-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44F853320BF74AD092115BD1 /* Vazir-Medium-UI.ttf */; };
-		12E742B02D514C85A271EE67 /* Vazir-Regular-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2BACD54BE6042F9B8B78B98 /* Vazir-Regular-UI.ttf */; };
-		3414E3F901C949C2A61618D5 /* Vazir-Thin-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9CD9E61292A461282B513DC /* Vazir-Thin-UI.ttf */; };
+		96905EF65AED1B983A6B3ABC /* libPods-taskyn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-taskyn.a */; };
+		AE0AE84CC7AA4202B3B2427B /* Vazir-Black-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2DC3C0EE14E7DB3E9D7B2 /* Vazir-Black-UI.ttf */; };
+		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		D1780D01D4C343539D5D60BC /* Vazir-Bold-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81AA63D0B78A499298E63FFD /* Vazir-Bold-UI.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		0EFB1F4C503B4E199134F16B /* Vazir-Light-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Light-UI.ttf"; path = "../fonts/Vazir-Light-UI.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* taskyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = taskyn/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = taskyn/AppDelegate.m; sourceTree = "<group>"; };
@@ -38,24 +31,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = taskyn/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = taskyn/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = taskyn/main.m; sourceTree = "<group>"; };
-		2067B3259D3C49FC91BE67A1 /* Vazir-Regular-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Regular-UI.ttf"; path = "../fonts/Vazir-Regular-UI.ttf"; sourceTree = "<group>"; };
-		465FC868E1C8420DADA21FB4 /* Vazir-Thin-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Thin-UI.ttf"; path = "../fonts/Vazir-Thin-UI.ttf"; sourceTree = "<group>"; };
+		3EB2DC3C0EE14E7DB3E9D7B2 /* Vazir-Black-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Black-UI.ttf"; path = "../assets/fonts/Vazir-Black-UI.ttf"; sourceTree = "<group>"; };
+		44F853320BF74AD092115BD1 /* Vazir-Medium-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Medium-UI.ttf"; path = "../assets/fonts/Vazir-Medium-UI.ttf"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-taskyn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taskyn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62A7032F604E4C4C89D14EF6 /* Vazir-Black-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Black-UI.ttf"; path = "../fonts/Vazir-Black-UI.ttf"; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-taskyn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taskyn.debug.xcconfig"; path = "Target Support Files/Pods-taskyn/Pods-taskyn.debug.xcconfig"; sourceTree = "<group>"; };
-		6EBACAF35F9B473580F42521 /* Vazir-Medium-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Medium-UI.ttf"; path = "../fonts/Vazir-Medium-UI.ttf"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-taskyn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taskyn.release.xcconfig"; path = "Target Support Files/Pods-taskyn/Pods-taskyn.release.xcconfig"; sourceTree = "<group>"; };
+		81AA63D0B78A499298E63FFD /* Vazir-Bold-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Bold-UI.ttf"; path = "../assets/fonts/Vazir-Bold-UI.ttf"; sourceTree = "<group>"; };
+		8830207A55674E4BA652C978 /* Vazir-Light-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Light-UI.ttf"; path = "../assets/fonts/Vazir-Light-UI.ttf"; sourceTree = "<group>"; };
+		A9CD9E61292A461282B513DC /* Vazir-Thin-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Thin-UI.ttf"; path = "../assets/fonts/Vazir-Thin-UI.ttf"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = taskyn/SplashScreen.storyboard; sourceTree = "<group>"; };
-		AE5918B472304453AB7E881A /* Vazir-Bold-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Bold-UI.ttf"; path = "../fonts/Vazir-Bold-UI.ttf"; sourceTree = "<group>"; };
+		B2BACD54BE6042F9B8B78B98 /* Vazir-Regular-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Regular-UI.ttf"; path = "../assets/fonts/Vazir-Regular-UI.ttf"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		3EB2DC3C0EE14E7DB3E9D7B2 /* Vazir-Black-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Black-UI.ttf"; path = "../assets/fonts/Vazir-Black-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		81AA63D0B78A499298E63FFD /* Vazir-Bold-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Bold-UI.ttf"; path = "../assets/fonts/Vazir-Bold-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8830207A55674E4BA652C978 /* Vazir-Light-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Light-UI.ttf"; path = "../assets/fonts/Vazir-Light-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		44F853320BF74AD092115BD1 /* Vazir-Medium-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Medium-UI.ttf"; path = "../assets/fonts/Vazir-Medium-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B2BACD54BE6042F9B8B78B98 /* Vazir-Regular-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Regular-UI.ttf"; path = "../assets/fonts/Vazir-Regular-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A9CD9E61292A461282B513DC /* Vazir-Thin-UI.ttf */ = {isa = PBXFileReference; name = "Vazir-Thin-UI.ttf"; path = "../assets/fonts/Vazir-Thin-UI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +87,6 @@
 		529C39FEDB2E4E959BFFA42D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				62A7032F604E4C4C89D14EF6 /* Vazir-Black-UI.ttf */,
-				AE5918B472304453AB7E881A /* Vazir-Bold-UI.ttf */,
-				0EFB1F4C503B4E199134F16B /* Vazir-Light-UI.ttf */,
-				6EBACAF35F9B473580F42521 /* Vazir-Medium-UI.ttf */,
-				2067B3259D3C49FC91BE67A1 /* Vazir-Regular-UI.ttf */,
-				465FC868E1C8420DADA21FB4 /* Vazir-Thin-UI.ttf */,
 				3EB2DC3C0EE14E7DB3E9D7B2 /* Vazir-Black-UI.ttf */,
 				81AA63D0B78A499298E63FFD /* Vazir-Bold-UI.ttf */,
 				8830207A55674E4BA652C978 /* Vazir-Light-UI.ttf */,
@@ -113,7 +95,6 @@
 				A9CD9E61292A461282B513DC /* Vazir-Thin-UI.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -228,12 +209,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				C22D2C48E7DA47D18E4D586E /* Vazir-Black-UI.ttf in Resources */,
-				9AF6C7F9AD614C4387827C7B /* Vazir-Bold-UI.ttf in Resources */,
-				F923DCAC631941C694840ADD /* Vazir-Light-UI.ttf in Resources */,
-				695CFD6D695D449C8444EE94 /* Vazir-Medium-UI.ttf in Resources */,
-				876A4456AC4C4FE8AF1AD509 /* Vazir-Regular-UI.ttf in Resources */,
-				A6EF2624A8A445B6B084D456 /* Vazir-Thin-UI.ttf in Resources */,
 				AE0AE84CC7AA4202B3B2427B /* Vazir-Black-UI.ttf in Resources */,
 				D1780D01D4C343539D5D60BC /* Vazir-Bold-UI.ttf in Resources */,
 				53B5A9639AAD4F12BE0C4ECF /* Vazir-Light-UI.ttf in Resources */,
