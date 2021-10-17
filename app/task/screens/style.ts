@@ -1,33 +1,39 @@
 import { StyleSheet } from "react-native";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../library";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor:THEME.COLORS.BACKGROUND,
   },
   titleContainer: {
-    flex: 2,
+    width:widthPercentageToDP("100"),
+    height:heightPercentageToDP("10"),
     alignItems: "center",
     justifyContent: "center",
   },
   inputContainer: {
-    flex: 1,
+    width:widthPercentageToDP("100"),
+    height:heightPercentageToDP("10"),
     alignItems: "center",
     justifyContent: "center",
   },
   taskContainer: {
-    flex: 8,
-    paddingTop: 50,
+    width:widthPercentageToDP("100"),
+    height:heightPercentageToDP("64"),
+    paddingTop: 20,
     //width: widthPercentageToDP("86"),
    
   },
-  scrollViewContainer:{flex:1},
+  scrollViewContainer:{
+    flex:1,
+  },
   containerContentStyle:{alignItems:"center"},
   buttonContainer: {
-    flex: 2,
-    alignItems: "center",
+    width:widthPercentageToDP("100"),
+    height:heightPercentageToDP("10"),
+        alignItems: "center",
     justifyContent: "center",
   },
 });
