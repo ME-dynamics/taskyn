@@ -19,7 +19,7 @@ export const FormCard = (props: IPatients) => {
     <View style={styles.container}>
       <View style={styles.iconContainer}>
         <View style={styles.formIcon}>
-          {/* <Icon size={30} color={"grey"} /> */}
+         <Icon size={30} color={"grey"} />
         </View>
       </View>
       <View style={styles.infoContainer}>
