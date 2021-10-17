@@ -12,19 +12,20 @@ import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
 import { NoteScreen } from "./app/note/screens";
+import { FormList } from "./app/formList/screens";
 
 function FirstTab() {
-  return <Task />;
+  return <Dashboard />;
 }
 
 function SecondTab() {
   
-  return <NoteScreen  />;
+  return <DoctorProfile  />;
 }
 
 function ThirdTab() {
   return (
-    <Authentication />
+    <FormList />
   );
 }
 
