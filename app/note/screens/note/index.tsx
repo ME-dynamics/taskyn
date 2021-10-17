@@ -2,43 +2,27 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  Button,
-  THEME,
-  Input,
-  Subheading,
-  Touchable,
-} from "../../../library";
-
+import { Button, THEME, Input, Subheading, Touchable } from "../../../library";
+import { PickerButton, Line } from "../../components";
 import { styles } from "./styles";
 export function NoteScreen() {
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <View style={styles.cameraIcon}>
-          <View style={styles.cameraButton}>
-            <MaterialCommunityIcons
-              name="camera-outline"
-              color={THEME.COLORS.PRIMARY.DARK}
-              size={70}
-            />
-            <View style={styles.cameraText}>
-              <Subheading>{"دوربین"}</Subheading>
-            </View>
-            <Touchable rippleColor={"lightGrey"} />
-          </View>
-          <View style={styles.line} />
-          <View style={styles.cameraButton}>
-            <MaterialCommunityIcons
-              name="camera-outline"
-              color={THEME.COLORS.PRIMARY.DARK}
-              size={70}
-            />
-            <View style={styles.cameraText}>
-              <Subheading>{"گالری"}</Subheading>
-            </View>
-            <Touchable rippleColor={"lightGrey"} />
-          </View>
+          <PickerButton
+            mode={"gallery"}
+            onPress={() => {
+              console.log("gallery pick");
+            }}
+          />
+          <Line />
+          <PickerButton
+            mode={"camera"}
+            onPress={() => {
+              console.log("camera pick");
+            }}
+          />
         </View>
       </View>
       <View style={styles.bodyContainer}>

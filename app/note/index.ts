@@ -1,1 +1,1 @@
-export { NoteScreen } from "./interfaces/note";
+export { NoteScreen } from "./screens/note";
