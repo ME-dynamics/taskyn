@@ -1,17 +1,24 @@
 import { StyleSheet } from "react-native";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   searchBarContainer: {
-    flex: 1,
+    width: widthPercentageToDP("100"),
+    height: heightPercentageToDP("10"),
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 10,
   },
   formCardContainer: {
-    flex: 9,
+    width: widthPercentageToDP("100"),
+    height: heightPercentageToDP("90"),
     alignItems: "center",
   },
+  containerContentStyle: { alignItems: "center" },
 });
