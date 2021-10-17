@@ -2,21 +2,18 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { heightPercentageToDP } from "react-native-responsive-screen";
-
 import {
   Button,
   THEME,
   Input,
-  Title,
   Subheading,
   Touchable,
-  Headline,
-} from "../../library";
-import { styles } from "./style";
+} from "../../../library";
+
+import { styles } from "./styles";
 export function NoteScreen() {
   return (
-    <KeyboardAwareScrollView  style={styles.container} >
+    <KeyboardAwareScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <View style={styles.cameraIcon}>
           <View style={styles.cameraButton}>
