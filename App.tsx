@@ -12,20 +12,24 @@ import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
 import { FormList } from "./app/formList/screens";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Header } from "react-native/Libraries/NewAppScreen";
+import { UserInfo } from "./app/userInfo/screens";
+
+function LoginScreen() {
+  return <Authentication />;
+}
 
 function FirstTab() {
-  return <Profile />;
+  return <UserInfo />;
 }
 
 function SecondTab() {
-  
-  return <DoctorProfile  />;
+  return <DoctorProfile />;
 }
 
 function ThirdTab() {
-  return (
-    <FormList />
-  );
+  return <FormList />;
 }
 
 const Tab = createBottomTabNavigator();
@@ -36,14 +40,13 @@ function MyTabs() {
       initialRouteName="خانه"
       screenOptions={{
         tabBarActiveTintColor: THEME.COLORS.PRIMARY.NORMAL,
-         headerShown: false ,
+        headerShown: false,
       }}
     >
       <Tab.Screen
         name="مشخصات"
         component={ThirdTab}
         options={{
-          
           tabBarLabel: "مشخصات",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -55,7 +58,6 @@ function MyTabs() {
       <Tab.Screen
         name="لیست بیماران"
         component={SecondTab}
-        
         options={{
           tabBarLabel: "بیماران",
           tabBarIcon: ({ color, size }) => (
@@ -76,11 +78,22 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const isSignedIn = true;
   return (
     <NavigationContainer>
-      <MyTabs />
+      {isSignedIn ? (
+        <MyTabs />
+      ) : (
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Home" component={LoginScreen} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 };
