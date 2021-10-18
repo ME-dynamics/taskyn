@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Input } from "../../library";
+import { Input, THEME } from "../../library";
 import { styles } from "./style";
 import { IUserInfoProps } from "./type";
+import {DropPicker} from '../components/index';
 export function UserInfo(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
   const ComponentGenerator = () => {
@@ -129,10 +130,6 @@ export function UserInfo(props: IUserInfoProps) {
         type: "",
       },
       { title: "شرح برادر خواهر ", placeholder: "", type: "" },
-      { title: "", placeholder: "", type: "" },
-      { title: "", placeholder: "", type: "" },
-      { title: "", placeholder: "", type: "" },
-      { title: "", placeholder: "", type: "" },
     ];
     const FormComponent = [];
     for (let i = 0; i < TitleAndPlaceholderObjectList.length; i++) {
@@ -150,9 +147,13 @@ export function UserInfo(props: IUserInfoProps) {
     }
     return FormComponent;
   };
+
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>{ComponentGenerator()}</View>
+      <DropPicker>
+        
+      </DropPicker>
+      {/* <View style={styles.inputContainer}>{ComponentGenerator()}</View> */}
     </View>
   );
 }
