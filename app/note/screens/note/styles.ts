@@ -10,30 +10,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: THEME.COLORS.BACKGROUND,
   },
-  imageContainer: {
-    width: fullWidth,
-    height: heightPercentageToDP("28"),
-    padding: 20,
-    backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
-  },
-  cameraIcon: {
-    flex: 1,
-    backgroundColor: THEME.COLORS.TRANSPARENT.WHITE,
-    borderRadius: 8,
-    flexDirection: "row",
-  },
-  cameraText: {
-    alignItems: "center",
-  },
-  cameraButton: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
+
 
   bodyContainer: {
     width: fullWidth,
-    minHeight: heightPercentageToDP("50"),
+    minHeight: heightPercentageToDP("48"),
     alignItems: "center",
     paddingTop: 12,
   },

@@ -1,1 +1,1 @@
-export { IPickerButtonProps } from "./components"
+export { IPickerButtonProps, ILineProps, INoteImageProps } from "./components"
