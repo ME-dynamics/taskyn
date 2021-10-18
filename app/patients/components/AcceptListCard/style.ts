@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     elevation: 2,
+    marginTop:10,
     overflow: "hidden",
   },
   imageContainer: {
