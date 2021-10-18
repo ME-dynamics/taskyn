@@ -13,13 +13,14 @@ export const styles = StyleSheet.create({
   },
   iconContainer: {
     flex: 3,
-    alignItems: "center",
-    justifyContent: "center",
+   
   },
   formIcon: {
     width: 72,
     height: 72,
     borderRadius: 72 / 2,
+    alignItems:"center",
+    justifyContent:"center"
   },
   infoContainer: {
     flex: 10,
