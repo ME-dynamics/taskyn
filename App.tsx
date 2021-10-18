@@ -11,11 +11,10 @@ import { Authentication } from "./app/authentication";
 import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
-import { NoteScreen } from "./app/note/screens";
 import { FormList } from "./app/formList/screens";
 
 function FirstTab() {
-  return <Dashboard />;
+  return <Profile />;
 }
 
 function SecondTab() {

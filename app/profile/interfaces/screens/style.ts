@@ -8,12 +8,11 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: THEME.COLORS.BACKGROUND,
   },
-  header: {
-    backgroundColor: "black",
+  topBackground: {
+    flex: 2,
+    backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   avatar: {
     width: 130,
@@ -22,28 +21,27 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: THEME.COLORS.PRIMARY.DARK,
     alignSelf: "center",
-    top: hp("8%"),
-    zIndex: 100,
+    // top: hp("4%"),
   },
 
   body: {
-    flex: 1,
-    top: 90,
-    justifyContent: "flex-start",
-    borderRadius: 20,
-    
-  },
-  bodyShadow: {
+    flex: 3,
     borderRadius: 20,
     alignSelf: "center",
     //elevation: 10,
     height: hp("60%"),
     width: wp("90%"),
-    zIndex: 50,
   },
+
   bodyContent: {
     flex: 1,
     alignItems: "center",
-    padding: 30,
+    justifyContent: "center",
+  },
+  botbackground: {
+    flex: 6,
+    top:-100,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
