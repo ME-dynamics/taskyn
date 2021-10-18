@@ -12,4 +12,5 @@ export const styles = StyleSheet.create({
 export const iconStyle = {
   size: 70,
   color: THEME.COLORS.PRIMARY.DARK,
+  smallSize: 32
 };
