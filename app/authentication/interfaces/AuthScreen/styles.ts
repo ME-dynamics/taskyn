@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     width:widthPercentageToDP("100"), 
-    height:heightPercentageToDP("30"),
+    height:heightPercentageToDP("31"),
     alignItems: "center",
     justifyContent: "space-evenly",
     flexDirection:"column",
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   authContainer: {
     width:widthPercentageToDP("100"), 
-    height:heightPercentageToDP("70"),
+    height:heightPercentageToDP("66"),
     backgroundColor: "white",
     borderTopLeftRadius: widthPercentageToDP("6"),
     borderTopRightRadius: widthPercentageToDP("6"),
