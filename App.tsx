@@ -1,5 +1,5 @@
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import * as SplashScreen from "expo-splash-screen";
 import { THEME, Input } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -7,7 +7,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
 import { Task } from "./app/task/screens";
-import { Authentication, getLoggedIn } from "./app/authentication";
+import { Authentication, getLoggedIn, initToken } from "./app/authentication";
 import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
@@ -16,13 +16,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens";
 import { observer } from "mobx-react-lite";
+import { NoteScreen } from "./app/note";
 
 function LoginScreen() {
   return <Authentication />;
 }
 
 function FirstTab() {
-  return <UserInfo />;
+  return <NoteScreen />;
 }
 
 function SecondTab() {
@@ -83,8 +84,30 @@ const Stack = createNativeStackNavigator();
 
 function AppComponent() {
   const isSignedIn = getLoggedIn();
+  const [isAppReady, setAppReady] = useState<boolean>(false);
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await initToken();
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        setAppReady(true);
+      }
+    }
+    prepare();
+  }, []);
+  const onLayoutRootView = useCallback(async () => {
+    if (isAppReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [isAppReady]);
+  if (!isAppReady) {
+    return null;
+  }
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={onLayoutRootView}>
       {isSignedIn ? (
         <MyTabs />
       ) : (
