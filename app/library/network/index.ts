@@ -1,6 +1,6 @@
 import { IRequest, IResponse } from "./types";
 
-const serverUrl = "https://dangerous-hound-57.loca.lt";
+const serverUrl = "https://wonderful-insect-60.loca.lt/api/v1";
 
 export async function request(info: IRequest): Promise<IResponse> {
   try {
@@ -12,6 +12,8 @@ export async function request(info: IRequest): Promise<IResponse> {
         "Content-type": "application/json",
         Accept: "application/json",
         "Accept-Encoding": "gzip",
+        "x-jwt-payload":
+          "eyJjdXN0b21lciI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly90YXNreW4uaXIiLCJzdWIiOiI5MzBhMGZhOS1jODUwLTQ0MzQtYTZiMS02Mjk1NmE0Y2VjODUiLCJhdWQiOiJ0YXNreW4iLCJqdGkiOiJYZVlyazgiLCJpYXQiOjE2MzQ2NjcxNjksIm5iZiI6MTYzNDY2NzE2OSwiZXhwIjoxNjQwNjY3MTY5fQ",
       },
       body: body ? JSON.stringify(body) : undefined,
     });
@@ -28,7 +30,7 @@ export async function request(info: IRequest): Promise<IResponse> {
     // add sentry
     return {
       success: false,
-      httpStatus: -1,
+      httpStatus: 0,
       payload: undefined,
       error: undefined,
     };
