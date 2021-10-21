@@ -48,12 +48,6 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 0,
   },
-  flatFocusedBorder: {
-    borderBottomWidth: 2,
-  },
-  outlinedFocusedBorder: {
-    borderWidth: 2,
-  },
   activeBorderColor: {
     borderColor: THEME.COLORS.PRIMARY.NORMAL,
   },

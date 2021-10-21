@@ -99,21 +99,16 @@ export function Input(props: IInputProps) {
                         ? { height: INPUT_HEIGHT + numberOfLines * 14 }
                         : undefined,
                     ],
-                    value ? styles.activeBorderColor : null,
                     material.subheading,
                     styles.inputFont,
-                    mode === "flat" ? styles.flat : null,
+                    mode === "flat" ? styles.flat : undefined,
                     multiline && !numberOfLines
                       ? { height: state.height }
-                      : null,
+                      : undefined,
                     state.focused
-                      ? [
-                          styles.activeBorderColor,
-                          mode === "outlined"
-                            ? styles.outlinedFocusedBorder
-                            : styles.flatFocusedBorder,
-                        ]
+                      ? styles.activeBorderColor
                       : styles.disabledBorderColor,
+                    value ? styles.activeBorderColor : undefined,
                     style,
                   ]}
                   onBlur={onBlur}
