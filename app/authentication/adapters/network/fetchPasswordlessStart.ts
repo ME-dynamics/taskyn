@@ -7,18 +7,18 @@ export async function fetchPasswordlessStart(
 ): Promise<adapterTypes.IFetchPasswordlessStartResult> {
   const { success, httpStatus, payload, error } = await request({
     token: auth.token,
-    endpoint: "/v1/customer/passwordless/start",
+    endpoint: "/passwordless/start",
     method: "POST",
     body: { phoneNumber },
   });
   if (!success) {
     return {
       error: error,
-      otpToken: undefined,
+      otpToken: "",
     };
   }
   return {
     otpToken: payload ? String(payload.otpToken) : "",
-    error: undefined,
+    error: "",
   };
 }

@@ -6,28 +6,28 @@ export async function fetchPasswordlessVerify(
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
   const { success, httpStatus, payload, error } = await request({
     token: auth.token,
-    endpoint: "/v1/customer/passwordless/verify",
+    endpoint: "/passwordless/verify",
     method: "POST",
     body: { otpCode: otpNumber, otpToken: auth.otpToken },
   });
   if (!success) {
     return {
       error: error,
-      jwt: undefined,
-      role: undefined,
-      refreshToken: undefined,
-      jwtExpires: undefined,
-      refreshExpires: undefined,
+      jwt: "",
+      role: "",
+      refreshToken: "",
+      jwtExpires: 0,
+      refreshExpires: 0,
     };
   }
   if (!payload) {
     return {
       error: "no payload",
-      jwt: undefined,
-      role: undefined,
-      refreshToken: undefined,
-      jwtExpires: undefined,
-      refreshExpires: undefined,
+      jwt: "",
+      role: "",
+      refreshToken: "",
+      jwtExpires: 0,
+      refreshExpires: 0,
     };
   }
   const jwt = String(payload.jwtToken);
@@ -42,6 +42,6 @@ export async function fetchPasswordlessVerify(
     jwtExpires,
     refreshExpires,
     role,
-    error: undefined,
+    error: "",
   };
 }
