@@ -1,2 +1,8 @@
 export { Authentication } from "./interfaces";
-export { auth } from "./entities";
+import { auth } from "./entities";
+
+export function getLoggedIn() {
+  return auth.loggedIn;
+}
+
+
