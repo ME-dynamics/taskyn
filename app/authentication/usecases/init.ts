@@ -11,7 +11,7 @@ export async function init() {
     ]);
   auth.setRefreshToken(refreshToken || "");
   auth.setToken(token || "");
-  auth.setTokenExpire(tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : -1);
-  auth.setRefreshExpire(refreshExpiresAt ? parseInt(refreshExpiresAt, 10) : -1);
+  auth.setTokenExpire(tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : 0);
+  auth.setRefreshExpire(refreshExpiresAt ? parseInt(refreshExpiresAt, 10) : 0);
   auth.setRole(role || "");
 }
