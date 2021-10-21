@@ -1,47 +1,18 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { PickerButton } from "../PickerButton";
 import { observer } from "mobx-react-lite";
-import { openCamera, openGallery, openCropper } from "../../../library";
 import { NoteImage } from "../NoteImage";
 import { Line } from "../Line";
 import { note } from "../../entities";
-
+import {
+  onCameraPress,
+  onCropPress,
+  onRemovePress,
+  onGalleryPress,
+} from "../../usecases";
 import { styles } from "./styles";
 function PickerComponent() {
-  // move to usecases
-  async function onCropPress(path: string) {
-    try {
-      const image = await openCropper("note", path);
-      note.replaceImage(path, image.path);
-    } catch (error) {
-      console.log(error);
-    }
-
-    // set to state;
-  }
-  function onRemovePress(path: string) {
-    note.removeImage(path);
-  }
-  async function onOpenCameraPressed() {
-    try {
-      const image = await openCamera("note");
-      note.addImage(image.path);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function onOpenGalleryPressed() {
-    const images = await openGallery("note");
-    if (Array.isArray(images)) {
-      for (let index = 0; index < images.length; index++) {
-        const image = images[index];
-        note.addImage(image.path);
-      }
-      return;
-    }
-    note.addImage(images.path);
-  }
   function renderImages() {
     const images = [];
     for (let index = 0; index < note.images.length; index++) {
@@ -81,13 +52,13 @@ function PickerComponent() {
         >
           <PickerButton
             mode={"gallery"}
-            onPress={onOpenGalleryPressed}
+            onPress={onGalleryPress}
             small={note.hasImages}
           />
           <Line direction={note.hasImages ? "horizontal" : "vertical"} />
           <PickerButton
             mode={"camera"}
-            onPress={onOpenCameraPressed}
+            onPress={onCameraPress}
             small={note.hasImages}
           />
         </View>

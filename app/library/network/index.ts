@@ -1,6 +1,6 @@
 import { IRequest, IResponse } from "./types";
 
-const serverUrl = "https://wonderful-insect-60.loca.lt/api/v1";
+const serverUrl = "https://foolish-dragon-50.loca.lt/api/v1";
 
 export async function request(info: IRequest): Promise<IResponse> {
   try {

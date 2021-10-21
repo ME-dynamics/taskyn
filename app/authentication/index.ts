@@ -1,10 +1,13 @@
 export { Authentication } from "./interfaces";
 import { auth } from "./entities";
-
+export { initToken } from "./usecases";
 export function getLoggedIn() {
   return auth.loggedIn;
 }
 
-export function getRoled() {
+export function getRole() {
   return auth.role;
+}
+export function getJWT() {
+  return auth.token;
 }

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import * as SplashScreen from "expo-splash-screen";
 import { THEME, Input } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -7,7 +7,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { AcceptPatientList, PatientList } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
 import { Task } from "./app/task/screens";
-import { Authentication, getLoggedIn, getRoled } from "./app/authentication";
+import { Authentication, getLoggedIn, getRole, initToken } from "./app/authentication";
 import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
@@ -67,7 +67,7 @@ export function PatientsTab() {
 
 
 function MyTabs() {
-  const role = getRoled();
+  const role = getRole();
 
   return (
     <Tab.Navigator
@@ -112,23 +112,42 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-const AutheticationStack = createNativeStackNavigator();
 const Tabs = observer(MyTabs);
 function AppComponent() {
-  // const isSignedIn = getLoggedIn();
-  const isSignedIn = true;
-
+  const isSignedIn = getLoggedIn();
+  const [isAppReady, setAppReady] = useState<boolean>(false);
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await initToken();
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        setAppReady(true);
+      }
+    }
+    prepare();
+  }, []);
+  const onLayoutRootView = useCallback(async () => {
+    if (isAppReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [isAppReady]);
+  if (!isAppReady) {
+    return null;
+  }
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={onLayoutRootView}>
       {isSignedIn ? (
         <Tabs />
       ) : (
-        <AutheticationStack.Navigator
+        <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
-          <AutheticationStack.Screen name="Home" component={Authentication} />
-        </AutheticationStack.Navigator>
+          <Stack.Screen name="Home" component={Authentication} />
+        </Stack.Navigator>
       )}
     </NavigationContainer>
   );
