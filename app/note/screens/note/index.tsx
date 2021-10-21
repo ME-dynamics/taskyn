@@ -2,16 +2,11 @@ import React from "react";
 import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button, Input } from "../../../library";
-import { PickerButton, Line, Picker } from "../../components";
+import { Picker } from "../../components";
 import { styles } from "./styles";
 export function NoteScreen() {
   return (
     <KeyboardAwareScrollView style={styles.container}>
-      {/* <View style={styles.pickerContainer}>
-        <View style={styles.picker}>
-          
-        </View>
-      </View> */}
       <Picker />
       <View style={styles.bodyContainer}>
         <View style={styles.inputContainer}>
