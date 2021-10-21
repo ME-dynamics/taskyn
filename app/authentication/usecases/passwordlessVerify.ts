@@ -7,7 +7,6 @@ export async function passwordlessVerify() {
     // do error stuff
     // validation here
   }
-
   const { error, jwt, jwtExpires, refreshExpires, refreshToken, role } =
     await fetchPasswordlessVerify(input.otpNumber);
   if (error) {
@@ -29,5 +28,4 @@ export async function passwordlessVerify() {
   auth.setRefreshExpire(refreshExpires);
   auth.setTokenExpire(jwtExpires);
   auth.setRole(role);
-  // set navigation root to main tab navigation
 }

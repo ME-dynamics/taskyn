@@ -12,7 +12,6 @@ export async function passwordlessStart() {
       auth.setOtpToken(otpToken);
       return;
     }
-
     // change state to number mode
   }
 }
