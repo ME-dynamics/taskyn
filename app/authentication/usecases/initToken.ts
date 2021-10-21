@@ -1,6 +1,6 @@
 import { secureStorage, storage } from "../../library";
 import { auth } from "../entities";
-export async function init() {
+export async function initToken() {
   const [token, refreshToken, tokenExpiresAt, refreshExpiresAt, role] =
     await Promise.all([
       secureStorage.retrieve("refresh_token"),
