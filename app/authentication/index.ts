@@ -5,4 +5,6 @@ export function getLoggedIn() {
   return auth.loggedIn;
 }
 
-
+export function getRoled() {
+  return auth.role;
+}
