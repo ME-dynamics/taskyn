@@ -1,17 +1,17 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Title, Touchable } from "../../library";
-import { styles } from "./style";
-import { ICardProps } from "./type";
+import { Button, Caption, Title, Touchable } from "../../../library";
+import { styles } from "./styles";
+import { ICardProps } from "../../types";
 
-export const Card = observer((props: ICardProps) => {
-  const { image, name, description, onPress } = props;
+function CardComponent(props: ICardProps) {
+  const { imageUrl, name, description, onPress } = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require('../../../assets/image/images.png')} style={styles.patientImage} />
+        <Image source={{uri: imageUrl}} style={styles.patientImage} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
@@ -29,7 +29,8 @@ export const Card = observer((props: ICardProps) => {
         </View>
       </View>
 
-      {/* <Touchable onPress={onPress} rippleColor={"grey"} /> */}
     </View>
   );
-});
+};
+
+export const Card = observer(CardComponent);

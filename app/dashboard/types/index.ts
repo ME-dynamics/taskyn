@@ -1,0 +1,1 @@
+export { ICardProps,ITileProps } from "./components"

@@ -1,20 +1,11 @@
-import {
-  AntDesign,
-  FontAwesome5,
-  Foundation,
-  Ionicons,
-  MaterialCommunityIcons,
-  Octicons,
-} from "@expo/vector-icons";
-const SIZE = 40;
-
-const state = true;
+import { AntDesign, Foundation, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { Card } from "../components";
-import { styles } from "./style";
-import { Paragraph, Subheading, THEME, Title, Touchable } from "../../library";
+import { View, ScrollView } from "react-native";
+import { Card, Tile } from "../components";
+import { styles } from "./styles";
+
 export function Dashboard() {
+  const state = true;
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -23,7 +14,7 @@ export function Dashboard() {
             id={""}
             name={state ? "نامشخص" : "سیف اله"}
             description={state ? "نامشخص" : "سیف اله"}
-            image={require("../../../assets/image/images.png")}
+            imageUrl={"https://cdn01.zoomit.ir/2021/10/m1-max-m1-pro.jpg"}
             onPress={() => {}}
           />
         </View>
@@ -34,20 +25,49 @@ export function Dashboard() {
           contentContainerStyle={styles.containerContentStyle}
         >
           <View style={styles.row}>
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <Octicons
-                  name="tasklist"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"تمرینات"}</Subheading>
-                </View>
-              </View>
-
-              <Touchable rippleColor={"lightGrey"} />
-            </View>
+            <Tile
+              title={"تمرینات"}
+              Icon={({ size, color }) => {
+                return <AntDesign name="form" size={size} color={color} />;
+              }}
+              onPress={() => {
+                console.log("tile pressed");
+              }}
+            />
+            <Tile
+              title={"نوت برداری"}
+              Icon={({ size, color }) => {
+                return <Octicons name="tasklist" size={size} color={color} />;
+              }}
+              onPress={() => {
+                console.log("tile pressed");
+              }}
+            />
+          </View>
+          <View style={styles.row}>
+            <Tile
+              title={"فرم ها"}
+              Icon={({ size, color }) => {
+                return <Foundation name="clipboard-notes" size={size} color={color} />;
+              }}
+              onPress={() => {
+                console.log("tile pressed");
+              }}
+            />
+            <Tile
+              title={"پرونده بیمار"}
+              Icon={({ size, color }) => {
+                return <MaterialCommunityIcons name="file-document-edit-outline" size={size} color={color} />;
+              }}
+              onPress={() => {
+                console.log("tile pressed");
+              }}
+            />
+          </View>
+          {/* <Tile
+           name={"task"}
+           onPress={() => navigation.navigate("Details")}
+           />
             <View style={styles.button}>
               <View style={styles.iconContainer}>
                 <AntDesign
@@ -117,8 +137,7 @@ export function Dashboard() {
                 </View>
               </View>
               <Touchable rippleColor={"lightGrey"} />
-            </View>
-          </View>
+            </View> */}
         </ScrollView>
       </View>
     </View>
