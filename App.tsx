@@ -7,7 +7,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Patients } from "./app/patients/screens";
 import { ScrollView } from "react-native-gesture-handler";
 import { Task } from "./app/task/screens";
-import { Authentication } from "./app/authentication";
+import { Authentication, getLoggedIn } from "./app/authentication";
 import { Profile } from "./app/profile/interfaces/screens";
 import { DoctorProfile } from "./app/doctorProfile/screens";
 import { Dashboard } from "./app/dashboard/screens";
@@ -15,6 +15,7 @@ import { FormList } from "./app/formList/screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens";
+import { observer } from "mobx-react-lite";
 
 function LoginScreen() {
   return <Authentication />;
@@ -80,8 +81,8 @@ function MyTabs() {
 }
 const Stack = createNativeStackNavigator();
 
-const App = () => {
-  const isSignedIn = true;
+function AppComponent() {
+  const isSignedIn = getLoggedIn();
   return (
     <NavigationContainer>
       {isSignedIn ? (
@@ -96,14 +97,6 @@ const App = () => {
       )}
     </NavigationContainer>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-export default App;
+export const App = observer(AppComponent);
