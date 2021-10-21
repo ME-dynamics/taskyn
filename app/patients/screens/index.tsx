@@ -12,9 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
 
-
-
-function PatientList({ navigation }) {
+export function PatientList({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
@@ -24,7 +22,7 @@ function PatientList({ navigation }) {
           value={""}
           placeholder=""
         />
-        <Tap onPress={() => navigation.navigate("Details")}>
+        <Tap onPress={() => navigation.push("AcceptPatientList")}>
           <View style={styles.iconContainer}>
             <SimpleLineIcons name="user-follow" size={32} color="black" />
             <View style={styles.redCircleContainer}>
@@ -60,100 +58,89 @@ function PatientList({ navigation }) {
     </View>
   );
 }
-function AcceptPatientList() {
+export function AcceptPatientList() {
   return (
-    <ScrollView style={{flex:1}}> 
-    <View style={{ flex: 1, alignItems: "center",}}>
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-      <AcceptListCard
-        description={"ادرس خ ازادی خ ازادی ک ازادی"}
-        id=""
-        image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-        name="محمد سجاد سیف اله طرقی"
-        date={"فلان تاریخ"}
-      />
-    </View>
+    <ScrollView style={{ flex: 1 }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+        <AcceptListCard
+          description={"ادرس خ ازادی خ ازادی ک ازادی"}
+          id=""
+          image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
+          name="محمد سجاد سیف اله طرقی"
+          date={"فلان تاریخ"}
+        />
+      </View>
     </ScrollView>
   );
 }
-const Stack = createNativeStackNavigator();
-export const Patients = observer(() => {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="Home" component={PatientList} />
-      <Stack.Screen name="Details" component={AcceptPatientList} />
-    </Stack.Navigator>
-  );
-});
+// export const Patients = observer(PatientList);
