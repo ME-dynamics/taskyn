@@ -1,5 +1,4 @@
 import "react-native-gesture-handler";
-import "proxy-polyfill";
 import { registerRootComponent } from "expo";
 
 import { App } from "./App";
