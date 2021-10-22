@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   authContainer: {
     width:widthPercentageToDP("100"), 
-    height:heightPercentageToDP("66"),
+    height:heightPercentageToDP("69"),
     backgroundColor: "white",
     borderTopLeftRadius: widthPercentageToDP("6"),
     borderTopRightRadius: widthPercentageToDP("6"),
