@@ -1881,6 +1881,11 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
+"@types/react-native-communications@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-communications/-/react-native-communications-2.2.1.tgz#fe067d9d226090cea34a62de8c6ac71f92caeeb9"
+  integrity sha512-eTgJlMjrx825VuO+3y5rT4Xu3it6oH3i7Zck/QhJO3c8RM61nBp9lJ7BBI3Coc8nxweYkS6i1lkrPPmZOnNzNA==
+
 "@types/react-native@~0.64.12":
   version "0.64.17"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.17.tgz#174408dbab691dc345bbdf0c1471c8b1519409a8"
@@ -6272,6 +6277,11 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-communications@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
+  integrity sha1-eIO1ayCgAu63kMET+GFuqGksp5U=
 
 react-native-dropdown-picker@^5.1.28:
   version "5.1.28"
