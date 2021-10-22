@@ -23,7 +23,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 function AuthenticationScreen() {
   return (
-    <KeyboardAwareScrollView style={styles.container}>
+    <KeyboardAwareScrollView style={styles.container} scrollEnabled={false}> 
       <View style={styles.titleContainer}>
         <View style={styles.logoContainer}>
           <Logo size={100} color={"white"} />
