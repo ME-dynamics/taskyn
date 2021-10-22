@@ -1,7 +1,14 @@
-import { input } from "../entities"
-
+import { validatePhoneNumber } from "../adapters";
+import { input } from "../entities";
 
 export function onPhoneChange(value: string) {
-    // check if phone is valid
-    input.setPhoneNumber(value);
+  if (value.length >= 11) {
+    const isValid = validatePhoneNumber(value);
+    if (!isValid) {
+      input.setPhoneValidation(["شماره اشتباه است"]);
+    } else {
+        input.setPhoneValidation([]);
+    }
+  }
+  input.setPhoneNumber(value);
 }

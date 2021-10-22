@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { View, TextInput } from "react-native";
 
 import { material } from "react-native-typography";
-import { Observer } from "mobx-react-lite";
+import { Observer, useLocalObservable } from "mobx-react-lite";
 import { Tap } from "../Tap";
 import { Timer, TimerState } from "../Timer";
 import { Caption, Paragraph } from "../Typography";
@@ -12,7 +12,6 @@ import { InputState } from "./state";
 import { styles, selectionColor, INPUT_HEIGHT } from "./styles";
 
 import { IInputProps, tOnContentSize } from "./types";
-
 export function Input(props: IInputProps) {
   const {
     multiline,
@@ -25,7 +24,7 @@ export function Input(props: IInputProps) {
     numberOfLines,
   } = props;
   const inputRef = useRef<TextInput>(null);
-  const state = new InputState();
+  const state = useLocalObservable(() => new InputState());
   function onPress() {
     if (inputRef) {
       state.focus();
@@ -57,11 +56,14 @@ export function Input(props: IInputProps) {
     }
     return errors;
   }
-  const timerState = timer ? new TimerState(timer) : null;
+
   function renderTimer() {
     if (!timer) {
       return null;
     }
+    const timerState = timer
+      ? useLocalObservable(() => new TimerState(timer))
+      : null;
     if (!timerState) {
       return null;
     }

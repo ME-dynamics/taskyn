@@ -1,6 +1,6 @@
 export interface IFetchPasswordlessStartResult {
-  otpToken: string | undefined;
-  error: string | undefined;
+  otpToken: string;
+  error: string;
 }
 
 export interface IFetchPasswordlessVerifyResult {

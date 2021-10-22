@@ -13,7 +13,7 @@ export async function fetchPasswordlessStart(
   });
   if (!success) {
     return {
-      error: error,
+      error: error || "",
       otpToken: "",
     };
   }
