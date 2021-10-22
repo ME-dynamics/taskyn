@@ -1,7 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Input, Button, Headline, Logo, Caption, Paragraph } from "../../../library";
+import {
+  Input,
+  Button,
+  Headline,
+  Logo,
+  Caption,
+  Paragraph,
+} from "../../../library";
 
 import { auth, input } from "../../entities";
 import {
@@ -16,7 +23,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 function AuthenticationScreen() {
   return (
-    <KeyboardAwareScrollView style={styles.container}> 
+    <KeyboardAwareScrollView style={styles.container}>
       <View style={styles.titleContainer}>
         <View style={styles.logoContainer}>
           <Logo size={100} color={"white"} />
@@ -26,19 +33,26 @@ function AuthenticationScreen() {
       <View style={styles.authContainer}>
         <View style={styles.itemsContainer}>
           <View style={styles.itemsMargin}>
-            <Input
-              value={auth.otpMode ? input.otpNumber : input.phoneNumber}
-              onChangeText={auth.otpMode ? onOtpNumberChange : onPhoneChange}
-              title={auth.otpMode ? confirm.title : phone.title}
-              placeholder={
-                auth.otpMode ? confirm.placeholder : phone.placeholder
-              }
-              mode={"outlined"}
-              validation={
-                auth.otpMode ? input.otpValidation : input.phoneValidation
-              }
-              timer={auth.otpMode ? { minute: 1, second: 0 } : undefined}
-            />
+            {auth.otpMode ? (
+              <Input
+                value={input.otpNumber}
+                onChangeText={onOtpNumberChange}
+                title={confirm.title}
+                placeholder={confirm.placeholder}
+                mode={"outlined"}
+                validation={input.otpValidation}
+                timer={{ minute: 1, second: 0 }}
+              />
+            ) : (
+              <Input
+                value={input.phoneNumber}
+                onChangeText={onPhoneChange}
+                title={phone.title}
+                placeholder={phone.placeholder}
+                mode={"outlined"}
+                validation={input.phoneValidation}
+              />
+            )}
           </View>
 
           <View style={styles.itemsMargin}>
@@ -50,18 +64,15 @@ function AuthenticationScreen() {
             >
               {auth.otpMode ? confirm.button : phone.button}
             </Button>
-           
           </View>
-          
         </View>
         <View style={styles.termsContainer}>
-              <Paragraph style={styles.terms}>
-              {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
-
-              </Paragraph>
-            </View>
+          <Paragraph style={styles.terms}>
+            {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
+          </Paragraph>
+        </View>
       </View>
-      </KeyboardAwareScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 export const Authentication = observer(AuthenticationScreen);
