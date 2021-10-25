@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   QuestionContainer: {
     // padding: 30,
     width: widthPercentageToDP("100"),
-    minHeight: 180,
+    minHeight: 140,
     padding: widthPercentageToDP("5"),
     alignItems: "flex-end",
     justifyContent: "center",
