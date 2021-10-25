@@ -23,5 +23,5 @@ export const styles = StyleSheet.create({
 
 export const iconStyle = {
   color: THEME.COLORS.PRIMARY.NORMAL,
-  size: 40
+  size: 70
 }
