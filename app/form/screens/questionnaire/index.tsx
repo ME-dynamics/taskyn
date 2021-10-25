@@ -1,25 +1,48 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Button, colors, Headline, Paragraph, Title } from "../../../library";
+import { Button, Subheading, Title } from "../../../library";
 import { AnswerCard } from "../../components/answerCard";
 import { Question } from "../../components/questions";
 import { styles } from "./style";
-export function Questionnaire() {
+export function Questionnaire({ navigation }) {
+  const x = "1";
+  const y = "224";
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title:"فرم نيو",
+      headerRight: () => (
+        <Subheading>{`${y} / ${x}`}</Subheading>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.container}>
+      {/* <View style={styles.headerContiner}>
+        <View style={styles.header}>
+          <Subheading>{y}</Subheading>
+          <Subheading>{" از "}</Subheading>
+          <Title>{x}</Title>
+        </View> */}
+
+      <Question />
+      {/* </View> */}
       <View style={styles.scrollViewContainer}>
         <ScrollView style={styles.scrollview}>
-          <Question />
+          <AnswerCard />
+          <AnswerCard />
+          <AnswerCard />
+          <AnswerCard />
+          <AnswerCard />
           <AnswerCard />
         </ScrollView>
       </View>
       <View style={styles.buttonContainer}>
-        <Button mode={"contained"} rippleColor={"lightGrey"} size={"big"}>
+        <Button mode={"contained"} rippleColor={"lightGrey"} size={"medium"}>
+          {"قبلی"}
+        </Button>
+        <Button mode={"contained"} rippleColor={"lightGrey"} size={"medium"}>
           {"بعدی"}
         </Button>
-        {/* <Button mode={"contained"} rippleColor={"lightGrey"} size={"medium"}>
-          {"قبلی"}
-        </Button> */}
       </View>
     </View>
   );

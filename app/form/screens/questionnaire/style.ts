@@ -5,23 +5,26 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.COLORS.BACKGROUND,
+  },
+  scrollview: {
+    flex: 1,
   },
   scrollViewContainer: {
-    flex: 6,
+    flex: 5,
   },
-  answerContainer: {
-    flex: 4,
+  headerContiner: {
+    flex: 3,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
-  answerCart: {
-    width: widthPercentageToDP("86"),
-    height: 54,
-    borderWidth: 1,
-    borderRadius: 8,
+  header: {
+    flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"center",
   },
   answerCartActive: {
-    borderColor: THEME.COLORS.PRIMARY.NORMAL
+    borderColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   answerCartDeActive: {
     borderColor: THEME.COLORS.TRANSPARENT.PRIMARY,
