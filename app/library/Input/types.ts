@@ -4,12 +4,14 @@ import {
   TextInputProps,
 } from "react-native";
 
-import { ITime } from "../Timer/types";
 export interface IInputProps extends Omit<TextInputProps, "ref" | "onBlur"> {
   title: string;
   mode: "outlined" | "flat";
   validation?: string[];
-  timer?: ITime;
+  timer?: {
+    minute: number;
+    second: number;
+  };
 }
 
 export type tOnContentSize =
