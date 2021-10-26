@@ -29,7 +29,6 @@ function TimerComponent(props: ITimerProps) {
     return setTimer(timer - 1);
   }
   function formattedTime() {
-    console.log({ timer, interval: interval.current });
     const minute = Math.floor(timer / 60);
     const second = timer % 60;
     if (second < 10) {
