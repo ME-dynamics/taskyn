@@ -1,6 +1,7 @@
 import { AntDesign, Foundation, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import React from "react";
 import { View, ScrollView } from "react-native";
+import { OnlineIcon, WebIcon } from "../../library/Icon";
 import { Card, Tile } from "../components";
 import { styles } from "./styles";
 
@@ -28,7 +29,7 @@ export function Dashboard() {
             <Tile
               title={"تمرینات"}
               Icon={({ size, color }) => {
-                return <AntDesign name="form" size={size} color={color} />;
+                return <OnlineIcon size={size}/>;
               }}
               onPress={() => {
                 console.log("tile pressed");
@@ -37,7 +38,7 @@ export function Dashboard() {
             <Tile
               title={"نوت برداری"}
               Icon={({ size, color }) => {
-                return <Octicons name="tasklist" size={size} color={color} />;
+                return <OnlineIcon size={size}  />;
               }}
               onPress={() => {
                 console.log("tile pressed");

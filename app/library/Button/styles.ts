@@ -23,7 +23,7 @@ function buttonHeightCalc(size: tSize) {
     case "medium":
       return 38;
     case "big":
-      return 44;
+      return 54;
     default:
       return 36;
   }
