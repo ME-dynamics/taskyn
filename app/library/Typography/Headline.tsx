@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite";
 import { material } from "react-native-typography";
 
 import { styles } from "./styles"
-import { ITextProps } from "./types";
+import { tTextProps } from "./types";
 
-function HeadlineComponent(props: ITextProps)  {
+function HeadlineComponent(props: tTextProps)  {
   const { children, style } = props;
   return (
     <Text {...props} style={[material.headline, styles.headline ,style]}>
