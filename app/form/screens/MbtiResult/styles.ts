@@ -1,10 +1,15 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { THEME } from "../../../../library";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.COLORS.BACKGROUND,
+  },
+  progressBarGroupContainer: {
+    width: widthPercentageToDP(100),
+    height: 700,
   },
   imageContainer: {
     width: widthPercentageToDP(100),
@@ -15,10 +20,10 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  line:{
-    width:widthPercentageToDP("80"),
-    height:1,
-    backgroundColor:THEME.COLORS.TRANSPARENT.PRIMARY,
+  line: {
+    width: widthPercentageToDP("80"),
+    height: 1,
+    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
   },
   answerContainer: {
     width: widthPercentageToDP(100),
@@ -29,16 +34,12 @@ export const styles = StyleSheet.create({
   },
   descriptionContainer: {
     width: widthPercentageToDP(100),
-    height: 150,
+    minHeight: 50,
     paddingHorizontal: widthPercentageToDP("5"),
   },
-  progressBarContainer: {
-    width: widthPercentageToDP(100),
-    height: 400,
-  },
-  title:{
+  title: {
     width: widthPercentageToDP(100),
     height: 30,
     paddingHorizontal: widthPercentageToDP("5"),
-  }
+  },
 });

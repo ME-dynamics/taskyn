@@ -1,12 +1,13 @@
 import React, { useLayoutEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native"
 import { Button, Subheading, Title } from "../../../library";
-import { AnswerCard } from "../../components/answerCard";
-import { Question } from "../../components/questions";
+import { AnswerCard, Question } from "../../components";
 import { styles } from "./style";
-export function Questionnaire({ navigation }) {
+export function Questionnaire() {
   const x = "1";
   const y = "224";
+  const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
       title:"فرم نيو",
