@@ -1,4 +1,4 @@
-export { Authentication } from "./interfaces";
+export { Authentication } from "./screens";
 import { auth } from "./entities";
 export { initToken } from "./usecases";
 export function getLoggedIn() {
