@@ -11,26 +11,21 @@ function CardComponent(props: ICardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{uri: imageUrl}} style={styles.patientImage} />
+        <Image source={{ uri: imageUrl }} style={styles.patientImage} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
           <Title>{name}</Title>
-        </View>
-        <View style={styles.descriptionContainer}>
           <Caption>{description}</Caption>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={{ paddingHorizontal: 10 }}>
-            <Button mode={"contained"} size={"medium"} rippleColor={"lightGrey"}>
-              {"انتخاب دکتر"}
-            </Button>
-          </View>
+          <Button mode={"contained"} size={"medium"} rippleColor={"lightGrey"}>
+            {"انتخاب دکتر"}
+          </Button>
         </View>
       </View>
-
     </View>
   );
-};
+}
 
 export const Card = observer(CardComponent);

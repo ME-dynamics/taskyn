@@ -21,22 +21,20 @@ export const styles = StyleSheet.create({
   patientImage: {
     width: 76,
     height: 86,
-    borderRadius: 22 / 2,
+    borderRadius: 8,
   },
   infoContainer: {
     flex: 9,
+    paddingRight: 8
   },
   titleContainer: {
-    flex: 3,
+    flex: 3.7,
     justifyContent: "center",
   },
-  descriptionContainer: {
-    flex: 4,
-    justifyContent: "flex-start",
-  },
   buttonContainer:{
+    flex: 3,
     flexDirection:"row",
     justifyContent:"flex-end",
-    bottom:15,
+    alignItems: "flex-start",
   },
 });
