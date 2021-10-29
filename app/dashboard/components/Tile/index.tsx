@@ -1,10 +1,10 @@
-import { Octicons } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
+import { observer } from "mobx-react-lite";
 import { Subheading, Touchable } from "../../../library";
 import { styles, iconStyle } from "./styles";
 import { ITileProps } from "../../types";
-export function Tile(props: ITileProps) {
+function TileComponent(props: ITileProps) {
   const { Icon,onPress, title } = props;
   const { color, size } = iconStyle;
   return (
@@ -15,3 +15,5 @@ export function Tile(props: ITileProps) {
     </View>
   );
 }
+
+export const Tile = observer(TileComponent);
