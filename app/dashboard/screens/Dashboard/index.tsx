@@ -1,12 +1,14 @@
-import { AntDesign, Foundation, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import React from "react";
 import { View, ScrollView } from "react-native";
-import { OnlineIcon, WebIcon } from "../../library/Icon";
-import { Card, Tile } from "../components";
+import { observer } from "mobx-react-lite";
+import { AntDesign, Foundation, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
+import { OnlineIcon, WebIcon } from "../../../library/Icon";
+import { Card, Tile } from "../../components";
 import { styles } from "./styles";
 
-export function Dashboard() {
-  const state = true;
+
+function DashboardScreen() {
+  const state = false;
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -144,3 +146,6 @@ export function Dashboard() {
     </View>
   );
 }
+
+
+export const Dashboard = observer(DashboardScreen);
