@@ -4,13 +4,12 @@ import { input, auth } from "../entities";
 
 export async function passwordlessVerify() {
   if (!input.otpNumber) {
-    // do error stuff
-    // validation here
+    input.setOtpValidation(["کد تایید را وارد کنید"]);
   }
   const { error, jwt, jwtExpires, refreshExpires, refreshToken, role } =
     await fetchPasswordlessVerify(input.otpNumber);
   if (error) {
-    // do some error stuff here
+    input.setOtpValidation([error]);
     return;
   }
   if (!jwt || !refreshToken || !refreshExpires || !jwtExpires || !role) {
