@@ -1,14 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import {
-  Input,
-  Button,
-  Headline,
-  Logo,
-  Caption,
-  Paragraph,
-} from "../../../library";
+import { Input, Button, Headline, Logo, Paragraph } from "../../../library";
 
 import { auth, input } from "../../entities";
 import {
@@ -17,16 +10,16 @@ import {
   onOtpNumberChange,
   passwordlessVerify,
 } from "../../usecases";
-import { styles } from "./styles";
+import { styles, logoSize } from "./styles";
 import { confirm, phone } from "./constant";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function AuthenticationScreen() {
   return (
-    <KeyboardAwareScrollView style={styles.container} scrollEnabled={false}> 
+    <KeyboardAwareScrollView style={styles.container} scrollEnabled={false}>
       <View style={styles.titleContainer}>
         <View style={styles.logoContainer}>
-          <Logo size={100} color={"white"} />
+          <Logo size={logoSize} color={"white"} />
         </View>
         <Headline style={styles.title}>{"ورود به تسکین"}</Headline>
       </View>
@@ -56,14 +49,25 @@ function AuthenticationScreen() {
           </View>
 
           <View style={styles.itemsMargin}>
-            <Button
-              onPress={auth.otpMode ? passwordlessVerify : passwordlessStart}
-              mode={"contained"}
-              rippleColor={"lightGrey"}
-              size={"big"}
-            >
-              {auth.otpMode ? confirm.button : phone.button}
-            </Button>
+            {auth.otpMode ? (
+              <Button
+                onPress={passwordlessVerify}
+                mode={"contained"}
+                rippleColor={"lightGrey"}
+                size={"big"}
+              >
+                {confirm.button}
+              </Button>
+            ) : (
+              <Button
+                onPress={passwordlessStart}
+                mode={"contained"}
+                rippleColor={"lightGrey"}
+                size={"big"}
+              >
+                {phone.button}
+              </Button>
+            )}
           </View>
         </View>
         <View style={styles.termsContainer}>

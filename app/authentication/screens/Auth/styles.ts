@@ -44,6 +44,10 @@ export const styles = StyleSheet.create({
   },
   terms:{
     width:widthPercentageToDP("90"),
-    color: THEME.COLORS.GREY.DARK
+    color: THEME.COLORS.GREY.DARK,
+    textDecorationLine: "underline"
   }
 });
+
+
+export const logoSize = 100;
