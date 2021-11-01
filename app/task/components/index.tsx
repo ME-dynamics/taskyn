@@ -1,43 +1,103 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import CheckBox from "@react-native-community/checkbox";
+import {
+  AntDesign,
+  Feather,
+  FontAwesome5,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { Button, Paragraph } from "../../library";
+import { View, Text, TextInput } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { Button, Caption, Paragraph, THEME, Touchable } from "../../library";
 import { styles } from "./style";
-import { ITaskItemProps } from "./type";
+import { IInputProps, ITaskItemProps } from "./type";
 
 export function TaskItem(props: ITaskItemProps) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const { text } = props;
-  return (
-    <View style={{flex:1,marginVertical:6,}}>  
-    <View style={styles.checkboxContainer}>
-      <View style={styles.textContainer}>
-        <Paragraph>{text}</Paragraph>
-      </View>
+  const { text, date } = props;
+  const [value, setValue] = useState(text);
+  const [edit, setEdit] = useState(false);
+  const [done, setDone] = useState(false);
 
-      <View style={styles.buttonContainer}>
-        <Button
-          mode={"text"}
-          bold
-          size={"small"}
-          rippleColor={"lightGrey"}
-        >
-          {"ویرایش"}
-        </Button>
-        <Button mode={"text"} bold size={"small"} rippleColor={"lightGrey"}>
-          {"حذف"}
-        </Button>
-        <Button mode={"text"} bold size={"small"} rippleColor={"lightGrey"}>
-          {"انجام شد"}
-        </Button>
-        {/* <CheckBox
-          disabled={false}
-          value={toggleCheckBox}
-          onValueChange={(newValue) => setToggleCheckBox(newValue)}
-        /> */}
+  return (
+    <View style={styles.container}>
+      <View style={styles.checkboxContainer}>
+        <View style={styles.textContainer}>
+          {!edit ? (
+            <Paragraph>{value}</Paragraph>
+          ) : (
+            <TextInput onChangeText={setValue} value={value} multiline={true} />
+          )}
+        </View>
+        <View style={styles.footer}>
+          <View style={styles.dateContainer}>
+            <Caption>{date}</Caption>
+          </View>
+          <View
+            style={
+              !done
+                ? styles.buttonContainer
+                : [styles.buttonContainer, { justifyContent: "space-between" }]
+            }
+          >
+            {!done ? (
+              edit ? (
+                <React.Fragment>
+                  <BorderlessButton
+                    onPress={() => {
+                      setValue(text);
+                      setEdit(false);
+
+                    }}
+                    rippleColor={THEME.COLORS.ERROR}
+                  >
+                    <AntDesign name="closesquareo" size={28} color="black" />
+                  </BorderlessButton>
+                  <BorderlessButton
+                    onPress={() => {
+                      setDone(false);
+                      setEdit(false);
+                    }}
+                    rippleColor={THEME.COLORS.GREEN}
+                  >
+                    <AntDesign name="checkcircleo" size={28} color="black" />
+                  </BorderlessButton>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <BorderlessButton
+                    onPress={() => {}}
+                    rippleColor={THEME.COLORS.ERROR}
+                  >
+                    <AntDesign name="closesquareo" size={28} color="black" />
+                  </BorderlessButton>
+                  <BorderlessButton
+                    onPress={() => {
+                      setEdit(true);
+                    }}
+                    rippleColor={THEME.COLORS.YELOOW}
+                  >
+                    <Feather name="edit" size={28} color="black" />
+                  </BorderlessButton>
+                  <BorderlessButton
+                    onPress={() => {
+                      setDone(true);
+                    }}
+                    rippleColor={THEME.COLORS.GREEN}
+                  >
+                    <AntDesign name="checkcircleo" size={28} color="black" />
+                  </BorderlessButton>
+                </React.Fragment>
+              )
+            ) : (
+              <FontAwesome5
+                name="check-double"
+                size={30}
+                color={THEME.COLORS.GREENLIKE}
+              />
+            )}
+          </View>
+        </View>
       </View>
-    </View>
     </View>
   );
 }
