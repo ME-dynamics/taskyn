@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   taskContainer: {
     width:widthPercentageToDP("100"),
-    height:heightPercentageToDP("64"),
+    height:heightPercentageToDP("60"),
     paddingTop: 20,
     //width: widthPercentageToDP("86"),
    
