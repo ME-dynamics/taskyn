@@ -14,7 +14,7 @@ export function MbtiResult(props: IFromProps) {
           <Image
             style={styles.avatar}
             resizeMode={"contain"}
-            source={require("../../../assets/enfj-protagonist.png")}
+            source={require("../../assets/enfj-protagonist.png")}
           />
         </View>
         <View style={styles.answerContainer}>
