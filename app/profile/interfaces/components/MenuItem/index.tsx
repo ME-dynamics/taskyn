@@ -10,15 +10,13 @@ export function MenuItem(props: IMenuItemProps) {
   return (
     <View style={styles.container}>
       <View style={[styles.collapsedContainer, styles.plainHeight]}>
-        <Icon size={30} color={"grey"} />
-        <View style={{ flex: 1, alignItems: "flex-end", paddingRight: 12 }}>
+        <Icon size={24} color={"black"} />
+        <View style={styles.title}>
           <Paragraph>{title}</Paragraph>
         </View>
         <MaterialCommunityIcons name="chevron-left" color={"grey"} size={30} />
       </View>
-      <View style={styles.line}>
-
-      </View>
+      <View style={styles.line}></View>
       <Touchable onPress={onPress} rippleColor={"lightGrey"} />
     </View>
   );
