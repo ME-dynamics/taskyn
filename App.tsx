@@ -4,19 +4,29 @@ import { THEME, Input } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { AcceptPatientList, PatientList } from "./app/patients/screens";
+import {
+  AcceptPatientList,
+  PatientList,
+} from "./app/patients/screens/patientList";
 import { ScrollView } from "react-native-gesture-handler";
 import { Task } from "./app/task/screens";
-import { Authentication, getLoggedIn, getRole, initToken } from "./app/authentication";
-import { Profile } from "./app/profile/interfaces/screens";
-import { DoctorProfile } from "./app/doctorProfile/screens";
+import {
+  Authentication,
+  getLoggedIn,
+  getRole,
+  initToken,
+} from "./app/authentication";
+import { Profile } from "./app/profile/interfaces/screens/profile";
 import { Dashboard } from "./app/dashboard/screens";
-import { FormList } from "./app/formList/screens";
+import { FormList } from "./app/formList/screens/formList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "react-native/Libraries/NewAppScreen";
-import { UserInfo } from "./app/userInfo/screens";
+import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
+import { NoteScreen } from "./app/note";
+import { ContactUS } from "./app/profile/interfaces/screens/contactUs";
 const Stack = createNativeStackNavigator();
+const ProfileStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export function PatientsTab() {
   return (
@@ -25,10 +35,7 @@ export function PatientsTab() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="PatientList" component={PatientList} />
-      <Stack.Screen
-        name="AcceptPatientList"
-        component={AcceptPatientList}
-      />
+      <Stack.Screen name="AcceptPatientList" component={AcceptPatientList} />
     </Stack.Navigator>
   );
 }
@@ -48,23 +55,22 @@ export function PatientsTab() {
 //     </Stack.Navigator>
 //   );
 // }
-// export function ProfileTab() {
-//   return (
-//     <Stack.Navigator
-//       initialRouteName="PatientList"
-//       screenOptions={{ headerShown: false }}
-//     >
-//       <Stack.Screen name="Support" component={} />
-//       <Stack.Screen name="AboutUs" component={} />
-//       <Stack.Screen name="Questions" component={} />
-//       <Stack.Screen name="Terms" component={} />
-//       <Stack.Screen name="Exit" component={} />
+export function ProfileTab() {
+  return (
+    <ProfileStack.Navigator
+      initialRouteName="Profile"
+      screenOptions={{ headerShown: false }}
+    >
+      <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen name="Support" component={ContactUS} />
 
-//     </Stack.Navigator>
-//   );
-// }
-
-
+      {/* <Stack.Screen name="AboutUs" component={} />
+      <Stack.Screen name="Questions" component={} />
+      <Stack.Screen name="Terms" component={} />
+      <Stack.Screen name="Exit" component={} /> */}
+    </ProfileStack.Navigator>
+  );
+}
 
 function MyTabs() {
   const role = getRole();
@@ -78,8 +84,8 @@ function MyTabs() {
       }}
     >
       <Tab.Screen
-        name="Profile"
-        component={role === "provider" ? DoctorProfile : Profile}
+        name="ProfileTab"
+        component={role === "provider" ? ProfileTab : ProfileTab}
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
@@ -91,7 +97,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Form"
-        component={FormList}
+        component={PatientList}
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
@@ -114,7 +120,7 @@ function MyTabs() {
 }
 const Tabs = observer(MyTabs);
 function AppComponent() {
-  const isSignedIn = getLoggedIn();
+  const isSignedIn = true;
   const [isAppReady, setAppReady] = useState<boolean>(false);
   useEffect(() => {
     async function prepare() {
