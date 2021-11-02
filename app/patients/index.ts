@@ -1,1 +1,1 @@
-export { Patients } from "./screens"
+export { PatientList } from "./screens/patientList"
