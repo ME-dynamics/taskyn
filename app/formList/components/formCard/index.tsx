@@ -9,7 +9,7 @@ import {
   Headline,
   Paragraph,
   Subheading,
-} from "../../library";
+} from "../../../library";
 import { styles } from "./styles";
 
 export const FormCard = (props: IPatients) => {
