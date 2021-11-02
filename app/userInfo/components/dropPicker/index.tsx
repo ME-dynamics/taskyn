@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { THEME } from "../../library";
+import { THEME } from "../../../library";
 
 export  function DropPicker() {
   const myTheme = require("./style");

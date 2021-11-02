@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Input, THEME } from "../../library";
+import { Input, THEME } from "../../../library";
 import { styles } from "./style";
 import { IUserInfoProps } from "./type";
-import {DropPicker} from '../components/index';
+import { DropPicker } from "../../components/dropPicker/index";
 export function UserInfo(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
   const ComponentGenerator = () => {
@@ -150,9 +150,7 @@ export function UserInfo(props: IUserInfoProps) {
 
   return (
     <View style={styles.container}>
-      <DropPicker>
-        
-      </DropPicker>
+      <DropPicker />
       {/* <View style={styles.inputContainer}>{ComponentGenerator()}</View> */}
     </View>
   );
