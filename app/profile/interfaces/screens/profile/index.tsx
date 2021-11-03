@@ -1,21 +1,21 @@
 import React from "react";
 import { View, Image, Alert } from "react-native";
+import { openCamera, openCropper, openGallery, Tap } from "../../../../library";
+import { useNavigation, NavigationProp  } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack"
 import {
-  MaterialCommunityIcons,
-  FontAwesome5,
-  Octicons,
-  Foundation,
   MaterialIcons,
   AntDesign,
   Ionicons,
   Feather,
+  Entypo,
 } from "@expo/vector-icons";
-
-import { MenuItem } from "../components";
+import { MenuItem } from "../../components/MenuItem";
 import { styles } from "./style";
 import { IIconProps } from "./type";
-
-export const DoctorProfile = () => {
+import { Headline } from "../../../../library";
+export const Profile = () => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const renderSupportAgent = (props: IIconProps) => {
     const { color, size } = props;
     return <MaterialIcons name={"support-agent"} size={size} color={color} />;
@@ -38,19 +38,26 @@ export const DoctorProfile = () => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.topBackground}></View>
-      <View style={styles.botbackground}>
+      <View style={styles.header}>
+        <Tap onPress={() => {}}>
+          <View style={styles.cameraIconContainer}>
+            <Entypo name="camera" size={20} color="black" />
+          </View>
+        </Tap>
+
         <Image
           style={styles.avatar}
           source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
         />
-
+        <Headline style={styles.title}>{"سجاد سیف اله"}</Headline>
+      </View>
+      <View style={styles.bodyContainer}>
         <View style={styles.body}>
           <View style={styles.bodyContent}>
             <MenuItem
               Icon={renderSupportAgent}
               title="پشتیبانی"
-              onPress={() => Alert.alert("hi1")}
+              onPress={() => navigation.push("Support")}
             />
             <MenuItem
               Icon={renderInfocirlceo}
@@ -70,7 +77,7 @@ export const DoctorProfile = () => {
             <MenuItem
               Icon={renderExitOutline}
               title="خروج از حساب کاربری"
-              onPress={() => Alert.alert("hi1")}
+              onPress={() => {}}
             />
           </View>
         </View>

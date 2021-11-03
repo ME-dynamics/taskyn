@@ -5,8 +5,6 @@ import {
   Headline,
   Logo,
   Paragraph,
-  Subheading,
-  Title,
 } from "../../../../library";
 import { styles } from "./styles";
 import Communications from "react-native-communications";

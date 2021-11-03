@@ -2,9 +2,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { styles } from "./style";
-import { FormCard } from "../components";
+import { FormCard } from "../../components/formCard";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { SearchBar } from "../../library";
+import { SearchBar } from "../../../library";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
 export const FormList = () => {
