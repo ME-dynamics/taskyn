@@ -1,6 +1,10 @@
 export interface ITaskItemProps {
-  text: string;
-  date: string;
+  id: string;
+  content: string;
+  done: boolean;
+  createdAt: string;
+  onTaskInputFocus: () => void;
+  onTaskInputBlur: () => void;
 }
 
 export interface IInputProps {
