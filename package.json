@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
     "@motify/skeleton": "^0.16.0",
+    "@persian-tools/persian-tools": "^3.0.1",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/netinfo": "6.0.2",
     "@react-navigation/bottom-tabs": "^6.0.5",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/jalaali-js": "^1.1.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "@types/react-native-communications": "^2.2.1",

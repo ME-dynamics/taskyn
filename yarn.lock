@@ -1539,6 +1539,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@persian-tools/persian-tools@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@persian-tools/persian-tools/-/persian-tools-3.0.1.tgz#66a0ef3a614dec1cd8a65e2e9ba6ee1e9e91ec91"
+  integrity sha512-26XGQWjrfSY4SQlXXG7hNgTetItjCYVxuqKbhONrgmv+6B9PlaILVOwFydkISpK2u4iBE+CXfxUCD1HmpiMeUA==
+  dependencies:
+    fastest-levenshtein "^1.0.12"
+
 "@react-native-async-storage/async-storage@~1.15.0":
   version "1.15.9"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.9.tgz#744ecd566f108e86b6b59e617c23fdb4b8d53358"
@@ -1860,6 +1867,11 @@
   integrity sha512-c3mAZEuK0lvBp8tmuL74XRKn1+y2dcwOUpH7x4WrF6gk1GIgiluDRgMYQtw2OFcBvAJWlt6ASU3tSqxp0Uu0Aw==
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/jalaali-js@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/jalaali-js/-/jalaali-js-1.1.0.tgz#ef3b111bcf202d134fd9e2fd18103f7dbe22af2e"
+  integrity sha1-7zsRG88gLRNP2eL9GBA/fb4iry4=
 
 "@types/node@*":
   version "16.11.6"
@@ -3479,6 +3491,11 @@ fast-memoize@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.5.2.tgz#79e3bb6a4ec867ea40ba0e7146816f6cdce9b57e"
   integrity sha512-Ue0LwpDYErFbmNnZSF0UH6eImUwDmogUO1jyE+JbN2gsQz/jICm1Ve7t9QT0rNSsfJt+Hs4/S3GnsDVjL4HVrw==
+
+fastest-levenshtein@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/fastest-levenshtein/-/fastest-levenshtein-1.0.12.tgz#9990f7d3a88cc5a9ffd1f1745745251700d497e2"
+  integrity sha512-On2N+BpYJ15xIC974QNVuYGMOlEVt4s0EOI3wwMqOmK1fdDY+FN/zltPV8vosq4ad4c/gJ1KHScUn/6AWIgiow==
 
 fastq@^1.6.0:
   version "1.13.0"
