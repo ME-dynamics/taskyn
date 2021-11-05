@@ -27,22 +27,17 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: widthPercentageToDP("6"),
     borderTopRightRadius: widthPercentageToDP("6"),
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   body: {
-    fontSize: 20,
-    marginHorizontal: 20,
-  },
-  buttons: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    marginHorizontal: 10,
+    top: 30,
   },
   socialMedia: {
-    flex: 1,
+    marginBottom: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  buttoncontainer: {
-    flex: 1,
-  },
+  buttoncontainer: {},
 });
