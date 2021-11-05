@@ -18,22 +18,8 @@ function TasksScreen() {
   }
   function renderTaskItems() {
     const components = [];
-    for (let index = 0; index < taskState.doneList.length; index++) {
-      const { id, content, done, createdAt } = taskState.doneList[index];
-      components.push(
-        <TaskItem
-          key={id}
-          id={id}
-          content={content}
-          done={done}
-          createdAt={createdAt}
-          onTaskInputBlur={onTaskInputBlur}
-          onTaskInputFocus={onTaskInputFocus}
-        />
-      );
-    }
-    for (let index = 0; index < taskState.undoneList.length; index++) {
-      const { id, content, done, createdAt } = taskState.undoneList[index];
+    for (let index = 0; index < taskState.taskList.length; index++) {
+      const { id, content, done, createdAt } = taskState.taskList[index];
       components.push(
         <TaskItem
           key={id}
@@ -64,6 +50,7 @@ function TasksScreen() {
             onChangeText={onNewTaskChange}
             title={"اضافه کردن تمرین : "}
             placeholder={"تمرین جدید را وارد کنید."}
+            validation={taskState.taskValidation}
           />
         </View>
       )}
@@ -71,6 +58,7 @@ function TasksScreen() {
         <KeyboardAwareScrollView
           style={styles.container}
           contentContainerStyle={styles.containerContentStyle}
+          enableOnAndroid
         >
           {renderTaskItems()}
         </KeyboardAwareScrollView>
