@@ -1,1 +1,7 @@
-export { fetchTasks, fetchCreateTask } from "./network";
+export {
+  fetchTasks,
+  fetchCreateTask,
+  fetchTaskDone,
+  fetchUpdateTask,
+  fetchRemoveTask,
+} from "./network";
