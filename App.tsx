@@ -9,7 +9,6 @@ import {
   PatientList,
 } from "./app/patients/screens/patientList";
 import { ScrollView } from "react-native-gesture-handler";
-import { Task } from "./app/task/screens";
 import {
   Authentication,
   getLoggedIn,
@@ -25,6 +24,7 @@ import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
 import { NoteScreen } from "./app/note";
 import { ContactUS } from "./app/profile/interfaces/screens/contactUs";
+import { FormResult } from "./app/formResult/screens/formResult";
 const Stack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -97,7 +97,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Form"
-        component={PatientList}
+        component={ContactUS}
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
