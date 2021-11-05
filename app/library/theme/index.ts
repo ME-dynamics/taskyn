@@ -8,6 +8,7 @@ const COLORS = {
   },
   TRANSPARENT: {
     PRIMARY: "rgba(82, 86, 201, 0.2)",
+    INPUT_SELECTION: "rgba(82, 86, 201, 0.7)",
     GREY: "rgba(112,112,112,0.2)",
     WHITE: "rgba(255,255,255, 0.6)",
   },
@@ -17,8 +18,8 @@ const COLORS = {
     DARK: "#707070",
   },
   ERROR: "#b71c1c",
-  RED:"#ff1744",
-  BACKGROUND:"#fafafa"
+  RED: "#ff1744",
+  BACKGROUND: "#fafafa",
 };
 
 const FONTS = {

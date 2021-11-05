@@ -59,4 +59,4 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const selectionColor = THEME.COLORS.TRANSPARENT.PRIMARY;
+export const selectionColor = THEME.COLORS.TRANSPARENT.INPUT_SELECTION;
