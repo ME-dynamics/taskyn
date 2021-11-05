@@ -7,5 +7,5 @@ export async function retrieveTasks() {
     // TODO: do something with error
     return;
   }
-  taskState.setList(tasks);
+  taskState.setTasks(tasks);
 }
