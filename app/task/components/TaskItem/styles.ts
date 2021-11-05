@@ -21,20 +21,20 @@ export const styles = StyleSheet.create({
     flexDirection: "row-reverse",
   },
   dateContainer: {
-    flex: 1,
+    flex: 2,
     alignItems: "flex-end",
     justifyContent: "center",
     paddingRight: 8,
   },
   buttonContainer: {
-    flex: 1,
+    flex: 5,
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-around",
     paddingLeft: 8,
   },
   buttonContainerEdit: { justifyContent: "space-evenly" },
-  buttonContainerDone: { justifyContent: "space-between" },
+  buttonContainerDone: { justifyContent: "flex-end", paddingRight: 4 },
   textInput: {
     ...material.body1Object,
     fontFamily: THEME.FONTS.REGULAR,

@@ -1,18 +1,19 @@
 import React, { useState, useRef } from "react";
-import { View, Text, TextInput } from "react-native";
-import { toJS } from "mobx";
+import { View, TextInput } from "react-native";
 import { observer } from "mobx-react-lite";
-import { AntDesign, Feather, FontAwesome5 } from "@expo/vector-icons";
-import { Caption, Paragraph } from "../../../library";
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { Caption, Button } from "../../../library";
+import { taskDone, updateTask, removeTask } from "../../usecases";
 import { styles, selectionColor } from "./styles";
 import { ITaskItemProps } from "./type";
-import { IconButton } from "../IconButton";
 
 function TaskItemComponent(props: ITaskItemProps) {
   const { id, content, done, createdAt, onTaskInputBlur, onTaskInputFocus } =
     props;
   const [edit, setEdit] = useState<boolean>(false);
-
+  const [doneLoading, setDoneLoading] = useState<boolean>(false);
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
+  const [removeLoading, setRemoveLoading] = useState<boolean>(false);
   const [tempContent, setTempContent] = useState(content); // FIXME: observable must change to plain js data structure using toJS()
   const inputRef = useRef<TextInput>(null);
   function onEditPress() {
@@ -21,49 +22,73 @@ function TaskItemComponent(props: ITaskItemProps) {
       inputRef.current.focus();
     }
   }
-  function onClose() {
+  async function onClose() {
     if (edit) {
       setEdit(false);
       setTempContent(content);
       return;
     }
-    // TODO: delete item
-    console.log(`task: ${id} deleted`);
+    setRemoveLoading(true);
+    await removeTask(id);
   }
-  function onDone() {
+  async function onDone() {
     if (edit) {
-      // TODO: update task
+      setUpdateLoading(true);
+      await updateTask({ taskId: id, content: tempContent, userId: undefined });
+      setUpdateLoading(false);
+      setEdit(false);
       return;
     }
-    // TODO: task done
+    try {
+      setDoneLoading(true);
+      await taskDone(id);
+      setDoneLoading(false);
+    } catch (error) {}
   }
   function renderEdit() {
     return (
       <>
-        <IconButton
+        <Button
+          mode={"text"}
+          size={"small"}
+          rippleColor={"grey"}
+          loading={edit ? false : removeLoading}
           onPress={onClose}
           Icon={({ color, size }) => {
             return (
               <AntDesign name={"closesquareo"} color={color} size={size} />
             );
           }}
-        />
+        >
+          {edit ? "لغو" : "حذف"}
+        </Button>
         {!edit ? (
-          <IconButton
+          <Button
+            mode={"text"}
+            size={"small"}
+            rippleColor={"grey"}
             onPress={onEditPress}
             Icon={({ color, size }) => {
               return <Feather name={"edit"} size={size} color={color} />;
             }}
-          />
+          >
+            {"ویرایش"}
+          </Button>
         ) : null}
-        <IconButton
-          onPress={() => {}}
+        <Button
+          mode={"text"}
+          size={"small"}
+          rippleColor={"grey"}
+          loading={edit ? updateLoading : doneLoading}
+          onPress={onDone}
           Icon={({ color, size }) => {
             return (
               <AntDesign name={"checkcircleo"} color={color} size={size} />
             );
           }}
-        />
+        >
+          {edit ? "ثبت" : "اتمام"}
+        </Button>
       </>
     );
   }
@@ -95,7 +120,20 @@ function TaskItemComponent(props: ITaskItemProps) {
           ]}
         >
           {done ? (
-            <FontAwesome5 name="check-double" size={30} color={"red"} />
+            <Button
+              mode={"text"}
+              size={"small"}
+              rippleColor={"grey"}
+              disabled
+              Icon={({ color, size }) => {
+                return (
+                  <Ionicons name="checkmark-done" size={size} color={color} />
+                );
+              }}
+              color={"black"}
+            >
+              {"انجام شد"}
+            </Button>
           ) : (
             renderEdit()
           )}
