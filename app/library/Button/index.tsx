@@ -45,7 +45,9 @@ function ButtonComponent(props: IButtonProps) {
         {children}
       </Paragraph>
 
-      <Touchable onPress={onPress} rippleColor={rippleColor} />
+      {disabled ? null : (
+        <Touchable onPress={onPress} rippleColor={rippleColor} />
+      )}
     </View>
   );
 }
