@@ -10,4 +10,19 @@ export { Tap } from "./Tap";
 export { openCamera, openCropper, openGallery } from "./cropPicker";
 export { Logo } from "./Logo";
 export { Container } from "./Container";
-export  {Scroller  } from "./Scroller"
+export { Scroller } from "./Scroller";
+export { IconButton } from "./IconButton";
+export {
+  FileIcon,
+  FilesIcon,
+  FormHistoryIcon,
+  FormIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  Note2Icon,
+  NoteIcon,
+  OnlineIcon,
+  TaskIcon,
+  TelegramIcon,
+  WebIcon,
+} from "./Icon";
