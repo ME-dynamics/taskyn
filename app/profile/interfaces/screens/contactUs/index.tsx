@@ -1,16 +1,19 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { Button, Headline, Logo, Paragraph } from "../../../../library";
-import { styles } from "./styles";
-import Communications from "react-native-communications";
+import { View } from "react-native";
 import {
+  Button,
+  Headline,
+  Logo,
+  Paragraph,
   InstagramIcon,
   LinkedinIcon,
-  OnlineIcon,
   TelegramIcon,
   WebIcon,
-} from "../../../../library/Icon";
-import { IconButton } from "../../components/IconButton";
+  IconButton,
+} from "../../../../library";
+import { styles } from "./styles";
+import Communications from "react-native-communications";
+
 export function ContactUS() {
   return (
     <View style={styles.container}>
