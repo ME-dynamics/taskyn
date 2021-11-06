@@ -9,3 +9,5 @@ export { secureStorage, storage } from "./storage";
 export { Tap } from "./Tap";
 export { openCamera, openCropper, openGallery } from "./cropPicker";
 export { Logo } from "./Logo";
+export { Container } from "./Container";
+export  {Scroller  } from "./Scroller"
