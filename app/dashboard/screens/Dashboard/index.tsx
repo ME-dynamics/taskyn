@@ -1,11 +1,22 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 import { observer } from "mobx-react-lite";
-import { AntDesign, Foundation, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
-import { OnlineIcon, WebIcon } from "../../../library/Icon";
+import {
+  AntDesign,
+  Foundation,
+  MaterialCommunityIcons,
+  Octicons,
+} from "@expo/vector-icons";
+import {
+  FileIcon,
+  FormHistoryIcon,
+  FormIcon,
+  NoteIcon,
+  OnlineIcon,
+  WebIcon,
+} from "../../../library/Icon";
 import { Card, Tile } from "../../components";
 import { styles } from "./styles";
-
 
 function DashboardScreen() {
   const state = false;
@@ -31,7 +42,7 @@ function DashboardScreen() {
             <Tile
               title={"تمرینات"}
               Icon={({ size, color }) => {
-                return <OnlineIcon size={size}/>;
+                return <OnlineIcon size={size} />;
               }}
               onPress={() => {
                 console.log("tile pressed");
@@ -40,7 +51,7 @@ function DashboardScreen() {
             <Tile
               title={"نوت برداری"}
               Icon={({ size, color }) => {
-                return <OnlineIcon size={size}  />;
+                return <NoteIcon size={size} />;
               }}
               onPress={() => {
                 console.log("tile pressed");
@@ -51,16 +62,27 @@ function DashboardScreen() {
             <Tile
               title={"فرم ها"}
               Icon={({ size, color }) => {
-                return <Foundation name="clipboard-notes" size={size} color={color} />;
+                return <FormIcon size={size} />;
               }}
               onPress={() => {
                 console.log("tile pressed");
               }}
             />
             <Tile
+              title={"تاریخچه فرم ها"}
+              Icon={({ size, color }) => {
+                return <FormHistoryIcon size={size} />;
+              }}
+              onPress={() => {
+                console.log("tile pressed");
+              }}
+            />
+          </View>
+          <View style={styles.row}>
+            <Tile
               title={"پرونده بیمار"}
               Icon={({ size, color }) => {
-                return <MaterialCommunityIcons name="file-document-edit-outline" size={size} color={color} />;
+                return <FileIcon size={size} />;
               }}
               onPress={() => {
                 console.log("tile pressed");
@@ -146,6 +168,5 @@ function DashboardScreen() {
     </View>
   );
 }
-
 
 export const Dashboard = observer(DashboardScreen);

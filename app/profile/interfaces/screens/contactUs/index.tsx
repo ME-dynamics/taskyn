@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text } from "react-native";
-import {
-  Button,
-  Headline,
-  Logo,
-  Paragraph,
-} from "../../../../library";
+import { Button, Headline, Logo, Paragraph } from "../../../../library";
 import { styles } from "./styles";
 import Communications from "react-native-communications";
+import {
+  InstagramIcon,
+  LinkedinIcon,
+  OnlineIcon,
+  TelegramIcon,
+  WebIcon,
+} from "../../../../library/Icon";
+import { IconButton } from "../../components/IconButton";
 export function ContactUS() {
   return (
     <View style={styles.container}>
@@ -18,11 +21,29 @@ export function ContactUS() {
         <Headline style={styles.title}>{"پشتیبانی"}</Headline>
       </View>
       <View style={styles.bodyContainer}>
-        <Paragraph>{`فرقی نمی‌کند در کدام نقطه از زمین باشید، ما در سیمیاروم کمکتان می‌کنیم تجربه جذاب‌تر و بهتری از زندگی داشته باشید. کمکتان می‌کنیم هر مسیری که برای زندگی انتخاب می‌کنید، پر از امید و حال خوب باشد؛ چه مهاجرت، چه ازدواج، چه بچه‌دار شدن، چه سفر درونی، چه مشاوره کودک و نوجوان و .. خلاصه هر مسیری که شما بخواهید. ما کمکتان می‌کنیم طوری زندگی کنید که حالتان همیشه خوب باشد.`}</Paragraph>
-      </View>
-      <View style={styles.buttons}>
-        <View style={styles.socialMedia}></View>
+        <Paragraph
+          style={styles.body}
+        >{`فرقی نمی‌کند در کدام نقطه از زمین باشید، ما در سیمیاروم کمکتان می‌کنیم تجربه جذاب‌تر و بهتری از زندگی داشته باشید. کمکتان می‌کنیم هر مسیری که برای زندگی انتخاب می‌کنید، پر از امید و حال خوب باشد؛ چه مهاجرت، چه ازدواج، چه بچه‌دار شدن، چه سفر درونی، چه مشاوره کودک و نوجوان و .. خلاصه هر مسیری که شما بخواهید. ما کمکتان می‌کنیم طوری زندگی کنید که حالتان همیشه خوب باشد.`}</Paragraph>
+
         <View style={styles.buttoncontainer}>
+          <View style={styles.socialMedia}>
+            <IconButton
+              Icon={InstagramIcon}
+              onPress={() => Communications.web("https://google.com")}
+            />
+            <IconButton
+              Icon={LinkedinIcon}
+              onPress={() => Communications.web("https://google.com")}
+            />
+            <IconButton
+              Icon={TelegramIcon}
+              onPress={() => Communications.web("http://google.com")}
+            />
+            <IconButton
+              Icon={WebIcon}
+              onPress={() => Communications.web("https://taskyn.ir")}
+            />
+          </View>
           <Button
             mode={"contained"}
             rippleColor={"lightGrey"}
