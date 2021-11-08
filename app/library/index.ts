@@ -12,6 +12,8 @@ export { Logo } from "./Logo";
 export { Container } from "./Container";
 export { Scroller } from "./Scroller";
 export { IconButton } from "./IconButton";
+export { toJalaaliDate } from "./toJalaaliDate";
+export { toString} from "./toString";
 export {
   FileIcon,
   FilesIcon,
