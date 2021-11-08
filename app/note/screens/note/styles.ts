@@ -10,11 +10,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: THEME.COLORS.BACKGROUND,
   },
-
-
   bodyContainer: {
     width: fullWidth,
-    minHeight: heightPercentageToDP("48"),
+    minHeight: heightPercentageToDP("44"),
     alignItems: "center",
     paddingTop: 12,
   },
