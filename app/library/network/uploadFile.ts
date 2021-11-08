@@ -1,6 +1,6 @@
 import { uploadAsync, FileSystemUploadType } from "expo-file-system";
 import { secureStorage, storage } from "../storage";
-import { serverUrl, jwtPayload } from "./constant";
+import { serverUrl, customerJwtPayload, providerJwtPayload } from "./constant";
 import { IResponse, IUploadFile, tFileType } from "./types";
 
 function endpointGen(type: tFileType) {
@@ -48,7 +48,7 @@ export function buildUploadFile() {
           "Content-type": "multipart/form-data",
           Accept: "application/json",
           "Accept-Encoding": "gzip",
-          "x-jwt-payload": jwtPayload,
+          "x-jwt-payload": providerJwtPayload,
         },
         parameters: {
           access: "private",
@@ -60,9 +60,9 @@ export function buildUploadFile() {
     const data = JSON.parse(body);
     return {
       success,
-      error: success ? "" : data,
+      error: success ? "" : data.error,
       httpStatus: status,
-      payload: success ? data : "",
+      payload: success ? data?.payload : "",
     };
   };
 }
