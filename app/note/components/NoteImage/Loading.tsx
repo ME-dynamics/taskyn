@@ -5,7 +5,7 @@ import { styles, activityColor } from "./styles";
 function LoadingComponent() {
   return (
     <View style={styles.loadingContainer}>
-      <ActivityIndicator size={"small"} color={activityColor} />
+      <ActivityIndicator size={"large"} color={activityColor} />
     </View>
   );
 }
