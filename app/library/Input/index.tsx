@@ -5,7 +5,7 @@ import { material } from "react-native-typography";
 import { observer } from "mobx-react-lite";
 import { Tap } from "../Tap";
 import { Timer } from "../Timer";
-import { Caption, Paragraph } from "../Typography";
+import { Caption, Subheading } from "../Typography";
 
 import { styles, selectionColor, INPUT_HEIGHT } from "./styles";
 
@@ -65,13 +65,16 @@ function InputComponent(props: IInputProps) {
     return <Timer style={styles.timerColor} minute={minute} second={second} />;
   }
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        mode === "flat" ? styles.flatContainer : styles.outlineContainer,
+      ]}
+    >
       <View style={styles.textContainer}>
-        <Paragraph
-          style={[styles.title, focused ? styles.focusedTitle : undefined]}
-        >
+        <Subheading style={focused ? styles.focusedTitle : undefined}>
           {title}
-        </Paragraph>
+        </Subheading>
         {renderTimer()}
       </View>
       <Tap onPress={onPress}>

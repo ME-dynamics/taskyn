@@ -1,24 +1,26 @@
 import { StyleSheet } from "react-native";
 import { THEME } from "../theme";
 
-export const INPUT_HEIGHT = 52;
+export const INPUT_HEIGHT = 50;
 
 export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.BIG,
-    minHeight: INPUT_HEIGHT + 28,
+
     // alignItems: "flex-end",
     justifyContent: "space-between",
+  },
+  flatContainer: {
+    minHeight: INPUT_HEIGHT + 20,
+  },
+  outlineContainer: {
+    minHeight: INPUT_HEIGHT + 28,
   },
   textContainer: {
     width: "100%",
     flexDirection: "row-reverse",
     alignItems: "flex-start",
     justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "600",
   },
   focusedTitle: {
     color: THEME.COLORS.PRIMARY.NORMAL,
