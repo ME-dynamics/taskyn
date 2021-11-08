@@ -32,7 +32,7 @@ const FONTS = {
 };
 
 const WIDTH = {
-  BIG: widthPercentageToDP("90"),
+  BIG: widthPercentageToDP(90),
 };
 
 export const THEME = {
