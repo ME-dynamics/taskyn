@@ -1,5 +1,5 @@
 import { secureStorage, storage } from "../storage";
-import { serverUrl, jwtPayload } from "./constant";
+import { serverUrl, customerJwtPayload, providerJwtPayload } from "./constant";
 import { IRequest, IResponse } from "./types";
 
 export function buildRequest() {
@@ -33,7 +33,7 @@ export function buildRequest() {
           "Content-type": "application/json",
           Accept: "application/json",
           "Accept-Encoding": "gzip",
-          "x-jwt-payload": jwtPayload,
+          "x-jwt-payload": providerJwtPayload,
         },
         body: body ? JSON.stringify(body) : undefined,
       });
