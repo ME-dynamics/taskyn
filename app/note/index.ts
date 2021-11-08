@@ -1,1 +1,1 @@
-export { NoteScreen } from "./screens/note";
+export { Note } from "./screens/note";
