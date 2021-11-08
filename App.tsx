@@ -22,7 +22,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
-import { NoteScreen } from "./app/note";
+import { Note } from "./app/note";
 import { ContactUS } from "./app/profile/interfaces/screens/contactUs";
 import { FormResult } from "./app/formResult/screens/formResult";
 const Stack = createNativeStackNavigator();
@@ -97,7 +97,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Form"
-        component={ContactUS}
+        component={Note}
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
