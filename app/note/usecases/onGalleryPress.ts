@@ -1,5 +1,6 @@
+import { fetchUploadImage } from "../adapters";
 import { note } from "../entities";
-import { openGallery, uploadFile } from "../../library";
+import { openGallery } from "../../library";
 
 export async function onGalleryPress() {
   const images = await openGallery("note");
@@ -8,12 +9,25 @@ export async function onGalleryPress() {
     for (let index = 0; index < images.length; index++) {
       const image = images[index];
       note.addImage(image.path);
-      uploadPromises.push(uploadFile({ path: image.path, type: "image" }));
+      uploadPromises.push(fetchUploadImage(image.path));
     }
-    const result = await Promise.all(uploadPromises);
+    try {
+      const result = await Promise.all(uploadPromises);
+      for (let index = 0; index < result.length; index++) {
+        const { error, payload } = result[index];
+        if (error) {
+          // TODO add error to image
+          continue;
+        }
+        note.addImageId(images[index].path, payload.id);
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+
     // TODO: add results to note images;
     return;
   }
   note.addImage(images.path);
-  await uploadFile({ path: images.path, type: "image" });
+  await fetchUploadImage(images.path);
 }
