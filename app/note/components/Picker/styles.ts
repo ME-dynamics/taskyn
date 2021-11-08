@@ -8,13 +8,13 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(100),
-    height: heightPercentageToDP(30),
+    height: heightPercentageToDP(34),
     padding: 20,
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
   },
   pickerContainer: {
     flex: 1,
-    backgroundColor: THEME.COLORS.TRANSPARENT.WHITE,
+    backgroundColor: THEME.COLORS.BACKGROUND,
     borderRadius: 8,
     flexDirection: "row-reverse",
     overflow: "hidden",
@@ -22,19 +22,16 @@ export const styles = StyleSheet.create({
   scrollViewContainer: {
     flex: 6,
   },
-  scrollView: {
-    flex: 1,
-    transform: [{ scaleX: -1 }],
-  },
+
   scrollViewContent: {
-      alignItems: "center"
+    alignItems: "center",
+    paddingLeft: 8
   },
-  
+
   picker: {
-      flex: 1
+    flex: 1,
   },
   noneImagePicker: {
-      flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });
-

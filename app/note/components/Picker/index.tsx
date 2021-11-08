@@ -1,7 +1,8 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View } from "react-native";
 import { PickerButton } from "../PickerButton";
 import { observer } from "mobx-react-lite";
+import { Scroller } from "../../../library";
 import { NoteImage } from "../NoteImage";
 import { Line } from "../Line";
 import { note } from "../../entities";
@@ -19,9 +20,9 @@ function PickerComponent() {
       const image = note.images[index];
       images.push(
         <NoteImage
-          uri={image}
-          key={index}
-          path={image}
+          imageId={image.id}
+          key={image.path}
+          path={image.path}
           onCropPress={onCropPress}
           onRemovePress={onRemovePress}
         />
@@ -34,13 +35,13 @@ function PickerComponent() {
       <View style={styles.pickerContainer}>
         {note.hasImages ? (
           <View style={styles.scrollViewContainer}>
-            <ScrollView
-              style={styles.scrollView}
+            <Scroller
               contentContainerStyle={styles.scrollViewContent}
-              horizontal={true}
+              horizontal
+              rtl
             >
               {renderImages()}
-            </ScrollView>
+            </Scroller>
           </View>
         ) : null}
 
