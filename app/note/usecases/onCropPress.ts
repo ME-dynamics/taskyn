@@ -1,12 +1,11 @@
-import { uploadNoteImage } from "../adapters";
 import { note } from "../entities";
-import { openCropper } from "../../library";
+import { openCropper, uploadFile } from "../../library";
 
 export async function onCropPress(path: string) {
   try {
     const image = await openCropper("note", path);
     note.replaceImage(path, image.path);
-    await uploadNoteImage(path);
+    await uploadFile({ path, type: "image" });
   } catch (error) {
     console.log(error);
   }
