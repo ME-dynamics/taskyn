@@ -1,0 +1,4 @@
+export const serverUrl = "https://brave-duck-31.loca.lt/api/v1";
+
+export const jwtPayload =
+  "eyJjdXN0b21lciI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly90YXNreW4uaXIiLCJzdWIiOiJlZDdmMGJhZS00YmUzLTQ4NDYtYTI2My01NDM1YTA4YzlmMTYiLCJhdWQiOiJ0YXNreW4iLCJqdGkiOiJfYmdLdTIiLCJpYXQiOjE2MzUzMjg0MjIsIm5iZiI6MTYzNTMyODQyMiwiZXhwIjoxNjQxMzI4NDIyfQ";
