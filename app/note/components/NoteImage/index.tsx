@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { View, ImageBackground } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { observer } from "mobx-react-lite";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Skeleton } from "@motify/skeleton";
-
+import { Loading } from "./Loading";
 import { styles, iconStyle } from "./styles";
 import { INoteImageProps } from "../../types";
-export function NoteImage(props: INoteImageProps) {
-  const { uri, onCropPress, onRemovePress, path } = props;
+function NoteImageComponent(props: INoteImageProps) {
+  const { imageId, onCropPress, onRemovePress, path } = props;
   const [removeTap, setRemoveTap] = useState<boolean>(false);
   const [cropTap, setCropTap] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,7 +38,7 @@ export function NoteImage(props: INoteImageProps) {
     <Skeleton show={loading} colorMode={"light"}>
       <View style={styles.imageContainer}>
         <ImageBackground
-          source={{ uri }}
+          source={{ uri: path }}
           style={styles.image}
           onLoad={onImageLoad}
         >
@@ -68,7 +69,10 @@ export function NoteImage(props: INoteImageProps) {
             />
           </BorderlessButton>
         </ImageBackground>
+        {imageId ? null : <Loading />}
       </View>
     </Skeleton>
   );
 }
+
+export const NoteImage = observer(NoteImageComponent);
