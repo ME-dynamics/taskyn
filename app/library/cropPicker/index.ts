@@ -56,6 +56,7 @@ export async function openGallery(mode: tMode) {
   } else {
     const image = await ImagePicker.openPicker({
       ...optGen(isProfile),
+      cropping: false,
       multiple: true,
     });
     return image;
