@@ -1,1 +1,1 @@
-export { uploadNoteImage } from "./network";
+export * from "./network";
