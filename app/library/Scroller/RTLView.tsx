@@ -5,7 +5,11 @@ import { styles } from "./styles";
 import { IRTLView } from "./types";
 function RTLViewComponent(props: IRTLView) {
   const { children } = props;
-  return <View style={styles.rtlView}>{children}</View>;
+  return (
+    <View {...props} style={styles.rtlView}>
+      {children}
+    </View>
+  );
 }
 
 export const RTLView = observer(RTLViewComponent);
