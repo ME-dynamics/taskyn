@@ -9,7 +9,7 @@ export interface ILineProps {
 }
 
 export interface INoteImageProps {
-  uri: string;
+  imageId: string;
   path: string;
   onCropPress: (path: string) => void;
   onRemovePress: (path: string) => void;
