@@ -16,7 +16,9 @@ export async function onGalleryPress() {
       for (let index = 0; index < result.length; index++) {
         const { error, payload } = result[index];
         if (error) {
-          // TODO add error to image
+          if (error === "timeout") {
+            note.reset();
+          }
           continue;
         }
         note.addImageId(images[index].path, payload.id);
