@@ -1,10 +1,10 @@
 import React from "react";
 
-import { View, Text } from "react-native";
-import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { Button, Paragraph, Touchable } from "../../../../library";
-import { styles } from "./style";
-import { IMenuItemProps } from "./type";
+import { View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Paragraph, Touchable } from "../../../library";
+import { styles } from "./styles";
+import { IMenuItemProps } from "./types";
 export function MenuItem(props: IMenuItemProps) {
   const { title, onPress, Icon } = props;
   return (
