@@ -7,7 +7,6 @@ export async function fetchTasks(): Promise<IFetchTasksPayload> {
     body: undefined,
     endpoint: "/tasks/",
     method: "GET",
-    token: "",
   });
   if (!success) {
     return {
