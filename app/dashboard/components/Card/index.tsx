@@ -6,12 +6,19 @@ import { styles } from "./styles";
 import { ICardProps } from "../../types";
 
 function CardComponent(props: ICardProps) {
-  const { imageUrl, name, description, onPress } = props;
+  const { name, description, onPress, role } = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: imageUrl }} style={styles.patientImage} />
+        <Image
+          source={
+            role !== "provider"
+              ? require("../../../../assets/image/unknown.png")
+              : null
+          }
+          style={styles.patientImage}
+        />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
@@ -19,9 +26,15 @@ function CardComponent(props: ICardProps) {
           <Caption>{description}</Caption>
         </View>
         <View style={styles.buttonContainer}>
-          <Button mode={"contained"} size={"medium"} rippleColor={"lightGrey"}>
-            {"انتخاب دکتر"}
-          </Button>
+          {role!=="provider" ? (
+            <Button
+              mode={"contained"}
+              size={"medium"}
+              rippleColor={"lightGrey"}
+            >
+              {"انتخاب دکتر"}
+            </Button>
+          ) : null}
         </View>
       </View>
     </View>

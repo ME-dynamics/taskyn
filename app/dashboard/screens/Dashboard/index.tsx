@@ -1,35 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, ScrollView } from "react-native";
 import { observer } from "mobx-react-lite";
-import {
-  AntDesign,
-  Foundation,
-  MaterialCommunityIcons,
-  Octicons,
-} from "@expo/vector-icons";
 import {
   FileIcon,
   FormHistoryIcon,
   FormIcon,
   NoteIcon,
   OnlineIcon,
-  WebIcon,
 } from "../../../library/Icon";
 import { Card, Tile } from "../../components";
 import { styles } from "./styles";
-
 function DashboardScreen() {
-  const state = false;
+  const [role, setRole] = useState("povider");
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <View style={styles.card}>
           <Card
             id={""}
-            name={state ? "نامشخص" : "سیف اله"}
-            description={state ? "نامشخص" : "سیف اله"}
-            imageUrl={"https://cdn01.zoomit.ir/2021/10/m1-max-m1-pro.jpg"}
+            name={role === "provider" ? "" : "نامشخص"}
+            description={role ? "" : "نامشخص"}
             onPress={() => {}}
+            role={role}
           />
         </View>
       </View>
@@ -49,9 +41,9 @@ function DashboardScreen() {
               }}
             />
             <Tile
-              title={"نوت برداری"}
+              title={"پرونده بیمار"}
               Icon={({ size, color }) => {
-                return <NoteIcon size={size} />;
+                return <FileIcon size={size} />;
               }}
               onPress={() => {
                 console.log("tile pressed");
@@ -78,91 +70,19 @@ function DashboardScreen() {
               }}
             />
           </View>
-          <View style={styles.row}>
-            <Tile
-              title={"پرونده بیمار"}
-              Icon={({ size, color }) => {
-                return <FileIcon size={size} />;
-              }}
-              onPress={() => {
-                console.log("tile pressed");
-              }}
-            />
-          </View>
-          {/* <Tile
-           name={"task"}
-           onPress={() => navigation.navigate("Details")}
-           />
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <AntDesign
-                  name="form"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"نوت برداری"}</Subheading>
-                </View>
-              </View>
-              <Touchable rippleColor={"lightGrey"} />
+          {role === "provider" ? (
+            <View style={styles.row}>
+              <Tile
+                title={"نوت برداری"}
+                Icon={({ size, color }) => {
+                  return <NoteIcon size={size} />;
+                }}
+                onPress={() => {
+                  console.log("tile pressed");
+                }}
+              />
             </View>
-          </View>
-          <View style={styles.row}>
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <Foundation
-                  name="clipboard-notes"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"فرم ها"}</Subheading>
-                </View>
-              </View>
-              <Touchable rippleColor={"lightGrey"} />
-            </View>
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <Ionicons
-                  name="checkmark-done"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"فرم های انجام شده"}</Subheading>
-                </View>
-              </View>
-              <Touchable rippleColor={"lightGrey"} />
-            </View>
-          </View>
-          <View style={styles.row}>
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  name="file-document-edit-outline"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"پرونده بیمار"}</Subheading>
-                </View>
-              </View>
-              <Touchable rippleColor={"lightGrey"} />
-            </View>
-            <View style={styles.button}>
-              <View style={styles.iconContainer}>
-                <Octicons
-                  name="tasklist"
-                  size={SIZE}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-                <View style={styles.iconTitleContainer}>
-                  <Subheading>{"تمرینات"}</Subheading>
-                </View>
-              </View>
-              <Touchable rippleColor={"lightGrey"} />
-            </View> */}
+          ) : null}
         </ScrollView>
       </View>
     </View>
