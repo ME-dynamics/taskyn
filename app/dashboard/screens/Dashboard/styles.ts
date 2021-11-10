@@ -11,14 +11,14 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.BACKGROUND,
   },
   titleContainer: {
-    flex: 2,
+    flex: 1.4,
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
     alignItems: "center",
     justifyContent: "center",
     zIndex: 101,
   },
   card: {
-    top: heightPercentageToDP("12"),
+    top: heightPercentageToDP("8"),
   },
   buttonContainer: {
     flex: 6,
