@@ -32,6 +32,7 @@ function AuthenticationScreen() {
                 onChangeText={onOtpNumberChange}
                 title={confirm.title}
                 placeholder={confirm.placeholder}
+                textAlign={"center"}
                 mode={"outlined"}
                 validation={input.otpValidation}
                 timer={{ minute: 1, second: 0 }}
@@ -41,6 +42,7 @@ function AuthenticationScreen() {
                 value={input.phoneNumber}
                 onChangeText={onPhoneChange}
                 title={phone.title}
+                textAlign={"center"}
                 placeholder={phone.placeholder}
                 mode={"outlined"}
                 validation={input.phoneValidation}

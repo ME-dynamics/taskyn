@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Image, Alert } from "react-native";
-import { openCamera, openCropper, openGallery, Tap } from "../../../../library";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { openCamera, openCropper, openGallery, Tap } from "../../../library";
+import { useNavigation, NavigationProp  } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack"
 import {
   MaterialIcons,
   AntDesign,
@@ -11,9 +11,9 @@ import {
   Entypo,
 } from "@expo/vector-icons";
 import { MenuItem } from "../../components/MenuItem";
-import { styles } from "./style";
-import { IIconProps } from "./type";
-import { Headline } from "../../../../library";
+import { styles } from "./styles";
+import { IIconProps } from "./types";
+import { Headline } from "../../../library";
 export const Profile = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const renderSupportAgent = (props: IIconProps) => {

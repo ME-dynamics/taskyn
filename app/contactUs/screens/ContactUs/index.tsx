@@ -10,7 +10,7 @@ import {
   TelegramIcon,
   WebIcon,
   IconButton,
-} from "../../../../library";
+} from "../../../library";
 import { styles } from "./styles";
 import Communications from "react-native-communications";
 

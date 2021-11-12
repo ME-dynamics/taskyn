@@ -24,8 +24,11 @@ export function buildRequest() {
     return tokenCache;
   }
   return async function request(info: IRequest): Promise<IResponse> {
+    let timeoutId: NodeJS.Timeout | undefined = undefined;
     try {
+      const controller = new AbortController();
       const { method, endpoint, body } = info;
+      timeoutId = setTimeout(() => controller.abort(), 2000);
       const response: Response = await fetch(`${serverUrl}${endpoint}`, {
         method,
         headers: {
@@ -36,7 +39,10 @@ export function buildRequest() {
           "x-jwt-payload": providerJwtPayload,
         },
         body: body ? JSON.stringify(body) : undefined,
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
       const data = await response.json();
       const { ok, status } = response;
       return {
@@ -45,14 +51,24 @@ export function buildRequest() {
         payload: ok ? data.payload : undefined,
         error: !ok ? data?.error : undefined,
       };
-    } catch (err) {
-      // show error
-      // add sentry
+    } catch (error: any) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      const errName = error?.name;
+      if (errName === "AbortError") {
+        return {
+          success: false,
+          httpStatus: 0,
+          payload: undefined,
+          error: "timeout",
+        };
+      }
       return {
         success: false,
         httpStatus: 0,
         payload: undefined,
-        error: undefined,
+        error: "timeout",
       };
     }
   };

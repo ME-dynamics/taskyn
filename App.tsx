@@ -11,7 +11,7 @@ import {
   getRole,
   initToken,
 } from "./app/authentication";
-import { Profile } from "./app/profile/interfaces/screens/profile";
+import { Profile } from "./app/profile/screens/Profile";
 import { Dashboard } from "./app/dashboard/screens";
 import { FormList } from "./app/formList/screens/formList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -19,7 +19,7 @@ import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
 import { Note } from "./app/note";
-import { ContactUS } from "./app/profile/interfaces/screens/contactUs";
+import { ContactUS } from "./app/contactUs/screens/ContactUs";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
