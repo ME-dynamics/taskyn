@@ -3,34 +3,30 @@ import { View, Text, StyleSheet } from "react-native";
 import { Input, THEME } from "../../../library";
 import { styles } from "./style";
 import { IUserInfoProps } from "./type";
-import { DropPicker } from "../../components/dropPicker/index";
+import { DropPicker } from "../../components/dropPicker";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export function UserInfo(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
   const ComponentGenerator = () => {
     const TitleAndPlaceholderObjectList = [
-      { title: "نام ", placeholder: "نام خود را وارد کنید", type: "" },
+      { title: "نام ", placeholder: "نام خود را وارد کنید", type: "input" },
       {
         title: "نام خانوادگی",
         placeholder: "نام خانوادگی خود را وارد کنید",
-        type: "",
+        type: "input",
       },
-      {
-        title: "شماره موبایل",
-        placeholder: "شماره موبایل خود را وارد کنید",
-        type: "",
-      },
-      {
-        title: "شماره تلفن",
-        placeholder: "شماره تلفن خود را وارد کنید",
-        type: "",
-      },
-      { title: "آدرس", placeholder: "آدرس خود را وارد کنید", type: "" },
+      { title: "سن ", placeholder: "سن خود را وارد کنید", type: "input" },
+      { title: "آدرس", placeholder: "آدرس خود را وارد کنید", type: "input" },
       {
         title: "تلفن ثابت",
         placeholder: "تلفن ثابت خود را وارد کنید",
-        type: "",
+        type: "input",
       },
-      { title: "شرح مشکل", placeholder: "شرح مشکل خود را بنویسید", type: "" },
+      {
+        title: "شرح مشکل",
+        placeholder: "شرح مشکل خود را بنویسید",
+        type: "input",
+      },
       {
         title: "جنسیت",
         placeholder: "جنسیت را انتخاب کنید",
@@ -40,7 +36,7 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "تاریخ تولد",
         placeholder: "تاریخ تولد خود را وارد کنید",
-        type: "",
+        type: "input",
       },
       {
         title: "وضعیت تاهل",
@@ -51,10 +47,8 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "وضعیت زناشویی",
         placeholder: "وضعیت زناشویی خود را انتخاب کنید",
-        type: "",
+        type: "dropdown",
         item: [
-          "مجرد",
-          "متاهل",
           "نامزد",
           "عقد",
           "عقد دایم",
@@ -68,6 +62,7 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "تحصیلات",
         placeholder: "تحصیلات خود را انتخاب کنید",
+        type: "dropdown",
         item: [
           "بی سواد (برای سنین بالا)",
           "زیر سن مدرسه",
@@ -87,53 +82,66 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "رشته تحصیلی",
         placeholder: "رشته تحصیلی خود را وارد کنید",
-        type: "",
+        type: "input",
       },
-      { title: "دین", placeholder: "دین خود را انتخاب کنید", type: "" },
+      {
+        title: "دین",
+        placeholder: "دین خود را انتخاب کنید",
+        type: "dropdown",
+        item: ["اسلام شیعه", "اسلام سنی", "زرتشتی", "مسیحی", "سایر"],
+      },
       {
         title: "شغل",
         placeholder:
           "عنوان دقیق شغل نوشته شود بدون اشاره به شغل آزاد، دانشجو، دانش آموز",
-        type: "",
+        type: "input",
       },
       {
         title: "بیماری جسمی",
         placeholder: "سابقه وجود هرگونه بیماری جسمی ذکر گردد",
-        type: "",
+        type: "input",
       },
       {
         title: "بیماری روحی",
         placeholder: "سابقه وجود هرگونه بیماری روحی ذکر گردد",
-        type: "",
+        type: "input",
       },
       {
         title: "بیماری افراد خانواده",
         placeholder: "بیماری افراد خانواده را برای هر شخص وارد کنید",
-        type: "",
+        type: "input",
       },
       {
         title: "اعتیاد به مواد مخدر",
         placeholder: "وضعیت اعتیاد خود را وارد کنید",
-        type: "",
+        type: "input",
       },
       {
         title: "اعتیاد به مشروبات الکلی",
         placeholder: "وضعیت اعتیاد خود را وارد کنید",
-        type: "",
+        type: "input",
       },
-      { title: "پدر در قید حیات هستند؟", placeholder: "علت فوت", type: "" },
-      { title: "مادر در قید حیات هستند؟", placeholder: "علت فوت", type: "" },
-      { title: "ازدواج فامیلی", placeholder: "", type: "" },
+      {
+        title: "پدر در قید حیات هستند؟",
+        placeholder: "علت فوت",
+        type: "input",
+      },
+      {
+        title: "مادر در قید حیات هستند؟",
+        placeholder: "علت فوت",
+        type: "input",
+      },
+      { title: "ازدواج فامیلی", placeholder: "", type: "dropdown" },
       {
         title: "فرزند چندم",
         placeholder: "فرزند چندم خانواده هستید؟",
-        type: "",
+        type: "input",
       },
-      { title: "شرح برادر خواهر ", placeholder: "", type: "" },
+      { title: "شرح برادر خواهر ", placeholder: "", type: "input" },
     ];
     const FormComponent = [];
     for (let i = 0; i < TitleAndPlaceholderObjectList.length; i++) {
-      if (TitleAndPlaceholderObjectList[i].type == "dropdowm") {
+      if (TitleAndPlaceholderObjectList[i].type == "dropdown") {
         FormComponent.push();
       } else {
         FormComponent.push(
@@ -147,11 +155,18 @@ export function UserInfo(props: IUserInfoProps) {
     }
     return FormComponent;
   };
-
   return (
     <View style={styles.container}>
-      <DropPicker />
-      {/* <View style={styles.inputContainer}>{ComponentGenerator()}</View> */}
+      {/* <DropPicker /> */}
+      <KeyboardAwareScrollView
+        style={styles.inputContainer}
+        contentContainerStyle={{
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
+        {ComponentGenerator()}
+      </KeyboardAwareScrollView>
     </View>
   );
 }
