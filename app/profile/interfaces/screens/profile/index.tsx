@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Image, Alert } from "react-native";
 import { openCamera, openCropper, openGallery, Tap } from "../../../../library";
-import { useNavigation, NavigationProp  } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack"
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import {
   MaterialIcons,
   AntDesign,
