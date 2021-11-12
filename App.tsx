@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { THEME, Input } from "./app/library";
+import { THEME, Input, Paragraph } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import {
-  AcceptPatientList,
-  PatientList,
-} from "./app/patients/screens/patientList";
-import { ScrollView } from "react-native-gesture-handler";
+import { PatientList } from "./app/patients/screens/patientList";
 import {
   Authentication,
   getLoggedIn,
@@ -25,45 +21,164 @@ import { observer } from "mobx-react-lite";
 import { Note } from "./app/note";
 import { ContactUS } from "./app/profile/interfaces/screens/contactUs";
 import { FormResult } from "./app/formResult/screens/formResult";
-const Stack = createNativeStackNavigator();
+import { NoteList } from "./app/note/screens/noteList";
+import { Tasks } from "./app/task";
+import { FormDetails, Questionnaire } from "./app/form/screens";
+import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
+import { DoctorList } from "./app/doctorList/screens/DoctorList";
+import { AcceptPatientList } from "./app/patients/screens/acceptPtaientList";
+const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
+const PatientStack = createNativeStackNavigator();
+const FormListStack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export function PatientsTab() {
   return (
-    <Stack.Navigator
+    <PatientStack.Navigator
       initialRouteName="PatientList"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        headerTintColor: "white",
+        headerStyle: { backgroundColor: THEME.COLORS.PRIMARY.NORMAL },
+      }}
     >
-      <Stack.Screen name="PatientList" component={PatientList} />
-      <Stack.Screen name="AcceptPatientList" component={AcceptPatientList} />
-    </Stack.Navigator>
+      <PatientStack.Screen name="PatientList" component={PatientList} />
+      <PatientStack.Screen
+        name="AcceptPatientList"
+        component={AcceptPatientList}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitle: (props) => (
+            <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+              {props.children}
+            </Paragraph>
+          ),
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+          },
+        }}
+      />
+      <PatientStack.Screen
+        name="DashboardStack"
+        component={Dashboard}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitle: (props) => (
+            <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+              {props.children}
+            </Paragraph>
+          ),
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+          },
+        }}
+      />
+      <DashboardStack.Screen name="Task" component={Tasks} />
+      <DashboardStack.Screen name="Form" component={FormList} />
+      {/* <DashboardStack.Screen name="UserInfo" component={UserInfo} /> */}
+      <DashboardStack.Screen name="Note" component={Note} />
+      <DashboardStack.Screen name="DoctorList" component={DoctorList} />
+      <DashboardStack.Screen name="FormsHistory" component={FormResult} />
+    </PatientStack.Navigator>
   );
 }
-
-// export function DashboardTab() {
-//   return (
-//     <Stack.Navigator
-//       initialRouteName="PatientList"
-//       screenOptions={{ headerShown: false }}
-//     >
-//       <Stack.Screen name="Task" component={Task} />
-//       <Stack.Screen name="Form" component={FormList} />
-//       <Stack.Screen name="UserInfo" component={UserInfo} />
-//       <Stack.Screen name="Note" component={} />
-//       <Stack.Screen name="FormsHistory" component={} />
-
-//     </Stack.Navigator>
-//   );
-// }
+export function FornListTab() {
+  return (
+    <FormListStack.Navigator
+      initialRouteName="FormList"
+      screenOptions={{ headerShown: false }}
+    >
+      <FormListStack.Screen name="FormList" component={FormList} />
+      <FormListStack.Screen
+        name="FormDetails"
+        component={FormDetails}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitle: (props) => (
+            <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+              {props.children}
+            </Paragraph>
+          ),
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+          },
+        }}
+      />
+      <FormListStack.Screen
+        name="Questionnaire"
+        component={Questionnaire}
+        options={{
+          headerShown: true,
+        }}
+      />
+    </FormListStack.Navigator>
+  );
+}
+export function DashboardTab() {
+  return (
+    <DashboardStack.Navigator
+      initialRouteName="Dashboard"
+      screenOptions={{
+        headerShown: true,
+        headerTitleAlign: "center",
+        headerTitle: (props) => (
+          <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+            {props.children}
+          </Paragraph>
+        ),
+        headerShadowVisible: false,
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+        },
+      }}
+    >
+      <DashboardStack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
+      <DashboardStack.Screen name="Task" component={Tasks} />
+      <DashboardStack.Screen name="Form" component={FormList} />
+      {/* <DashboardStack.Screen name="UserInfo" component={UserInfo} /> */}
+      <DashboardStack.Screen name="Note" component={Note} />
+      <DashboardStack.Screen name="DoctorList" component={DoctorList} />
+      <DashboardStack.Screen name="FormsHistory" component={FormResult} />
+    </DashboardStack.Navigator>
+  );
+}
 export function ProfileTab() {
   return (
     <ProfileStack.Navigator
       initialRouteName="Profile"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: true,
+        headerTitleAlign: "center",
+        headerTitle: (props) => (
+          <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+            {props.children}
+          </Paragraph>
+        ),
+        headerShadowVisible: false,
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+        },
+      }}
     >
-      <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
       <ProfileStack.Screen name="Support" component={ContactUS} />
-
       {/* <Stack.Screen name="AboutUs" component={} />
       <Stack.Screen name="Questions" component={} />
       <Stack.Screen name="Terms" component={} />
@@ -73,7 +188,7 @@ export function ProfileTab() {
 }
 
 function MyTabs() {
-  const role = getRole();
+  const role = "provider";
 
   return (
     <Tab.Navigator
@@ -85,7 +200,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name="ProfileTab"
-        component={role === "provider" ? ProfileTab : ProfileTab}
+        component={ProfileTab}
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
@@ -97,7 +212,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Form"
-        component={Note}
+        component={UserInfo}
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
@@ -107,7 +222,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="InitialRoot"
-        component={role === "provider" ? PatientsTab : Dashboard}
+        component={role === "provider" ? PatientsTab : DashboardTab}
         options={{
           tabBarLabel: role === "provider" ? "بیماران" : "داشبورد",
           tabBarIcon: ({ color, size }) => (
