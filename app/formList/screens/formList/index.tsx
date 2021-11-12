@@ -4,13 +4,18 @@ import { View, Text } from "react-native";
 import { styles } from "./style";
 import { FormCard } from "../../components/formCard";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { SearchBar } from "../../../library";
+import { SearchBar, Container } from "../../../library";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
-export const FormList = () => {
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
+export function FormList() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+
   return (
-    <View style={styles.container}>
+    <Container>
       <View style={styles.searchBarContainer}>
+          
         <SearchBar
           onChangeText={() => {}}
           onClear={() => {}}
@@ -26,78 +31,15 @@ export const FormList = () => {
         >
           <FormCard
             Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
+              <FontAwesome5 name="medium-m" size={size} color={color} />
             )}
             id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
-          />
-          <FormCard
-            Icon={({ color, size }) => (
-              <FontAwesome5 name="neos" size={size} color={color} />
-            )}
-            id={"Neo"}
-            englishName={"NEO Personality Inventory"}
-            persianName={"پرسش نامه شخصیتی نئو"}
-            onPress={() => {}}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تست MBTI"}
+            onPress={() => {navigation.push("FormDetails")}}
           />
         </KeyboardAwareScrollView>
       </View>
-    </View>
+    </Container>
   );
-};
+}

@@ -4,9 +4,9 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   tile: {
-    width: widthPercentageToDP(80),
+    width: widthPercentageToDP(90),
     height: 100,
-    marginVertical: 6,
+    marginVertical: 10,
     flexDirection: "column",
     alignItems: "center",
   },
@@ -16,32 +16,28 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   line: {
-    width: widthPercentageToDP("80"),
+    width: widthPercentageToDP("90"),
     height: StyleSheet.hairlineWidth,
     backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
   },
   coloredline: {
     width: 2,
-    left: 20,
+    right: 10,
     height: "64%",
     backgroundColor: THEME.COLORS.PRIMARY.LIGHT,
   },
   bodyContainer: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    flex: 1,
   },
 
   titleContainer: {
-    width: "76%",
-    height: "50%",
+    flex: 1,
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-between",
   },
   answerContainer: {
-    width: "76%",
-    height: "50%",
+    flex: 1,
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-between",

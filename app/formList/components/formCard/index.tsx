@@ -18,9 +18,7 @@ export const FormCard = (props: IPatients) => {
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <View style={styles.formIcon}>
-         <Icon size={30} color={"grey"} />
-        </View>
+         <Icon size={40} color={"grey"} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.persianNameContainer}>

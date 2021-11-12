@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { THEME } from "../../library";
+import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.BIG,
@@ -9,19 +9,14 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 2,
     overflow: "hidden",
-    marginVertical:6,
+    marginVertical: 6,
   },
   iconContainer: {
     flex: 3,
-   
+    alignItems: "center",
+    justifyContent: "center",
   },
-  formIcon: {
-    width: 72,
-    height: 72,
-    borderRadius: 72 / 2,
-    alignItems:"center",
-    justifyContent:"center"
-  },
+
   infoContainer: {
     flex: 10,
   },
@@ -32,6 +27,5 @@ export const styles = StyleSheet.create({
   englishNameContainer: {
     flex: 2,
     justifyContent: "center",
-    
   },
 });
