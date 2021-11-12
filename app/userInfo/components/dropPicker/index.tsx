@@ -3,11 +3,10 @@ import { View, Text } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { THEME } from "../../../library";
 
-export  function DropPicker() {
+export function DropPicker() {
   const myTheme = require("./style");
   DropDownPicker.addTheme("myTheme", myTheme);
   DropDownPicker.setTheme("myTheme");
-
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
