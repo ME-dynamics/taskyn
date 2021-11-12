@@ -10,7 +10,7 @@ export function Questionnaire() {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
-      title:"فرم نيو",
+      title:"تست MBTI",
       headerRight: () => (
         <Subheading>{`${y} / ${x}`}</Subheading>
       ),
@@ -31,10 +31,7 @@ export function Questionnaire() {
         <ScrollView style={styles.scrollview}>
           <AnswerCard />
           <AnswerCard />
-          <AnswerCard />
-          <AnswerCard />
-          <AnswerCard />
-          <AnswerCard />
+      
         </ScrollView>
       </View>
       <View style={styles.buttonContainer}>
