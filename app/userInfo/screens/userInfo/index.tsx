@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Input, THEME } from "../../../library";
 import { styles } from "./style";
 import { IUserInfoProps } from "./type";
 import { DropPicker } from "../../components/dropPicker";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 export function UserInfo(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
   const ComponentGenerator = () => {
@@ -92,8 +92,7 @@ export function UserInfo(props: IUserInfoProps) {
       },
       {
         title: "شغل",
-        placeholder:
-          "عنوان دقیق شغل نوشته شود بدون اشاره به شغل آزاد، دانشجو، دانش آموز",
+        placeholder: "عنوان دقیق شغل نوشته شود",
         type: "input",
       },
       {
@@ -131,7 +130,12 @@ export function UserInfo(props: IUserInfoProps) {
         placeholder: "علت فوت",
         type: "input",
       },
-      { title: "ازدواج فامیلی", placeholder: "", type: "dropdown" },
+      {
+        title: "ازدواج فامیلی",
+        placeholder: "",
+        type: "dropdown",
+        item: ["بله", "خیر"],
+      },
       {
         title: "فرزند چندم",
         placeholder: "فرزند چندم خانواده هستید؟",
@@ -142,14 +146,30 @@ export function UserInfo(props: IUserInfoProps) {
     const FormComponent = [];
     for (let i = 0; i < TitleAndPlaceholderObjectList.length; i++) {
       if (TitleAndPlaceholderObjectList[i].type == "dropdown") {
-        FormComponent.push();
+        FormComponent.push(
+          <View
+            style={{
+              marginVertical: 6,
+              width: widthPercentageToDP(90),
+              alignItems: "flex-end",
+              overflow: "visible",
+            }}
+          >
+            <DropPicker
+              title={TitleAndPlaceholderObjectList[i].title}
+              item={TitleAndPlaceholderObjectList[i].item}
+            />
+          </View>
+        );
       } else {
         FormComponent.push(
-          <Input
-            mode="flat"
-            title={TitleAndPlaceholderObjectList[i].title}
-            placeholder={TitleAndPlaceholderObjectList[i].placeholder}
-          />
+          <View style={{ marginVertical: 6 }}>
+            <Input
+              mode="flat"
+              title={TitleAndPlaceholderObjectList[i].title}
+              placeholder={TitleAndPlaceholderObjectList[i].placeholder}
+            />
+          </View>
         );
       }
     }
@@ -157,16 +177,15 @@ export function UserInfo(props: IUserInfoProps) {
   };
   return (
     <View style={styles.container}>
-      {/* <DropPicker /> */}
-      <KeyboardAwareScrollView
+      <ScrollView
         style={styles.inputContainer}
         contentContainerStyle={{
           alignItems: "center",
-          justifyContent: "flex-start",
+          justifyContent: "center",
         }}
       >
         {ComponentGenerator()}
-      </KeyboardAwareScrollView>
+      </ScrollView>
     </View>
   );
 }

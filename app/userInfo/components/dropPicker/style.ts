@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-
 import { THEME } from "../../../library";
 export const ICONS = {
   ARROW_DOWN: require("../../../../assets/image/arrow-down.png"),
@@ -10,14 +9,14 @@ export const ICONS = {
 
 export default StyleSheet.create({
   container: {
-    width: "90%",
+    width: 208 //128, //112
   },
   style: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    height: 50,
+    height: 44,
     borderRadius: 8,
     elevation: 2,
     // borderWidth: 1,
