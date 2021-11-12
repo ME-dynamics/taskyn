@@ -10,8 +10,12 @@ import {
 } from "../../../library/Icon";
 import { Card, Tile } from "../../components";
 import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 function DashboardScreen() {
-  const [role, setRole] = useState("povider");
+  const navigation = useNavigation<StackNavigationProp<any>>();
+
+  const [role, setRole] = useState("provider");
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -20,7 +24,7 @@ function DashboardScreen() {
             id={""}
             name={role === "provider" ? "" : "نامشخص"}
             description={role ? "" : "نامشخص"}
-            onPress={() => {}}
+            onPress={() => {navigation.push("DoctorList")}}
             role={role}
           />
         </View>
@@ -37,7 +41,7 @@ function DashboardScreen() {
                 return <OnlineIcon size={size} />;
               }}
               onPress={() => {
-                console.log("tile pressed");
+                navigation.push("Task");
               }}
             />
             <Tile
@@ -46,7 +50,7 @@ function DashboardScreen() {
                 return <FileIcon size={size} />;
               }}
               onPress={() => {
-                console.log("tile pressed");
+                navigation.push("UserInfo");
               }}
             />
           </View>
@@ -57,7 +61,7 @@ function DashboardScreen() {
                 return <FormIcon size={size} />;
               }}
               onPress={() => {
-                console.log("tile pressed");
+                navigation.push("Form");
               }}
             />
             <Tile
@@ -66,7 +70,7 @@ function DashboardScreen() {
                 return <FormHistoryIcon size={size} />;
               }}
               onPress={() => {
-                console.log("tile pressed");
+                navigation.push("FormsHistory");
               }}
             />
           </View>
@@ -78,7 +82,7 @@ function DashboardScreen() {
                   return <NoteIcon size={size} />;
                 }}
                 onPress={() => {
-                  console.log("tile pressed");
+                  navigation.push("Note");
                 }}
               />
             </View>

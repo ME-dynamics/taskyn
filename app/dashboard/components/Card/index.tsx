@@ -4,8 +4,12 @@ import { observer } from "mobx-react-lite";
 import { Button, Caption, Title, Touchable } from "../../../library";
 import { styles } from "./styles";
 import { ICardProps } from "../../types";
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 function CardComponent(props: ICardProps) {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+
   const { name, description, onPress, role } = props;
 
   return (
@@ -26,11 +30,12 @@ function CardComponent(props: ICardProps) {
           <Caption>{description}</Caption>
         </View>
         <View style={styles.buttonContainer}>
-          {role!=="provider" ? (
+          {role !== "provider" ? (
             <Button
               mode={"contained"}
               size={"medium"}
               rippleColor={"lightGrey"}
+              onPress={onPress}
             >
               {"انتخاب دکتر"}
             </Button>
