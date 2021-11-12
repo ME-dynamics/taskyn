@@ -18,3 +18,5 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+export const statusBarBackgroundColor = THEME.COLORS.PRIMARY.NORMAL;
