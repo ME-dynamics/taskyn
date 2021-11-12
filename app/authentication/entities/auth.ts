@@ -24,7 +24,7 @@ export class Auth {
   otpToken: string = "";
   tokenExpiresAt: number = 0;
   refreshExpiresAt: number = 0;
-  role: string = "";
+  role: string = 'provider'||'customer';
   setToken(newToken: string) {
     this.token = newToken;
   }
