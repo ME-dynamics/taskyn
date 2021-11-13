@@ -12,7 +12,7 @@ export function Questionnaire() {
     navigation.setOptions({
       title:"تست MBTI",
       headerRight: () => (
-        <Subheading>{`${y} / ${x}`}</Subheading>
+        <Subheading style={{color: "white"}}>{`${y} / ${x}`}</Subheading>
       ),
     });
   }, [navigation]);

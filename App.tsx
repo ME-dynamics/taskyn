@@ -78,6 +78,31 @@ export function PatientsTab() {
           },
         }}
       />
+      <DashboardStack.Screen
+        name="FormDetails"
+        component={FormDetails}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitle: (props) => (
+            <Paragraph style={{ fontSize: 18, top: 4, color: "white" }}>
+              {props.children}
+            </Paragraph>
+          ),
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+          },
+        }}
+      />
+      <DashboardStack.Screen
+        name="Questionnaire"
+        component={Questionnaire}
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+        }}
+      />
       <DashboardStack.Screen name="Task" component={Tasks} />
       <DashboardStack.Screen name="Form" component={FormList} />
       {/* <DashboardStack.Screen name="UserInfo" component={UserInfo} /> */}
