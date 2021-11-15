@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { THEME } from "../theme";
 
-export const INPUT_HEIGHT = 50;
+export const INPUT_HEIGHT = 48;
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   flatContainer: {
-    minHeight: INPUT_HEIGHT + 20,
+    minHeight: INPUT_HEIGHT + 16,
   },
   outlineContainer: {
     minHeight: INPUT_HEIGHT + 28,
