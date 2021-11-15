@@ -9,7 +9,7 @@ export const ICONS = {
 
 export default StyleSheet.create({
   container: {
-    width: 208 //128, //112
+    width: 208, //128, //112
   },
   style: {
     flexDirection: "row",

@@ -42,6 +42,7 @@ export function DropPicker(props: IDropPickerProps) {
         showBadgeDot={true}
         open={open}
         value={value}
+        
         items={items}
         setOpen={setOpen}
         setValue={setValue}
