@@ -23,7 +23,7 @@ import { ContactUS } from "./app/contactUs/screens/ContactUs";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
-import { FormDetails, Questionnaire } from "./app/form/screens";
+import { FormDetails, MbtiResult, Questionnaire } from "./app/form/screens";
 import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
 import { DoctorList } from "./app/doctorList/screens/DoctorList";
 import { AcceptPatientList } from "./app/patients/screens/acceptPtaientList";
@@ -105,10 +105,13 @@ export function PatientsTab() {
       />
       <DashboardStack.Screen name="Task" component={Tasks} />
       <DashboardStack.Screen name="Form" component={FormList} />
-      {/* <DashboardStack.Screen name="UserInfo" component={UserInfo} /> */}
+      <DashboardStack.Screen name="UserInfo" component={UserInfo} />
       <DashboardStack.Screen name="Note" component={Note} />
       <DashboardStack.Screen name="DoctorList" component={DoctorList} />
       <DashboardStack.Screen name="FormsHistory" component={FormResult} />
+      <DashboardStack.Screen name="MbtiResult" component={MbtiResult} />
+
+      
     </PatientStack.Navigator>
   );
 }
@@ -172,7 +175,7 @@ export function DashboardTab() {
       />
       <DashboardStack.Screen name="Task" component={Tasks} />
       <DashboardStack.Screen name="Form" component={FormList} />
-      {/* <DashboardStack.Screen name="UserInfo" component={UserInfo} /> */}
+      <DashboardStack.Screen name="UserInfo" component={UserInfo} />
       <DashboardStack.Screen name="Note" component={Note} />
       <DashboardStack.Screen name="DoctorList" component={DoctorList} />
       <DashboardStack.Screen name="FormsHistory" component={FormResult} />
@@ -237,7 +240,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Form"
-        component={UserInfo}
+        component={FornListTab}
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
