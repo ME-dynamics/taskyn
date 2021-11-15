@@ -6,7 +6,7 @@ import { ProgressBar } from "../../components";
 import { IFromProps } from "../../types";
 import { styles } from "./styles";
 export function MbtiResult(props: IFromProps) {
-  const { description,answer,type } = props;
+  const { description, answer, type } = props;
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
@@ -18,25 +18,63 @@ export function MbtiResult(props: IFromProps) {
           />
         </View>
         <View style={styles.answerContainer}>
-          <Headline>{answer}</Headline>
+          <Headline>{"INTJ-T"}</Headline>
           <View style={styles.line} />
         </View>
         <View style={styles.title}>
-          <Title>{`تیپ شخصیتی: ${type}`}</Title>
+          <Title>{`تیپ شخصیتی: معمار`}</Title>
         </View>
         <View style={styles.descriptionContainer}>
-          <Paragraph>{description}</Paragraph>
+          <Paragraph>
+            {
+              "معماران به‌تنهایی در نوک قله قرار گرفته‌اند و یکی از کمیاب‌ترین و توانمندترین گونه‌های شخصیتی از حیث توانایی‌های استراتژیک هستند و به‌خوبی از این امر آگاهند. معماران تنها دو درصد جمعیت را تشکیل می‌دهند و زنان این گونه شخصیتی بسیار نادر هستند و فقط 0.8% جمعیت را تشکیل می‌دهند - به همین دلیل اغلب اوقات پیدا کردن افراد همفکر که قادر باشند با روشن‌اندیشی بی حد و حصر و مانورهای شطرنج‌وار آنها برابری کنند کار دشواری است. افراد دارای گونه شخصیتی معمار اهل تخیل و در عین حال قاطع، بلندپرواز و در عین حال گوشه‌گیر و به شکلی شگفت‌آور کنجکاو هستند، اما انرژی خود را بیهوده هدر نمی‌دهند."
+            }
+          </Paragraph>
         </View>
         <View style={styles.progressBarGroupContainer}>
-          <ProgressBar 
-          leftPercent={10}
-          description={"شیس بذشخع بذشخ دبش"}
-          leftName={"سشبتذشس"}
-          rightName={"dfd"}
-          title={"sd"}
-  
+          <ProgressBar
+            leftPercent={35}
+            description={"این ویژگی نحوه تعامل ما با محیط خود را تعیین می کند"}
+            leftName={"برونگرا"}
+            rightName={"درونگرا"}
+            title={"ذهن"}
           />
-         
+          <ProgressBar
+            leftPercent={60}
+            description={
+              "این ویژگی نشان می دهد که ما انرژی ذهنی خود را به کجا هدایت می کنیم."
+            }
+            leftName={"شهودی"}
+            rightName={"ناظر"}
+            title={"انرژی"}
+          />
+          <ProgressBar
+            leftPercent={64}
+            description={
+              "این ویژگی تعیین می کند که چگونه تصمیم می گیریم و با احساسات کنار می آییم. "
+            }
+            leftName={"تفکر"}
+            rightName={"احساس"}
+            title={"طبیعت"}
+          />
+          <ProgressBar
+            leftPercent={43}
+            description={
+              "این ویژگی نشان دهنده رویکرد ما به کار، برنامه ریزی و تصمیم گیری است. "
+            }
+            leftName={"قضاوت کردن"}
+            rightName={"اکتشاف"}
+            title={"تاکتیک"}
+          />
+           <ProgressBar
+            leftPercent={43}
+            description={
+              "این ویژگی زیربنای همه چیزهای دیگر است ومی گوید که چقدر به توانایی ها و تصمیمات خود اطمینان داریم. "
+            }
+            leftName={"اظهار کننده"}
+            rightName={"آشفته"}
+            title={"هویت"}
+          />
         </View>
       </ScrollView>
     </View>
