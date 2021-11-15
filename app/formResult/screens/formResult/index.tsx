@@ -1,11 +1,15 @@
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { View, Text, ScrollView } from "react-native";
-import { Button, THEME } from "../../../library";
+import { View, Text, ScrollView,  } from "react-native";
+import { Button, THEME ,Touchable} from "../../../library";
 import { CategoryComponent } from "../../components/category";
 import { ResultTile } from "../../components/resultTile";
 import { styles } from "./styles";
 
 export function FormResult() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+
   const [mode, setMode] = useState("contained");
   return (
     <View style={styles.container}>
@@ -19,13 +23,13 @@ export function FormResult() {
             setMode(mode === "outlined" ? "contained" : "outlined")
           }
         >
-          asd
+          {"MBTI"}
         </Button>
         <Button mode={mode} size={"small"} rippleColor={"lightGrey"} fullRadius>
-          asd
+          {"NEO"}
         </Button>
         <Button mode={mode} size={"small"} rippleColor={"lightGrey"} fullRadius>
-          asd
+          {"beck-D"}
         </Button>
         {/* <CategoryComponent
           mode={mode}
@@ -62,11 +66,12 @@ export function FormResult() {
         <View style={styles.resultTileContainer}>
           <ResultTile
             color={"red"}
-            result={"abcds"}
+            result={" INTJ-T "}
             createdAt={"1376/6/6"}
             title={"mbti"}
           />
         </View>
+        <Touchable rippleColor={"lightGrey"} onPress={()=>{navigation.push("MbtiResult")}}/>
       </ScrollView>
     </View>
   );
