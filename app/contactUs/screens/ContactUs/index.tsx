@@ -33,18 +33,22 @@ export function ContactUS() {
             <IconButton
               Icon={InstagramIcon}
               onPress={() => Communications.web("https://google.com")}
+              size={50}
             />
             <IconButton
               Icon={LinkedinIcon}
               onPress={() => Communications.web("https://google.com")}
+              size={50}
             />
             <IconButton
               Icon={TelegramIcon}
               onPress={() => Communications.web("http://google.com")}
+              size={50}
             />
             <IconButton
               Icon={WebIcon}
               onPress={() => Communications.web("https://taskyn.ir")}
+              size={50}
             />
           </View>
           <Button

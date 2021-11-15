@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     marginBottom: 14,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   buttoncontainer: {},
 });
