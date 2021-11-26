@@ -1,19 +1,13 @@
 import { StyleSheet } from "react-native";
-import { material } from "react-native-typography";
+import { material, systemWeights } from "react-native-typography";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
 import { IInputStyleGen, tInputMode } from "./types";
 
-
-
 function containerHeightGen(mode: tInputMode) {
   if (mode === "outlined") {
-    // 54 for input
-    // 34 for title
+    // 56 for input
     // 34 for errors
-    return 54 + 34 + 34;
-  }
-  if (mode === "outline-material") {
     return 56 + 34;
   }
   if (mode === "flat") {
@@ -25,9 +19,6 @@ function inputHeightGen(mode: tInputMode) {
   if (mode === "outlined") {
     // 54 for input
     // 34 for title
-    return 54;
-  }
-  if (mode === "outline-material") {
     return 56;
   }
   if (mode === "flat") {
@@ -51,17 +42,7 @@ function inputBorderGen(mode: tInputMode) {
     borderRadius: 8,
   };
 }
-function clearButtonTop(mode: tInputMode) {
-  if (mode === "outlined") {
-    // 34 title container height
-    // 54 outlined input height
-    // 12 half of clear button size
-    return 34 + 54 / 2 - 12;
-  }
-  // 56 other inputs height
-  // 12 half of clear button size
-  return 56 / 2 - 12;
-}
+
 function styleGenerator(args: IInputStyleGen) {
   const {
     mode,
@@ -69,6 +50,8 @@ function styleGenerator(args: IInputStyleGen) {
     inputHeightState,
     multiline,
     numberOfLines,
+    hasError,
+    limit,
     value,
     style,
   } = args;
@@ -108,24 +91,34 @@ function styleGenerator(args: IInputStyleGen) {
     disabledBorderColor: {
       borderColor: THEME.COLORS.GREY.LIGHT,
     },
-    timerColor: {
+    limit: { position: "absolute", top: -18, left: 0 },
+    limitActive: {
       color: THEME.COLORS.PRIMARY.NORMAL,
+    },
+    limitReached: {
+      color: THEME.COLORS.ERROR,
     },
     clearButtonContainer: {
       zIndex: 1,
       position: "absolute",
       left: 12,
-      top: clearButtonTop(mode),
+      top: inputHeight / 2 - 12,
     },
     errorContainer: {
       width: "100%",
       height: 34,
       flexDirection: "row-reverse",
-      flexWrap: "wrap",
+      paddingLeft: 16,
+      paddingTop: 8,
+      overflow: "hidden",
     },
     error: {
+      width: "100%",
       color: THEME.COLORS.ERROR,
       marginLeft: 8,
+    },
+    inputError: {
+      borderColor: THEME.COLORS.ERROR,
     },
     animatedText: {
       position: "absolute",
@@ -139,8 +132,15 @@ function styleGenerator(args: IInputStyleGen) {
       textAlign: "right",
       overflow: "hidden",
     },
+    animatedTextActive: {
+      color: THEME.COLORS.PRIMARY.NORMAL,
+    },
+    animatedTextError: {
+      color: THEME.COLORS.ERROR,
+    },
   });
-  // theses styles are based on states 
+
+  // theses styles are based on states
   // they change on state changes and should be passed like this
   const inputStyles = [
     material.subheading,
@@ -152,19 +152,29 @@ function styleGenerator(args: IInputStyleGen) {
       : undefined,
     multiline && !numberOfLines ? { height: inputHeightState } : undefined,
     styles.inputFont,
+    hasError ? styles.inputError : undefined,
     style,
+  ];
+  const limitStyle = [
+    styles.limit,
+    focused ? styles.limitActive : undefined,
+    Number(value?.length) === Number(limit) ? styles.limitReached : undefined,
+  ];
+  const animatedTextStyle = [
+    styles.animatedText,
+    focused ? styles.animatedTextActive : undefined,
+    hasError ? styles.animatedTextError : undefined,
   ];
   const selectionColor = THEME.COLORS.TRANSPARENT.INPUT_SELECTION;
   return {
     styles,
     inputStyles,
+    limitStyle,
+    animatedTextStyle,
     selectionColor,
     INPUT_HEIGHT: inputHeight,
-    clearIconSize: 24, 
-    animatedColors: {
-      black: material.subheadingObject.color?.toString() || "black",
-      primary: THEME.COLORS.PRIMARY.NORMAL,
-    },
+    clearIconSize: 24,
+    clearIconColor: hasError ? THEME.COLORS.ERROR : undefined,
   };
 }
 

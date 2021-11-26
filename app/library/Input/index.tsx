@@ -7,14 +7,12 @@ import Animated, {
 } from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { observer } from "mobx-react-lite";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Tap } from "../Tap";
-import { Timer } from "../Timer";
-import { Caption, Subheading } from "../Typography";
+import { Caption } from "../Typography";
 import { IconButton } from "../IconButton";
 import { styleGen } from "./styles";
 import { IInputProps, tOnContentSize, tNativeEvent } from "./types";
-
-
 
 function InputComponent(props: IInputProps) {
   const {
@@ -22,20 +20,20 @@ function InputComponent(props: IInputProps) {
     title,
     style,
     mode,
-    timer,
-    validation,
+    errors,
     value,
     numberOfLines,
     onChangeText,
     onBlur,
     placeholder,
     clearButton,
+    limit,
   } = props;
   const inputRef = useRef<TextInput>(null);
   /**
-   * clearRef is used for gesture handler components, Tap uses this ref 
+   * clearRef is used for gesture handler components, Tap uses this ref
    * to wait for IconButton to react to touch, if IconButton does not recognize anything
-   * then Tap executes onPress event, more information available in 
+   * then Tap executes onPress event, more information available in
    * react native gesture handler documents
    * https://docs.swmansion.com/react-native-gesture-handler/docs/interactions#awaiting-other-handlers
    */
@@ -46,49 +44,55 @@ function InputComponent(props: IInputProps) {
   const {
     styles,
     inputStyles,
+    limitStyle,
+    animatedTextStyle,
     selectionColor,
     clearIconSize,
+    clearIconColor,
     INPUT_HEIGHT,
-    animatedColors,
   } = styleGen({
     mode,
     focused,
     inputHeightState: inputHeight,
     multiline,
     numberOfLines,
+    hasError: !!errors?.length,
+    limit,
     value,
     style,
   });
 
-  
-  let animation: Animated.SharedValue<number> | undefined;
-  // define animated shared value when needed
-  if (mode === "outline-material" || mode === "flat") {
-    // if value is defined and not empty
-    // animation should be at active stage
-    animation = useSharedValue(value ? 1 : 0);
-  }
+  // if value is defined and not empty
+  // animation should be at active stage
+  const animation: Animated.SharedValue<number> = useSharedValue(value ? 1 : 0);
+
   function onPress() {
     if (inputRef) {
       setFocused(true);
       inputRef.current?.focus();
     }
     // start animation on focus
-    if (animation) {
-      animation.value = 1;
-    }
+    animation.value = 1;
   }
   function onBlurPress(event: tNativeEvent) {
     setFocused(false);
     /**
-     * if text input is empty and animation is defined 
+     * if text input is empty
      * onBlur animation should reset to default value
      */
-    if (!value && animation) {
+    if (!value) {
       animation.value = 0;
     }
     if (onBlur) {
       onBlur(event);
+    }
+  }
+  function onChangeValue(text: string) {
+    if (limit && text.length > limit) {
+      return;
+    }
+    if (onChangeText) {
+      onChangeText(text);
     }
   }
   function onClear() {
@@ -106,70 +110,53 @@ function InputComponent(props: IInputProps) {
     }
   }
   function renderTitle() {
-    if (mode === "outlined") {
-      return (
-        <View style={styles.titleContainer}>
-          <Subheading style={focused ? styles.focusedTitle : undefined}>
-            {title}
-          </Subheading>
-          {renderTimer()}
-        </View>
-      );
-    }
-    if (
-      (mode === "outline-material" || mode === "flat") &&
-      animation !== undefined
-    ) {
-      const isFlat = mode === "flat";
-      // translateX for flat and outline-material mode
-      // I found the numbers with simple calculation and testing
-      const reduceX = isFlat ? -10 : 2;
-      const center = INPUT_HEIGHT / 2 + reduceX;
-      const animatedStyle = useAnimatedStyle(() => {
-        return {
-          transform: [
-            {
-              translateX: withTiming(animation?.value === 1 ? 12 : 0),
-            },
-            { translateY: withTiming(animation?.value === 1 ? -center : 0) },
-            { scale: withTiming(animation?.value === 1 ? 0.8 : 1) },
-          ],
-          color:
-            animation?.value === 1
-              ? animatedColors.primary
-              : animatedColors.black,
-        };
-      });
-      return (
-        <Animated.Text
-          style={[styles.animatedText, animatedStyle]}
-          onPress={onPress}
-        >
-          {title}
-        </Animated.Text>
-      );
-    }
+    const isFlat = mode === "flat";
+    // translateX for flat and outline-material mode
+    // I found the numbers with simple calculation and testing
+    const reduceX = isFlat ? -10 : 2;
+    const center = INPUT_HEIGHT / 2 + reduceX;
+    const animatedStyle = useAnimatedStyle(() => {
+      return {
+        transform: [
+          {
+            translateX: withTiming(animation?.value === 1 ? 12 : 0),
+          },
+          { translateY: withTiming(animation?.value === 1 ? -center : 0) },
+          { scale: withTiming(animation?.value === 1 ? 0.8 : 1) },
+        ],
+      };
+    });
+    return (
+      <Animated.Text
+        style={[animatedStyle, animatedTextStyle]}
+        onPress={onPress}
+      >
+        {title}
+      </Animated.Text>
+    );
   }
   function renderErrors() {
-    if (!validation) {
+    if (!errors) {
       return null;
     }
-    const errors = [];
-    for (let index = 0; index < validation.length; index++) {
-      const text = validation[index];
-      errors.push(
-        <Caption key={text} style={styles.error}>{`* ${text}`}</Caption>
-      );
+    let errorText = "";
+    for (let index = 0; index < errors.length; index++) {
+      const text = errors[index];
+      errorText += `*${text}    `;
     }
-    return errors;
+    return <Caption numberOfLines={1} style={styles.error}>{errorText}</Caption>;
   }
 
-  function renderTimer() {
-    if (!timer) {
+  function renderLimit() {
+    if (!limit) {
       return null;
     }
-    const { minute, second } = timer;
-    return <Timer style={styles.timerColor} minute={minute} second={second} />;
+
+    return (
+      <Caption style={limitStyle}>{`${digitsEnToFa(limit)}/${
+        value ? digitsEnToFa(value.length) : digitsEnToFa(0)
+      }`}</Caption>
+    );
   }
   function renderClearButton() {
     if (value && clearButton) {
@@ -178,6 +165,7 @@ function InputComponent(props: IInputProps) {
           <IconButton
             ref={clearRef}
             size={clearIconSize}
+            color={clearIconColor}
             Icon={({ size, color }) => {
               return (
                 <MaterialCommunityIcons
@@ -195,6 +183,7 @@ function InputComponent(props: IInputProps) {
   }
   return (
     <View style={styles.container}>
+      {renderLimit()}
       {renderTitle()}
       <Tap onPress={onPress} waitFor={clearRef}>
         <View
@@ -208,6 +197,7 @@ function InputComponent(props: IInputProps) {
             ref={inputRef}
             style={inputStyles}
             onBlur={onBlurPress}
+            onChangeText={onChangeValue}
             textAlignVertical={multiline ? "top" : "center"}
             underlineColorAndroid={"transparent"}
             selectionColor={selectionColor}

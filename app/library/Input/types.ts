@@ -4,21 +4,16 @@ import {
   TextInputContentSizeChangeEventData,
   TextInputFocusEventData,
   TextInputProps,
-  TextProps,
   TextStyle,
-  ViewStyle,
 } from "react-native";
 
-export type tInputMode = "outlined" | "flat" | "outline-material";
+export type tInputMode = "outlined" | "flat";
 export interface IInputProps extends TextInputProps {
   title: string;
   mode: tInputMode;
-  validation?: string[];
-  timer?: {
-    minute: number;
-    second: number;
-  };
-  clearButton?: boolean
+  errors?: string[];
+  clearButton?: boolean;
+  limit?: number;
 }
 
 export interface IInputStyleGen {
@@ -28,6 +23,8 @@ export interface IInputStyleGen {
   multiline: boolean | undefined;
   numberOfLines: number | undefined;
   inputHeightState: number;
+  hasError: boolean;
+  limit: number | undefined;
   style: StyleProp<TextStyle>;
 }
 
