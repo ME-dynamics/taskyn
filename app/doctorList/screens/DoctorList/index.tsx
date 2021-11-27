@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { View, Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -7,7 +7,7 @@ import { SearchBar, Tap } from "../../../library";
 import { DoctorCard } from "../../components/DoctorCard";
 import { styles } from "./styles";
 export function DoctorList() {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
     <View style={styles.container}>
