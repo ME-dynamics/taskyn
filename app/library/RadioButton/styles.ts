@@ -4,12 +4,12 @@ import { THEME } from "../theme";
 import { IRadioButtonStyles } from "./types";
 function styleGenerator(args: IRadioButtonStyles) {
   const { checked, size } = args;
-
+  const buttonSize = size - 2;
   const styles = StyleSheet.create({
     container: {
-      width: size,
-      height: size,
-      borderRadius: size / 2,
+      width: buttonSize,
+      height: buttonSize,
+      borderRadius: buttonSize / 2,
       alignItems: "center",
       justifyContent: "center",
       borderWidth: 2,
@@ -21,9 +21,9 @@ function styleGenerator(args: IRadioButtonStyles) {
       borderColor: THEME.COLORS.GREY.LIGHT,
     },
     dot: {
-      width: size - Math.floor(size / 4),
-      height: size - Math.floor(size / 4),
-      borderRadius: (size - Math.floor(size / 4)) / 2,
+      width: buttonSize - Math.floor(buttonSize / 2),
+      height: buttonSize - Math.floor(buttonSize / 2),
+      borderRadius: (buttonSize - Math.floor(buttonSize / 2)) / 2,
     },
     activeDot: {
       backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
