@@ -1,9 +1,9 @@
 import React from "react";
+import { View } from "react-native";
 import {
   TapGestureHandler,
   TapGestureHandlerGestureEvent,
 } from "react-native-gesture-handler";
-
 import { ITapProps } from "./types";
 
 export function Tap(props: ITapProps) {
@@ -16,7 +16,11 @@ export function Tap(props: ITapProps) {
   }
   return (
     <TapGestureHandler onHandlerStateChange={onTapPress}>
-      {children}
+      {
+        // there must be a view around children to avoid ref bug
+        // that causes crash
+      }
+      <View>{children}</View>
     </TapGestureHandler>
   );
 }
