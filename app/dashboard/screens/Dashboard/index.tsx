@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import { observer } from "mobx-react-lite";
 import {
@@ -7,15 +7,20 @@ import {
   FormIcon,
   NoteIcon,
   OnlineIcon,
-} from "../../../library/Icon";
+} from "../../../library";
+import { getRole } from "../../../authentication";
 import { Card, Tile } from "../../components";
+import { dashboardState } from "../../entities"
+import { retrieveProvider } from "../../usecases";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 function DashboardScreen() {
-  const navigation = useNavigation<StackNavigationProp<any>>();
-
-  const [role, setRole] = useState("provider");
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const role = getRole();
+  useEffect(() => {
+    retrieveProvider();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -24,7 +29,9 @@ function DashboardScreen() {
             id={""}
             name={role === "provider" ? "" : "نامشخص"}
             description={role ? "" : "نامشخص"}
-            onPress={() => {navigation.push("DoctorList")}}
+            onPress={() => {
+              navigation.push("DoctorList");
+            }}
             role={role}
           />
         </View>
