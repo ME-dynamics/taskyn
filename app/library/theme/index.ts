@@ -19,7 +19,7 @@ const COLORS = {
   },
   ERROR: "#b71c1c",
   RED: "#ff1744",
-  BACKGROUND: "#fafafa",
+  BACKGROUND: "#E5E5E5",
 };
 
 const FONTS = {
