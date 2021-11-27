@@ -5,10 +5,10 @@ import { Button, Caption, Title, Touchable } from "../../../library";
 import { styles } from "./styles";
 import { ICardProps } from "../../types";
 import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function CardComponent(props: ICardProps) {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const { name, description, onPress, role } = props;
 
