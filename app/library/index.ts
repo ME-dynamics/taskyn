@@ -13,7 +13,7 @@ export { Container } from "./Container";
 export { Scroller } from "./Scroller";
 export { IconButton } from "./IconButton";
 export { toJalaaliDate } from "./toJalaaliDate";
-export { toString} from "./toString";
+export { toString } from "./toString";
 export {
   FileIcon,
   FilesIcon,
@@ -28,3 +28,5 @@ export {
   TelegramIcon,
   WebIcon,
 } from "./Icon";
+export { Checkbox } from "./CheckBox";
+export { RadioButton } from "./RadioButton"
