@@ -1,6 +1,6 @@
-import { input } from "../entities";
+import { inputState } from "../entities";
 
 export function onOtpNumberChange(otpNumber: string) {
   // validate
-  input.setOtpNumber(otpNumber);
+  inputState.setOtpNumber(otpNumber);
 }

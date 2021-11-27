@@ -26,5 +26,7 @@ export async function passwordlessVerify() {
   auth.setToken(jwt);
   auth.setRefreshExpire(refreshExpires);
   auth.setTokenExpire(jwtExpires);
-  auth.setRole(role);
+  if (role === "customer" || role === "provider") {
+    auth.setRole(role);
+  }
 }

@@ -1,24 +1,24 @@
 import { fetchPasswordlessStart, validatePhoneNumber } from "../adapters";
-import { input, auth } from "../entities";
+import { inputState, authState } from "../entities";
 
 export async function passwordlessStart() {
-  if (input.phoneNumber && input.phoneNumber.length >= 10) {
-    const isPhoneValid = validatePhoneNumber(input.phoneNumber);
+  if (inputState.phoneNumber && inputState.phoneNumber.length >= 10) {
+    const isPhoneValid = validatePhoneNumber(inputState.phoneNumber);
     if (!isPhoneValid) {
-      input.setPhoneValidation(["شماره تماس اشتباه است."]);
+      inputState.setPhoneValidation(["شماره تماس اشتباه است."]);
     } else {
-      input.setPhoneValidation([]);
+      inputState.setPhoneValidation([]);
     }
     if (isPhoneValid) {
       const { otpToken, error } = await fetchPasswordlessStart(
-        input.phoneNumber
+        inputState.phoneNumber
       );
       if (error) {
-        input.setPhoneValidation([`${error} ارور سرور`]);
+        inputState.setPhoneValidation([`${error} ارور سرور`]);
         return;
       }
       if (otpToken) {
-        auth.setOtpToken(otpToken);
+        authState.setOtpToken(otpToken);
         return;
       }
     }
