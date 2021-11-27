@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Input, Button, Headline, Logo, Paragraph } from "../../../library";
+import {
+  Input,
+  Button,
+  Title,
+  Logo,
+ Paragraph
+} from "../../../library";
 
-import { auth, input } from "../../entities";
+import { authState, inputState } from "../../entities";
 import {
   onPhoneChange,
   passwordlessStart,
@@ -15,43 +21,51 @@ import { confirm, phone } from "./constant";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function AuthenticationScreen() {
+  const [checked, setChecked] = useState(false);
   return (
     <KeyboardAwareScrollView style={styles.container} scrollEnabled={false}>
       <View style={styles.titleContainer}>
         <View style={styles.logoContainer}>
-          <Logo size={logoSize} color={"white"} />
+          <Logo size={logoSize} color={"primary"} />
         </View>
-        <Headline style={styles.title}>{"ورود به تسکین"}</Headline>
+        <Title style={styles.title}>{"ورود به تسکین"}</Title>
       </View>
       <View style={styles.authContainer}>
         <View style={styles.itemsContainer}>
           <View style={styles.itemsMargin}>
-            {auth.otpMode ? (
+            {authState.otpMode ? (
               <Input
-                value={input.otpNumber}
+                value={inputState.otpNumber}
                 onChangeText={onOtpNumberChange}
                 title={confirm.title}
                 placeholder={confirm.placeholder}
                 textAlign={"center"}
                 mode={"outlined"}
-                validation={input.otpValidation}
-                timer={{ minute: 1, second: 0 }}
+                errors={inputState.otpValidation}
+                keyboardType={"number-pad"}
               />
             ) : (
               <Input
-                value={input.phoneNumber}
+                value={inputState.phoneNumber}
                 onChangeText={onPhoneChange}
                 title={phone.title}
-                textAlign={"center"}
+                textAlign={"right"}
                 placeholder={phone.placeholder}
                 mode={"outlined"}
-                validation={input.phoneValidation}
+                errors={inputState.phoneValidation}
+                keyboardType={"number-pad"}
+                limit={18}
+                clearButton
               />
             )}
           </View>
-
+          <View style={styles.termsContainer}>
+            <Paragraph style={styles.terms}>
+              {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
+            </Paragraph>
+          </View>
           <View style={styles.itemsMargin}>
-            {auth.otpMode ? (
+            {authState.otpMode ? (
               <Button
                 onPress={passwordlessVerify}
                 mode={"contained"}
@@ -71,11 +85,6 @@ function AuthenticationScreen() {
               </Button>
             )}
           </View>
-        </View>
-        <View style={styles.termsContainer}>
-          <Paragraph style={styles.terms}>
-            {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
-          </Paragraph>
         </View>
       </View>
     </KeyboardAwareScrollView>
