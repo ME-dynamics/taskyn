@@ -40,10 +40,13 @@ function ButtonComponent(props: IButtonProps) {
           <Icon size={iconStyle.size} color={iconStyle.color} />
         </View>
       )}
-      {loading && <Loading mode={mode} />}
-      <Paragraph numberOfLines={1} style={styles.text}>
-        {children}
-      </Paragraph>
+      {loading ? (
+        <Loading mode={mode} />
+      ) : (
+        <Paragraph numberOfLines={1} style={styles.text}>
+          {children}
+        </Paragraph>
+      )}
 
       {disabled ? null : (
         <Touchable onPress={onPress} rippleColor={rippleColor} />
