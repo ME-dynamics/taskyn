@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from "mobx";
 
-export class Input {
+export class InputState {
   constructor() {
     makeObservable(this, {
       phoneNumber: observable,
