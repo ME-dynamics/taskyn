@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { View, Text, ScrollView,  } from "react-native";
-import { Button, THEME ,Touchable} from "../../../library";
+import { View, Text, ScrollView } from "react-native";
+import { Button, THEME, Touchable } from "../../../library";
 import { CategoryComponent } from "../../components/category";
 import { ResultTile } from "../../components/resultTile";
 import { styles } from "./styles";
 
 export function FormResult() {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const [mode, setMode] = useState("contained");
   return (
@@ -71,7 +71,12 @@ export function FormResult() {
             title={"mbti"}
           />
         </View>
-        <Touchable rippleColor={"lightGrey"} onPress={()=>{navigation.push("MbtiResult")}}/>
+        <Touchable
+          rippleColor={"lightGrey"}
+          onPress={() => {
+            navigation.push("MbtiResult");
+          }}
+        />
       </ScrollView>
     </View>
   );

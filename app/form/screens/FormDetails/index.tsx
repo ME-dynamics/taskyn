@@ -1,12 +1,12 @@
 import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useLayoutEffect } from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import { Button, Paragraph, Subheading, THEME, Title } from "../../../library";
 import { styles } from "./style";
 
 export function FormDetails() {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "تست MBTI",

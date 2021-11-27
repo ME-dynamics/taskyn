@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, Alert } from "react-native";
 import { openCamera, openCropper, openGallery, Tap } from "../../../library";
 import { useNavigation, NavigationProp  } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import {
   MaterialIcons,
   AntDesign,
@@ -15,7 +15,7 @@ import { styles } from "./styles";
 import { IIconProps } from "./types";
 import { Headline } from "../../../library";
 export const Profile = () => {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const renderSupportAgent = (props: IIconProps) => {
     const { color, size } = props;
     return <MaterialIcons name={"support-agent"} size={size} color={color} />;
