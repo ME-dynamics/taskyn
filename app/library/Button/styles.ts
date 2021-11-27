@@ -16,18 +16,18 @@ export function activityStyleGen(mode: tMode) {
 }
 
 
-function buttonHeightCalc(size: tSize) {
-  switch (size) {
-    case "small":
-      return 36;
-    case "medium":
-      return 38;
-    case "big":
-      return 54;
-    default:
-      return 36;
-  }
-}
+// function buttonHeightCalc(size: tSize) {
+//   switch (size) {
+//     case "small":
+//       return 36;
+//     case "medium":
+//       return 38;
+//     case "big":
+//       return 54;
+//     default:
+//       return 36;
+//   }
+// }
 
 function buttonMinWidthCalc(size: tSize) {
   switch (size) {
@@ -63,17 +63,17 @@ function buttonStyle(args: IButtonStyles) {
   const styles = StyleSheet.create({
     container: {
       minWidth: buttonMinWidthCalc(size),
-      maxWidth: size === "big" ? widthPercentageToDP("86") : widthPercentageToDP("52"),
-      height: buttonHeightCalc(size),
+      maxWidth: size === "big" ? widthPercentageToDP("90") : widthPercentageToDP("52"),
+      height: 36,
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
       backgroundColor:
-        mode === "contained" ? THEME.COLORS.PRIMARY.NORMAL : "transparent",
+        mode === "contained" ? disabled ? THEME.COLORS.GREY.NORMAL : THEME.COLORS.PRIMARY.NORMAL : "transparent",
       borderColor: disabled
         ? THEME.COLORS.GREY.NORMAL
         : color
         ? color
         : THEME.COLORS.PRIMARY.NORMAL,
-      borderRadius: fullRadius ? buttonHeightCalc(size) / 2 : 4,
+      borderRadius: fullRadius ? 36 / 2 : 12,
       flexDirection: "row-reverse",
       alignItems: "center",
       justifyContent: "center",
@@ -82,7 +82,7 @@ function buttonStyle(args: IButtonStyles) {
       elevation: mode === "contained" ? 2 : 0,
     },
     text: {
-      fontSize: size === "big" ? 16 : 14,
+      fontSize: 14,
       fontFamily: bold ? "Vazir-Bold-UI": "Vazir-Regular-UI",
       color: buttonColor(dark, mode, color),
       marginHorizontal: 4,
