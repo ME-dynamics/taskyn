@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from "mobx";
-
-export class Auth {
+import { entityTypes } from "../types"
+export class AuthState {
   constructor() {
     makeObservable(this, {
       refreshToken: observable,
@@ -24,7 +24,7 @@ export class Auth {
   otpToken: string = "";
   tokenExpiresAt: number = 0;
   refreshExpiresAt: number = 0;
-  role: string = 'provider'||'customer';
+  role: entityTypes.tRole = "customer";
   setToken(newToken: string) {
     this.token = newToken;
   }
@@ -40,7 +40,7 @@ export class Auth {
   setRefreshExpire(time: number) {
     this.refreshExpiresAt = time;
   }
-  setRole(role: string) {
+  setRole(role: entityTypes.tRole) {
     this.role = role;
   }
   get loggedIn(): boolean {
