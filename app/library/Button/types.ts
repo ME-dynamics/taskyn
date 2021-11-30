@@ -7,7 +7,7 @@ interface IIconProps {
   size: number;
 }
 
-export type tSize = "small" | "medium" | "big";
+export type tSize = "extra-small" | "small" | "medium" | "big" | "wide" | "FAB";
 
 export interface IButtonProps {
   mode: tMode;
@@ -28,7 +28,7 @@ export interface IActivityProps {
   mode: tMode;
 }
 
-export interface  IButtonStyles {
+export interface IButtonStyles {
   mode: tMode;
   bold?: boolean;
   size: tSize;

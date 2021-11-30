@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
-import { tMode, IButtonStyles, tSize, } from "./types";
+import { tMode, IButtonStyles, tSize } from "./types";
 
 export const activityStyles = StyleSheet.create({
   container: {
@@ -11,38 +11,46 @@ export const activityStyles = StyleSheet.create({
 });
 
 export function activityStyleGen(mode: tMode) {
-  const activityColor = mode === "contained" ? "white" : THEME.COLORS.PRIMARY.NORMAL;
+  const activityColor =
+    mode === "contained" ? "white" : THEME.COLORS.PRIMARY.NORMAL;
   return { activityColor, styles: activityStyles };
 }
 
-
-// function buttonHeightCalc(size: tSize) {
-//   switch (size) {
-//     case "small":
-//       return 36;
-//     case "medium":
-//       return 38;
-//     case "big":
-//       return 54;
-//     default:
-//       return 36;
-//   }
-// }
-
-function buttonMinWidthCalc(size: tSize) {
+function buttonHeightCalc(size: tSize) {
   switch (size) {
-    case "small":
-      return widthPercentageToDP(16);
-    case "medium":
-      return widthPercentageToDP(48);
-    case "big":
-      return widthPercentageToDP(90);
+    case "extra-small":
+      return 26;
+    case "FAB":
+      return 48;
     default:
-      return widthPercentageToDP(16);
+      return 36;
   }
 }
 
-function buttonColor(dark: boolean | undefined, mode: tMode, color: string | undefined) {
+function buttonMinWidthCalc(size: tSize) {
+  switch (size) {
+    case "extra-small":
+      return widthPercentageToDP(25);
+    case "small":
+      return widthPercentageToDP(35);
+    case "medium":
+      return widthPercentageToDP(43);
+    case "big":
+      return widthPercentageToDP(82);
+    case "wide":
+      return widthPercentageToDP(90);
+    case "FAB":
+      return widthPercentageToDP(48);
+    default:
+      return widthPercentageToDP(25);
+  }
+}
+
+function buttonColor(
+  dark: boolean | undefined,
+  mode: tMode,
+  color: string | undefined
+) {
   if (dark === undefined) {
     if (mode === "contained") {
       return "white";
@@ -56,18 +64,21 @@ function buttonColor(dark: boolean | undefined, mode: tMode, color: string | und
   }
 }
 
-
 function buttonStyle(args: IButtonStyles) {
-  const { mode,bold, size, dark, disabled, color, fullRadius } = args;
-  
+  const { mode, bold, size, dark, disabled, color, fullRadius } = args;
+
   const styles = StyleSheet.create({
     container: {
       minWidth: buttonMinWidthCalc(size),
-      maxWidth: size === "big" ? widthPercentageToDP("90") : widthPercentageToDP("52"),
-      height: 36,
+      maxWidth: widthPercentageToDP("90"),
+      height: buttonHeightCalc(size),
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
       backgroundColor:
-        mode === "contained" ? disabled ? THEME.COLORS.GREY.NORMAL : THEME.COLORS.PRIMARY.NORMAL : "transparent",
+        mode === "contained"
+          ? disabled
+            ? THEME.COLORS.GREY.NORMAL
+            : THEME.COLORS.PRIMARY.NORMAL
+          : "transparent",
       borderColor: disabled
         ? THEME.COLORS.GREY.NORMAL
         : color
@@ -83,7 +94,7 @@ function buttonStyle(args: IButtonStyles) {
     },
     text: {
       fontSize: 14,
-      fontFamily: bold ? "Vazir-Bold-UI": "Vazir-Regular-UI",
+      fontFamily: bold ? "Vazir-Bold-UI" : "Vazir-Regular-UI",
       color: buttonColor(dark, mode, color),
       marginHorizontal: 4,
     },
@@ -92,8 +103,8 @@ function buttonStyle(args: IButtonStyles) {
     },
   });
   const iconStyle = {
-    size: size === "big" ? 22 : 16 ,
-    color: buttonColor(dark, mode, color)
+    size: size === "FAB" ? 24 : 18,
+    color: buttonColor(dark, mode, color),
   };
   return { styles, iconStyle };
 }
