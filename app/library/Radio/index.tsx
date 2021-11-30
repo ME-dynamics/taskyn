@@ -9,7 +9,7 @@ import Animated, {
 import { styleGen } from "./styles";
 import { IRadioButtonProps } from "./types";
 
-function RadioButtonComponent(props: IRadioButtonProps) {
+function RadioComponent(props: IRadioButtonProps) {
   const { checked, size } = props;
   const animation = useSharedValue(checked ? 1 : 0);
   useEffect(() => {
@@ -36,4 +36,4 @@ function RadioButtonComponent(props: IRadioButtonProps) {
   );
 }
 
-export const RadioButton = observer(RadioButtonComponent);
+export const Radio = observer(RadioComponent);
