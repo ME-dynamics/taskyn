@@ -1,9 +1,10 @@
 import { ReactElement } from "react";
 
 export interface ISelectButtonProps {
+  id?: string;
   mode: "checkbox" | "radio";
-  Label: () => ReactElement;
+  children: () => ReactElement;
   selected: boolean;
   size: number;
-  onPress?: () => void;
+  onPress?: (id: string) => void;
 }
