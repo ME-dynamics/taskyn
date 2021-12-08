@@ -5,21 +5,28 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.COLORS.BACKGROUND,
+    backgroundColor: "white",
   },
   categoryContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: widthPercentageToDP(100),
-    height: 80,
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    height: 56,
+    alignItems: "flex-end",
+    justifyContent: "space-around",
   },
 
   resultTileContainer: {
+    top: 12,
     width: widthPercentageToDP(100),
     minHeight: 530,
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
+  },
+  line: {
+    width: widthPercentageToDP(90),
+    height: 1,
+    alignSelf: "center",
+    backgroundColor: THEME.COLORS.GREY.LIGHT,
   },
 });

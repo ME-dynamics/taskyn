@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     // padding: 30,
     width: widthPercentageToDP("100"),
     minHeight: 140,
-    padding: widthPercentageToDP("5"),
+    padding: widthPercentageToDP("6"),
     alignItems: "flex-end",
     justifyContent: "center",
   },

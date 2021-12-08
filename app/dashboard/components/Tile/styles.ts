@@ -1,23 +1,22 @@
 import { StyleSheet } from "react-native";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
-    width: 154,
-    height: 154,
+    width: widthPercentageToDP(40),
+    height: 120,
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: 12,
     shadowRadius: 2,
-    shadowColor: "black",
+    shadowColor: "red",
     elevation: 2,
-    overflow:"hidden",
+    overflow: "hidden",
     alignItems: "center",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
 });
 
-
-
 export const iconStyle = {
   color: THEME.COLORS.PRIMARY.NORMAL,
-  size: 70
-}
+  size: 64,
+};

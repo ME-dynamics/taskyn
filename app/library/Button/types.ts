@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export type tMode = "text" | "outlined" | "contained";
+export type tMode = "text" | "outlined" | "contained" | "contained-grey" | "contained-secondary";
 
 interface IIconProps {
   color: string;
@@ -20,7 +20,8 @@ export interface IButtonProps {
   rippleColor: "lightGrey" | "grey" | "darkGrey";
   disabled?: boolean;
   children: string;
-  color?: string;
+  textColor?: string;
+  backgroundColor?: string;
   fullRadius?: boolean;
 }
 
@@ -34,6 +35,7 @@ export interface IButtonStyles {
   size: tSize;
   dark?: boolean;
   disabled?: boolean;
-  color?: string;
+  textColor?: string;
+  backgroundColor?: string;
   fullRadius?: boolean;
 }

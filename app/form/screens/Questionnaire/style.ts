@@ -5,7 +5,11 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.COLORS.BACKGROUND,
+    backgroundColor: "white",
+  },
+  questionContainer: {
+    flex: 3,
+    justifyContent:"flex-end",
   },
   scrollview: {
     flex: 1,
@@ -20,8 +24,8 @@ export const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    alignItems:"center",
-    justifyContent:"center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   answerCartActive: {
     borderColor: THEME.COLORS.PRIMARY.NORMAL,
@@ -37,5 +41,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  contentContainer: {
+    alignItems: "center",
   },
 });

@@ -19,7 +19,6 @@ function ButtonComponent(props: IButtonProps) {
     onPress,
     rippleColor,
     disabled,
-    color,
     children,
     fullRadius,
   } = props;
@@ -29,7 +28,6 @@ function ButtonComponent(props: IButtonProps) {
     disabled,
     mode,
     size,
-    color,
     fullRadius,
   });
 

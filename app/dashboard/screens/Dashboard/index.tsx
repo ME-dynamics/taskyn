@@ -10,14 +10,14 @@ import {
 } from "../../../library";
 import { getRole } from "../../../authentication";
 import { Card, Tile } from "../../components";
-import { dashboardState } from "../../entities"
+import { dashboardState } from "../../entities";
 import { retrieveProvider } from "../../usecases";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 function DashboardScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const role = getRole();
+  const role = "cu";
   useEffect(() => {
     retrieveProvider();
   }, []);

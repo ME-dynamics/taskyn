@@ -33,7 +33,7 @@ function CardComponent(props: ICardProps) {
           {role !== "provider" ? (
             <Button
               mode={"contained"}
-              size={"medium"}
+              size={"extra-small"}
               rippleColor={"lightGrey"}
               onPress={onPress}
             >

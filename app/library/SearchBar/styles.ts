@@ -4,11 +4,11 @@ import { THEME } from "../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.BIG - widthPercentageToDP("6"),
-    height: 44,
+    width: THEME.WIDTH.BIG,
+    height: 36,
     flexDirection: "row-reverse",
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: 12,
     elevation: 2,
   },
   iconContainer: {

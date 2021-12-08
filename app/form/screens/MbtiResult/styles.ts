@@ -5,11 +5,11 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.COLORS.BACKGROUND,
+    backgroundColor: "white",
   },
   progressBarGroupContainer: {
     width: widthPercentageToDP(100),
-    height: 700,
+    minHeight: 700,
   },
   imageContainer: {
     width: widthPercentageToDP(100),
@@ -21,16 +21,17 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   line: {
-    width: widthPercentageToDP("80"),
+    width: widthPercentageToDP("90"),
     height: 1,
+    top: 16,
     backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
   },
   answerContainer: {
     width: widthPercentageToDP(100),
-    height: 50,
+    height: 62,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   descriptionContainer: {
     width: widthPercentageToDP(100),
@@ -41,5 +42,17 @@ export const styles = StyleSheet.create({
     width: widthPercentageToDP(100),
     height: 30,
     paddingHorizontal: widthPercentageToDP("5"),
+  },
+  titleBar: {
+    width: widthPercentageToDP(100),
+    height: 70,
+    paddingTop: 24,
+    paddingHorizontal: widthPercentageToDP("5"),
+  },
+  buttonContainer: {
+    width: widthPercentageToDP(100),
+    height: "10%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

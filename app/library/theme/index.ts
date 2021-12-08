@@ -6,6 +6,11 @@ const COLORS = {
     NORMAL: "#5256c9",
     DARK: "#082d97",
   },
+  SECONDARY: {
+    LIGHT: "#80b4ff",
+    NORMAL: "#4285f4",
+    DARK: "#0059c1",
+  },
   TRANSPARENT: {
     PRIMARY: "rgba(82, 86, 201, 0.2)",
     INPUT_SELECTION: "rgba(82, 86, 201, 0.7)",
@@ -17,9 +22,40 @@ const COLORS = {
     NORMAL: "#9e9e9e",
     DARK: "#707070",
   },
+  DISABLED: {
+    TEXT: "#CECCCC",
+    BACKGROUND: "#E5E5E5",
+  },
+  TEST: {
+    GREEN: {
+      NORMAL: "#00BF10",
+      DARK: "#008A0D",
+    },
+    GRAS: {
+      NORMAL: "#8DD100",
+      DARK: "#6E9E00",
+    },
+    YELLOW: {
+      NORMAL: "#FFCE00",
+      DARK: "#FF9800",
+    },
+    RED: {
+      NORMAL: "#FF3200",
+      DARK: "#D50000",
+    },
+    PURPLE: "#A55CB6",
+    ORANGE: "#FEA92C",
+    HIGHLIGHT: "#61FE4A",
+    PINK: "#FF6EC9",
+    BLUE: "#6A83DD",
+  },
   ERROR: "#b71c1c",
-  RED: "#ff1744",
-  BACKGROUND: "#E5E5E5",
+  RED: {
+    LIGHT: "#E7D9D8",
+    NORMAL: "#DB2D1E",
+  },
+  GREEN: "#34A853",
+  BACKGROUND: "#f5f5f5",
 };
 
 const FONTS = {

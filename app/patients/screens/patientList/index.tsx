@@ -1,18 +1,22 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { SearchBar, Touchable, Title, Tap } from "../../../library";
+import { SearchBar, Touchable, Title, Tap, Subheading } from "../../../library";
 import { Octicons, SimpleLineIcons } from "@expo/vector-icons";
 import { styles } from "./styles";
-import { PatientCard } from "../../components/PatientCard";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { UserList } from "../../components/UserList";
+import { RequestIcon } from "../../../library/Icon";
 
 export function PatientList() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
     <View style={styles.container}>
+      <View style={styles.titleContainer}>
+        <Title>{"لیست بیماران"}</Title>
+      </View>
       <View style={styles.searchBarContainer}>
         <SearchBar
           onChangeText={() => {}}
@@ -20,28 +24,36 @@ export function PatientList() {
           value={""}
           placeholder={""}
         />
-        <Tap onPress={() => navigation.push("AcceptPatientList")}>
-          <View style={styles.iconContainer}>
-            <SimpleLineIcons name="user-follow" size={32} color="black" />
-            <View style={styles.redCircleContainer}>
-              <View style={styles.redCircle}>
-                <Text style={styles.numberStyle}>1</Text>
-              </View>
+      </View>
+      <View style={styles.requestContainer}>
+        <View style={styles.iconContainer}>
+          <View style={styles.redCircleContainer}>
+            <View style={styles.redCircle}>
+              <Text style={styles.numberStyle}>1</Text>
             </View>
           </View>
-        </Tap>
+          <View style={styles.icon}>
+            <RequestIcon size={24} />
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <View style={styles.title}>
+            <Subheading>{"درخواست ها"}</Subheading>
+          </View>
+        </View>
+        <Touchable
+          onPress={() => {
+            navigation.push("AcceptPatientList");
+          }}
+          rippleColor={"grey"}
+        />
       </View>
-      <KeyboardAwareScrollView style={styles.container}>
+      <View style={styles.line} />
+
+      <KeyboardAwareScrollView style={styles.scrolViewContainer}>
         <View style={styles.patientCardContainer}>
-          <PatientCard
-            description={"ادرس خ ازادی خ ازادی ک ازادی"}
-            id=""
-            image={"https://bootdey.com/img/Content/avatar/avatar7.png"}
-            name="محمد سجاد سیف اله طرقی"
-            onPress={() => {
-              navigation.push("DashboardStack");
-            }}
-          />
+          <UserList name={"سجاد سیف اله"} mode={"request"} />
+          <UserList name={"سجاد سیف اله"} mode={"reject"} />
         </View>
       </KeyboardAwareScrollView>
     </View>

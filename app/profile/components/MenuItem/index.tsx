@@ -6,17 +6,19 @@ import { Paragraph, Touchable } from "../../../library";
 import { styles } from "./styles";
 import { IMenuItemProps } from "./types";
 export function MenuItem(props: IMenuItemProps) {
-  const { title, onPress, Icon } = props;
+  const { title, onPress, Icon, line, style } = props;
   return (
     <View style={styles.container}>
       <View style={[styles.collapsedContainer, styles.plainHeight]}>
-        <Icon size={24} color={"black"} />
+        <View style={[styles.iconContainer, style]}>
+          <Icon size={24} color={"black"} />
+        </View>
         <View style={styles.title}>
           <Paragraph>{title}</Paragraph>
         </View>
-        <MaterialCommunityIcons name="chevron-left" color={"grey"} size={30} />
+        {/* <MaterialCommunityIcons name="chevron-left" color={"grey"} size={30} /> */}
       </View>
-      <View style={styles.line}></View>
+      {line ? <View style={styles.line}></View> : undefined}
       <Touchable onPress={onPress} rippleColor={"lightGrey"} />
     </View>
   );
