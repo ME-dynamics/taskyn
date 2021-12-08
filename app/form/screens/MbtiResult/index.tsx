@@ -1,15 +1,34 @@
+import { useNavigation } from "@react-navigation/core";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Headline, Paragraph, Title } from "../../../library";
+import {
+  Button,
+  Headline,
+  Paragraph,
+  Subheading,
+  THEME,
+  Title,
+} from "../../../library";
 import { ProgressBar } from "../../components";
 import { IFromProps } from "../../types";
 import { styles } from "./styles";
 export function MbtiResult(props: IFromProps) {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   const { description, answer, type } = props;
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
+        <View style={styles.titleBar}>
+          <Headline>
+            {"نتیجه تست "}
+            <Title style={{ color: THEME.COLORS.PRIMARY.NORMAL }}>
+              {"MBTI :"}
+            </Title>
+          </Headline>
+        </View>
         <View style={styles.imageContainer}>
           <Image
             style={styles.avatar}
@@ -18,18 +37,19 @@ export function MbtiResult(props: IFromProps) {
           />
         </View>
         <View style={styles.answerContainer}>
-          <Headline>{"INTJ-T"}</Headline>
+          <Headline>{"INTJ"}</Headline>
           <View style={styles.line} />
         </View>
         <View style={styles.title}>
-          <Title>{`تیپ شخصیتی: معمار`}</Title>
+          <Subheading>{`تیپ شخصیتی: معمار`}</Subheading>
         </View>
         <View style={styles.descriptionContainer}>
-          <Paragraph>
+          <Paragraph style={{ lineHeight: 22, color: "#727272" }}>
             {
               "معماران به‌تنهایی در نوک قله قرار گرفته‌اند و یکی از کمیاب‌ترین و توانمندترین گونه‌های شخصیتی از حیث توانایی‌های استراتژیک هستند و به‌خوبی از این امر آگاهند. معماران تنها دو درصد جمعیت را تشکیل می‌دهند و زنان این گونه شخصیتی بسیار نادر هستند و فقط 0.8% جمعیت را تشکیل می‌دهند - به همین دلیل اغلب اوقات پیدا کردن افراد همفکر که قادر باشند با روشن‌اندیشی بی حد و حصر و مانورهای شطرنج‌وار آنها برابری کنند کار دشواری است. افراد دارای گونه شخصیتی معمار اهل تخیل و در عین حال قاطع، بلندپرواز و در عین حال گوشه‌گیر و به شکلی شگفت‌آور کنجکاو هستند، اما انرژی خود را بیهوده هدر نمی‌دهند."
             }
           </Paragraph>
+          <View style={styles.line} />
         </View>
         <View style={styles.progressBarGroupContainer}>
           <ProgressBar
@@ -66,7 +86,7 @@ export function MbtiResult(props: IFromProps) {
             rightName={"اکتشاف"}
             title={"تاکتیک"}
           />
-           <ProgressBar
+          <ProgressBar
             leftPercent={43}
             description={
               "این ویژگی زیربنای همه چیزهای دیگر است ومی گوید که چقدر به توانایی ها و تصمیمات خود اطمینان داریم. "
@@ -77,6 +97,18 @@ export function MbtiResult(props: IFromProps) {
           />
         </View>
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <Button
+          mode={"contained"}
+          size={"wide"}
+          rippleColor={"lightGrey"}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          {"بازگشت"}
+        </Button>
+      </View>
     </View>
   );
 }
