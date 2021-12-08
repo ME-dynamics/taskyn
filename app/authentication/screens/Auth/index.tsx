@@ -75,7 +75,7 @@ function AuthenticationScreen() {
                 onPress={passwordlessVerify}
                 mode={"contained"}
                 rippleColor={"lightGrey"}
-                size={"big"}
+                size={"wide"}
               >
                 {confirm.button}
               </Button>
@@ -84,7 +84,7 @@ function AuthenticationScreen() {
                 onPress={passwordlessStart}
                 mode={"contained"}
                 rippleColor={"lightGrey"}
-                size={"big"}
+                size={"wide"}
               >
                 {phone.button}
               </Button>
