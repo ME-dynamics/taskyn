@@ -6,7 +6,8 @@ import {
   Button,
   Title,
   Logo,
- Paragraph
+  Paragraph,
+  SelectButton,
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
@@ -60,11 +61,15 @@ function AuthenticationScreen() {
             )}
           </View>
           <View style={styles.termsContainer}>
-            <Paragraph style={styles.terms}>
-              {"حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."}
-            </Paragraph>
+            <SelectButton mode={"checkbox"} selected={false} size={24}>
+              <Paragraph style={styles.terms}>
+                {
+                  "حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."
+                }
+              </Paragraph>
+            </SelectButton>
           </View>
-          <View style={styles.itemsMargin}>
+          <View style={styles.buttonContainer}>
             {authState.otpMode ? (
               <Button
                 onPress={passwordlessVerify}
