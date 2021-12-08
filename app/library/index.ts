@@ -29,5 +29,5 @@ export {
   WebIcon,
 } from "./Icon";
 export { Checkbox } from "./CheckBox";
-export { RadioButton } from "./RadioButton";
+export { Radio } from "./Radio";
 export { SelectButton } from "./SelectButton";
