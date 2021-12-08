@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
+import { ReactChild } from "react";
 
 export interface ISelectButtonProps {
   id?: string;
   mode: "checkbox" | "radio";
-  children: () => ReactElement;
+  children: ReactChild;
   selected: boolean;
   size: number;
   onPress?: (id: string) => void;
