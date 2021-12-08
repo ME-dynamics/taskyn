@@ -1,5 +1,4 @@
-
-
 export interface IIconProps {
-    size: number;
+  size: number;
+  color?: string;
 }

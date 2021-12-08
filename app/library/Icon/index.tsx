@@ -2,6 +2,7 @@ import React from "react";
 import { Image } from "react-native";
 
 import { IIconProps } from "./types";
+const Profile = require("./profile.png");
 const Web = require("./web.png");
 const File = require("./file.png");
 const Files = require("./files.png");
@@ -14,7 +15,60 @@ const Note2 = require("./note2.png");
 const Online = require("./online-registration.png");
 const Task = require("./task.png");
 const Telegram = require("./telegram.png");
-
+const Timer = require("./timer.png");
+const Filter = require("./filter.png");
+const FormNumber = require("./formNumber.png");
+const Request = require("./request.png");
+export function RequestIcon(props: IIconProps) {
+  const { size } = props;
+  return (
+    <Image
+      source={Request}
+      style={{ width: size, height: size }}
+      resizeMode={"contain"}
+    />
+  );
+}
+export function ProfileIcon(props: IIconProps) {
+  const { size ,color} = props;
+  return (
+    <Image
+      source={Profile}
+      style={{ width: size, height: size ,tintColor:color}}
+      resizeMode={"contain"}
+    />
+  );
+}
+export function TimerIcon(props: IIconProps) {
+  const { size } = props;
+  return (
+    <Image
+      source={Timer}
+      style={{ width: size, height: size }}
+      resizeMode={"contain"}
+    />
+  );
+}
+export function FilterIcon(props: IIconProps) {
+  const { size } = props;
+  return (
+    <Image
+      source={Filter}
+      style={{ width: size, height: size }}
+      resizeMode={"contain"}
+    />
+  );
+}
+export function FormNumberIcon(props: IIconProps) {
+  const { size } = props;
+  return (
+    <Image
+      source={FormNumber}
+      style={{ width: size, height: size }}
+      resizeMode={"contain"}
+    />
+  );
+}
 export function WebIcon(props: IIconProps) {
   const { size } = props;
   return (
