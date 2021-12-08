@@ -4,9 +4,8 @@ import { View, Text } from "react-native";
 import { styles } from "./style";
 import { FormCard } from "../../components/formCard";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { SearchBar, Container } from "../../../library";
+import { SearchBar, Container, Title } from "../../../library";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export function FormList() {
@@ -15,7 +14,6 @@ export function FormList() {
   return (
     <Container>
       <View style={styles.searchBarContainer}>
-          
         <SearchBar
           onChangeText={() => {}}
           onClear={() => {}}
@@ -23,11 +21,28 @@ export function FormList() {
           placeholder=""
         />
       </View>
-
+      <View style={styles.formHistoryContainer}>
+        <FormCard
+          Icon={({ color, size }) => (
+            <FontAwesome5 name="medium-m" size={size} color={color} />
+          )}
+          id={"Neo"}
+          englishName={"Myers–Briggs Type Indicator"}
+          persianName={"تاریخچه تست"}
+          onPress={() => {
+            navigation.push("FormDetails");
+          }}
+        />
+        <View style={styles.line} />
+        <View style={styles.title}>
+          <Title>{"لیست تست ها"}</Title>
+        </View>
+      </View>
       <View style={styles.formCardContainer}>
         <KeyboardAwareScrollView
           style={styles.container}
           contentContainerStyle={styles.containerContentStyle}
+          scrollEnabled={true}
         >
           <FormCard
             Icon={({ color, size }) => (
@@ -35,8 +50,109 @@ export function FormList() {
             )}
             id={"Neo"}
             englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تاریخچه تست"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
             persianName={"تست MBTI"}
-            onPress={() => {navigation.push("FormDetails")}}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            id={"Neo"}
+            englishName={"Myers–Briggs Type Indicator"}
+            persianName={"تست MBTI"}
+            onPress={() => {
+              navigation.push("FormDetails");
+            }}
           />
         </KeyboardAwareScrollView>
       </View>
