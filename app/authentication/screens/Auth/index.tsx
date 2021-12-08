@@ -6,7 +6,8 @@ import {
   Button,
   Title,
   Logo,
- Paragraph
+  Paragraph,
+  SelectButton,
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
@@ -70,7 +71,7 @@ function AuthenticationScreen() {
                 onPress={passwordlessVerify}
                 mode={"contained"}
                 rippleColor={"lightGrey"}
-                size={"big"}
+                size={"wide"}
               >
                 {confirm.button}
               </Button>
@@ -79,7 +80,7 @@ function AuthenticationScreen() {
                 onPress={passwordlessStart}
                 mode={"contained"}
                 rippleColor={"lightGrey"}
-                size={"big"}
+                size={"wide"}
               >
                 {phone.button}
               </Button>
