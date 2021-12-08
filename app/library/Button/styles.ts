@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
@@ -19,7 +19,7 @@ export function activityStyleGen(mode: tMode) {
 function buttonHeightCalc(size: tSize) {
   switch (size) {
     case "extra-small":
-      return 26;
+      return 28;
     case "FAB":
       return 48;
     default:
@@ -30,42 +30,113 @@ function buttonHeightCalc(size: tSize) {
 function buttonMinWidthCalc(size: tSize) {
   switch (size) {
     case "extra-small":
-      return widthPercentageToDP(25);
+      return widthPercentageToDP(25); //91
     case "small":
-      return widthPercentageToDP(35);
+      return widthPercentageToDP(35); //128
     case "medium":
-      return widthPercentageToDP(43);
+      return widthPercentageToDP(43); //156
     case "big":
-      return widthPercentageToDP(82);
+      return widthPercentageToDP(82); //172
     case "wide":
-      return widthPercentageToDP(90);
+      return widthPercentageToDP(90); //296
     case "FAB":
-      return widthPercentageToDP(48);
+      return widthPercentageToDP(48); //328
     default:
       return widthPercentageToDP(25);
   }
 }
 
-function buttonColor(
+function buttonTextColor(
   dark: boolean | undefined,
   mode: tMode,
-  color: string | undefined
+  textColor: string | undefined,
+  disabled: boolean | undefined
 ) {
-  if (dark === undefined) {
-    if (mode === "contained") {
-      return "white";
-    } else {
-      return color ? color : THEME.COLORS.PRIMARY.NORMAL;
-    }
-  } else if (dark === false && mode === "contained") {
-    return color ? color : "rgba(0,0,0,0.87)";
-  } else {
-    return color ? color : THEME.COLORS.PRIMARY.NORMAL;
+  if (disabled) {
+    return THEME.COLORS.DISABLED.TEXT;
   }
+  if (textColor) {
+    return textColor;
+  }
+  if (mode === "contained" || mode === "contained-secondary") {
+    return "#FFF";
+  }
+  if (mode === "contained-grey") {
+    if (dark) {
+      return THEME.COLORS.PRIMARY.DARK;
+    }
+    return THEME.COLORS.PRIMARY.NORMAL;
+  }
+
+  return THEME.COLORS.PRIMARY.NORMAL;
 }
 
+function buttonBackgroundColor(
+  mode: tMode,
+  disabled: boolean | undefined,
+  backgroundColor: string | undefined
+) {
+  if (disabled) {
+    return THEME.COLORS.DISABLED.BACKGROUND;
+  }
+  if (mode === "contained") {
+    if (backgroundColor) {
+      return backgroundColor;
+    }
+    return THEME.COLORS.PRIMARY.NORMAL;
+  }
+  if (mode === "contained-grey") {
+    return THEME.COLORS.GREY.NORMAL;
+  }
+  if (mode === "contained-secondary") {
+    if (backgroundColor) {
+      return backgroundColor;
+    }
+    return THEME.COLORS.SECONDARY.NORMAL;
+  }
+  return "transparent";
+}
+function buttonBorderColor(mode: tMode) {
+  if (mode === "outlined") {
+    return THEME.COLORS.GREY.NORMAL;
+  }
+  return "transparent";
+}
+function buttonElevation(mode: tMode) {
+  if (
+    mode === "contained" ||
+    mode === "contained-grey" ||
+    mode === "contained-secondary"
+  ) {
+    if (Platform.OS === "android") {
+      return {
+        elevation: 2,
+      };
+    }
+    if (Platform.OS === "ios") {
+      return {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+      };
+    }
+  }
+}
 function buttonStyle(args: IButtonStyles) {
-  const { mode, bold, size, dark, disabled, color, fullRadius } = args;
+  const {
+    mode,
+    bold,
+    size,
+    dark,
+    disabled,
+    textColor,
+    backgroundColor,
+    fullRadius,
+  } = args;
 
   const styles = StyleSheet.create({
     container: {
@@ -73,29 +144,20 @@ function buttonStyle(args: IButtonStyles) {
       maxWidth: widthPercentageToDP("90"),
       height: buttonHeightCalc(size),
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
-      backgroundColor:
-        mode === "contained"
-          ? disabled
-            ? THEME.COLORS.GREY.NORMAL
-            : THEME.COLORS.PRIMARY.NORMAL
-          : "transparent",
-      borderColor: disabled
-        ? THEME.COLORS.GREY.NORMAL
-        : color
-        ? color
-        : THEME.COLORS.PRIMARY.NORMAL,
+      backgroundColor: buttonBackgroundColor(mode, disabled, backgroundColor),
+      borderColor: buttonBorderColor(mode),
       borderRadius: fullRadius ? 36 / 2 : 12,
       flexDirection: "row-reverse",
       alignItems: "center",
       justifyContent: "center",
       paddingHorizontal: 4,
       overflow: "hidden",
-      elevation: mode === "contained" ? 2 : 0,
+      ...buttonElevation(mode),
     },
     text: {
       fontSize: 14,
       fontFamily: bold ? "Vazir-Bold-UI" : "Vazir-Regular-UI",
-      color: buttonColor(dark, mode, color),
+      color: buttonTextColor(dark, mode, textColor, disabled),
       marginHorizontal: 4,
     },
     icon: {
@@ -104,7 +166,7 @@ function buttonStyle(args: IButtonStyles) {
   });
   const iconStyle = {
     size: size === "FAB" ? 24 : 18,
-    color: buttonColor(dark, mode, color),
+    color: buttonTextColor(dark, mode, textColor, disabled),
   };
   return { styles, iconStyle };
 }
