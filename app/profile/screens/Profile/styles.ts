@@ -8,56 +8,37 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.COLORS.BACKGROUND,
+    backgroundColor: "white",
   },
   header: {
     flex: 3,
-    backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+    backgroundColor: "#E5E5E5",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
-  cameraIconContainer:{
-    position:"absolute",
-    width:30,
-    height:30,
-    borderRadius:30/2,
-    backgroundColor:"white",
-    alignItems:"center",
-    justifyContent:"center",
-    zIndex:10,
-    left:236,
-    right:0,
-    bottom:0,
-    top:100,
-  },
+ 
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 130 / 2,
+    width: 96,
+    height: 96,
+    borderRadius: 96 / 2,
     borderWidth: 4,
     borderColor: THEME.COLORS.PRIMARY.DARK,
-     bottom: hp("1%"),
+    //  bottom: hp("1%"),
   },
   title: {
-    color: "white",
+    color: "black",
   },
   body: {
-    flex: 3,
     borderRadius: 20,
     alignSelf: "center",
     //elevation: 10,
     height: hp("60%"),
-    width: wp("90%"),
+    width: wp("100%"),
   },
 
-  bodyContent: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   bodyContainer: {
-    flex: 7,
+    flex: 5,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });

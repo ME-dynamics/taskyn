@@ -4,10 +4,21 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: 72,
-    paddingLeft: 14,
-    paddingRight: 10,
+    width: widthPercentageToDP(90),
+    height: 60,
+    paddingTop:10,
+    // paddingLeft: 14,
+    // paddingRight: 10,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 16,
+    backgroundColor: "#EEE5FF",
+    alignItems: "center",
+    justifyContent: "center",
   },
   collapsedContainer: {
     flexDirection: "row-reverse",
@@ -15,7 +26,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   plainHeight: {
-    height: 72,
+    // height: 72,
   },
   text: {
     color: "black",
@@ -26,9 +37,9 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.4,
   },
   line: {
-    width: widthPercentageToDP("80"),
+    width: widthPercentageToDP("90"),
     height: 1,
-    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
+    backgroundColor: "#F2F2F2",
   },
   title: {
     flex: 1,
