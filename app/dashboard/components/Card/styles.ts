@@ -1,15 +1,13 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 
-
-
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("90"),
-    height: 110,
+    width: widthPercentageToDP(66),
+    height: 72,
     flexDirection: "row-reverse",
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: 12,
     elevation: 4,
     overflow: "hidden",
   },
@@ -19,22 +17,22 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   patientImage: {
-    width: 76,
-    height: 86,
+    width: 40,
+    height: 40,
     borderRadius: 8,
   },
   infoContainer: {
     flex: 9,
-    paddingRight: 8
+    paddingRight: 8,
   },
   titleContainer: {
     flex: 3.7,
     justifyContent: "center",
   },
-  buttonContainer:{
+  buttonContainer: {
     flex: 3,
-    flexDirection:"row",
-    justifyContent:"flex-end",
+    flexDirection: "row",
+    justifyContent: "flex-end",
     alignItems: "flex-start",
   },
 });

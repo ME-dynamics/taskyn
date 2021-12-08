@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: widthPercentageToDP("100"),
-    height: 180,
+    height: 140,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
