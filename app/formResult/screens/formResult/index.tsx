@@ -1,74 +1,57 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Button, THEME, Touchable } from "../../../library";
+import {
+  Button,
+  IconButton,
+  THEME,
+  Touchable,
+  WebIcon,
+} from "../../../library";
+import { tMode } from "../../../library/Button/types";
+import { FilterIcon } from "../../../library/Icon";
 import { CategoryComponent } from "../../components/category";
+import { FormCard } from "../../components/formCard";
 import { ResultTile } from "../../components/resultTile";
 import { styles } from "./styles";
 
 export function FormResult() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-  const [mode, setMode] = useState("contained");
+  const [mode, setMode] = useState<tMode>("contained");
   return (
     <View style={styles.container}>
       <View style={styles.categoryContainer}>
         <Button
-          mode={mode}
+          Icon={() => <FilterIcon size={24} />}
+          mode={"text"}
           size={"small"}
+          color={THEME.COLORS.GREY.DARK}
           rippleColor={"lightGrey"}
-          fullRadius
-          onPress={() =>
-            setMode(mode === "outlined" ? "contained" : "outlined")
-          }
         >
-          {"MBTI"}
+          {"همه تست ها"}
         </Button>
-        <Button mode={mode} size={"small"} rippleColor={"lightGrey"} fullRadius>
-          {"NEO"}
-        </Button>
-        <Button mode={mode} size={"small"} rippleColor={"lightGrey"} fullRadius>
-          {"beck-D"}
-        </Button>
-        {/* <CategoryComponent
-          mode={mode}
-          rippleColor={"lightGrey"}
-          color={THEME.COLORS.PRIMARY.NORMAL}
-          onPress={() =>
-            setMode(mode === "outlined" ? "contained" : "outlined")
-          }
-        >
-          {"Neo"}
-        </CategoryComponent>
-        <CategoryComponent
-          mode={mode}
-          rippleColor={"lightGrey"}
-          color={THEME.COLORS.PRIMARY.NORMAL}
-          onPress={() =>
-            setMode(mode === "outlined" ? "contained" : "outlined")
-          }
-        >
-          {"Mbti"}
-        </CategoryComponent>
-        <CategoryComponent
-          mode={mode}
-          rippleColor={"lightGrey"}
-          color={THEME.COLORS.PRIMARY.NORMAL}
-          onPress={() =>
-            setMode(mode === "outlined" ? "contained" : "outlined")
-          }
-        >
-          {"Mbti"}
-        </CategoryComponent> */}
+        <View style={styles.line} />
       </View>
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.resultTileContainer}>
-          <ResultTile
-            color={"red"}
-            result={" INTJ-T "}
-            createdAt={"1376/6/6"}
-            title={"mbti"}
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            title={"MBTI"}
+            answer={"INTJ"}
+            date={"1376/06/06"}
+          />
+          <FormCard
+            Icon={({ color, size }) => (
+              <FontAwesome5 name="medium-m" size={size} color={color} />
+            )}
+            title={"MBTI"}
+            answer={"INTJ"}
+            date={"1376/06/06"}
           />
         </View>
         <Touchable

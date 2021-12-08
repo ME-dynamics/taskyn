@@ -7,26 +7,21 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  categoryContainer: {
-    flexDirection: "column",
+  card: {
     width: widthPercentageToDP(100),
-    height: 56,
-    alignItems: "flex-end",
-    justifyContent: "space-around",
+    height: 46,
+    flexDirection: "column",
   },
-
-  resultTileContainer: {
-    top: 12,
+  body: {
     width: widthPercentageToDP(100),
-    minHeight: 530,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexDirection: "column",
+    flexDirection: "row-reverse",
+    right: 8,
+    // backgroundColor:"red",
   },
   line: {
     width: widthPercentageToDP(90),
     height: 1,
-    alignSelf: "center",
     backgroundColor: THEME.COLORS.GREY.LIGHT,
+    alignSelf: "center",
   },
 });
