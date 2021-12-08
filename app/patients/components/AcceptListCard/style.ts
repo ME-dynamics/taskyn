@@ -1,20 +1,18 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("96"),
-    height: 120,
-    flexDirection: "row-reverse",
-    backgroundColor: "white",
-    borderRadius: 8,
-    elevation: 2,
-    marginTop:10,
-    overflow: "hidden",
+    flex: 1,
   },
-  imageContainer: {
-    flex: 3,
-    alignItems: "center",
-    justifyContent: "center",
+  contentContaienr: {
+    alignItems: "flex-end",
+  },
+  scrollView: {
+    width: widthPercentageToDP("90"),
+    minHeight: heightPercentageToDP("30"),
   },
   patientImage: {
     width: 76,
@@ -23,7 +21,6 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 9,
-   
   },
   titleContainer: {
     flex: 3,
@@ -33,9 +30,9 @@ export const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-start",
   },
-  buttonContainer:{
-    flexDirection:"row",
-    justifyContent:"flex-end",
-    bottom:15,
-  }
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    bottom: 15,
+  },
 });
