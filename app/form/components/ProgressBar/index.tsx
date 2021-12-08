@@ -22,24 +22,29 @@ export function ProgressBar(props: IProgressProps) {
         <Title>{title}</Title>
       </View>
       <View style={styles.progressDescription}>
-        <Paragraph style={{ textAlign: "center" }}>{description}</Paragraph>
+        <Paragraph style={{ color: "#727272" }}>{description}</Paragraph>
       </View>
       <View style={styles.progressBar}>
         <View style={[styles.progressLeft, leftStyle]}>
-          <Caption style={{ color: "white" }}>{`${leftPercent}%`}</Caption>
+          <View style={styles.titleWithPercent}>
+            <Paragraph style={{ color: "white" }}>{leftName}</Paragraph>
+            <Paragraph
+              style={{ color: "white", left: 6 }}
+            >{`${leftPercent}%`}</Paragraph>
+          </View>
         </View>
         <View style={[styles.progressRight, rightStyle]}>
-          <Caption style={{ color: "black" }}>{`${rightPercent}%`}</Caption>
+          <View style={styles.titleWithPercent}>
+            <Paragraph style={{ color: THEME.COLORS.PRIMARY.NORMAL, right: 6 }}>
+              {rightName}
+            </Paragraph>
+            <Paragraph
+              style={{ color: THEME.COLORS.PRIMARY.NORMAL }}
+            >{`${rightPercent}%`}</Paragraph>
+          </View>
         </View>
       </View>
-      <View style={styles.typeTitle}>
-        <Paragraph style={{ color: THEME.COLORS.PRIMARY.NORMAL }}>
-          {leftName}
-        </Paragraph>
-        <Paragraph style={{ color: THEME.COLORS.GREY.DARK }}>
-          {rightName}
-        </Paragraph>
-      </View>
+      <View style={styles.typeTitle}></View>
       <View style={styles.fullLine} />
     </View>
   );

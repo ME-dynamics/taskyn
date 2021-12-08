@@ -4,27 +4,27 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems:"center",
+    paddingTop: 24,
+    alignItems: "center",
   },
   progressBar: {
     marginTop: 10,
     width: widthPercentageToDP(90),
-    height: 16,
-    borderRadius: 4,
-    backgroundColor: THEME.COLORS.GREY.LIGHT,
+    height: 28,
+    borderRadius: 10,
+    backgroundColor: THEME.COLORS.GREY.NORMAL,
     flexDirection: "row",
     overflow: "hidden",
   },
   progressLeft: {
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   progressRight: {
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor:"blue"
   },
   typeTitle: {
     width: widthPercentageToDP(90),
@@ -34,22 +34,27 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   progressTitle: {
-    width: widthPercentageToDP(100),
+    width: widthPercentageToDP(90),
     height: 30,
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
   },
   progressDescription: {
-    width: widthPercentageToDP(100),
+    width: widthPercentageToDP(90),
     height: 50,
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
-    paddingHorizontal: widthPercentageToDP("12"),
+    // paddingHorizontal: widthPercentageToDP("12"),
   },
   fullLine: {
     marginTop: 10,
     width: widthPercentageToDP("90"),
     height: 1,
     backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
+  },
+  titleWithPercent: {
+    flexDirection: "row",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });
