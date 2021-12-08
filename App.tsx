@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { PatientList } from "./app/patients/screens/patientList";
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import { useFonts } from "expo-font"
 import {
   Authentication,
   getLoggedIn,
@@ -19,7 +21,6 @@ import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
 import { Note } from "./app/note";
-import { ContactUS } from "./app/contactUs/screens/ContactUs";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
@@ -27,12 +28,23 @@ import { FormDetails, MbtiResult, Questionnaire } from "./app/form/screens";
 import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
 import { DoctorList } from "./app/doctorList/screens/DoctorList";
 import { AcceptPatientList } from "./app/patients/screens/acceptPtaientList";
+import { Support } from "./app/support/screens/SupportScreen";
+import { EditProfile } from "./app/editProfile/screens";
+import { AboutUs } from "./app/aboutUs/screens";
+import { FrequentlyQuestions } from "./app/frequentlyQuestions/screens";
+import { Filter } from "./app/formResult/screens/filterScreen";
 const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const PatientStack = createNativeStackNavigator();
 const FormListStack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const Icon = createIconSetFromIcoMoon(
+  require('./assets/selection.json'),
+  'IcoMoon',
+  'icomoon.ttf'
+);
+
 export function PatientsTab() {
   return (
     <PatientStack.Navigator
@@ -110,8 +122,6 @@ export function PatientsTab() {
       <DashboardStack.Screen name="DoctorList" component={DoctorList} />
       <DashboardStack.Screen name="FormsHistory" component={FormResult} />
       <DashboardStack.Screen name="MbtiResult" component={MbtiResult} />
-
-      
     </PatientStack.Navigator>
   );
 }
@@ -206,19 +216,27 @@ export function ProfileTab() {
         component={Profile}
         options={{ headerShown: false }}
       />
-      <ProfileStack.Screen name="Support" component={ContactUS} />
-      {/* <Stack.Screen name="AboutUs" component={} />
-      <Stack.Screen name="Questions" component={} />
-      <Stack.Screen name="Terms" component={} />
-      <Stack.Screen name="Exit" component={} /> */}
+
+      <ProfileStack.Screen name="Support" component={Support} />
+      <ProfileStack.Screen name="EditProfile" component={EditProfile} />
+      <ProfileStack.Screen name="AboutUs" component={AboutUs} />
+      <ProfileStack.Screen
+        name="FrequentlyQuestions"
+        component={FrequentlyQuestions}
+      />
+      {/* <ProfileStack.Screen ="Terms" component={} />
+      <ProfileStack.Screen ="Exit" component={} /> */}
     </ProfileStack.Navigator>
   );
 }
 
 function MyTabs() {
   const role = "provider";
-
-  return (
+  const [fontsLoaded] = useFonts({ IcoMoon: require('./assets/fonts/icomoon.ttf') }); 
+  if(!fontsLoaded) {
+    return null
+  }
+   return (
     <Tab.Navigator
       initialRouteName="InitialRoot"
       screenOptions={{
@@ -232,8 +250,8 @@ function MyTabs() {
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+          tabBarIcon: ({color, size}) => (
+            <Icon name="Profile" size={size} color={color}/>
           ),
         }}
       />
@@ -250,7 +268,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="InitialRoot"
-        component={role === "provider" ? PatientsTab : DashboardTab}
+        component={role === "provider" ? DashboardTab : DashboardTab}
         options={{
           tabBarLabel: role === "provider" ? "بیماران" : "داشبورد",
           tabBarIcon: ({ color, size }) => (
@@ -263,7 +281,7 @@ function MyTabs() {
 }
 const Tabs = observer(MyTabs);
 function AppComponent() {
-  const isSignedIn = true;
+  const isSignedIn = false;
   const [isAppReady, setAppReady] = useState<boolean>(false);
   useEffect(() => {
     async function prepare() {
