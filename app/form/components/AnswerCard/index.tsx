@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { Paragraph, Tap } from "../../../library";
+import { Paragraph, SelectButton, Tap } from "../../../library";
 import { styles } from "./style";
 export function AnswerCard() {
+  const [check, setCheck] = useState(false);
+
   return (
-    <Tap
-      onPress={() => {
-        console.log("fuck");
-      }}
-    >
-      <View style={styles.answerContainer}>
-        <View style={styles.answerCard}>
-          <View style={styles.textContainer}>
-            <Paragraph>{"علاقه ای به همکاری با مردم ندارم"}</Paragraph>
-          </View>
-        </View>
+    <View style={styles.answerContainer}>
+      <View>
+        <SelectButton
+          size={20}
+          mode={"radio"}
+          selected={check}
+          onPress={() => {
+            setCheck(!check);
+          }}
+        >
+          <Paragraph style={{ color: "#727272" }}>
+            {"فقط با افراد خاص میتونانم حرف بزنم"}
+          </Paragraph>
+        </SelectButton>
       </View>
-    </Tap>
+    </View>
   );
 }
