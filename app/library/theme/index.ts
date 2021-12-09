@@ -68,7 +68,11 @@ const FONTS = {
 };
 
 const WIDTH = {
-  BIG: widthPercentageToDP(90),
+  WIDE: widthPercentageToDP(90),
+  BIG: widthPercentageToDP(82),
+  MEDIUM: widthPercentageToDP(43),
+  SMALL: widthPercentageToDP(35),
+  EXTRA_SMALL: widthPercentageToDP(25),
 };
 
 export const THEME = {
