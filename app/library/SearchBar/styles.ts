@@ -4,7 +4,7 @@ import { THEME } from "../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.BIG,
+    width: THEME.WIDTH.WIDE,
     height: 36,
     flexDirection: "row-reverse",
     backgroundColor: "white",
@@ -12,21 +12,21 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   iconContainer: {
-    flex: 1,
-    alignItems: "flex-start",
+    flex: 2,
+    alignItems: "center",
     justifyContent: "center",
   },
   inputContainer: {
-    flex: 8,
+    flex: 11,
   },
   input: {
     flex: 1,
-    fontFamily: "Vazir-Regular-UI",
+    fontFamily: THEME.FONTS.REGULAR,
   },
 });
 
 export const iconStyle = {
-  size: 28,
-  color: THEME.COLORS.GREY.DARK,
+  size: 26,
+  color: THEME.COLORS.GREY.NORMAL,
   selectionColor: THEME.COLORS.PRIMARY.DARK,
 };

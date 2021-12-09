@@ -2,7 +2,7 @@ import React from "react";
 import { View, TextInput } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 import { material } from "react-native-typography";
 import { styles, iconStyle } from "./styles";
@@ -10,13 +10,13 @@ import { styles, iconStyle } from "./styles";
 import { ISearchBarProps } from "./types";
 
 function SearchBarComponent(props: ISearchBarProps) {
-  const { onChangeText, onClear, value, placeholder } = props;
-  const { size, color,selectionColor } = iconStyle;
+  const { onChangeText, value, placeholder } = props;
+  const { size, color, selectionColor } = iconStyle;
+  function onClearPress() {
+    onChangeText("");
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <MaterialIcons name={"search"} size={size} color={color} />
-      </View>
       <View style={styles.inputContainer}>
         <TextInput
           style={[material.body1, styles.input]}
@@ -28,14 +28,16 @@ function SearchBarComponent(props: ISearchBarProps) {
         />
       </View>
       <View style={styles.iconContainer}>
-        {value !== "" ? (
-          <BorderlessButton onPress={onClear}>
+        {value ? (
+          <BorderlessButton onPress={onClearPress}>
             <MaterialIcons name={"clear"} size={size} color={color} />
           </BorderlessButton>
-        ) : null}
+        ) : (
+          <Feather name={"search"} size={size} color={color} />
+        )}
       </View>
     </View>
   );
-};
+}
 
 export const SearchBar = observer(SearchBarComponent);
