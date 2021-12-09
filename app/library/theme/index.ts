@@ -59,12 +59,11 @@ const COLORS = {
 };
 
 const FONTS = {
-  LIGHT: "Vazir-Light-UI",
-  THIN: "Vazir-Thin-UI",
-  REGULAR: "Vazir-Regular-UI",
-  MEDIUM: "Vazir-Medium-UI",
-  BOLD: "Vazir-Bold-UI",
-  BLACK: "Vazir-Black-UI",
+  LIGHT: "IRANSansMobile-Light",
+  THIN: "IRANSansMobile-UltraLight",
+  REGULAR: "IRANSansMobile",
+  MEDIUM: "IRANSansMobile-Medium",
+  BOLD: "IRANSansMobile-Bold",
 };
 
 const WIDTH = {
