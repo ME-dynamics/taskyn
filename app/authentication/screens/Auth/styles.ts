@@ -35,13 +35,19 @@ export const styles = StyleSheet.create({
     marginVertical: 8,
   },
   termsContainer: {
-    alignItems: "center",
+    width: widthPercentageToDP(90),
+    alignItems: "flex-start",
+    left: 6,
     paddingTop: 10,
   },
   terms: {
-    width: widthPercentageToDP("90"),
+    width: widthPercentageToDP("80"),
     color: THEME.COLORS.GREY.DARK,
     textDecorationLine: "underline",
+  },
+  buttonContainer: {
+    width: widthPercentageToDP(90),
+    marginVertical: 8,
   },
 });
 
