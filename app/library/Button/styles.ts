@@ -156,7 +156,7 @@ function buttonStyle(args: IButtonStyles) {
     },
     text: {
       fontSize: 14,
-      fontFamily: bold ? "Vazir-Bold-UI" : "Vazir-Regular-UI",
+      fontFamily: bold ? THEME.FONTS.BOLD : THEME.FONTS.REGULAR,
       color: buttonTextColor(dark, mode, textColor, disabled),
       marginHorizontal: 4,
     },
