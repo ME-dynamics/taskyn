@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { observer } from "mobx-react-lite";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Tap } from "../Tap";
-import { Caption } from "../Typography";
+import { Caption, Subheading } from "../Typography";
 import { IconButton } from "../IconButton";
 import { styleGen } from "./styles";
 import { IInputProps, tOnContentSize, tNativeEvent } from "./types";
@@ -62,17 +62,22 @@ function InputComponent(props: IInputProps) {
     style,
   });
 
-  // if value is defined and not empty
-  // animation should be at active stage
-  const animation: Animated.SharedValue<number> = useSharedValue(value ? 1 : 0);
-
+  let animation: Animated.SharedValue<number> | undefined = undefined;
+  // define animated shared value when needed
+  if (mode !== "with-label") {
+    // if value is defined and not empty
+    // animation should be at active stage
+    animation = useSharedValue(value ? 1 : 0);
+  }
   function onPress() {
     if (inputRef) {
       setFocused(true);
       inputRef.current?.focus();
     }
     // start animation on focus
-    animation.value = 1;
+    if (animation) {
+      animation.value = 1;
+    }
   }
   function onBlurPress(event: tNativeEvent) {
     setFocused(false);
@@ -80,7 +85,7 @@ function InputComponent(props: IInputProps) {
      * if text input is empty
      * onBlur animation should reset to default value
      */
-    if (!value) {
+    if (!value && animation) {
       animation.value = 0;
     }
     if (onBlur) {
@@ -110,6 +115,15 @@ function InputComponent(props: IInputProps) {
     }
   }
   function renderTitle() {
+    if (mode === "with-label") {
+      return (
+        <View style={styles.titleContainer}>
+          <Subheading style={focused ? styles.focusedTitle : undefined}>
+            {title}
+          </Subheading>
+        </View>
+      );
+    }
     const isFlat = mode === "flat";
     // translateX for flat and outline-material mode
     // I found the numbers with simple calculation and testing
