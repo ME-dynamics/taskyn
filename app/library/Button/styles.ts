@@ -36,11 +36,11 @@ function buttonMinWidthCalc(size: tSize) {
     case "medium":
       return widthPercentageToDP(43); //156
     case "big":
-      return widthPercentageToDP(82); //172
+      return widthPercentageToDP(82); //296
     case "wide":
-      return widthPercentageToDP(90); //296
+      return widthPercentageToDP(90); //328
     case "FAB":
-      return widthPercentageToDP(48); //328
+      return widthPercentageToDP(48); //172
     default:
       return widthPercentageToDP(25);
   }
