@@ -1,10 +1,16 @@
 import { StyleSheet } from "react-native";
-import { material, systemWeights } from "react-native-typography";
+import { material } from "react-native-typography";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
 import { IInputStyleGen, tInputMode } from "./types";
 
 function containerHeightGen(mode: tInputMode) {
+  if (mode === "with-label") {
+    // 28 for title
+    // 56 for input
+    // 34 for errors
+    return 28 + 56 + 34;
+  }
   if (mode === "outlined") {
     // 56 for input
     // 34 for errors
@@ -66,7 +72,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     titleContainer: {
       width: "100%",
-      height: 34,
+      height: 28,
       flexDirection: "row-reverse",
       alignItems: "flex-start",
       justifyContent: "space-between",

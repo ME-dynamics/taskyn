@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from "react-native";
 
-export type tInputMode = "outlined" | "flat";
+export type tInputMode = "outlined" | "flat" | "with-label";
 export interface IInputProps extends TextInputProps {
   title: string;
   mode: tInputMode;
