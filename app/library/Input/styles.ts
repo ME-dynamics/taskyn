@@ -57,6 +57,7 @@ function styleGenerator(args: IInputStyleGen) {
     multiline,
     numberOfLines,
     hasError,
+    clearButton,
     limit,
     value,
     style,
@@ -67,7 +68,7 @@ function styleGenerator(args: IInputStyleGen) {
   const flatBackgroundColor = isFlat ? "rgba(0,0,0,0.12)" : undefined;
   const styles = StyleSheet.create({
     container: {
-      width: THEME.WIDTH.BIG,
+      width: THEME.WIDTH.WIDE,
       height,
     },
     titleContainer: {
@@ -80,13 +81,17 @@ function styleGenerator(args: IInputStyleGen) {
     focusedTitle: {
       color: THEME.COLORS.PRIMARY.NORMAL,
     },
-    input: {
-      width: THEME.WIDTH.BIG,
+    inputContainer: {
+      flexDirection: "row",
+      width: THEME.WIDTH.WIDE,
       height: inputHeight,
       backgroundColor: flatBackgroundColor,
       paddingRight: 16,
       paddingBottom: isFlat ? 0 : undefined,
       ...inputBorderGen(mode),
+    },
+    input: {
+      flex: 9,
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
@@ -105,10 +110,10 @@ function styleGenerator(args: IInputStyleGen) {
       color: THEME.COLORS.ERROR,
     },
     clearButtonContainer: {
+      flex: 1,
       zIndex: 1,
-      position: "absolute",
-      left: 12,
-      top: inputHeight / 2 - 12,
+      alignItems: "flex-end",
+      justifyContent: "center",
     },
     errorContainer: {
       width: "100%",
@@ -148,17 +153,21 @@ function styleGenerator(args: IInputStyleGen) {
 
   // theses styles are based on states
   // they change on state changes and should be passed like this
+  const inputContainerStyles = [
+    styles.inputContainer,
+    focused ? styles.activeBorderColor : styles.disabledBorderColor,
+    value ? styles.activeBorderColor : undefined,
+    hasError ? styles.inputError : undefined,
+  ];
   const inputStyles = [
     material.subheading,
     styles.input,
-    focused ? styles.activeBorderColor : styles.disabledBorderColor,
-    value ? styles.activeBorderColor : undefined,
+
     multiline && numberOfLines
       ? { height: inputHeight + numberOfLines * 14 }
       : undefined,
     multiline && !numberOfLines ? { height: inputHeightState } : undefined,
     styles.inputFont,
-    hasError ? styles.inputError : undefined,
     style,
   ];
   const limitStyle = [
@@ -174,6 +183,7 @@ function styleGenerator(args: IInputStyleGen) {
   const selectionColor = THEME.COLORS.TRANSPARENT.INPUT_SELECTION;
   return {
     styles,
+    inputContainerStyles,
     inputStyles,
     limitStyle,
     animatedTextStyle,

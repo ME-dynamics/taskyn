@@ -43,6 +43,7 @@ function InputComponent(props: IInputProps) {
 
   const {
     styles,
+    inputContainerStyles,
     inputStyles,
     limitStyle,
     animatedTextStyle,
@@ -57,6 +58,7 @@ function InputComponent(props: IInputProps) {
     multiline,
     numberOfLines,
     hasError: !!errors?.length,
+    clearButton,
     limit,
     value,
     style,
@@ -206,11 +208,17 @@ function InputComponent(props: IInputProps) {
       <Tap onPress={onPress} waitFor={clearRef}>
         <View
           pointerEvents={focused ? "box-none" : value ? "box-none" : "box-only"}
+          style={inputContainerStyles}
         >
+          {renderClearButton()}
           <TextInput
             {...props}
             placeholder={
-              mode !== "outlined" && focused ? placeholder : undefined
+              mode === "with-label"
+                ? placeholder
+                : focused
+                ? placeholder
+                : undefined
             }
             ref={inputRef}
             style={inputStyles}
@@ -223,7 +231,7 @@ function InputComponent(props: IInputProps) {
           />
         </View>
       </Tap>
-      {renderClearButton()}
+
       <View style={styles.errorContainer}>{renderErrors()}</View>
     </View>
   );
