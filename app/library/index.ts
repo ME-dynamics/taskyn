@@ -31,3 +31,4 @@ export {
 export { Checkbox } from "./CheckBox";
 export { Radio } from "./Radio";
 export { SelectButton } from "./SelectButton";
+export { TaskynIcon } from "./TaskynIcon";
