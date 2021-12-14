@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { THEME, Input, Paragraph } from "./app/library";
+import { useFonts } from "expo-font";
+import { THEME, Input, Paragraph, TaskynIcon } from "./app/library";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { PatientList } from "./app/patients/screens/patientList";
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import { useFonts } from "expo-font"
+import { createIconSetFromIcoMoon } from "@expo/vector-icons";
 import {
   Authentication,
   getLoggedIn,
@@ -17,7 +18,6 @@ import { Profile } from "./app/profile/screens/Profile";
 import { Dashboard } from "./app/dashboard/screens";
 import { FormList } from "./app/formList/screens/formList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
 import { Note } from "./app/note";
@@ -33,17 +33,13 @@ import { EditProfile } from "./app/editProfile/screens";
 import { AboutUs } from "./app/aboutUs/screens";
 import { FrequentlyQuestions } from "./app/frequentlyQuestions/screens";
 import { Filter } from "./app/formResult/screens/filterScreen";
+import { View } from "react-native";
 const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const PatientStack = createNativeStackNavigator();
 const FormListStack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const Icon = createIconSetFromIcoMoon(
-  require('./assets/selection.json'),
-  'IcoMoon',
-  'icomoon.ttf'
-);
 
 export function PatientsTab() {
   return (
@@ -232,11 +228,13 @@ export function ProfileTab() {
 
 function MyTabs() {
   const role = "provider";
-  const [fontsLoaded] = useFonts({ IcoMoon: require('./assets/fonts/icomoon.ttf') }); 
-  if(!fontsLoaded) {
-    return null
-  }
-   return (
+  // const [fontsLoaded] = useFonts({
+  //   IcoMoon: require("./assets/fonts/icomoon.ttf"),
+  // });
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
+  return (
     <Tab.Navigator
       initialRouteName="InitialRoot"
       screenOptions={{
@@ -250,8 +248,8 @@ function MyTabs() {
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <Icon name="Profile" size={size} color={color}/>
+          tabBarIcon: ({ color, size }) => (
+            <TaskynIcon name={"profile"} size={size} color={color} />
           ),
         }}
       />
@@ -279,15 +277,19 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
+
 const Tabs = observer(MyTabs);
 function AppComponent() {
-  const isSignedIn = false;
+  const isSignedIn = true;
   const [isAppReady, setAppReady] = useState<boolean>(false);
+  const [fontsLoaded] = useFonts({
+    TaskynIcon: require("./assets/fonts/icomoon.ttf"),
+  });
   useEffect(() => {
     async function prepare() {
       try {
-        await SplashScreen.preventAutoHideAsync();
-        await initToken();
+        await Promise.all([SplashScreen.preventAutoHideAsync(), initToken()]);
       } catch (error) {
         console.warn(error);
       } finally {
@@ -297,13 +299,14 @@ function AppComponent() {
     prepare();
   }, []);
   const onLayoutRootView = useCallback(async () => {
-    if (isAppReady) {
+    if (isAppReady && fontsLoaded) {
       await SplashScreen.hideAsync();
     }
-  }, [isAppReady]);
-  if (!isAppReady) {
+  }, [isAppReady, fontsLoaded]);
+  if (!isAppReady || !fontsLoaded) {
     return null;
   }
+
   return (
     <NavigationContainer onReady={onLayoutRootView}>
       {isSignedIn ? (
