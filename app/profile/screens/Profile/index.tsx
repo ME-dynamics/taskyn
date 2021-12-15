@@ -1,14 +1,6 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import { View, Image, Alert } from "react-native";
-import {
-  Button,
-  openCamera,
-  openCropper,
-  openGallery,
-  Subheading,
-  Tap,
-  Title,
-} from "../../../library";
+import { Button, Subheading, Tap, Title } from "../../../library";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
@@ -16,17 +8,49 @@ import {
   AntDesign,
   Ionicons,
   Feather,
-  Entypo,
 } from "@expo/vector-icons";
 import { MenuItem } from "../../components/MenuItem";
 import { styles } from "./styles";
 import { IIconProps } from "./types";
 import { Headline } from "../../../library";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetBackdropProps,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+const CustomBackdrop = ({ animatedIndex, style }: BottomSheetBackdropProps) => {
+  // animated variables
+  const containerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      animatedIndex.value,
+      [0, 1],
+      [0, 1],
+      Extrapolate.CLAMP
+    ),
+  }));
+
+  // styles
+  const containerStyle = useMemo(
+    () => [
+      style,
+      {
+        backgroundColor: "rgba(0, 0, 0, 0.36)",
+      },
+      containerAnimatedStyle,
+    ],
+    [style, containerAnimatedStyle]
+  );
+
+  return <Animated.View style={containerStyle} />;
+};
 export const Profile = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ["30%", "50%"], []);
+  const snapPoints = useMemo(() => ["30%", "30%"], []);
 
   const handleSnapPress = useCallback(() => {
     bottomSheetRef.current?.close();
@@ -120,6 +144,7 @@ export const Profile = () => {
         index={-1}
         snapPoints={snapPoints}
         // onChange={handleSheetChanges}
+        backdropComponent={CustomBackdrop}
         enablePanDownToClose={true}
       >
         <BottomSheetView
@@ -139,6 +164,7 @@ export const Profile = () => {
           </View>
           <View
             style={{
+              width: "100%",
               flexDirection: "row-reverse",
               alignItems: "center",
               justifyContent: "space-evenly",
@@ -146,10 +172,9 @@ export const Profile = () => {
             }}
           >
             <Button
-              mode={"outlined"}
+              mode={"contained-grey"}
               size={"medium"}
               rippleColor={"lightGrey"}
-              color={"grey"}
               onPress={() => {
                 handleSnapPress();
               }}
