@@ -9,7 +9,7 @@ function ContainerComponent(props: IContainerProps) {
   const { children, style } = props;
 
   return (
-    <SafeAreaView style={[styles.container, style]}  {...props}>
+    <SafeAreaView {...props} style={[styles.container, style]}>
       {children}
       <NetInfo />
     </SafeAreaView>
