@@ -28,7 +28,6 @@ export function FormResult() {
           Icon={() => <FilterIcon size={24} />}
           mode={"text"}
           size={"small"}
-          color={THEME.COLORS.GREY.DARK}
           rippleColor={"lightGrey"}
         >
           {"همه تست ها"}

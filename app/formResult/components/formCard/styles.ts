@@ -3,7 +3,7 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.BIG,
+    width: widthPercentageToDP(90),
     height: 56,
     flexDirection: "row-reverse",
     backgroundColor: "white",
