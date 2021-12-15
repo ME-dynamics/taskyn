@@ -44,3 +44,7 @@ export interface ITaskynIconProps {
   size: number;
   color: string;
 }
+
+export interface ISvgIconProps {
+  size?: number;
+}
