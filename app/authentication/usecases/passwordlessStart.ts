@@ -14,7 +14,7 @@ export async function passwordlessStart() {
         inputState.phoneNumber
       );
       if (error) {
-        inputState.setPhoneValidation([`${error} ارور سرور`]);
+        inputState.setPhoneValidation([error]);
         return;
       }
       if (otpToken) {
