@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { ISvgIconProps } from "./types";
 function SvgGoogle(props: ISvgIconProps) {
   const { size } = props;
-  const scale = size ? size / 64 : 1;
+  const scale = size ? size / 24 : 1;
   return (
     <Svg
       width={24}
