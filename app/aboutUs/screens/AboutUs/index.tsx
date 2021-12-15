@@ -1,52 +1,65 @@
 import React from "react";
 import { View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
-  Button,
+  TaskynIcon,
   IconButton,
-  InstagramIcon,
-  LinkedinIcon,
   Logo,
   Paragraph,
-  TelegramIcon,
-  WebIcon,
+  Scroller,
 } from "../../../library";
-import { styles } from "./styles";
+import { aboutUsText } from "../../constant";
+import { styles, buttonIconSize, iconColors } from "./styles";
 import Communications from "react-native-communications";
 
 export function AboutUs() {
+  const { web, telegram, linkedin, instagram } = iconColors;
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Logo size={120} color={"primary"} />
       </View>
       <View style={styles.bodyContainer}>
-        <Paragraph
-          style={styles.body}
-        >{`همه ی تلاش ما در تسکین آوردن تجربه ای راحتر از جلسات تراپی برای شما عزیزان است.
-تسکین یه تجربه جذاب، متفاوت و امن برای شما است. ذهن انسان نمیتواند همه چیز را به خاطر بسپارد یا ممکن است اطلاعاتی که روی کاغذ نوشته اید را گم کنید اما در تسکین ما این اطمینان را حاصل کرده ایم که چنین مشکلاتی چه برای مراجعه کننده و روانشناس پیش نیایید. همه چیز درتسکین ذخیره میشود و دیگر نگران گم کردن اطلاعات خود و ویرایش فایل های خود نباشید. 
-اگر میخواهید از اخبار جدید جا نمونید ما را در فضای مجازی دنبال کنید.`}</Paragraph>
+        <Scroller>
+          <Paragraph style={styles.body}>{aboutUsText}</Paragraph>
+        </Scroller>
       </View>
-
-      <View style={styles.buttoncontainer}>
+      <View style={styles.buttonContainer}>
         <IconButton
-          Icon={InstagramIcon}
-          onPress={() => Communications.web("https://google.com")}
-          size={24}
-        />
-        <IconButton
-          Icon={LinkedinIcon}
-          onPress={() => Communications.web("https://google.com")}
-          size={24}
-        />
-        <IconButton
-          Icon={TelegramIcon}
-          onPress={() => Communications.web("http://google.com")}
-          size={24}
-        />
-        <IconButton
-          Icon={WebIcon}
+          color={web}
+          Icon={({ size, color }) => {
+            return (
+              <MaterialCommunityIcons name={"web"} size={size} color={color} />
+            );
+          }}
           onPress={() => Communications.web("https://taskyn.ir")}
-          size={24}
+          size={buttonIconSize}
+        />
+        <IconButton
+          color={telegram}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"telegram"} size={size} color={color} />;
+          }}
+          onPress={() => Communications.web("https://telegram.com")}
+          size={buttonIconSize}
+        />
+        <IconButton
+          color={linkedin}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"linkedin"} size={size} color={color} />;
+          }}
+          onPress={() => Communications.web("http://google.com")}
+          size={buttonIconSize}
+        />
+        <IconButton
+          color={instagram}
+          Icon={({ size, color }) => {
+            return (
+              <TaskynIcon name={"instagram"} size={size} color={color} svg />
+            );
+          }}
+          onPress={() => Communications.web("https://instagram.com/taskyn")}
+          size={buttonIconSize}
         />
       </View>
     </View>

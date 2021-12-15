@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
@@ -26,11 +27,20 @@ export const styles = StyleSheet.create({
     lineHeight: 30,
   },
 
-  buttoncontainer: {
+  buttonContainer: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 30,
+    marginHorizontal: 24,
   },
 });
+
+export const buttonIconSize = 36;
+
+export const iconColors = {
+  web: THEME.COLORS.GREY.NORMAL,
+  telegram: "#34AAE5",
+  linkedin: "#0A66C2",
+  instagram: "#E82683",
+};
