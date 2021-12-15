@@ -55,7 +55,6 @@ function AuthenticationScreen() {
                 mode={"outlined"}
                 errors={inputState.phoneValidation}
                 keyboardType={"number-pad"}
-                limit={18}
                 clearButton
               />
             )}
@@ -69,7 +68,7 @@ function AuthenticationScreen() {
               </Paragraph>
             </SelectButton>
           </View>
-          <View style={styles.buttonContainer}>
+          <View style={styles.itemsMargin}>
             {authState.otpMode ? (
               <Button
                 onPress={passwordlessVerify}

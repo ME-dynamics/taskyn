@@ -45,10 +45,6 @@ export const styles = StyleSheet.create({
     color: THEME.COLORS.GREY.DARK,
     textDecorationLine: "underline",
   },
-  buttonContainer: {
-    width: widthPercentageToDP(90),
-    marginVertical: 8,
-  },
 });
 
 export const logoSize = 120;
