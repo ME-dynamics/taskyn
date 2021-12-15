@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 
 import { activityStyleGen } from "./styles";
 
-// types
 import { IActivityProps } from "./types";
 
 function LoadingComponent(props: IActivityProps) {

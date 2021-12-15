@@ -4,9 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Touchable } from "../Touchable";
 import { Paragraph } from "../Typography";
 import { Loading } from "./Loading";
-// styles
 import { styleGen } from "./styles";
-// types
 import { IButtonProps } from "./types";
 function ButtonComponent(props: IButtonProps) {
   const {
