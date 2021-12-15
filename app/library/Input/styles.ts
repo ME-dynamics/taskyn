@@ -190,6 +190,11 @@ function styleGenerator(args: IInputStyleGen) {
   // they change on state changes and should be passed like this
   const containerStyles = [
     styles.container,
+    /**
+     * if input is not in raw mode and multiline is enabled
+     * if number of lines is defined, for each line 16 size is added to
+     * container style
+     */
     !isRaw && multiline && numberOfLines
       ? {
           height:
@@ -200,6 +205,11 @@ function styleGenerator(args: IInputStyleGen) {
               : ERROR_CONTAINER_HEIGHT),
         }
       : undefined,
+    /**
+     * if input is not in raw mode and multiline is enabled
+     * if number of lines is NOT defined, text input will grow
+     * based on content size dynamically
+     */
     !isRaw && multiline && !numberOfLines
       ? {
           height:
