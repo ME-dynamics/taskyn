@@ -19,6 +19,7 @@
     "@react-navigation/material-top-tabs": "^6.0.2",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.2.5",
+    "color": "^4.1.0",
     "expo": "^43.0.3",
     "expo-file-system": "~13.0.3",
     "expo-font": "~10.0.3",
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/color": "^3.0.2",
     "@types/jalaali-js": "^1.1.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
