@@ -37,12 +37,14 @@ export type tTaskynIconNames =
   | "document"
   | "disconnected"
   | "camera"
-  | "back";
+  | "back"
+  | "google";
 
 export interface ITaskynIconProps {
   name: tTaskynIconNames;
   size: number;
   color: string;
+  svg?: boolean;
 }
 
 export interface ISvgIconProps {
