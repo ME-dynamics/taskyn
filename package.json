@@ -43,6 +43,7 @@
     "react-native-gesture-handler": "~1.10.2",
     "react-native-image-crop-picker": "^0.37.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-mmkv": "^1.5.4",
     "react-native-pager-view": "5.4.6",
     "react-native-reanimated": "~2.2.0",
     "react-native-redash": "^16.2.2",
@@ -57,6 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-numeric-separator": "^7.16.5",
     "@types/color": "^3.0.2",
     "@types/jalaali-js": "^1.1.0",
     "@types/react": "~17.0.21",
