@@ -20,7 +20,7 @@ import { FormList } from "./app/formList/screens/formList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
-import { Note } from "./app/note";
+import { Note } from "./app/note1/screens/Note";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
@@ -34,6 +34,7 @@ import { AboutUs } from "./app/aboutUs/screens";
 import { FrequentlyQuestions } from "./app/frequentlyQuestions/screens";
 import { Filter } from "./app/formResult/screens/filterScreen";
 import { View, I18nManager } from "react-native";
+import { Identify } from "./app/authentication/screens/Identify";
 const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const PatientStack = createNativeStackNavigator();
@@ -209,7 +210,7 @@ export function ProfileTab() {
     >
       <ProfileStack.Screen
         name="Profile"
-        component={Profile}
+        component={Note}
         options={{ headerShown: false }}
       />
 
@@ -249,7 +250,7 @@ function MyTabs() {
           tabBarLabel: "پروفایل",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <TaskynIcon name={"profile"} size={size} color={color} />
+            <TaskynIcon  name={"profile"} size={size} color={color} />
           ),
         }}
       />

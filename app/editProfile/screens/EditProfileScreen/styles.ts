@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     bottom: 44,
+    zIndex: 0,
   },
   cameraIconContainer: {
     position: "absolute",
@@ -37,6 +38,7 @@ export const styles = StyleSheet.create({
     borderRadius: 40 / 2,
     backgroundColor: "#EEE5FF",
     alignItems: "center",
+    overflow: "hidden",
     justifyContent: "center",
     zIndex: 10,
     left: 80,
@@ -52,5 +54,12 @@ export const styles = StyleSheet.create({
   sheetContentContainer: {
     flex: 1,
     alignItems: "center",
+  },
+  sheetButtonContainer: {
+    width: "90%",
+    height: 56,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
 });

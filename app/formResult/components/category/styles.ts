@@ -27,7 +27,6 @@ function buttonStyle(args: IButtonStyles) {
     },
     text: {
       fontSize: 16,
-      fontFamily: "Vazir-Bold-UI",
       color: mode === "contained" ? "white" : THEME.COLORS.PRIMARY.NORMAL,
       marginHorizontal: 4,
     },

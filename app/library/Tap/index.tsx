@@ -7,7 +7,7 @@ import {
 import { ITapProps } from "./types";
 
 export function Tap(props: ITapProps) {
-  const { children, onPress } = props;
+  const { children, onPress, waitFor } = props;
   function onTapPress(event: TapGestureHandlerGestureEvent) {
     const { state } = event.nativeEvent;
     if (onPress && state === 4) {
@@ -15,7 +15,7 @@ export function Tap(props: ITapProps) {
     }
   }
   return (
-    <TapGestureHandler onHandlerStateChange={onTapPress}>
+    <TapGestureHandler onHandlerStateChange={onTapPress} waitFor={waitFor}>
       {
         // there must be a view around children to avoid ref bug
         // that causes crash

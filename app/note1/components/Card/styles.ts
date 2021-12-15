@@ -1,16 +1,18 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { THEME } from "../../../library";
+
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.BIG,
-    height: 56,
-    flexDirection: "row-reverse",
-    backgroundColor: "white",
+    flex: 1,
+    paddingVertical: 8,
+  },
+  card: {
+    width: widthPercentageToDP(90),
+    height: 68,
     borderRadius: 12,
     elevation: 2,
-    marginVertical: 10,
-    overflow:"hidden",
+    backgroundColor: "white",
+    flexDirection: "row-reverse",
   },
   iconContainer: {
     flex: 3,
@@ -27,14 +29,23 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 10,
+    flexDirection: "row-reverse",
   },
-  persianNameContainer: {
-    flex: 2,
+  titleContainer: {
+    flex: 1,
     justifyContent: "flex-end",
   },
-  englishNameContainer: {
-    flex: 2,
+  bodyContainer: {
+    flex: 3,
+  },
+  descriptionContainer: {
+    flex: 1,
     justifyContent: "center",
   },
- 
+
+  dateContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingTop: 8,
+  },
 });
