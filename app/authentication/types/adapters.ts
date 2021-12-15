@@ -9,5 +9,19 @@ export interface IFetchPasswordlessVerifyResult {
   refreshExpires: number | undefined;
   jwtExpires: number | undefined;
   role: string | undefined;
+  userId: string | undefined;
   error: string | undefined;
+}
+
+export interface IFetchRefresh {
+  userId: string;
+}
+
+export interface IFetchRefreshResult {
+  jwtToken: string;
+  refreshToken: string;
+  refreshExpires: number;
+  jwtExpires: number;
+  shouldLogout: boolean;
+  error: string;
 }
