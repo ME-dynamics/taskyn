@@ -11,7 +11,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Tap } from "../Tap";
 import { Caption, Subheading } from "../Typography";
 import { IconButton } from "../IconButton";
-import { styleGen } from "./styles";
+import { styleGen, inputHeightGen } from "./styles";
 import { IInputProps, tOnContentSize, tNativeEvent } from "./types";
 
 function InputComponent(props: IInputProps) {
@@ -39,10 +39,11 @@ function InputComponent(props: IInputProps) {
    */
   const clearRef = useRef(null);
   const [focused, setFocused] = useState<boolean>(false);
-  const [inputHeight, setHeight] = useState<number>(56);
+  const [inputHeight, setHeight] = useState<number>(inputHeightGen(mode));
 
   const {
     styles,
+    containerStyles,
     inputContainerStyles,
     inputStyles,
     limitStyle,
@@ -58,7 +59,6 @@ function InputComponent(props: IInputProps) {
     multiline,
     numberOfLines,
     hasError: !!errors?.length,
-    clearButton,
     limit,
     value,
     style,
@@ -112,8 +112,12 @@ function InputComponent(props: IInputProps) {
       return;
     }
     const { height } = event.nativeEvent.contentSize;
-    if (height > INPUT_HEIGHT) {
+    // prevent from fist resize, height is returned 62
+    // and default height is 58 in maximum.
+    if (height > INPUT_HEIGHT * 1.4) {
       setHeight(height);
+    } else {
+      setHeight(INPUT_HEIGHT);
     }
   }
   function renderTitle() {
@@ -202,7 +206,7 @@ function InputComponent(props: IInputProps) {
     }
   }
   return (
-    <View style={styles.container}>
+    <View style={[containerStyles]}>
       {renderLimit()}
       {renderTitle()}
       <Tap onPress={onPress} waitFor={clearRef}>
