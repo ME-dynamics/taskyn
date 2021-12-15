@@ -1,12 +1,61 @@
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useLayoutEffect } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import { Button, Paragraph, Subheading, THEME, Title } from "../../../library";
 import { FormNumberIcon, TimerIcon } from "../../../library/Icon";
+import BottomSheet, {
+  BottomSheetBackdropProps,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import { styles } from "./style";
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { widthPercentageToDP } from "react-native-responsive-screen";
+const CustomBackdrop = ({ animatedIndex, style }: BottomSheetBackdropProps) => {
+  // animated variables
+  const containerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        animatedIndex.value,
+        [-1, 0, 1],
+        [0, 0.9, 1],
+        Extrapolate.CLAMP
+      ),
+    };
+  });
+
+  // styles
+  const containerStyle = useMemo(
+    () => [
+      style,
+      {
+        backgroundColor: "rgba(0,0,0,0.42)",
+      },
+      containerAnimatedStyle,
+    ],
+    [style, containerAnimatedStyle]
+  );
+
+  return <Animated.View style={containerStyle} />;
+};
 const FormCount = 93;
 export function FormDetails() {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ["40%", "40"], []);
+
+  const handleSnapPress = useCallback(() => {
+    bottomSheetRef.current?.close();
+  }, []);
+  const onCollapsePress = useCallback(() => {
+    bottomSheetRef.current?.collapse();
+  }, []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+  }, []);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -67,6 +116,7 @@ export function FormDetails() {
             flex: 1,
             alignItems: "center",
             justifyContent: "flex-start",
+            zIndex: 0,
           }}
         >
           <Button
@@ -74,13 +124,71 @@ export function FormDetails() {
             size={"big"}
             rippleColor={"lightGrey"}
             onPress={() => {
-              navigation.push("Questionnaire");
+              onCollapsePress();
             }}
           >
             {"شروع تست"}
           </Button>
         </View>
       </View>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        // onChange={handleSheetChanges}
+        backdropComponent={CustomBackdrop}
+        enablePanDownToClose={true}
+      >
+        <BottomSheetView
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "flex-start",
+            zIndex: 1000,
+          }}
+        >
+          <View style={{ width: widthPercentageToDP(90), top: 10 }}>
+            <Title style={{ textAlign: "center" }}>{"شروع تست"}</Title>
+            <Subheading style={{ textAlign: "center", top: 10 }}>
+              {
+                "آیا میخواهید از جایی که قبلا خارج شدید ادامه دهید یا از اول شروع میکنید؟"
+              }
+            </Subheading>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              top: 40,
+            }}
+          >
+            <Button
+              mode={"contained-grey"}
+              size={"medium"}
+              rippleColor={"lightGrey"}
+              onPress={() => {
+                navigation.push("Questionnaire");
+                handleSnapPress();
+              }}
+            >
+              {"شروع از اول"}
+            </Button>
+            <Button
+              mode={"contained"}
+              size={"medium"}
+              rippleColor={"lightGrey"}
+              onPress={() => {
+                navigation.push("Questionnaire");
+                handleSnapPress();
+              }}
+            >
+              {"ادامه میدهم"}
+            </Button>
+          </View>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
 }
