@@ -1,2 +1,2 @@
-export { fetchPasswordlessStart, fetchPasswordlessVerify } from "./network";
-export { validatePhoneNumber } from "./utils"
+export * from "./network";
+export { validatePhoneNumber } from "./utils";
