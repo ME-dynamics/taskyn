@@ -8,7 +8,7 @@ export interface IResponse {
   success: boolean;
   httpStatus: number;
   payload: Record<string, unknown> | undefined;
-  error: string | undefined;
+  error: string;
 }
 
 export type tFileType = "image";
