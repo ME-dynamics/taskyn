@@ -1,0 +1,23 @@
+{
+  "build": {
+    "local": {
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug",
+        "developmentClient": true
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {}
+  },
+  "cli": {
+    "version": ">= 0.41.0"
+  }
+}
