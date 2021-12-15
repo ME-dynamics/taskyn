@@ -1,5 +1,5 @@
 package com.abasoft.taskyn;
-import android.content.res.Configuration;
+import  android.content.res.Configuration;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 import expo.modules.ReactActivityDelegateWrapper;
+
+// disable rtl support
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 
 
 public class MainActivity extends ReactActivity {
@@ -29,6 +32,8 @@ public class MainActivity extends ReactActivity {
     // coloring the background, status bar, and navigation bar.
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
+    I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+    sharedI18nUtilInstance.allowRTL(getApplicationContext(), false);
     super.onCreate(null);
   }
 

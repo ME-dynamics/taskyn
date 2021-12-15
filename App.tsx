@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { THEME, Input, Paragraph, TaskynIcon } from "./app/library";
+import { THEME, Input, Paragraph, TaskynIcon, Container } from "./app/library";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -33,7 +33,7 @@ import { EditProfile } from "./app/editProfile/screens";
 import { AboutUs } from "./app/aboutUs/screens";
 import { FrequentlyQuestions } from "./app/frequentlyQuestions/screens";
 import { Filter } from "./app/formResult/screens/filterScreen";
-import { View } from "react-native";
+import { View, I18nManager } from "react-native";
 const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const PatientStack = createNativeStackNavigator();
@@ -278,10 +278,20 @@ function MyTabs() {
   );
 }
 
+function Test() {
+  return (
+    <Container>
+      <View
+        style={{ top: 120, width: 100, height: 100, backgroundColor: "blue" }}
+      />
+    </Container>
+  );
+}
 
 const Tabs = observer(MyTabs);
 function AppComponent() {
-  const isSignedIn = true;
+  I18nManager.allowRTL(false);
+  const isSignedIn = false;
   const [isAppReady, setAppReady] = useState<boolean>(false);
   const [fontsLoaded] = useFonts({
     TaskynIcon: require("./assets/fonts/icomoon.ttf"),
@@ -316,7 +326,7 @@ function AppComponent() {
           initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen name="Home" component={Authentication} />
+          <Stack.Screen name="Home" component={Test} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

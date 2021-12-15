@@ -19,6 +19,7 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:allowBackup="true"
     android:theme="@style/AppTheme"
+    android:supportsRtl="false"
   >
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="true"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="43.0.0"/>
