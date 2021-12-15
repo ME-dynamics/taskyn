@@ -40,7 +40,7 @@ function InputComponent(props: IInputProps) {
   const clearRef = useRef(null);
   const [focused, setFocused] = useState<boolean>(false);
   const [inputHeight, setHeight] = useState<number>(inputHeightGen(mode));
-
+  const isRaw = mode === "raw";
   const {
     styles,
     containerStyles,
@@ -66,7 +66,7 @@ function InputComponent(props: IInputProps) {
 
   let animation: Animated.SharedValue<number> | undefined = undefined;
   // define animated shared value when needed
-  if (mode !== "with-label") {
+  if (mode !== "with-label" && mode !== "raw") {
     // if value is defined and not empty
     // animation should be at active stage
     animation = useSharedValue(value ? 1 : 0);
@@ -121,6 +121,12 @@ function InputComponent(props: IInputProps) {
     }
   }
   function renderTitle() {
+    if (isRaw) {
+      if (focused) {
+        return null;
+      }
+      return <Subheading style={styles.titleRaw}>{title}</Subheading>;
+    }
     if (mode === "with-label") {
       return (
         <View style={styles.titleContainer}>
@@ -156,6 +162,9 @@ function InputComponent(props: IInputProps) {
     );
   }
   function renderErrors() {
+    if (isRaw) {
+      return null;
+    }
     if (!errors) {
       return null;
     }
@@ -183,6 +192,9 @@ function InputComponent(props: IInputProps) {
     );
   }
   function renderClearButton() {
+    if (isRaw) {
+      return null;
+    }
     if (value && clearButton) {
       return (
         <View style={styles.clearButtonContainer}>
@@ -206,7 +218,7 @@ function InputComponent(props: IInputProps) {
     }
   }
   return (
-    <View style={[containerStyles]}>
+    <View style={containerStyles}>
       {renderLimit()}
       {renderTitle()}
       <Tap onPress={onPress} waitFor={clearRef}>
@@ -228,7 +240,7 @@ function InputComponent(props: IInputProps) {
             style={inputStyles}
             onBlur={onBlurPress}
             onChangeText={onChangeValue}
-            textAlignVertical={multiline ? "top" : "center"}
+            textAlignVertical={isRaw ? "top" : multiline ? "top" : "center"}
             underlineColorAndroid={"transparent"}
             selectionColor={selectionColor}
             onContentSizeChange={multiline ? onContentSize : undefined}

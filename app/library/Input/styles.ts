@@ -14,7 +14,9 @@ function containerHeightGen(mode: tInputMode) {
     // 28 for title
     // 56 for input
     // 34 for errors
-    return WITH_LABEL_TITLE_HEIGHT + INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT;
+    return (
+      WITH_LABEL_TITLE_HEIGHT + INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT
+    );
   }
   if (mode === "outlined") {
     // 56 for input
@@ -24,6 +26,7 @@ function containerHeightGen(mode: tInputMode) {
   if (mode === "flat") {
     return FLAT_INPUT_HEIGHT + ERROR_CONTAINER_HEIGHT;
   }
+
   return INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT;
 }
 export function inputHeightGen(mode: tInputMode) {
@@ -48,9 +51,27 @@ function inputBorderGen(mode: tInputMode) {
       borderTopRightRadius: 8,
     };
   }
+  if (mode === "raw") {
+    return {
+      borderWidth: undefined,
+      borderRadius: undefined,
+    };
+  }
   return {
     borderWidth: 1,
     borderRadius: 8,
+  };
+}
+
+function containerStyleGen(mode: tInputMode, height: number) {
+  if (mode === "raw") {
+    return {
+      flex: 1,
+    };
+  }
+  return {
+    width: THEME.WIDTH.WIDE,
+    height,
   };
 }
 
@@ -69,18 +90,21 @@ function styleGenerator(args: IInputStyleGen) {
   const inputHeight = inputHeightGen(mode);
   const height = containerHeightGen(mode);
   const isFlat = mode === "flat";
+  const isRaw = mode === "raw";
   const flatBackgroundColor = isFlat ? "rgba(0,0,0,0.12)" : undefined;
   const styles = StyleSheet.create({
-    container: {
-      width: THEME.WIDTH.WIDE,
-      height,
-    },
+    container: containerStyleGen(mode, height),
     titleContainer: {
       width: "100%",
       height: WITH_LABEL_TITLE_HEIGHT,
       flexDirection: "row-reverse",
       alignItems: "flex-start",
       justifyContent: "space-between",
+    },
+    titleRaw: {
+      position: "absolute",
+      right: 16,
+      top: 16,
     },
     focusedTitle: {
       color: THEME.COLORS.PRIMARY.NORMAL,
@@ -94,9 +118,15 @@ function styleGenerator(args: IInputStyleGen) {
       paddingBottom: isFlat ? 0 : undefined,
       ...inputBorderGen(mode),
     },
+    inputRawContainer: {
+      width: "100%",
+      height: "100%",
+      paddingTop: 0,
+      paddingHorizontal: 16,
+      paddingBottom: 16,
+    },
     input: {
       flex: 9,
-      textAlignVertical: multiline ? "top" : undefined,
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
@@ -107,7 +137,7 @@ function styleGenerator(args: IInputStyleGen) {
     disabledBorderColor: {
       borderColor: THEME.COLORS.GREY.LIGHT,
     },
-    limit: { position: "absolute", top: -18, left: 0 },
+    limit: { position: "absolute", top: isRaw ? 4 : -18, left: isRaw ? 4 : 0 },
     limitActive: {
       color: THEME.COLORS.PRIMARY.NORMAL,
     },
@@ -160,40 +190,47 @@ function styleGenerator(args: IInputStyleGen) {
   // they change on state changes and should be passed like this
   const containerStyles = [
     styles.container,
-    multiline && numberOfLines
+    !isRaw && multiline && numberOfLines
       ? {
           height:
             inputHeight +
             numberOfLines * 16 +
-            (mode === "with-label" ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT : ERROR_CONTAINER_HEIGHT),
+            (mode === "with-label"
+              ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT
+              : ERROR_CONTAINER_HEIGHT),
         }
       : undefined,
-    multiline && !numberOfLines
+    !isRaw && multiline && !numberOfLines
       ? {
           height:
             inputHeightState +
-            (mode === "with-label" ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT : ERROR_CONTAINER_HEIGHT),
+            (mode === "with-label"
+              ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT
+              : ERROR_CONTAINER_HEIGHT),
         }
       : undefined,
   ];
-  const inputContainerStyles = [
-    styles.inputContainer,
-    focused ? styles.activeBorderColor : styles.disabledBorderColor,
-    value ? styles.activeBorderColor : undefined,
-    hasError ? styles.inputError : undefined,
-    multiline && numberOfLines
-      ? { height: inputHeight + numberOfLines * 16 }
-      : undefined,
-    multiline && !numberOfLines ? { height: inputHeightState } : undefined,
-  ];
+  const inputContainerStyles = isRaw
+    ? styles.inputRawContainer
+    : [
+        styles.inputContainer,
+        focused ? styles.activeBorderColor : styles.disabledBorderColor,
+        value ? styles.activeBorderColor : undefined,
+        hasError ? styles.inputError : undefined,
+        multiline && numberOfLines
+          ? { height: inputHeight + numberOfLines * 16 }
+          : undefined,
+        multiline && !numberOfLines ? { height: inputHeightState } : undefined,
+      ];
   const inputStyles = [
     material.subheading,
     styles.input,
-
-    multiline && numberOfLines
+    !isRaw && multiline && numberOfLines
       ? { height: inputHeight + numberOfLines * 16 }
       : undefined,
-    multiline && !numberOfLines ? { height: inputHeightState } : undefined,
+    !isRaw && multiline && !numberOfLines
+      ? { height: inputHeightState }
+      : undefined,
     styles.inputFont,
     style,
   ];
