@@ -24,7 +24,6 @@ export interface IInputStyleGen {
   numberOfLines: number | undefined;
   inputHeightState: number;
   hasError: boolean;
-  clearButton: boolean | undefined;
   limit: number | undefined;
   style: StyleProp<TextStyle>;
 }

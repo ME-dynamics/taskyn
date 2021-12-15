@@ -4,33 +4,38 @@ import memoize from "fast-memoize";
 import { THEME } from "../theme";
 import { IInputStyleGen, tInputMode } from "./types";
 
+const WITH_LABEL_TITLE_HEIGHT = 28;
+const ERROR_CONTAINER_HEIGHT = 34;
+const FLAT_INPUT_HEIGHT = 58;
+const INPUT_NORMAL_HEIGHT = 56;
+
 function containerHeightGen(mode: tInputMode) {
   if (mode === "with-label") {
     // 28 for title
     // 56 for input
     // 34 for errors
-    return 28 + 56 + 34;
+    return WITH_LABEL_TITLE_HEIGHT + INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT;
   }
   if (mode === "outlined") {
     // 56 for input
     // 34 for errors
-    return 56 + 34;
+    return INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT;
   }
   if (mode === "flat") {
-    return 58 + 34;
+    return FLAT_INPUT_HEIGHT + ERROR_CONTAINER_HEIGHT;
   }
-  return 56 + 34;
+  return INPUT_NORMAL_HEIGHT + ERROR_CONTAINER_HEIGHT;
 }
-function inputHeightGen(mode: tInputMode) {
+export function inputHeightGen(mode: tInputMode) {
   if (mode === "outlined") {
-    // 54 for input
+    // 56 for input
     // 34 for title
-    return 56;
+    return INPUT_NORMAL_HEIGHT;
   }
   if (mode === "flat") {
-    return 58;
+    return FLAT_INPUT_HEIGHT;
   }
-  return 56;
+  return INPUT_NORMAL_HEIGHT;
 }
 function inputBorderGen(mode: tInputMode) {
   if (mode === "flat") {
@@ -57,7 +62,6 @@ function styleGenerator(args: IInputStyleGen) {
     multiline,
     numberOfLines,
     hasError,
-    clearButton,
     limit,
     value,
     style,
@@ -73,7 +77,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     titleContainer: {
       width: "100%",
-      height: 28,
+      height: WITH_LABEL_TITLE_HEIGHT,
       flexDirection: "row-reverse",
       alignItems: "flex-start",
       justifyContent: "space-between",
@@ -92,6 +96,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     input: {
       flex: 9,
+      textAlignVertical: multiline ? "top" : undefined,
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
@@ -117,7 +122,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     errorContainer: {
       width: "100%",
-      height: 34,
+      height: ERROR_CONTAINER_HEIGHT,
       flexDirection: "row-reverse",
       paddingLeft: 16,
       paddingTop: 8,
@@ -153,18 +158,40 @@ function styleGenerator(args: IInputStyleGen) {
 
   // theses styles are based on states
   // they change on state changes and should be passed like this
+  const containerStyles = [
+    styles.container,
+    multiline && numberOfLines
+      ? {
+          height:
+            inputHeight +
+            numberOfLines * 16 +
+            (mode === "with-label" ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT : ERROR_CONTAINER_HEIGHT),
+        }
+      : undefined,
+    multiline && !numberOfLines
+      ? {
+          height:
+            inputHeightState +
+            (mode === "with-label" ? WITH_LABEL_TITLE_HEIGHT + ERROR_CONTAINER_HEIGHT : ERROR_CONTAINER_HEIGHT),
+        }
+      : undefined,
+  ];
   const inputContainerStyles = [
     styles.inputContainer,
     focused ? styles.activeBorderColor : styles.disabledBorderColor,
     value ? styles.activeBorderColor : undefined,
     hasError ? styles.inputError : undefined,
+    multiline && numberOfLines
+      ? { height: inputHeight + numberOfLines * 16 }
+      : undefined,
+    multiline && !numberOfLines ? { height: inputHeightState } : undefined,
   ];
   const inputStyles = [
     material.subheading,
     styles.input,
 
     multiline && numberOfLines
-      ? { height: inputHeight + numberOfLines * 14 }
+      ? { height: inputHeight + numberOfLines * 16 }
       : undefined,
     multiline && !numberOfLines ? { height: inputHeightState } : undefined,
     styles.inputFont,
@@ -183,6 +210,7 @@ function styleGenerator(args: IInputStyleGen) {
   const selectionColor = THEME.COLORS.TRANSPARENT.INPUT_SELECTION;
   return {
     styles,
+    containerStyles,
     inputContainerStyles,
     inputStyles,
     limitStyle,
