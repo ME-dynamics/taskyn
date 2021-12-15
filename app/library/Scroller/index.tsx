@@ -24,11 +24,7 @@ function ScrollerComponent(props: IScroller) {
 
         return items;
       }
-      return (
-        <Observer>
-          {() => <RTLView key={children.toString()}>{children}</RTLView>}
-        </Observer>
-      );
+      return <Observer>{() => <RTLView>{children}</RTLView>}</Observer>;
     }
     return children;
   }

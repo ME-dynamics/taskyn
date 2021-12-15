@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from "react";
+import React, { Ref } from "react";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
 import { iconStyleGen } from "./styles";

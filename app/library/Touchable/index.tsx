@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { RectButton, RectButtonProperties } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
 import { THEME } from "../theme";
 
