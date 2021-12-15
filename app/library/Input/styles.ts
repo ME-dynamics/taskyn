@@ -115,7 +115,6 @@ function styleGenerator(args: IInputStyleGen) {
       height: inputHeight,
       backgroundColor: flatBackgroundColor,
       paddingRight: 16,
-      paddingBottom: isFlat ? 0 : undefined,
       ...inputBorderGen(mode),
     },
     inputRawContainer: {
@@ -127,6 +126,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     input: {
       flex: 9,
+      paddingBottom: isFlat ? 0 : undefined,
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
