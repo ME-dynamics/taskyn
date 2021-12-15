@@ -4,7 +4,7 @@ import { adapterTypes } from "../../types";
 export async function fetchPasswordlessVerify(
   otpNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
-  const { success, httpStatus, payload, error } = await request({
+  const { success, payload, error } = await request({
     endpoint: "/passwordless/verify",
     method: "POST",
     body: { otpCode: otpNumber, otpToken: authState.otpToken },
@@ -17,6 +17,7 @@ export async function fetchPasswordlessVerify(
       refreshToken: "",
       jwtExpires: 0,
       refreshExpires: 0,
+      userId: "",
     };
   }
 
@@ -25,13 +26,14 @@ export async function fetchPasswordlessVerify(
   const refreshExpires = Number(payload?.refreshTokenExpiresAt);
   const jwtExpires = Number(payload?.jwtTokenExpiresAt);
   const role = toString(payload?.role);
-
+  const userId = toString(payload?.userId);
   return {
     jwt,
     refreshToken,
     jwtExpires,
     refreshExpires,
     role,
+    userId,
     error: "",
   };
 }
