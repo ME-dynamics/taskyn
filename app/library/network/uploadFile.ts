@@ -13,16 +13,26 @@ function endpointGen(type: tFileType) {
 }
 
 export function buildUploadFile() {
+  // create request cache
+  // cache token and token validation time
   let tokenCache = "";
   let tokenCacheValidTime = 0;
+  /**
+   * retrieve token and expire time and set them to cache
+   */
   async function setToken() {
-    const [jwtToken, tokenExpiresAt] = await Promise.all([
-      secureStorage.retrieve("token"),
-      storage.retrieve("refresh_expires_at"),
-    ]);
+    const jwtToken = await secureStorage.retrieve("token");
+    const tokenExpiresAt = storage.retrieve("refresh_expires_at", "number");
     tokenCache = jwtToken ? jwtToken : "";
-    tokenCacheValidTime = tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : 0;
+    tokenCacheValidTime =
+      typeof tokenExpiresAt === "number" ? tokenExpiresAt : 0;
   }
+  /**
+   * get token from cache
+   * if token expire time is not greater than now, cache is stale
+   * if cache is stale, setToken method gets called again to renew token
+   * token is refreshed by default with silent refresh
+   */
   async function getJwtToken() {
     if (tokenCache && tokenCacheValidTime) {
       if (tokenCacheValidTime > Date.now()) {
@@ -30,6 +40,7 @@ export function buildUploadFile() {
       }
       return tokenCache;
     }
+    // if there are no token here
     await setToken();
     return tokenCache;
   }

@@ -1,18 +1,29 @@
 import { secureStorage, storage } from "../storage";
+import { netInfoState } from "../netInfo";
 import { serverUrl, customerJwtPayload, providerJwtPayload } from "./constant";
 import { IRequest, IResponse } from "./types";
 
 export function buildRequest() {
+  // create request cache
+  // cache token and token validation time
   let tokenCache = "";
   let tokenCacheValidTime = 0;
+  /**
+   * retrieve token and expire time and set them to cache
+   */
   async function setToken() {
-    const [jwtToken, tokenExpiresAt] = await Promise.all([
-      secureStorage.retrieve("token"),
-      storage.retrieve("refresh_expires_at"),
-    ]);
+    const jwtToken = await secureStorage.retrieve("token");
+    const tokenExpiresAt = storage.retrieve("refresh_expires_at", "number");
     tokenCache = jwtToken ? jwtToken : "";
-    tokenCacheValidTime = tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : 0;
+    tokenCacheValidTime =
+      typeof tokenExpiresAt === "number" ? tokenExpiresAt : 0;
   }
+  /**
+   * get token from cache
+   * if token expire time is not greater than now, cache is stale
+   * if cache is stale, setToken method gets called again to renew token
+   * token is refreshed by default with silent refresh
+   */
   async function getJwtToken() {
     if (tokenCache && tokenCacheValidTime) {
       if (tokenCacheValidTime > Date.now()) {
@@ -20,10 +31,19 @@ export function buildRequest() {
       }
       return tokenCache;
     }
+    // if there are no token here
     await setToken();
     return tokenCache;
   }
   return async function request(info: IRequest): Promise<IResponse> {
+    if (!netInfoState.hasAccess) {
+      return {
+        error: "عدم دسترسی به اینترنت",
+        httpStatus: -1,
+        payload: undefined,
+        success: false,
+      };
+    }
     let timeoutId: NodeJS.Timeout | undefined = undefined;
     try {
       const controller = new AbortController();
@@ -36,7 +56,7 @@ export function buildRequest() {
           "Content-type": "application/json",
           Accept: "application/json",
           "Accept-Encoding": "gzip",
-          "x-jwt-payload": providerJwtPayload,
+          "x-jwt-payload": customerJwtPayload,
         },
         body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal,
@@ -61,14 +81,14 @@ export function buildRequest() {
           success: false,
           httpStatus: 0,
           payload: undefined,
-          error: "timeout",
+          error: "خطای درخواست",
         };
       }
       return {
         success: false,
         httpStatus: 0,
         payload: undefined,
-        error: "timeout",
+        error: "خطا",
       };
     }
   };
