@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { THEME, Input, Paragraph } from "./app/library";
+import { THEME, Input, Paragraph, WebIcon } from "./app/library";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { PatientList } from "./app/patients/screens/patientList";
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import { useFonts } from "expo-font"
+import { createIconSetFromIcoMoon } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 import {
   Authentication,
   getLoggedIn,
@@ -20,7 +20,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
-import { Note } from "./app/note";
+import { Note } from "./app/note1/screens/Note";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
@@ -33,6 +33,8 @@ import { EditProfile } from "./app/editProfile/screens";
 import { AboutUs } from "./app/aboutUs/screens";
 import { FrequentlyQuestions } from "./app/frequentlyQuestions/screens";
 import { Filter } from "./app/formResult/screens/filterScreen";
+import { Identify } from "./app/authentication/screens/Identify";
+import { CreateNote } from "./app/note1/screens/CreateNote";
 const DashboardStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const PatientStack = createNativeStackNavigator();
@@ -40,9 +42,9 @@ const FormListStack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Icon = createIconSetFromIcoMoon(
-  require('./assets/selection.json'),
-  'IcoMoon',
-  'icomoon.ttf'
+  require("./assets/selection.json"),
+  "IcoMoon",
+  "icomoon.ttf"
 );
 
 export function PatientsTab() {
@@ -213,7 +215,7 @@ export function ProfileTab() {
     >
       <ProfileStack.Screen
         name="Profile"
-        component={Profile}
+        component={Note}
         options={{ headerShown: false }}
       />
 
@@ -232,11 +234,13 @@ export function ProfileTab() {
 
 function MyTabs() {
   const role = "provider";
-  const [fontsLoaded] = useFonts({ IcoMoon: require('./assets/fonts/icomoon.ttf') }); 
-  if(!fontsLoaded) {
-    return null
-  }
-   return (
+  // const [fontsLoaded] = useFonts({
+  //   IcoMoon: require("./assets/fonts/icomoon.ttf"),
+  // });
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
+  return (
     <Tab.Navigator
       initialRouteName="InitialRoot"
       screenOptions={{
@@ -250,9 +254,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <Icon name="Profile" size={size} color={color}/>
-          ),
+          tabBarIcon: ({ color, size }) => <WebIcon size={size} />,
         }}
       />
 
@@ -313,7 +315,7 @@ function AppComponent() {
           initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen name="Home" component={Authentication} />
+          <Stack.Screen name="Home" component={Identify} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
