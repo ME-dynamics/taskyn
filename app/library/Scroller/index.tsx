@@ -7,35 +7,40 @@ import { styles } from "./styles";
 import { IScroller } from "./types";
 
 function ScrollerComponent(props: IScroller) {
-  const { horizontal, rtl, keyboard, children } = props;
+  const { horizontal, rtl, keyboard, children, style } = props;
   const isRtlHorizontal = horizontal && rtl;
   function renderItems() {
-    if (isRtlHorizontal && children) {
-      if (Array.isArray(children)) {
-        const items = [];
+    if (!children) {
+      return null;
+    }
+    if (Array.isArray(children)) {
+      const items = [];
+      if (isRtlHorizontal) {
         for (let index = 0; index < children.length; index++) {
           const item = children[index];
-          items.push(
-            <Observer key={item.key}>
-              {() => <RTLView key={item.key}>{item}</RTLView>}
-            </Observer>
-          );
+          const key = item.key || `${index}`;
+          items.push(<RTLView key={key}>{item}</RTLView>);
         }
-
-        return items;
+      } else {
+        for (let index = 0; index < children.length; index++) {
+          const item = children[index];
+          const key = item.key || `${index}`;
+          items.push(<Observer key={key}>{() => item}</Observer>);
+        }
       }
-      return <Observer>{() => <RTLView>{children}</RTLView>}</Observer>;
+      return items;
     }
     return children;
   }
   if (keyboard) {
     return (
       <KeyboardAwareScrollView
+        {...props}
         style={[
           styles.container,
           isRtlHorizontal ? styles.rtlScrollView : undefined,
+          style,
         ]}
-        {...props}
       >
         {renderItems()}
       </KeyboardAwareScrollView>
@@ -43,11 +48,12 @@ function ScrollerComponent(props: IScroller) {
   }
   return (
     <ScrollView
+      {...props}
       style={[
         styles.container,
         isRtlHorizontal ? styles.rtlScrollView : undefined,
+        style,
       ]}
-      {...props}
     >
       {renderItems()}
     </ScrollView>
