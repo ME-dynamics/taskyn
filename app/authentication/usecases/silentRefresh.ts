@@ -66,4 +66,4 @@ async function silentRefresh() {
   }
 }
 
-const tokenDisposer = autorun(silentRefresh);
+const silentRefreshAutoRunDisposer = autorun(silentRefresh);
