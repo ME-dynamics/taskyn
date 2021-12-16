@@ -1,13 +1,13 @@
-export { Authentication } from "./screens";
-import { auth } from "./entities";
+export * from "./screens";
+import { authState } from "./entities";
 export { initToken } from "./usecases";
 export function getLoggedIn() {
-  return auth.loggedIn;
+  return authState.loggedIn;
 }
 
 export function getRole() {
-  return auth.role;
+  return authState.role;
 }
 export function getJWT() {
-  return auth.token;
+  return authState.token;
 }
