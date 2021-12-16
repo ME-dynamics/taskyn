@@ -14,21 +14,9 @@ export { Scroller } from "./Scroller";
 export { IconButton } from "./IconButton";
 export { toJalaaliDate } from "./toJalaaliDate";
 export { toString } from "./toString";
-export {
-  FileIcon,
-  FilesIcon,
-  FormHistoryIcon,
-  FormIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  Note2Icon,
-  NoteIcon,
-  OnlineIcon,
-  TaskIcon,
-  TelegramIcon,
-  WebIcon,
-} from "./Icon";
+
 export { Checkbox } from "./CheckBox";
 export { Radio } from "./Radio";
 export { SelectButton } from "./SelectButton";
 export { TaskynIcon } from "./TaskynIcon";
+export { Timer } from "./Timer";
