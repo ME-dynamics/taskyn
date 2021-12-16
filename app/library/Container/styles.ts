@@ -7,6 +7,7 @@ const HEIGHT = 72;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.COLORS.BACKGROUND,
   },
   netInfoContainer: {
     position: "absolute",
