@@ -44,10 +44,16 @@ export const styles = StyleSheet.create({
     height: 40,
     borderWidth: 2,
     // borderColor: THEME.COLORS.GREY.NORMAL,
-    borderBottomColor:"red",
-    borderRightColor:"transparent",
+    borderBottomColor: "red",
+    borderRightColor: "transparent",
     textAlign: "center",
     borderRadius: 0,
+  },
+  phoneNumber: {
+    color: THEME.COLORS.PRIMARY.NORMAL,
+  },
+  enterCodeText: {
+    paddingTop: 12
   },
   line: {
     width: 40,
@@ -55,9 +61,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderBottomWidth: 2,
-    borderRightWidth:0,
-    borderLeftWidth:0,
-    borderTopWidth:0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
     borderColor: THEME.COLORS.GREY.NORMAL,
     borderRadius: 0,
   },
