@@ -1,5 +1,5 @@
 import { toJalaaliDate } from "../utils";
-import { request } from "../../../library";
+import { request, toString } from "../../../library";
 import { IFetchTasksPayload, ITask } from "../../types";
 
 export async function fetchTasks(): Promise<IFetchTasksPayload> {
@@ -10,7 +10,7 @@ export async function fetchTasks(): Promise<IFetchTasksPayload> {
   });
   if (!success) {
     return {
-      error: String(error),
+      error: error,
       tasks: [],
     };
   }
@@ -28,9 +28,9 @@ export async function fetchTasks(): Promise<IFetchTasksPayload> {
           ? toJalaaliDate(new Date(task?.modifiedAt))
           : "";
       result.push({
-        userId: String(task?.userId),
-        id: String(task?.id),
-        content: String(task?.content),
+        userId: toString(task?.userId),
+        id: toString(task?.id),
+        content: toString(task?.content),
         done: Boolean(task?.done),
         createdAt,
         modifiedAt,
