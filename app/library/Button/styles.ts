@@ -137,16 +137,16 @@ function buttonStyle(args: IButtonStyles) {
     backgroundColor,
     fullRadius,
   } = args;
-
+  const buttonHeight = buttonHeightCalc(size);
   const styles = StyleSheet.create({
     container: {
       minWidth: buttonMinWidthCalc(size),
       maxWidth: widthPercentageToDP("90"),
-      height: buttonHeightCalc(size),
+      height: buttonHeight,
       borderWidth: mode === "outlined" ? StyleSheet.hairlineWidth : 0,
       backgroundColor: buttonBackgroundColor(mode, disabled, backgroundColor),
       borderColor: buttonBorderColor(mode),
-      borderRadius: fullRadius ? 36 / 2 : 12,
+      borderRadius: fullRadius ? buttonHeight / 2 : 12,
       flexDirection: "row-reverse",
       alignItems: "center",
       justifyContent: "center",
