@@ -20,7 +20,7 @@ import { FormList } from "./app/formList/screens/formList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { UserInfo } from "./app/userInfo/screens/userInfo";
 import { observer } from "mobx-react-lite";
-import { Note } from "./app/note1/screens/Note";
+import { Note } from "./app/note/screens/Note";
 import { FormResult } from "./app/formResult/screens/formResult";
 import { NoteList } from "./app/note/screens/noteList";
 import { Tasks } from "./app/task";
@@ -250,7 +250,7 @@ function MyTabs() {
           tabBarLabel: "پروفایل",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <TaskynIcon  name={"profile"} size={size} color={color} />
+            <TaskynIcon name={"instagram"} size={size} color={color} svg />
           ),
         }}
       />
@@ -327,7 +327,7 @@ function AppComponent() {
           initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen name="Home" component={Test} />
+          <Stack.Screen name="Home" component={MyTabs} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

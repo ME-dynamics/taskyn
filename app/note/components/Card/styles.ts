@@ -1,40 +1,51 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
-  tile: {
+  container: {
+    flex: 1,
+    paddingVertical: 8,
+  },
+  card: {
     width: widthPercentageToDP(90),
-    height: 100,
-    marginVertical: 10,
-    flexDirection: "column",
-    // alignItems: "center",
-  },
-  body: {
-    flex: 1,
+    height: 68,
+    borderRadius: 12,
+    elevation: 2,
+    backgroundColor: "white",
     flexDirection: "row-reverse",
+  },
+  iconContainer: {
+    flex: 3,
     alignItems: "center",
+    justifyContent: "center",
   },
-  line: {
-    width: widthPercentageToDP("90"),
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
+  icon: {
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    backgroundColor: "#FFFDE4",
+    alignItems: "center",
+    justifyContent: "center",
   },
-
-  bodyContainer: {
-    flex: 1,
+  infoContainer: {
+    flex: 10,
+    flexDirection: "row-reverse",
   },
-
   titleContainer: {
     flex: 1,
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
   },
-  answerContainer: {
+  bodyContainer: {
+    flex: 3,
+  },
+  descriptionContainer: {
     flex: 1,
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    // justifyContent: "space-between",
+    justifyContent: "center",
+  },
+
+  dateContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingTop: 8,
   },
 });
