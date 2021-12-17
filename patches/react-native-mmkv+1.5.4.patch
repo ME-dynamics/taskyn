@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-mmkv/android/CMakeLists.txt b/node_modules/react-native-mmkv/android/CMakeLists.txt
+index 8784d6b..3aa59c4 100644
+--- a/node_modules/react-native-mmkv/android/CMakeLists.txt
++++ b/node_modules/react-native-mmkv/android/CMakeLists.txt
+@@ -31,12 +31,6 @@ find_library(
+         log-lib
+         log
+ )
+-find_library(
+-        JSI_LIB
+-        jsi
+-        PATHS ${LIBRN_DIR}
+-        NO_CMAKE_FIND_ROOT_PATH
+-)
+ find_library(
+         REACT_NATIVE_JNI_LIB
+         reactnativejni
