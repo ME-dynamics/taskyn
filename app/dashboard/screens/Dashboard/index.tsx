@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import { observer } from "mobx-react-lite";
-import {
-  FileIcon,
-  FormHistoryIcon,
-  FormIcon,
-  NoteIcon,
-  OnlineIcon,
-} from "../../../library";
+import { Container, Scroller, TaskynIcon } from "../../../library";
 import { getRole } from "../../../authentication";
 import { Card, Tile } from "../../components";
 import { dashboardState } from "../../entities";
@@ -17,12 +11,12 @@ import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 function DashboardScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const role = "cu";
+  const role = getRole();
   useEffect(() => {
     retrieveProvider();
   }, []);
   return (
-    <View style={styles.container}>
+    <Container>
       <View style={styles.titleContainer}>
         <View style={styles.card}>
           <Card
@@ -37,15 +31,14 @@ function DashboardScreen() {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <ScrollView
-          style={styles.scrollViewContainer}
-          contentContainerStyle={styles.containerContentStyle}
-        >
+        <Scroller contentContainerStyle={styles.containerContentStyle}>
           <View style={styles.row}>
             <Tile
               title={"تمرینات"}
               Icon={({ size, color }) => {
-                return <OnlineIcon size={size} />;
+                return (
+                  <TaskynIcon name={"practice"} color={color} size={size} svg />
+                );
               }}
               onPress={() => {
                 navigation.push("Task");
@@ -54,7 +47,9 @@ function DashboardScreen() {
             <Tile
               title={"پرونده بیمار"}
               Icon={({ size, color }) => {
-                return <FileIcon size={size} />;
+                return (
+                  <TaskynIcon name={"file"} color={color} size={size} svg />
+                );
               }}
               onPress={() => {
                 navigation.push("UserInfo");
@@ -65,7 +60,9 @@ function DashboardScreen() {
             <Tile
               title={"فرم ها"}
               Icon={({ size, color }) => {
-                return <FormIcon size={size} />;
+                return (
+                  <TaskynIcon name={"form"} color={color} size={size} svg />
+                );
               }}
               onPress={() => {
                 navigation.push("Form");
@@ -74,7 +71,14 @@ function DashboardScreen() {
             <Tile
               title={"تاریخچه فرم ها"}
               Icon={({ size, color }) => {
-                return <FormHistoryIcon size={size} />;
+                return (
+                  <TaskynIcon
+                    name={"file-history"}
+                    color={color}
+                    size={size}
+                    svg
+                  />
+                );
               }}
               onPress={() => {
                 navigation.push("FormsHistory");
@@ -86,7 +90,9 @@ function DashboardScreen() {
               <Tile
                 title={"نوت برداری"}
                 Icon={({ size, color }) => {
-                  return <NoteIcon size={size} />;
+                  return (
+                    <TaskynIcon name={"note"} color={color} size={size} svg />
+                  );
                 }}
                 onPress={() => {
                   navigation.push("Note");
@@ -94,9 +100,9 @@ function DashboardScreen() {
               />
             </View>
           ) : null}
-        </ScrollView>
+        </Scroller>
       </View>
-    </View>
+    </Container>
   );
 }
 
