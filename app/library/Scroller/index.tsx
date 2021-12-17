@@ -18,13 +18,13 @@ function ScrollerComponent(props: IScroller) {
       if (isRtlHorizontal) {
         for (let index = 0; index < children.length; index++) {
           const item = children[index];
-          const key = item.key || `${index}`;
+          const key = item?.key || `${index}`;
           items.push(<RTLView key={key}>{item}</RTLView>);
         }
       } else {
         for (let index = 0; index < children.length; index++) {
           const item = children[index];
-          const key = item.key || `${index}`;
+          const key = item?.key || `${index}`;
           items.push(<Observer key={key}>{() => item}</Observer>);
         }
       }
