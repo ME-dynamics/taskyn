@@ -18,7 +18,7 @@ export function DoctorList() {
       <View style={styles.searchBarContainer}>
         <SearchBar
           onChangeText={() => {}}
-          onClear={() => {}}
+          // onClear={() => {}}
           value={""}
           placeholder={""}
         />

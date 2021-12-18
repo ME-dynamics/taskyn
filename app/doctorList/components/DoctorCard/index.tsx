@@ -24,7 +24,7 @@ export const DoctorCard = observer((props: IDoctorsCardProps) => {
         <View style={styles.buttonContainer}>
           <Button
             mode={"text"}
-            color={select ? THEME.COLORS.GREY.NORMAL : ""}
+            // color={select ? THEME.COLORS.GREY.NORMAL : ""}
             size={"small"}
             rippleColor={"grey"}
             onPress={() => {
