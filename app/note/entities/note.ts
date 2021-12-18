@@ -7,6 +7,7 @@ export class NoteState {
       notes: observable,
       noteTitle: observable,
       noteContent: observable,
+      showMenu: observable,
       hasImages: computed,
       imageIds: computed,
       addImage: action,
@@ -17,6 +18,7 @@ export class NoteState {
       setNoteTitle: action,
       setNoteContent: action,
       reset: action,
+      toggleMenu: action,
     });
   }
 
@@ -24,6 +26,7 @@ export class NoteState {
   notes: INote[] = [];
   noteTitle: string = "";
   noteContent: string = "";
+  showMenu: boolean = false;
   get hasImages(): boolean {
     return this.images.length !== 0;
   }
@@ -96,5 +99,12 @@ export class NoteState {
     this.images = [];
     this.noteTitle = "";
     this.noteContent = "";
+  }
+  toggleMenu(status: boolean | undefined) {
+    if (typeof status === "undefined") {
+      this.showMenu = !this.showMenu;
+    } else {
+      this.showMenu = status;
+    }
   }
 }
