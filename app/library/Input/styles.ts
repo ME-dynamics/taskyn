@@ -103,8 +103,8 @@ function styleGenerator(args: IInputStyleGen) {
     },
     titleRaw: {
       position: "absolute",
-      right: 16,
-      top: 16,
+      right: 18,
+      top: 10,
     },
     focusedTitle: {
       color: THEME.COLORS.PRIMARY.NORMAL,
