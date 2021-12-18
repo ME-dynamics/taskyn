@@ -1,33 +1,54 @@
 import { StyleSheet } from "react-native";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 
+// TODO: fix width and heights based on enabled header
+
 export const styles = StyleSheet.create({
-  container: {
+  horizontalLine: {
+    width: THEME.WIDTH.WIDE,
+    height: StyleSheet.hairlineWidth,
+    borderRadius: 0.5,
+    backgroundColor: THEME.COLORS.GREY.NORMAL,
+    alignSelf: "center",
+  },
+  titleInputContainer: {
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(8),
+  },
+  NoteInputContainer: {
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(56),
+  },
+  pickImageContainer: {
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(20),
+    flexDirection: "row-reverse",
+  },
+  imageListContainer: {
+    flex: 9,
+    paddingBottom: 8,
+    paddingRight: widthPercentageToDP(5),
+  },
+  attachButtonContainer: {
     flex: 1,
-    backgroundColor: THEME.COLORS.BACKGROUND,
     alignItems: "center",
+    justifyContent: "flex-end",
+    paddingBottom: 18,
+    paddingLeft: widthPercentageToDP(2.5),
   },
-  title: {
-    flex: 1,
-  },
-  body: {
-    flex: 7,
-  },
-  buttonContainer: {
-    flex: 1,
+  submitButtonContainer: {
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(11),
+    alignItems: "center",
     justifyContent: "center",
   },
-  icon: {
+  attachPopUp: {
     position: "absolute",
-    bottom: 80,
-    right: 0,
-    left: 20,
-  },
-  popUp: {
-    position: "absolute",
-    top: 206,
-    right: 0,
     left: 10,
-    bottom: 0,
+    bottom: heightPercentageToDP(10),
   },
 });

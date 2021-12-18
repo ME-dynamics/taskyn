@@ -1,97 +1,98 @@
-import React, { useState } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import { View } from "react-native";
+import { observer } from "mobx-react-lite";
 import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuProvider,
-  MenuTrigger,
-} from "react-native-popup-menu";
-import { widthPercentageToDP } from "react-native-responsive-screen";
-import { Button, Input, TaskynIcon, WebIcon } from "../../../library";
+  Button,
+  Input,
+  TaskynIcon,
+  Container,
+  Scroller,
+  IconButton,
+} from "../../../library";
+import { NoteImage, AttachMenu, AttachCounter } from "../../components";
+import { noteState } from "../../entities";
+import { onCropPress, onRemovePress } from "../../usecases";
 import { styles } from "./styles";
 
-export function CreateNote() {
-  const [state, setState] = useState(false);
-  function onTriggerPress() {
-    setState(true);
+function CreateNoteScreen() {
+  function onNoteImageCropPress(path: string) {
+    onCropPress(path);
   }
-  function onOptionSelect(value: any) {
-    alert(`Selected number: ${value}`);
-    setState(false);
+  function onNoteImageRemovePress(path: string) {
+    onRemovePress(path);
   }
-  function onBackdropPress() {
-    setState(false);
+  function onAttachMenuPress() {
+    noteState.toggleMenu(undefined);
   }
+  function renderNoteImages() {
+    const notes: JSX.Element[] = [];
+    for (let index = 0; index < noteState.images.length; index++) {
+      const { id, path } = noteState.images[index];
+      notes.push(
+        <NoteImage
+          key={path}
+          imageId={id}
+          path={path}
+          onCropPress={onNoteImageCropPress}
+          onRemovePress={onNoteImageRemovePress}
+        />
+      );
+    }
+    return notes;
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.title}>
-        <Input mode={"flat"} title={"موضوع"} />
-      </View>
-      <View style={styles.body}>
+    <Container>
+      <View style={styles.titleInputContainer}>
         <Input
-          style={{ paddingLeft: 30 }}
-          mode={"flat"}
-          title={"متن یادداشت"}
-          multiline
-          numberOfLines={4}
+          mode={"raw"}
+          title={"موضوع"}
+          placeholder={"موضوع یادداشت خود را وارد کنید"}
         />
       </View>
-      <View style={styles.icon}>
-        <TaskynIcon name={"paperclip"} size={24} color={"black"} />
+      <View style={styles.horizontalLine} />
+      <View style={styles.NoteInputContainer}>
+        <Input
+          mode={"raw"}
+          title={"متن یادداشت"}
+          placeholder={"متن یادداشت خود را وارد کنید"}
+        />
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.pickImageContainer}>
+        <View style={styles.imageListContainer}>
+          <Scroller horizontal rtl>
+            {renderNoteImages()}
+          </Scroller>
+        </View>
+        <View style={styles.attachButtonContainer}>
+          <IconButton
+            size={24}
+            color={"black"}
+            Icon={({ size, color }) => {
+              return (
+                <TaskynIcon name={"paperclip"} size={size} color={color} />
+              );
+            }}
+            onPress={onAttachMenuPress}
+          />
+          <AttachCounter />
+
+          <AttachMenu />
+        </View>
+      </View>
+      <View style={styles.horizontalLine} />
+      <View style={styles.submitButtonContainer}>
         <Button
           mode={"contained"}
           size={"wide"}
           rippleColor={"lightGrey"}
-          onPress={onTriggerPress}
+          onPress={() => {}}
         >
           {"ثبت کردن یادداشت"}
         </Button>
       </View>
-      <View style={styles.popUp}>
-        <MenuProvider style={{ flexDirection: "column", padding: 30 }}>
-          <Menu
-            opened={state}
-            onBackdropPress={() => onBackdropPress()}
-            onSelect={(value) => onOptionSelect(value)}
-          >
-            <MenuTrigger onPress={() => onTriggerPress()} />
-            <MenuOptions
-              optionsContainerStyle={{
-                borderRadius: 12,
-                height: 80,
-                width: widthPercentageToDP(34),
-              }}
-            >
-              <MenuOption value={1}></MenuOption>
-              <Button
-                mode={"text"}
-                rippleColor={"lightGrey"}
-                size={"extra-small"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon name={"camera"} size={size} color={color} />
-                  );
-                }}
-              >
-                {"عکس از دوربین"}
-              </Button>
-              <MenuOption value={2}>
-                <Button
-                  mode={"text"}
-                  rippleColor={"lightGrey"}
-                  size={"extra-small"}
-                  Icon={WebIcon}
-                >
-                  {"عکس از گالری"}
-                </Button>
-              </MenuOption>
-            </MenuOptions>
-          </Menu>
-        </MenuProvider>
-      </View>
-    </View>
+    </Container>
   );
 }
+
+export const CreateNote = observer(CreateNoteScreen);
