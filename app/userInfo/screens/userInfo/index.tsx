@@ -1,12 +1,37 @@
 import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Button, Input, THEME } from "../../../library";
+import {
+  Button,
+  Input,
+  SelectButton,
+  Subheading,
+  THEME,
+} from "../../../library";
 import { styles } from "./style";
 import { IUserInfoProps } from "./type";
 import { DropPicker } from "../../components/dropPicker";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 export function UserInfo(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
+  const [gender, setGender] = useState<"female" | "male" | null>(null);
+  const [state, setState] = useState({
+    gender: false,
+    taahol: false,
+    family: false,
+  });
+  function StateManager(text: string) {
+    if (text === "gender") {
+      // setState({gender:true});
+      return state.gender;
+    }
+    if (text === "family") {
+      return state.family;
+    }
+    if (text === "taahol") {
+      return state.taahol;
+    }
+  }
+
   const ComponentGenerator = () => {
     const TitleAndPlaceholderObjectList = [
       {
@@ -23,7 +48,7 @@ export function UserInfo(props: IUserInfoProps) {
       },
       {
         title: "سن ",
-        placeholder: "سن خود را وارد کنید",
+        placeholder: "مثال ۱۳۷۶/۰۶/۰۶",
         type: "input",
         value: "24",
       },
@@ -48,9 +73,10 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "جنسیت",
         placeholder: "جنسیت را انتخاب کنید",
-        type: "dropdown",
+        type: "radio",
         item: ["مرد", "زن"],
         value: "",
+        state: "female",
       },
       {
         title: "تاریخ تولد",
@@ -61,9 +87,10 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "وضعیت تاهل",
         placeholder: "وضعیت تاهل خود را انتخاب کنید",
-        type: "dropdown",
+        type: "radio",
         item: ["مجرد", "متاهل"],
         value: "",
+        state: "taahol",
       },
       {
         title: "وضعیت زناشویی",
@@ -166,9 +193,10 @@ export function UserInfo(props: IUserInfoProps) {
       {
         title: "ازدواج فامیلی",
         placeholder: "",
-        type: "dropdown",
+        type: "radio",
         item: ["بله", "خیر"],
         value: "",
+        state: "family",
       },
       {
         title: "فرزند چندم",
@@ -201,15 +229,52 @@ export function UserInfo(props: IUserInfoProps) {
             />
           </View>
         );
-      } else {
+      } else if (TitleAndPlaceholderObjectList[i].type == "input") {
         FormComponent.push(
-          <View style={{ marginVertical: 6 }}>
+          <View>
             <Input
-              mode="flat"
-              value={TitleAndPlaceholderObjectList[i].value}
+              mode="with-label"
+              // value={TitleAndPlaceholderObjectList[i].value}
               title={TitleAndPlaceholderObjectList[i].title}
               placeholder={TitleAndPlaceholderObjectList[i].placeholder}
             />
+          </View>
+        );
+      } else if (TitleAndPlaceholderObjectList[i].type == "radio") {
+        FormComponent.push(
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              width: widthPercentageToDP(100),
+              right: 20,
+            }}
+          >
+            <Subheading>{`${TitleAndPlaceholderObjectList[i].title}:`}</Subheading>
+            <SelectButton
+              mode={"radio"}
+              selected={gender === "male"}
+              size={24}
+              onPress={() => {
+                setGender("male");
+              }}
+            >
+              <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+                {TitleAndPlaceholderObjectList[i].item[0]}
+              </Subheading>
+            </SelectButton>
+            <SelectButton
+              mode={"radio"}
+              selected={gender === "female"}
+              size={24}
+              onPress={() => {
+                setGender("female");
+              }}
+            >
+              <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+                {TitleAndPlaceholderObjectList[i].item[1]}
+              </Subheading>
+            </SelectButton>
           </View>
         );
       }
@@ -222,12 +287,12 @@ export function UserInfo(props: IUserInfoProps) {
         style={styles.inputContainer}
         contentContainerStyle={{
           alignItems: "center",
-          justifyContent: "center",
+          // justifyContent: "center",
         }}
       >
         {ComponentGenerator()}
-        <View style={{ paddingVertical: 10 }}>
-          <Button mode={"contained"} rippleColor={"lightGrey"} size={"big"}>
+        <View>
+          <Button mode={"contained"} rippleColor={"lightGrey"} size={"wide"}>
             {"ثبت اطلاعات"}
           </Button>
         </View>
