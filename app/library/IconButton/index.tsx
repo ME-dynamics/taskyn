@@ -1,4 +1,5 @@
 import React, { Ref } from "react";
+import { View } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
 import { iconStyleGen } from "./styles";
@@ -10,10 +11,20 @@ function IconButtonComponent(
   ref: Ref<BorderlessButton> | undefined
 ) {
   const { Icon, onPress, color, size } = props;
-  const { iconColor, iconSize, rippleColor } = iconStyleGen({ color, size });
+  const { styles, iconColor, iconSize, rippleColor } = iconStyleGen({
+    color,
+    size,
+  });
   return (
-    <BorderlessButton ref={ref} onPress={onPress} rippleColor={rippleColor}>
-      <Icon color={iconColor} size={iconSize} />
+    <BorderlessButton
+      ref={ref}
+      onPress={onPress}
+      rippleColor={rippleColor}
+      borderless
+    >
+      <View style={styles.container}>
+        <Icon color={iconColor} size={iconSize} />
+      </View>
     </BorderlessButton>
   );
 }
