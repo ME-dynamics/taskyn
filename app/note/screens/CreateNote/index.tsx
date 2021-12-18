@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import {
@@ -9,12 +9,16 @@ import {
   Scroller,
   IconButton,
 } from "../../../library";
-import { NoteImage, AttachMenu, AttachCounter } from "../../components";
+import { CreateNoteImage, AttachMenu, AttachCounter } from "../../components";
 import { noteState } from "../../entities";
 import { onCropPress, onRemovePress } from "../../usecases";
+
 import { styles } from "./styles";
+import { tScrollRef } from "../../types";
+import { autorun } from "mobx";
 
 function CreateNoteScreen() {
+  const scrollRef = useRef<tScrollRef>(null);
   function onNoteImageCropPress(path: string) {
     onCropPress(path);
   }
@@ -29,7 +33,7 @@ function CreateNoteScreen() {
     for (let index = 0; index < noteState.images.length; index++) {
       const { id, path } = noteState.images[index];
       notes.push(
-        <NoteImage
+        <CreateNoteImage
           key={path}
           imageId={id}
           path={path}
@@ -40,7 +44,13 @@ function CreateNoteScreen() {
     }
     return notes;
   }
-
+  useEffect(() => {
+    autorun(() => {
+      if (noteState.prevImagesCount < noteState.images.length) {
+        scrollRef.current?.scrollToEnd({ animated: true });
+      }
+    });
+  }, []);
   return (
     <Container>
       <View style={styles.titleInputContainer}>
@@ -51,7 +61,7 @@ function CreateNoteScreen() {
         />
       </View>
       <View style={styles.horizontalLine} />
-      <View style={styles.NoteInputContainer}>
+      <View style={styles.noteInputContainer}>
         <Input
           mode={"raw"}
           title={"متن یادداشت"}
@@ -60,7 +70,7 @@ function CreateNoteScreen() {
       </View>
       <View style={styles.pickImageContainer}>
         <View style={styles.imageListContainer}>
-          <Scroller horizontal rtl>
+          <Scroller ref={scrollRef} horizontal rtl>
             {renderNoteImages()}
           </Scroller>
         </View>
