@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     width: widthPercentageToDP(100),
     height: heightPercentageToDP(8),
   },
-  NoteInputContainer: {
+  noteInputContainer: {
     width: widthPercentageToDP(100),
     height: heightPercentageToDP(56),
   },
