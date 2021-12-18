@@ -1,21 +1,20 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingVertical: 8,
-  },
-  card: {
-    width: widthPercentageToDP(90),
+    width: THEME.WIDTH.WIDE,
     height: 68,
     borderRadius: 12,
     elevation: 2,
     backgroundColor: "white",
     flexDirection: "row-reverse",
+    overflow: "hidden",
+    marginVertical: 8,
   },
   iconContainer: {
-    flex: 3,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -23,17 +22,20 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 40 / 2,
-    backgroundColor: "#FFFDE4",
+    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
     alignItems: "center",
     justifyContent: "center",
   },
   infoContainer: {
-    flex: 10,
-    flexDirection: "row-reverse",
+    flex: 4,
+    paddingLeft: 10,
+    flexDirection: "column",
   },
   titleContainer: {
     flex: 1,
-    justifyContent: "flex-end",
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   bodyContainer: {
     flex: 3,
@@ -41,6 +43,7 @@ export const styles = StyleSheet.create({
   descriptionContainer: {
     flex: 1,
     justifyContent: "center",
+    paddingLeft: 20,
   },
 
   dateContainer: {

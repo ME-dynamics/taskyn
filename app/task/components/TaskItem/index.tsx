@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { View, TextInput } from "react-native";
 import { observer } from "mobx-react-lite";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { Caption, Button } from "../../../library";
+import { Caption, Button, TaskynIcon, Tap, THEME } from "../../../library";
 import { taskDone, updateTask, removeTask } from "../../usecases";
 import { styles, selectionColor } from "./styles";
 import { ITaskItemProps } from "./type";
@@ -10,6 +10,8 @@ import { ITaskItemProps } from "./type";
 function TaskItemComponent(props: ITaskItemProps) {
   const { id, content, done, createdAt, onTaskInputBlur, onTaskInputFocus } =
     props;
+  const [showMenu, setShowMenu] = useState(false);
+
   const [edit, setEdit] = useState<boolean>(false);
   const [doneLoading, setDoneLoading] = useState<boolean>(false);
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
@@ -50,42 +52,10 @@ function TaskItemComponent(props: ITaskItemProps) {
       <>
         <Button
           mode={"text"}
-          size={"small"}
-          rippleColor={"grey"}
-          loading={edit ? false : removeLoading}
-          onPress={onClose}
-          Icon={({ color, size }) => {
-            return (
-              <AntDesign name={"closesquareo"} color={color} size={size} />
-            );
-          }}
-        >
-          {edit ? "لغو" : "حذف"}
-        </Button>
-        {!edit ? (
-          <Button
-            mode={"text"}
-            size={"small"}
-            rippleColor={"grey"}
-            onPress={onEditPress}
-            Icon={({ color, size }) => {
-              return <Feather name={"edit"} size={size} color={color} />;
-            }}
-          >
-            {"ویرایش"}
-          </Button>
-        ) : null}
-        <Button
-          mode={"text"}
-          size={"small"}
+          size={"extra-small"}
           rippleColor={"grey"}
           loading={edit ? updateLoading : doneLoading}
           onPress={onDone}
-          Icon={({ color, size }) => {
-            return (
-              <AntDesign name={"checkcircleo"} color={color} size={size} />
-            );
-          }}
         >
           {edit ? "ثبت" : "اتمام"}
         </Button>
@@ -95,6 +65,16 @@ function TaskItemComponent(props: ITaskItemProps) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.dateContainer}>
+        <Tap
+          onPress={() => {
+            setShowMenu(!showMenu);
+          }}
+        >
+          <TaskynIcon name={"menu"} size={24} color={THEME.COLORS.GREY.NORMAL} />
+        </Tap>
+        <Caption>{createdAt}</Caption>
+      </View>
       <View style={styles.textContainer}>
         <TextInput
           onFocus={onTaskInputFocus}
@@ -108,37 +88,61 @@ function TaskItemComponent(props: ITaskItemProps) {
           editable={edit}
         />
       </View>
-      <View style={styles.footer}>
-        <View style={styles.dateContainer}>
-          <Caption>{createdAt}</Caption>
-        </View>
-        <View
-          style={[
-            styles.buttonContainer,
-            edit ? styles.buttonContainerEdit : undefined,
-            done ? styles.buttonContainerDone : undefined,
-          ]}
-        >
-          {done ? (
-            <Button
-              mode={"text"}
-              size={"small"}
-              rippleColor={"grey"}
-              disabled
-              Icon={({ color, size }) => {
-                return (
-                  <Ionicons name="checkmark-done" size={size} color={color} />
-                );
-              }}
-              color={"black"}
-            >
-              {"انجام شد"}
-            </Button>
-          ) : (
-            renderEdit()
-          )}
-        </View>
+      <View style={styles.buttonContainer}>
+        {done ? (
+          <Button
+            mode={"text"}
+            size={"small"}
+            rippleColor={"grey"}
+            disabled
+            Icon={({ color, size }) => {
+              return (
+                <Ionicons name="checkmark-done" size={size} color={color} />
+              );
+            }}
+          >
+            {"انجام شد"}
+          </Button>
+        ) : (
+          renderEdit()
+        )}
       </View>
+      {showMenu ? (
+        <View style={styles.popUp}>
+          <Button
+            mode={"text"}
+            rippleColor={"lightGrey"}
+            size={"small"}
+            Icon={() => {
+              return (
+                <TaskynIcon
+                  name={"pencil"}
+                  size={24}
+                  color={THEME.COLORS.PRIMARY.NORMAL}
+                />
+              );
+            }}
+          >
+            {"ویرایش"}
+          </Button>
+          <Button
+            mode={"text"}
+            rippleColor={"lightGrey"}
+            size={"small"}
+            Icon={() => {
+              return (
+                <TaskynIcon
+                  name={"trash"}
+                  size={24}
+                  color={THEME.COLORS.PRIMARY.NORMAL}
+                />
+              );
+            }}
+          >
+            {"حذف"}
+          </Button>
+        </View>
+      ) : null}
     </View>
   );
 }
