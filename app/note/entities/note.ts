@@ -3,6 +3,7 @@ import { INoteImage, INote } from "../types";
 export class NoteState {
   constructor() {
     makeObservable(this, {
+      prevImagesCount: observable,
       images: observable,
       notes: observable,
       noteTitle: observable,
@@ -21,7 +22,7 @@ export class NoteState {
       toggleMenu: action,
     });
   }
-
+  prevImagesCount: number = 0;
   images: INoteImage[] = [];
   notes: INote[] = [];
   noteTitle: string = "";
@@ -39,6 +40,7 @@ export class NoteState {
     return imageIds;
   }
   addImage(newImagePath: string) {
+    this.prevImagesCount = this.images.length;
     for (let index = 0; index < this.images.length; index++) {
       const { id, path } = this.images[index];
       if (path === newImagePath) {
@@ -58,6 +60,7 @@ export class NoteState {
   }
   removeImage(path: string) {
     const images: INoteImage[] = [];
+    this.prevImagesCount = this.images.length;
     for (let index = 0; index < this.images.length; index++) {
       const image = this.images[index];
       if (image.path === path) {
@@ -97,6 +100,7 @@ export class NoteState {
   }
   reset() {
     this.images = [];
+    this.prevImagesCount = 0;
     this.noteTitle = "";
     this.noteContent = "";
   }
