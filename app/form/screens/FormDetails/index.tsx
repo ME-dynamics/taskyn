@@ -1,9 +1,16 @@
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useCallback, useLayoutEffect, useMemo, useRef } from "react";
-import { View, Text, Image, ScrollView } from "react-native";
-import { Button, Paragraph, Subheading, THEME, Title } from "../../../library";
-import { FormNumberIcon, TimerIcon } from "../../../library/Icon";
+import { View, Image, ScrollView } from "react-native";
+import {
+  Button,
+  Paragraph,
+  Subheading,
+  THEME,
+  Title,
+  TaskynIcon,
+} from "../../../library";
+// import { FormNumberIcon, TimerIcon } from "../../../library/Icon";
 import BottomSheet, {
   BottomSheetBackdropProps,
   BottomSheetView,
@@ -102,13 +109,13 @@ export function FormDetails() {
             <Paragraph style={{ color: "#727272", right: 10 }}>
               {"تعداد تست ها: "} <Paragraph>{FormCount}</Paragraph>
             </Paragraph>
-            <TimerIcon size={24} />
+            <TaskynIcon name={"timer"} size={24} color={"red"} />
           </View>
           <View style={styles.formDetailsBody}>
             <Paragraph style={{ color: "#727272", right: 8 }}>
               {"زمان لازم: "} <Paragraph>{"۱۰ دقیقه"}</Paragraph>
             </Paragraph>
-            <FormNumberIcon size={24} />
+            <TaskynIcon name={"task"} size={24} color={"red"} />
           </View>
         </View>
         <View

@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { UserList } from "../../components/UserList";
-import { RequestIcon } from "../../../library/Icon";
+import { TaskynIcon } from "../../../library";
 
 export function PatientList() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -18,12 +18,7 @@ export function PatientList() {
         <Title>{"لیست بیماران"}</Title>
       </View>
       <View style={styles.searchBarContainer}>
-        <SearchBar
-          onChangeText={() => {}}
-          onClear={() => {}}
-          value={""}
-          placeholder={""}
-        />
+        <SearchBar onChangeText={() => {}} value={""} placeholder={""} />
       </View>
       <View style={styles.requestContainer}>
         <View style={styles.iconContainer}>
@@ -33,7 +28,7 @@ export function PatientList() {
             </View>
           </View>
           <View style={styles.icon}>
-            <RequestIcon size={24} />
+            <TaskynIcon name={"users"} color={"red"} size={24} />
           </View>
         </View>
         <View style={styles.infoContainer}>

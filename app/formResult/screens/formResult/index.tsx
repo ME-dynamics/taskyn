@@ -8,10 +8,9 @@ import {
   IconButton,
   THEME,
   Touchable,
-  WebIcon,
+  TaskynIcon,
 } from "../../../library";
 import { tMode } from "../../../library/Button/types";
-import { FilterIcon } from "../../../library/Icon";
 import { CategoryComponent } from "../../components/category";
 import { FormCard } from "../../components/formCard";
 import { ResultTile } from "../../components/resultTile";
@@ -25,7 +24,7 @@ export function FormResult() {
     <View style={styles.container}>
       <View style={styles.categoryContainer}>
         <Button
-          Icon={() => <FilterIcon size={24} />}
+          Icon={() => <TaskynIcon name={"filter"} size={24} color={"red"} />}
           mode={"text"}
           size={"small"}
           rippleColor={"lightGrey"}
