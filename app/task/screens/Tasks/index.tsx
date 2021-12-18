@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/core";
 import { observer } from "mobx-react-lite";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Button, Input } from "../../../library";
+import { Button, Input, TaskynIcon } from "../../../library";
 import { TaskItem } from "../../components/TaskItem";
 import { taskState } from "../../entities";
 import { retrieveTasks, createTask, onNewTaskChange } from "../../usecases";
 import { styles } from "./styles";
+import { ScrollView } from "react-native-gesture-handler";
+import { Entypo } from "@expo/vector-icons";
 function TasksScreen() {
   const [focused, setFocus] = useState<boolean>(false);
   function onTaskInputFocus() {
@@ -42,7 +42,12 @@ function TasksScreen() {
 
   return (
     <View style={styles.container}>
-      {focused ? null : (
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={styles.containerContentStyle}
+        
+      >
+        {/* {focused ? null : (
         <View style={styles.inputContainer}>
           <Input
             mode={"flat"}
@@ -50,32 +55,30 @@ function TasksScreen() {
             onChangeText={onNewTaskChange}
             title={"اضافه کردن تمرین : "}
             placeholder={"تمرین جدید را وارد کنید."}
-            validation={taskState.taskValidation}
+            // validation={taskState.taskValidation}
           />
         </View>
-      )}
-      <View style={styles.taskContainer}>
-        <KeyboardAwareScrollView
-          style={styles.container}
-          contentContainerStyle={styles.containerContentStyle}
-          enableOnAndroid
-        >
-          {renderTaskItems()}
-        </KeyboardAwareScrollView>
-      </View>
+      )} */}
+        <View style={styles.taskContainer}>{renderTaskItems()}</View>
+        <View style={styles.line} />
+        {/* {focused ? null : ( */}
 
-      {focused ? null : (
-        <View style={[styles.buttonContainer]}>
-          <Button
-            mode={"contained"}
-            size={"big"}
-            rippleColor={"lightGrey"}
-            onPress={createTask}
-          >
-            {"اضافه کردن تمرین"}
-          </Button>
-        </View>
-      )}
+        {/* )} */}
+      </ScrollView>
+      <View style={[styles.buttonContainer]}>
+        <Button
+          mode={"contained"}
+          rippleColor={"lightGrey"}
+          size={"FAB"}
+          Icon={() => {
+            return <Entypo name="plus" size={24} color="white" />;
+          }}
+          fullRadius
+          onPress={createTask}
+        >
+          {"افزودن تمرین جدید"}
+        </Button>
+      </View>
     </View>
   );
 }
