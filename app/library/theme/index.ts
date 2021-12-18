@@ -12,10 +12,16 @@ const COLORS = {
     DARK: "#0059c1",
   },
   TRANSPARENT: {
+    PRIMARY_LIGHT: "rgba(135, 131, 253, 0.7)",
     PRIMARY: "rgba(82, 86, 201, 0.2)",
     INPUT_SELECTION: "rgba(82, 86, 201, 0.7)",
     GREY: "rgba(112,112,112,0.2)",
-    WHITE: "rgba(255,255,255, 0.6)",
+    WHITE: "rgba(255,255,255, 0.7)",
+  },
+  BLACK: {
+    LIGHT: "#484848",
+    NORMAL: "#212121",
+    DARK: "#000000"
   },
   GREY: {
     LIGHT: "#cfcfcf",
