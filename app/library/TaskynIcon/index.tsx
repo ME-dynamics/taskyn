@@ -43,7 +43,7 @@ function TaskynIconComponent(props: ITaskynIconProps) {
     }
     return <Icon name={name} size={size} color={color} />;
   }
-  return <Icon name={name} size={size} color={color} />;
+  return <Icon name={name === "note" ? "ph_note" : name} size={size} color={color} />;
 }
 
 export const TaskynIcon = observer(TaskynIconComponent);
