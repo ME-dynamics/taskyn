@@ -2,9 +2,12 @@ import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { IconButton, Button, TaskynIcon } from "../../../library";
-import { styles, iconButtonStyle } from "./styles";
 
-function NoteHeaderComponent() {
+import { styles, iconButtonStyle } from "./styles";
+import { INoteHeaderProps } from "../../types";
+
+function NoteHeaderComponent(props: INoteHeaderProps) {
+  const { onDeletePress } = props;
   return (
     <View style={styles.container}>
       <View style={styles.backContainer}>
@@ -27,9 +30,7 @@ function NoteHeaderComponent() {
             Icon={({ size, color }) => {
               return <TaskynIcon name={"trash"} size={size} color={color} />;
             }}
-            onPress={() => {
-              console.log("delete");
-            }}
+            onPress={onDeletePress}
           />
         </View>
         <IconButton
