@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.WIDE,
     height: 196,
-    marginTop: 32,
+    marginTop: 34,
     marginBottom: 16,
     alignSelf: "center",
   },
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   closeIcon: {
     position: "absolute",
     right: 0,
-    top: -26,
+    top: -34,
   },
 });
 
