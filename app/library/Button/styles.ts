@@ -86,7 +86,7 @@ function buttonBackgroundColor(
     return THEME.COLORS.PRIMARY.NORMAL;
   }
   if (mode === "contained-grey") {
-    return THEME.COLORS.GREY.NORMAL;
+    return THEME.COLORS.GREY.LIGHT;
   }
   if (mode === "contained-secondary") {
     if (backgroundColor) {
