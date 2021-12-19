@@ -9,10 +9,11 @@ export const styles = StyleSheet.create({
   titleInputContainer: {
     width: widthPercentageToDP(100),
     height: heightPercentageToDP(8),
+    marginTop: 24
   },
   noteInputContainer: {
     width: widthPercentageToDP(100),
-    minHeight: heightPercentageToDP(24),
+    minHeight: heightPercentageToDP(16),
   },
   horizontalLine: {
     width: THEME.WIDTH.WIDE,
@@ -20,5 +21,6 @@ export const styles = StyleSheet.create({
     borderRadius: 0.5,
     backgroundColor: THEME.COLORS.GREY.NORMAL,
     alignSelf: "center",
+    top: -heightPercentageToDP(2)
   },
 });
