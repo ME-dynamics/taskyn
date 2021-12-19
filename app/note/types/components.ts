@@ -10,3 +10,7 @@ export interface ICreateNoteImageProps {
   onCropPress: (path: string) => void;
   onRemovePress: (path: string) => void;
 }
+
+export interface INoteHeaderProps {
+  onDeletePress: () => void;
+}
