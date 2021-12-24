@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
+import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   Input,
   Button,
@@ -13,18 +16,39 @@ import {
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
-import {
-  onPhoneChange,
-  passwordlessStart,
-  onOtpNumberChange,
-  passwordlessVerify,
-} from "../../usecases";
+import { onPhoneChange, passwordlessStart } from "../../usecases";
 import { styles, logoSize } from "./styles";
-import { confirm, phone } from "./constant";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { phone } from "./constant";
 
 function AuthenticationScreen() {
-  const [checked, setChecked] = useState(false);
+  const navigator = useNavigation<NativeStackNavigationProp<any>>();
+  const [agreed, setAgreed] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  async function start() {
+    try {
+      setLoading(true);
+
+      await passwordlessStart();
+      setLoading(false);
+    } catch (error) {
+      //TODO: toast error
+      console.log(error);
+      setLoading(false);
+    }
+  }
+  function toggleAgreement() {
+    setAgreed(!agreed);
+  }
+  useEffect(() => {
+    const disposer = autorun(() => {
+      if (authState.otpToken) {
+        navigator.push("Identify");
+      }
+    });
+    return () => {
+      // disposer();
+    };
+  }, []);
   return (
     <Container>
       <Scroller keyboard scrollEnabled={false}>
@@ -37,33 +61,25 @@ function AuthenticationScreen() {
         <View style={styles.authContainer}>
           <View style={styles.itemsContainer}>
             <View style={styles.itemsMargin}>
-              {authState.otpMode ? (
-                <Input
-                  value={inputState.otpNumber}
-                  onChangeText={onOtpNumberChange}
-                  title={confirm.title}
-                  placeholder={confirm.placeholder}
-                  textAlign={"center"}
-                  mode={"outlined"}
-                  errors={inputState.otpValidation}
-                  keyboardType={"number-pad"}
-                />
-              ) : (
-                <Input
-                  value={inputState.phoneNumber}
-                  onChangeText={onPhoneChange}
-                  title={phone.title}
-                  textAlign={"right"}
-                  placeholder={phone.placeholder}
-                  mode={"outlined"}
-                  errors={inputState.phoneValidation}
-                  keyboardType={"number-pad"}
-                  clearButton
-                />
-              )}
+              <Input
+                value={inputState.phoneNumber}
+                onChangeText={onPhoneChange}
+                title={phone.title}
+                textAlign={"right"}
+                placeholder={phone.placeholder}
+                mode={"outlined"}
+                errors={inputState.phoneValidation}
+                keyboardType={"number-pad"}
+                clearButton
+              />
             </View>
             <View style={styles.termsContainer}>
-              <SelectButton mode={"checkbox"} selected={false} size={24}>
+              <SelectButton
+                mode={"checkbox"}
+                selected={agreed}
+                size={24}
+                onPress={toggleAgreement}
+              >
                 <Paragraph style={styles.terms}>
                   {
                     "حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."
@@ -72,25 +88,16 @@ function AuthenticationScreen() {
               </SelectButton>
             </View>
             <View style={styles.itemsMargin}>
-              {authState.otpMode ? (
-                <Button
-                  onPress={passwordlessVerify}
-                  mode={"contained"}
-                  rippleColor={"lightGrey"}
-                  size={"wide"}
-                >
-                  {confirm.button}
-                </Button>
-              ) : (
-                <Button
-                  onPress={passwordlessStart}
-                  mode={"contained"}
-                  rippleColor={"lightGrey"}
-                  size={"wide"}
-                >
-                  {phone.button}
-                </Button>
-              )}
+              <Button
+                onPress={start}
+                mode={"contained"}
+                rippleColor={"lightGrey"}
+                size={"wide"}
+                loading={loading}
+                disabled={!agreed}
+              >
+                {phone.button}
+              </Button>
             </View>
           </View>
         </View>
