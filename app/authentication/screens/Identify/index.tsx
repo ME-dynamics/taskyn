@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
+import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { useNavigation } from "@react-navigation/native";
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from "react-native-confirmation-code-field";
 import {
   Button,
   Logo,
@@ -12,22 +21,32 @@ import {
   TaskynIcon,
 } from "../../../library";
 import { inputState } from "../../entities";
+import { onOtpNumberChange, passwordlessVerify } from "../../usecases";
 import { styles, logoSize } from "./styles";
-import {
-  CodeField,
-  Cursor,
-  useBlurOnFulfill,
-  useClearByFocusCell,
-} from "react-native-confirmation-code-field";
-function IdentifyScreen() {
-  const CELL_COUNT = 5;
-  const [value, setValue] = useState("");
-  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
-  });
 
+function IdentifyScreen() {
+  const navigator = useNavigation();
+  const [loading, setLoading] = useState<boolean>(false);
+  const CELL_COUNT = 5;
+  const ref = useBlurOnFulfill({
+    value: inputState.otpNumber,
+    cellCount: CELL_COUNT,
+  });
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value: inputState.otpNumber,
+    setValue: onOtpNumberChange,
+  });
+  useEffect(() => {
+    const disposer = autorun(() => {
+      if (inputState.otpNumber.length === 5) {
+        setLoading(true);
+        passwordlessVerify();
+      }
+    });
+    return () => {
+      return disposer();
+    };
+  }, []);
   return (
     <Container>
       <Scroller style={styles.container} scrollEnabled={false}>
@@ -38,9 +57,9 @@ function IdentifyScreen() {
           <View style={styles.title}>
             <Subheading>
               {"کد تایید برای شماره "}
-              <Subheading
-                style={styles.phoneNumber}
-              >{` (${inputState.phoneNumber}) `}</Subheading>
+              <Subheading style={styles.phoneNumber}>{` (${digitsEnToFa(
+                inputState.phoneNumber
+              )}) `}</Subheading>
               <Subheading>{"ارسال شد."}</Subheading>
             </Subheading>
             <Subheading style={styles.enterCodeText}>
@@ -56,6 +75,7 @@ function IdentifyScreen() {
             Icon={({ size, color }) => {
               return <TaskynIcon name={"pencil"} size={size} color={color} />;
             }}
+            onPress={navigator.goBack}
           >
             {"ویرایش شماره"}
           </Button>
@@ -64,8 +84,8 @@ function IdentifyScreen() {
           <CodeField
             ref={ref}
             {...props}
-            value={value}
-            onChangeText={setValue}
+            value={inputState.otpNumber}
+            onChangeText={onOtpNumberChange}
             cellCount={CELL_COUNT}
             rootStyle={styles.codeFieldRoot}
             keyboardType={"number-pad"}
@@ -74,10 +94,9 @@ function IdentifyScreen() {
               <View
                 key={index}
                 style={[styles.line, isFocused && styles.focusCell]}
+                onLayout={getCellOnLayoutHandler(index)}
               >
-                <Headline onLayout={getCellOnLayoutHandler(index)}>
-                  {symbol || (isFocused ? <Cursor /> : null)}
-                </Headline>
+                <Headline>{symbol || (isFocused ? <Cursor /> : null)}</Headline>
               </View>
             )}
           />
@@ -86,7 +105,13 @@ function IdentifyScreen() {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <Button mode={"contained"} rippleColor={"lightGrey"} size={"wide"}>
+          <Button
+            mode={"contained"}
+            loading={loading}
+            disabled={inputState.otpNumber.length !== 5}
+            rippleColor={"lightGrey"}
+            size={"wide"}
+          >
             {"ورود"}
           </Button>
         </View>
