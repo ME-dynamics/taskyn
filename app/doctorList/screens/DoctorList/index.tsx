@@ -1,13 +1,14 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { SearchBar, Touchable, Title, Tap, Subheading } from "../../../library";
+import { View } from "react-native";
+import { SearchBar, Title } from "../../../library";
+import { observer } from "mobx-react-lite";
 import { styles } from "./styles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { UserList } from "../../components/UserList";
 
-export function DoctorList() {
+function DoctorListScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
@@ -33,4 +34,5 @@ export function DoctorList() {
     </View>
   );
 }
-// export const Patients = observer(PatientList);
+
+export const DoctorList = observer(DoctorListScreen);
