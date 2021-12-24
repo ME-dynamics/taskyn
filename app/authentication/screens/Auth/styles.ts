@@ -37,8 +37,9 @@ export const styles = StyleSheet.create({
   termsContainer: {
     width: widthPercentageToDP(90),
     alignItems: "flex-start",
-    left: 6,
+    paddingLeft: 6,
     paddingTop: 10,
+    marginBottom: 16,
   },
   terms: {
     width: widthPercentageToDP("80"),
