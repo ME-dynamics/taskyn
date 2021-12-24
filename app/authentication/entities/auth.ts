@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import { entityTypes } from "../types"
+import { entityTypes } from "../types";
 export class AuthState {
   constructor() {
     makeObservable(this, {
@@ -16,7 +16,6 @@ export class AuthState {
       setRefreshExpire: action,
       setTokenExpire: action,
       loggedIn: computed,
-      otpMode: computed,
     });
   }
   refreshToken: string = "";
@@ -45,8 +44,5 @@ export class AuthState {
   }
   get loggedIn(): boolean {
     return !!this.refreshToken && !!this.token;
-  }
-  get otpMode(): boolean {
-    return !!this.otpToken;
   }
 }
