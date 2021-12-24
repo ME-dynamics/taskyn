@@ -48,7 +48,7 @@ export function buildRequest() {
     try {
       const controller = new AbortController();
       const { method, endpoint, body } = info;
-      timeoutId = setTimeout(() => controller.abort(), 2000);
+      timeoutId = setTimeout(() => controller.abort(), 4000);
       const response: Response = await fetch(`${serverUrl}${endpoint}`, {
         method,
         headers: {
@@ -56,7 +56,7 @@ export function buildRequest() {
           "Content-type": "application/json",
           Accept: "application/json",
           "Accept-Encoding": "gzip",
-          "x-jwt-payload": customerJwtPayload,
+          // "x-jwt-payload": customerJwtPayload,
         },
         body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal,
@@ -81,7 +81,7 @@ export function buildRequest() {
           success: false,
           httpStatus: 0,
           payload: undefined,
-          error: "خطای درخواست",
+          error: "سرور در زمان مناسب پاسخ گو نبود.",
         };
       }
       return {
