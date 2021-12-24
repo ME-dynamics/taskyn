@@ -160,6 +160,7 @@ function styleGenerator(args: IInputStyleGen) {
     },
     error: {
       width: "100%",
+      height: "100%",
       color: THEME.COLORS.ERROR,
       marginLeft: 8,
     },
