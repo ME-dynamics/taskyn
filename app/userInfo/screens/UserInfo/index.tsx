@@ -11,7 +11,8 @@ import { styles } from "./style";
 import { IUserInfoProps } from "./type";
 import { DropPicker } from "../../components/dropPicker";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-export function UserInfo(props: IUserInfoProps) {
+import { observer } from "mobx-react-lite";
+function UserInfoScreen(props: IUserInfoProps) {
   const { IInput, IButton, IDropPicker } = props;
   const [gender, setGender] = useState<"female" | "male" | null>(null);
   const [state, setState] = useState({
@@ -300,3 +301,5 @@ export function UserInfo(props: IUserInfoProps) {
     </View>
   );
 }
+
+export const UserInfo = observer(UserInfoScreen);
