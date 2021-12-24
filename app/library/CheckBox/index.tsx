@@ -30,13 +30,13 @@ function AnimatedCheckbox(props: ICheckBoxProps) {
   const animatedBoxProps = useAnimatedProps(
     () => ({
       stroke: interpolateColor(
-        Easing.bezier(0.16, 1, 0.3, 1)(progress.value),
+        progress.value,
         [0, 1],
         [THEME.COLORS.GREY.LIGHT, THEME.COLORS.PRIMARY.NORMAL],
         "RGB"
       ),
       fill: interpolateColor(
-        Easing.bezier(0.16, 1, 0.3, 1)(progress.value),
+        progress.value,
         [0, 1],
         ["#00000000", "#00000000"],
         "RGB"
@@ -44,7 +44,6 @@ function AnimatedCheckbox(props: ICheckBoxProps) {
     }),
     [THEME.COLORS.PRIMARY.NORMAL, THEME.COLORS.GREY.LIGHT]
   );
-
   return (
     <Svg viewBox={viewBox} width={size} height={size}>
       <Defs>
