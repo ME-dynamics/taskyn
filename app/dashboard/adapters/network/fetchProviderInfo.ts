@@ -8,7 +8,7 @@ export async function fetchProviderInfo(): Promise<IFetchProviderInfoResult> {
   });
   if (!success) {
     return {
-      error: error || "",
+      error: error,
       id: "",
       name: "",
       profilePictureUrl: "",
