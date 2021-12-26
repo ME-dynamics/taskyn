@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.PRIMARY.NORMAL,
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 101,
+    borderBottomLeftRadius: widthPercentageToDP(8),
+    borderBottomRightRadius: widthPercentageToDP(8),
   },
   card: {
     top: heightPercentageToDP("8"),
@@ -38,7 +39,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowColor: "black",
     elevation: 2,
-    overflow:"hidden",
+    overflow: "hidden",
   },
   scrollViewContainer: {
     flex: 1,
