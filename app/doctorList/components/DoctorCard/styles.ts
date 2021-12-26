@@ -1,41 +1,43 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../../library";
+
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP("96"),
-    height: 120,
+    width: THEME.WIDTH.WIDE,
+    height: 56,
     flexDirection: "row-reverse",
-    backgroundColor: "white",
-    borderRadius: 8,
-    elevation: 2,
-    overflow: "hidden",
-    marginVertical: 5,
+    alignSelf: "center",
+    marginVertical: 12,
   },
-  imageContainer: {
-    flex: 3,
+  emptyContainer: {
     alignItems: "center",
     justifyContent: "center",
   },
-  patientImage: {
-    width: 76,
-    height: 86,
-    borderRadius: 22 / 2,
-  },
-  infoContainer: {
-    flex: 9,
-  },
-  titleContainer: {
-    flex: 3,
-    justifyContent: "center",
-  },
-  descriptionContainer: {
-    flex: 1,
-    justifyContent: "flex-start",
+  cardContainer: {
+    flex: 2,
+    flexDirection: "row-reverse",
+    backgroundColor: "white",
+    borderRadius: 12,
   },
   buttonContainer: {
-    flex: 3,
-    alignItems:"flex-end",
-    justifyContent:"center",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  profileContainer: {
+    flex: 1,
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 16,
+  },
+  infoContainer: {
+    flex: 2,
+    alignItems: "flex-end",
+    justifyContent: "space-evenly",
   },
 });

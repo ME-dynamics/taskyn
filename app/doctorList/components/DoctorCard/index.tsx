@@ -1,47 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, THEME, Title } from "../../../library";
-import { styles } from "./styles";
-import { IDoctorsCardProps } from "./types";
-import { AntDesign } from "@expo/vector-icons";
+import { unknownImage } from "../../assets";
+import { Button, Caption, Paragraph } from "../../../library";
+import { doctorsState } from "../../entities";
+import { createRequest } from "../../usecases";
 
-export const DoctorCard = observer((props: IDoctorsCardProps) => {
-  const { image, name, description, onPress } = props;
-  const [select, setSelect] = useState(false);
+import { styles } from "./styles";
+import { IDoctorCardProps } from "../../types";
+
+function DoctorCardComponent(props: IDoctorCardProps) {
+  const { id, fullName, profileImageUrl, description, mode } = props;
+  async function onPress() {
+    if (mode === "doctors") {
+      await createRequest(id);
+    }
+  }
+  function renderButtonText() {
+    if (mode === "myDoctor") {
+      if (doctorsState.requestConfirmed) {
+        return "لغو اتصال";
+      }
+      return "در انتظار تایید";
+    }
+    return "درخواست اتصال";
+  }
+  if (!id) {
+    return (
+      <View style={[styles.container, styles.emptyContainer]}>
+        <Paragraph>{"دکتری برای شما پیدا نشد"}</Paragraph>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: image }} style={styles.patientImage} />
-      </View>
-      <View style={styles.infoContainer}>
-        <View style={styles.titleContainer}>
-          <Title>{name}</Title>
+      <View style={styles.cardContainer}>
+        <View style={styles.profileContainer}>
+          <Image
+            style={styles.profileImage}
+            source={{ uri: profileImageUrl }}
+            defaultSource={unknownImage}
+          />
         </View>
-        <View style={styles.descriptionContainer}>
+        <View style={styles.infoContainer}>
+          <Paragraph>{fullName}</Paragraph>
           <Caption>{description}</Caption>
         </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            mode={"text"}
-            // color={select ? THEME.COLORS.GREY.NORMAL : ""}
-            size={"small"}
-            rippleColor={"grey"}
-            onPress={() => {
-              setSelect(true);
-            }}
-            Icon={({ color, size }) => {
-              return (
-                <AntDesign name={"checkcircleo"} color={color} size={size} />
-              );
-            }}
-          >
-            {select ? "در انتظار تایید" 
-            : 
-            "اتصال به دکتر"}
-          </Button>
-        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          mode={"contained"}
+          rippleColor={"lightGrey"}
+          size={"extra-small"}
+          fullRadius
+          onPress={onPress}
+        >
+          {renderButtonText()}
+        </Button>
       </View>
     </View>
   );
-});
+}
+
+export const DoctorCard = observer(DoctorCardComponent);
