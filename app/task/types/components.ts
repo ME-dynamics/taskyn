@@ -9,3 +9,8 @@ export interface IIconButtonProps {
   onPress: () => void;
   Icon: (props: IIconProps) => ReactElement;
 }
+
+export interface ITaskMenuProps {
+  show: boolean;
+  onHidePress: () => void;
+}
