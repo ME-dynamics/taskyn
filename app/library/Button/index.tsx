@@ -1,12 +1,13 @@
-import React from "react";
+import React, { Ref } from "react";
 import { View } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
 import { Touchable } from "../Touchable";
 import { Paragraph } from "../Typography";
 import { Loading } from "./Loading";
 import { styleGen } from "./styles";
 import { IButtonProps } from "./types";
-function ButtonComponent(props: IButtonProps) {
+function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
   const {
     mode,
     bold,
@@ -37,7 +38,7 @@ function ButtonComponent(props: IButtonProps) {
         </View>
       )}
       {loading ? (
-        <Loading mode={mode} />
+        <Loading mode={mode} size={size} />
       ) : (
         <Paragraph numberOfLines={1} style={styles.text}>
           {children}
@@ -45,10 +46,12 @@ function ButtonComponent(props: IButtonProps) {
       )}
 
       {disabled ? null : (
-        <Touchable onPress={onPress} rippleColor={rippleColor} />
+        <Touchable ref={ref} onPress={onPress} rippleColor={rippleColor} />
       )}
     </View>
   );
 }
 
-export const Button = observer(ButtonComponent);
+export const Button = observer(ButtonComponent, {
+  forwardRef: true,
+});

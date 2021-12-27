@@ -7,8 +7,8 @@ import { activityStyleGen } from "./styles";
 import { IActivityProps } from "./types";
 
 function LoadingComponent(props: IActivityProps) {
-  const { mode } = props;
-  const { activityColor, styles } = activityStyleGen(mode);
+  const { mode, size } = props;
+  const { activityColor, styles } = activityStyleGen(mode, size);
   return (
     <ActivityIndicator
       style={styles.container}
