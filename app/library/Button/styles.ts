@@ -10,9 +10,14 @@ export const activityStyles = StyleSheet.create({
   },
 });
 
-export function activityStyleGen(mode: tMode) {
+export function activityStyleGen(mode: tMode, size: tSize) {
   const activityColor =
     mode === "contained" ? "white" : THEME.COLORS.PRIMARY.NORMAL;
+  const activityStyles = StyleSheet.create({
+    container: {
+      transform: [{ scale: size === "FAB" ? 1 : 0.8 }],
+    },
+  });
   return { activityColor, styles: activityStyles };
 }
 
@@ -29,6 +34,8 @@ function buttonHeightCalc(size: tSize) {
 
 function buttonMinWidthCalc(size: tSize) {
   switch (size) {
+    case "growWithText":
+      return 64;
     case "extra-small":
       return widthPercentageToDP(25); //91
     case "small":

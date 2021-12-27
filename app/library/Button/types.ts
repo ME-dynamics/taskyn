@@ -1,15 +1,29 @@
-import { ReactElement } from "react";
+import { ReactElement, Ref } from "react";
+import { RectButton } from "react-native-gesture-handler";
 
-export type tMode = "text" | "outlined" | "contained" | "contained-grey" | "contained-secondary";
+export type tMode =
+  | "text"
+  | "outlined"
+  | "contained"
+  | "contained-grey"
+  | "contained-secondary";
 
 interface IIconProps {
   color: string;
   size: number;
 }
 
-export type tSize = "extra-small" | "small" | "medium" | "big" | "wide" | "FAB";
+export type tSize =
+  | "growWithText"
+  | "extra-small"
+  | "small"
+  | "medium"
+  | "big"
+  | "wide"
+  | "FAB";
 
 export interface IButtonProps {
+  ref: Ref<RectButton>;
   mode: tMode;
   bold?: boolean;
   size: tSize;
@@ -27,6 +41,7 @@ export interface IButtonProps {
 
 export interface IActivityProps {
   mode: tMode;
+  size: tSize;
 }
 
 export interface IButtonStyles {
