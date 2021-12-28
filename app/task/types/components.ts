@@ -13,4 +13,14 @@ export interface IIconButtonProps {
 export interface ITaskMenuProps {
   show: boolean;
   onHidePress: () => void;
+  onEditPress: () => void;
+  onRemovePress: () => Promise<void>;
+}
+
+export interface ITaskItemProps {
+  id: string;
+  userId: string | undefined;
+  content: string;
+  done: boolean;
+  createdAt: string;
 }
