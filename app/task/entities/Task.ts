@@ -4,37 +4,36 @@ export class TaskState {
   constructor() {
     makeObservable(this, {
       tasks: observable,
-      newTask: observable,
-      taskValidation: observable,
-      setTaskValidation: action,
-      setNewTask: action,
       setTasks: action,
       addTask: action,
       updateTask: action,
+      updateEmptyTask: action,
       removeTask: action,
       setTaskDone: action,
       taskList: computed,
+      emptyTaskExist: computed,
     });
   }
-  newTask: string = "";
-  taskValidation: string[] = [];
   tasks: ITask[] = [];
-  setNewTask(content: string) {
-    this.newTask = content;
-  }
-  setTaskValidation(validations: string[]) {
-    this.taskValidation = validations;
-  }
   setTasks(list: ITask[]) {
     this.tasks = list;
   }
   addTask(task: ITask) {
-    this.tasks.unshift(task);
+    this.tasks.push(task);
   }
   updateTask(task: ITask) {
     for (let index = 0; index < this.tasks.length; index++) {
       const id = this.tasks[index].id;
       if (id === task.id) {
+        this.tasks[index] = task;
+        break;
+      }
+    }
+  }
+  updateEmptyTask(task: ITask, emptyId: string) {
+    for (let index = 0; index < this.tasks.length; index++) {
+      const id = this.tasks[index].id;
+      if (id === emptyId) {
         this.tasks[index] = task;
         break;
       }
@@ -74,5 +73,14 @@ export class TaskState {
     }
     // TODO: this line can be optimized further
     return done.concat(undone);
+  }
+  get emptyTaskExist() {
+    for (let index = 0; index < this.tasks.length; index++) {
+      const { content, createdAt, modifiedAt } = this.tasks[index];
+      if (!content && !createdAt && !modifiedAt) {
+        return true;
+      }
+    }
+    return false;
   }
 }
