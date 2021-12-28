@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, ScrollView } from "react-native";
+import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Container, Scroller, TaskynIcon } from "../../../library";
 import { getRole } from "../../../authentication";
@@ -20,11 +20,11 @@ function DashboardScreen() {
       <View style={styles.titleContainer}>
         <View style={styles.card}>
           <Card
-            id={""}
+            id={dashboardState.provider?.id || ""}
             name={role === "provider" ? "" : "نامشخص"}
             description={role ? "" : "نامشخص"}
             onPress={() => {
-              navigation.push("DoctorList");
+              navigation.push("doctorList");
             }}
             role={role}
           />
@@ -41,7 +41,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("Task");
+                navigation.push("tasks");
               }}
             />
             <Tile
@@ -52,7 +52,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("UserInfo");
+                navigation.push("userInfo");
               }}
             />
           </View>
@@ -65,7 +65,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("Form");
+                navigation.push("form");
               }}
             />
             <Tile
@@ -81,7 +81,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("FormsHistory");
+                navigation.push("formsHistory");
               }}
             />
           </View>
