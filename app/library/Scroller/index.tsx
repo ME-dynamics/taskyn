@@ -38,8 +38,8 @@ function ScrollerComponent(
   if (keyboard) {
     return (
       <KeyboardAwareScrollView
-        ref={ref}
         {...props}
+        ref={ref}
         style={[
           styles.container,
           isRtlHorizontal ? styles.rtlScrollView : undefined,
@@ -52,8 +52,8 @@ function ScrollerComponent(
   }
   return (
     <ScrollView
-      ref={ref}
       {...props}
+      ref={ref}
       style={[
         styles.container,
         isRtlHorizontal ? styles.rtlScrollView : undefined,
