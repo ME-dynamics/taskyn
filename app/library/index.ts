@@ -11,6 +11,7 @@ export { openCamera, openCropper, openGallery } from "./cropPicker";
 export { Logo } from "./Logo";
 export { Container } from "./Container";
 export { Scroller } from "./Scroller";
+export { tScrollerRef } from "./Scroller/types";
 export { IconButton } from "./IconButton";
 export { toJalaaliDate } from "./toJalaaliDate";
 export { toString } from "./toString";
