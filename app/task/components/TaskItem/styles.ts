@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { THEME } from "../../../library";
 import { material } from "react-native-typography";
-import { widthPercentageToDP } from "react-native-responsive-screen";
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,31 +8,38 @@ export const styles = StyleSheet.create({
     minHeight: 110,
     backgroundColor: "white",
     borderRadius: 6,
-    elevation: 3,
+    elevation: 2,
     marginVertical: 12,
   },
   textContainer: {
-    paddingTop: 10,
-    minHeight: 50,
+    width: "100%",
+    minHeight: 56,
+    paddingTop: 8,
     paddingHorizontal: 16,
   },
-
-  dateContainer: {
-    height: 30,
-    alignItems: "flex-end",
+  header: {
+    height: 32,
     flexDirection: "row-reverse",
+    alignItems: "center",
     justifyContent: "space-between",
-    marginLeft: 8,
-    marginRight: 8,
+    marginHorizontal: 8,
   },
-  buttonContainer: {
-    height: 30,
-    right: 20,
-    alignItems: "flex-start",
+  footer: {
+    height: 46,
+    alignItems: "center",
     justifyContent: "center",
   },
-  buttonContainerEdit: { justifyContent: "space-evenly" },
-  buttonContainerDone: { justifyContent: "flex-end", paddingRight: 4 },
+  doneParagraph: {
+    color: THEME.COLORS.GREEN,
+    alignSelf: "flex-start",
+    marginLeft: 12,
+  },
+  makeDoneContainer: {
+    alignSelf: "flex-start",
+  },
+  makeDoneParagraph: {
+    color: THEME.COLORS.SECONDARY.NORMAL,
+  },
   textInput: {
     ...material.body1Object,
     fontFamily: THEME.FONTS.REGULAR,
@@ -41,18 +47,7 @@ export const styles = StyleSheet.create({
     margin: 0,
     lineHeight: 24,
   },
-  popUp: {
-    position: "absolute",
-    borderRadius: 12,
-    height: 80,
-    width: widthPercentageToDP(34),
-    backgroundColor: "white",
-    elevation: 10,
-    right: 16,
-    top: 24,
-    zIndex: 2,
-    overflow: "hidden",
-  },
 });
 
 export const selectionColor = THEME.COLORS.PRIMARY.DARK;
+export const menuColor = THEME.COLORS.GREY.DARK;

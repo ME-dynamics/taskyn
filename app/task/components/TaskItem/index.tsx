@@ -1,149 +1,144 @@
 import React, { useState, useRef } from "react";
 import { View, TextInput } from "react-native";
 import { observer } from "mobx-react-lite";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { Caption, Button, TaskynIcon, Tap, THEME } from "../../../library";
-import { taskDone, updateTask, removeTask } from "../../usecases";
-import { styles, selectionColor } from "./styles";
-import { ITaskItemProps } from "./type";
+import {
+  Caption,
+  Button,
+  TaskynIcon,
+  IconButton,
+  Paragraph,
+} from "../../../library";
+import { taskDone, updateTask, removeTask, createTask } from "../../usecases";
+import { TaskMenu } from "../TaskMenu";
+import { styles, selectionColor, menuColor } from "./styles";
+import { ITaskItemProps } from "../../types";
 
 function TaskItemComponent(props: ITaskItemProps) {
-  const { id, content, done, createdAt, onTaskInputBlur, onTaskInputFocus } =
-    props;
+  const { id, userId, content, done, createdAt } = props;
+  const isEmpty = !content && !createdAt;
   const [showMenu, setShowMenu] = useState(false);
 
-  const [edit, setEdit] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(!content && !createdAt);
   const [doneLoading, setDoneLoading] = useState<boolean>(false);
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
-  const [removeLoading, setRemoveLoading] = useState<boolean>(false);
-  const [tempContent, setTempContent] = useState(content); // FIXME: observable must change to plain js data structure using toJS()
+  const [upsertTaskLoading, setUpsertTaskLoading] = useState<boolean>(false);
+  const [tempContent, setTempContent] = useState(content);
   const inputRef = useRef<TextInput>(null);
   function onEditPress() {
+    setShowMenu(false);
     setEdit(true);
     if (inputRef?.current) {
       inputRef.current.focus();
     }
   }
-  async function onClose() {
-    if (edit) {
-      setEdit(false);
-      setTempContent(content);
-      return;
-    }
-    setRemoveLoading(true);
+  async function onRemovePress() {
     await removeTask(id);
   }
   async function onDone() {
-    if (edit) {
-      setUpdateLoading(true);
-      await updateTask({ taskId: id, content: tempContent, userId: undefined });
-      setUpdateLoading(false);
-      setEdit(false);
-      return;
-    }
     try {
       setDoneLoading(true);
       await taskDone(id);
       setDoneLoading(false);
     } catch (error) {}
   }
-  function renderEdit() {
-    return (
-      <>
-        <Button
-          mode={"text"}
-          size={"extra-small"}
-          rippleColor={"grey"}
-          loading={edit ? updateLoading : doneLoading}
-          onPress={onDone}
-        >
-          {edit ? "ثبت" : "اتمام"}
-        </Button>
-      </>
-    );
+  async function onUpdatePress() {
+    setUpsertTaskLoading(true);
+    await updateTask({ taskId: id, content: tempContent, userId });
+    setUpsertTaskLoading(false);
+    setEdit(false);
+  }
+  async function onCreatePress() {
+    setUpsertTaskLoading(true);
+    await createTask(id, tempContent);
+    setUpsertTaskLoading(false);
+    setEdit(false);
   }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.dateContainer}>
-        <Tap
-          onPress={() => {
-            setShowMenu(!showMenu);
-          }}
+  function renderFooter() {
+    if (edit) {
+      if (content) {
+        return (
+          <Button
+            mode={"contained"}
+            size={"big"}
+            loading={upsertTaskLoading}
+            rippleColor={"lightGrey"}
+            onPress={onUpdatePress}
+          >
+            {"بروزرسانی تمرین"}
+          </Button>
+        );
+      } else {
+        return (
+          <Button
+            mode={"contained"}
+            size={"big"}
+            loading={upsertTaskLoading}
+            rippleColor={"lightGrey"}
+            onPress={onCreatePress}
+          >
+            {"اضافه کردن تمرین"}
+          </Button>
+        );
+      }
+    }
+    if (done) {
+      return <Paragraph style={styles.doneParagraph}>{"انجام دادم"}</Paragraph>;
+    }
+    return (
+      <View style={styles.makeDoneContainer}>
+        <Button
+          mode={"text"}
+          size={"growWithText"}
+          loading={doneLoading}
+          rippleColor={"lightGrey"}
+          onPress={onDone}
         >
-          <TaskynIcon name={"menu"} size={24} color={THEME.COLORS.GREY.NORMAL} />
-        </Tap>
-        <Caption>{createdAt}</Caption>
+          {"اتمام"}
+        </Button>
       </View>
-      <View style={styles.textContainer}>
-        <TextInput
-          onFocus={onTaskInputFocus}
-          onBlur={onTaskInputBlur}
-          ref={inputRef}
-          style={styles.textInput}
-          onChangeText={setTempContent}
-          value={tempContent}
-          multiline={true}
-          selectionColor={selectionColor}
-          editable={edit}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        {done ? (
-          <Button
-            mode={"text"}
-            size={"small"}
-            rippleColor={"grey"}
-            disabled
-            Icon={({ color, size }) => {
-              return (
-                <Ionicons name="checkmark-done" size={size} color={color} />
-              );
+    );
+  }
+  return (
+    <>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <IconButton
+            color={menuColor}
+            onPress={() => {
+              setShowMenu(true);
             }}
-          >
-            {"انجام شد"}
-          </Button>
-        ) : (
-          renderEdit()
-        )}
-      </View>
-      {showMenu ? (
-        <View style={styles.popUp}>
-          <Button
-            mode={"text"}
-            rippleColor={"lightGrey"}
-            size={"small"}
-            Icon={() => {
-              return (
-                <TaskynIcon
-                  name={"pencil"}
-                  size={24}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-              );
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"menu"} size={size} color={color} />;
             }}
-          >
-            {"ویرایش"}
-          </Button>
-          <Button
-            mode={"text"}
-            rippleColor={"lightGrey"}
-            size={"small"}
-            Icon={() => {
-              return (
-                <TaskynIcon
-                  name={"trash"}
-                  size={24}
-                  color={THEME.COLORS.PRIMARY.NORMAL}
-                />
-              );
-            }}
-          >
-            {"حذف"}
-          </Button>
+          />
+          <Caption>{createdAt}</Caption>
         </View>
-      ) : null}
-    </View>
+        <View style={styles.textContainer}>
+          <TextInput
+            ref={inputRef}
+            style={styles.textInput}
+            onChangeText={setTempContent}
+            placeholder={"تمرین خود را وارد کنید ..."}
+            value={tempContent}
+            multiline={true}
+            selectionColor={selectionColor}
+            editable={edit}
+          />
+        </View>
+        <View style={styles.footer}>{renderFooter()}</View>
+        {showMenu ? (
+          <TaskMenu
+            show={showMenu}
+            onHidePress={() => {
+              setShowMenu(false);
+            }}
+            onEditPress={onEditPress}
+            onRemovePress={onRemovePress}
+          />
+        ) : null}
+      </View>
+      {isEmpty ? <View style={{ width: "100%", height: 84 }} /> : null}
+    </>
   );
 }
 
