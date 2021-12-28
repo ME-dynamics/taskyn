@@ -1,6 +1,6 @@
 import { secureStorage, storage } from "../storage";
 import { netInfoState } from "../netInfo";
-import { serverUrl, customerJwtPayload, providerJwtPayload } from "./constant";
+import { serverUrl } from "./constant";
 import { IRequest, IResponse } from "./types";
 
 export function buildRequest() {
@@ -48,11 +48,13 @@ export function buildRequest() {
     try {
       const controller = new AbortController();
       const { method, endpoint, body } = info;
+      const url = `${serverUrl}${endpoint}`;
+      const token = `Bearer ${await getJwtToken()}`;
       timeoutId = setTimeout(() => controller.abort(), 4000);
-      const response: Response = await fetch(`${serverUrl}${endpoint}`, {
+      const response: Response = await fetch(url, {
         method,
         headers: {
-          Authorization: (await getJwtToken()) || "no-token",
+          Authorization: token,
           "Content-type": "application/json",
           Accept: "application/json",
           "Accept-Encoding": "gzip",
@@ -63,8 +65,17 @@ export function buildRequest() {
       });
 
       clearTimeout(timeoutId);
-      const data = await response.json();
       const { ok, status } = response;
+      if (!ok && status === 401) {
+        return {
+          success: false,
+          error: "توکن کاربری منقضی شده.",
+          httpStatus: status,
+          payload: undefined,
+        };
+      }
+
+      const data = await response.json();
       return {
         success: ok,
         httpStatus: status,
