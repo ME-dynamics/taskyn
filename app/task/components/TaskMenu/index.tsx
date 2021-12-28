@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { RectButton } from "react-native-gesture-handler";
 import Animated, {
@@ -14,7 +14,13 @@ import { styles } from "./styles";
 import { ITaskMenuProps } from "../../types";
 
 function TaskMenuComponent(props: ITaskMenuProps) {
-  const { show, onHidePress } = props;
+  const { show, onHidePress, onEditPress, onRemovePress } = props;
+  const [removeLoading, setRemoveLoading] = useState<boolean>(false);
+  async function onRemove() {
+    setRemoveLoading(true);
+    await onRemovePress();
+    setRemoveLoading(false);
+  }
   const animation = useSharedValue(0);
   useEffect(() => {
     if (show) {
@@ -57,22 +63,19 @@ function TaskMenuComponent(props: ITaskMenuProps) {
           Icon={({ size, color }) => {
             return <TaskynIcon name={"pencil"} color={color} size={size} />;
           }}
-          onPress={() => {
-            console.log("pressed edit");
-          }}
+          onPress={onEditPress}
         >
           {"ویرایش"}
         </Button>
         <Button
           mode={"text"}
           size={"small"}
+          loading={removeLoading}
           rippleColor={"lightGrey"}
           Icon={({ size, color }) => {
             return <TaskynIcon name={"trash"} color={color} size={size} />;
           }}
-          onPress={() => {
-            console.log("pressed delete");
-          }}
+          onPress={onRemove}
         >
           {"حذف"}
         </Button>
