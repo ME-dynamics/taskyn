@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Input, TaskynIcon } from "../../../library";
+import { Button, Container, Scroller, tScrollerRef } from "../../../library";
 import { TaskItem } from "../../components/TaskItem";
 import { taskState } from "../../entities";
-import { retrieveTasks, createTask, onNewTaskChange } from "../../usecases";
+import { retrieveTasks, addEmptyTask } from "../../usecases";
 import { styles } from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
 import { Entypo } from "@expo/vector-icons";
 function TasksScreen() {
-  const [focused, setFocus] = useState<boolean>(false);
-  function onTaskInputFocus() {
-    setFocus(true);
+  const scrollRef = useRef<tScrollerRef>(null);
+  function onNewTaskPress() {
+    addEmptyTask();
+    scrollRef.current?.scrollToEnd({ animated: true });
   }
-  function onTaskInputBlur() {
-    setFocus(false);
-  }
+  
   function renderTaskItems() {
-    const components = [];
+    const components: JSX.Element[] = [];
     for (let index = 0; index < taskState.taskList.length; index++) {
       const { id, content, done, createdAt } = taskState.taskList[index];
       components.push(
         <TaskItem
           key={id}
           id={id}
+          userId={undefined} // TODO: get user id from  navigation
           content={content}
           done={done}
           createdAt={createdAt}
-          onTaskInputBlur={onTaskInputBlur}
-          onTaskInputFocus={onTaskInputFocus}
         />
       );
     }
@@ -41,30 +38,16 @@ function TasksScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={{ flex: 1 }}
+    <Container>
+      <Scroller
+        ref={scrollRef}
         contentContainerStyle={styles.containerContentStyle}
-        
+        keyboard
+        enableOnAndroid
+        extraHeight={256}
       >
-        {/* {focused ? null : (
-        <View style={styles.inputContainer}>
-          <Input
-            mode={"flat"}
-            value={taskState.newTask}
-            onChangeText={onNewTaskChange}
-            title={"اضافه کردن تمرین : "}
-            placeholder={"تمرین جدید را وارد کنید."}
-            // validation={taskState.taskValidation}
-          />
-        </View>
-      )} */}
-        <View style={styles.taskContainer}>{renderTaskItems()}</View>
-        <View style={styles.line} />
-        {/* {focused ? null : ( */}
-
-        {/* )} */}
-      </ScrollView>
+        {renderTaskItems()}
+      </Scroller>
       <View style={[styles.buttonContainer]}>
         <Button
           mode={"contained"}
@@ -74,12 +57,12 @@ function TasksScreen() {
             return <Entypo name="plus" size={24} color="white" />;
           }}
           fullRadius
-          onPress={createTask}
+          onPress={onNewTaskPress}
         >
           {"افزودن تمرین جدید"}
         </Button>
       </View>
-    </View>
+    </Container>
   );
 }
 
