@@ -1,6 +1,1 @@
-export const serverUrl = "https://tidy-mouse-49.loca.lt/api/v1";
-
-export const customerJwtPayload =
-  "eyJjdXN0b21lciI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly90YXNreW4uaXIiLCJzdWIiOiJlZDdmMGJhZS00YmUzLTQ4NDYtYTI2My01NDM1YTA4YzlmMTYiLCJhdWQiOiJ0YXNreW4iLCJqdGkiOiJfYmdLdTIiLCJpYXQiOjE2MzUzMjg0MjIsIm5iZiI6MTYzNTMyODQyMiwiZXhwIjoxNjQxMzI4NDIyfQ";
-export const providerJwtPayload =
-  "eyJwcm92aWRlciI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly90YXNreW4uaXIiLCJzdWIiOiIyNmE0YzQ2NC02MDQ2LTQ0ZTctODViZC01ZjZhZDQ1MjcyMzkiLCJhdWQiOiJ0YXNreW4iLCJqdGkiOiJfbnR3TU0iLCJpYXQiOjE2MzU1MjQxNDIsIm5iZiI6MTYzNTUyNDE0MiwiZXhwIjoxNjQxNTI0MTQyfQ";
+export const serverUrl = "https://white-baboon-3.loca.lt/api/v1";
