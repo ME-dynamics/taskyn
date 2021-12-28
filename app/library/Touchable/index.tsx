@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Ref } from "react";
 import { StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
@@ -6,7 +6,7 @@ import { THEME } from "../theme";
 
 import { ITouchableProps } from "./types";
 
-function TouchableComponent(props: ITouchableProps) {
+function TouchableComponent(props: ITouchableProps, ref: Ref<RectButton>) {
   const { rippleColor, onPress } = props;
   let color: string;
   switch (rippleColor) {
@@ -24,6 +24,7 @@ function TouchableComponent(props: ITouchableProps) {
   }
   return (
     <RectButton
+      ref={ref}
       onPress={onPress}
       rippleColor={color}
       style={StyleSheet.absoluteFill}
@@ -31,4 +32,4 @@ function TouchableComponent(props: ITouchableProps) {
   );
 }
 
-export const Touchable = observer(TouchableComponent);
+export const Touchable = observer(TouchableComponent, { forwardRef: true });
