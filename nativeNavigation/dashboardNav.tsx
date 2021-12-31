@@ -24,7 +24,7 @@ function DashboardNavigation() {
       <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
       <DashboardStack.Screen name={"tasks"} component={Tasks} />
       {role === "provider" ? (
-        <DashboardStack.Screen name={"tasks"} component={Note} />
+        <DashboardStack.Screen name={"notes"} component={Note} />
       ) : null}
     </DashboardStack.Navigator>
   );
