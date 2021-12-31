@@ -9,6 +9,7 @@ export class Doctors {
       requestConfirmed: observable,
       setDoctors: action,
       setMyDoctor: action,
+      setRequestConfirmed: action,
     });
   }
   doctors: IUser[] = [];
