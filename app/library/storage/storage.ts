@@ -1,33 +1,26 @@
-import { MMKV } from "react-native-mmkv";
-const mmkv = new MMKV();
-function remove(key: string): void {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+async function remove(key: string): Promise<void> {
   try {
-    mmkv.delete(key);
+    await AsyncStorage.removeItem(key);
   } catch (error) {
     // send error to sentry
   }
 }
 
-function retrieve(key: string, type: "string" | "number" | "boolean") {
+async function retrieve(key: string): Promise<string | undefined> {
   try {
-    if (type === "string") {
-      return mmkv.getString(key);
-    }
-    if (type === "number") {
-      return mmkv.getNumber(key);
-    }
-    if (type === "boolean") {
-      return mmkv.getBoolean(key);
-    }
+    const result = await AsyncStorage.getItem(key);
+    return result ? result : undefined;
   } catch (error) {
     // send error to sentry
     return undefined;
   }
 }
 
-function add(key: string, value: string | number | boolean) {
+async function add(key: string, value: string): Promise<void> {
   try {
-    mmkv.set(key, value);
+    await AsyncStorage.setItem(key, value);
   } catch (error) {
     // send error to sentry
   }

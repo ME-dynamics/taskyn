@@ -11,8 +11,8 @@ async function silentRefresh() {
     authState.tokenExpiresAt &&
     authState.tokenExpiresAt < Date.now() - 4000
   ) {
-    const userId = storage.retrieve("userId", "string");
-    if (typeof userId === "string") {
+    const userId = await storage.retrieve("userId");
+    if (userId) {
       const {
         error,
         shouldLogout,
@@ -33,18 +33,19 @@ async function silentRefresh() {
           await Promise.all([
             secureStorage.remove("token"),
             secureStorage.remove("refresh_token"),
+            storage.remove("token_expires_at"),
+            storage.remove("refresh_expires_at"),
+            storage.remove("role"),
           ]);
-          storage.remove("token_expires_at");
-          storage.remove("refresh_expires_at");
-          storage.remove("role");
         }
       }
       await Promise.all([
         secureStorage.add("token", jwtToken),
         secureStorage.add("refresh_token", refreshToken),
+        storage.add("token_expires_at", `${jwtExpires}`),
+        storage.add("refresh_expires_at", `${refreshExpires}`),
       ]);
-      storage.add("token_expires_at", jwtExpires);
-      storage.add("refresh_expires_at", refreshExpires);
+
       authState.setToken(jwtToken);
       authState.setRefreshToken(refreshToken);
       authState.setRefreshExpire(jwtExpires);
