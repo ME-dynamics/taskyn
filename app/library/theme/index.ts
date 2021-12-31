@@ -2,6 +2,7 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 
 const COLORS = {
   PRIMARY: {
+    WHITEN_LIGHT: "#f0e5ff",
     LIGHT: "#8783fd",
     NORMAL: "#5256c9",
     DARK: "#082d97",
@@ -17,11 +18,12 @@ const COLORS = {
     INPUT_SELECTION: "rgba(82, 86, 201, 0.7)",
     GREY: "rgba(112,112,112,0.2)",
     WHITE: "rgba(255,255,255, 0.7)",
+    RED: "rgba(219, 45, 30, 0.2)",
   },
   BLACK: {
     LIGHT: "#484848",
     NORMAL: "#212121",
-    DARK: "#000000"
+    DARK: "#000000",
   },
   GREY: {
     LIGHT: "#cfcfcf",
