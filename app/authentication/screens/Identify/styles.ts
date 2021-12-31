@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     width: widthPercentageToDP(80),
     height: heightPercentageToDP(12),
     alignSelf: "center",
+    paddingRight: widthPercentageToDP(2),
   },
   textButtonContainer: {
     width: widthPercentageToDP(90),
@@ -53,7 +54,7 @@ export const styles = StyleSheet.create({
     color: THEME.COLORS.PRIMARY.NORMAL,
   },
   enterCodeText: {
-    paddingTop: 12
+    paddingTop: 12,
   },
   line: {
     width: 40,
