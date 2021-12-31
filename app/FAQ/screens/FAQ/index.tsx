@@ -4,7 +4,7 @@ import { Logo, Paragraph } from "../../../library";
 import { Questions } from "../../components/Questions";
 import { styles } from "./styles";
 
-export function FrequentlyQuestions() {
+export function FAQ() {
   return (
     <ScrollView
       style={styles.container}

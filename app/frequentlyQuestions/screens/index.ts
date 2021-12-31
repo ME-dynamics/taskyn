@@ -1,1 +1,0 @@
-export { FrequentlyQuestions } from "./FrequentlyQuestions"
