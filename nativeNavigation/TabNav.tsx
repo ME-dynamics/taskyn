@@ -1,11 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { DashboardNav } from "./dashboardNav";
-import { Profile } from "../app/profile";
+import { profileNav } from "./profileNav";
 import { getRole } from "../app/authentication";
 import { TaskynIcon, THEME } from "../app/library";
 import { FormList } from "../app/formList/screens/formList";
-import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,12 +20,12 @@ export function TabNav() {
     >
       <Tab.Screen
         name="ProfileTab"
-        component={Profile}
+        component={profileNav}
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <TaskynIcon name={"instagram"} size={size} color={color} svg />
+            <TaskynIcon name={"profile"} size={size} color={color} svg />
           ),
         }}
       />
@@ -37,7 +36,7 @@ export function TabNav() {
         options={{
           tabBarLabel: "فرم",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="clipboard-list" color={color} size={size} />
+            <TaskynIcon name={"document"} color={color} size={size} />
           ),
         }}
       />
@@ -47,7 +46,7 @@ export function TabNav() {
         options={{
           tabBarLabel: role === "provider" ? "بیماران" : "داشبورد",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <TaskynIcon name={"home"} color={color} size={size} />
           ),
         }}
       />
