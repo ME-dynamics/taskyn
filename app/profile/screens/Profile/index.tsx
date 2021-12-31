@@ -1,196 +1,99 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import { View, Image, Alert } from "react-native";
-import { Button, Subheading, Tap, Title } from "../../../library";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { View, Alert } from "react-native";
+import { observer } from "mobx-react-lite";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { Container, Headline, TaskynIcon } from "../../../library";
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import {
-  MaterialIcons,
-  AntDesign,
-  Ionicons,
-  Feather,
-} from "@expo/vector-icons";
-import { MenuItem } from "../../components/MenuItem";
+import { MenuItem, Avatar, CustomBackdrop, ExitSheet } from "../../components";
 import { styles } from "./styles";
-import { IIconProps } from "./types";
-import { Headline } from "../../../library";
-import BottomSheet, {
-  BottomSheetBackdropProps,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
-import { widthPercentageToDP } from "react-native-responsive-screen";
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-} from "react-native-reanimated";
-const CustomBackdrop = ({ animatedIndex, style }: BottomSheetBackdropProps) => {
-  // animated variables
-  const containerAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      animatedIndex.value,
-      [0, 1],
-      [0, 1],
-      Extrapolate.CLAMP
-    ),
-  }));
 
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      style,
-      {
-        backgroundColor: "rgba(0, 0, 0, 0.36)",
-      },
-      containerAnimatedStyle,
-    ],
-    [style, containerAnimatedStyle]
-  );
-
-  return <Animated.View style={containerStyle} />;
-};
-export const Profile = () => {
+function ProfileScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const snapPoints = useMemo(() => ["30%", "30%"], []);
 
-  const handleSnapPress = useCallback(() => {
+  const close = useCallback(() => {
     bottomSheetRef.current?.close();
   }, []);
   const onCollapsePress = useCallback(() => {
     bottomSheetRef.current?.collapse();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
 
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const renderSupportAgent = (props: IIconProps) => {
-    const { color, size } = props;
-    return <MaterialIcons name={"support-agent"} size={size} color={color} />;
-  };
-  const renderInfocirlceo = (props: IIconProps) => {
-    const { color, size } = props;
-    return <AntDesign name={"infocirlceo"} size={size} color={color} />;
-  };
-  const renderQuestiOnCircleo = (props: IIconProps) => {
-    const { color, size } = props;
-    return <AntDesign name={"questioncircleo"} size={size} color={color} />;
-  };
-  const renderExitOutline = (props: IIconProps) => {
-    const { color, size } = props;
-    return <Ionicons name={"exit-outline"} size={size} color={"#B71C1C"} />;
-  };
-  const renderClipboardNotes = (props: IIconProps) => {
-    const { color, size } = props;
-    return <Feather name="file-text" size={size} color={color} />;
-  };
   return (
-    <View style={styles.container}>
+    <Container>
       <View style={styles.header}>
-        <Headline style={[styles.title, { top: 14 }]}>{"پروفایل"}</Headline>
-        <Image
-          style={styles.avatar}
-          source={require("../../../../assets/image/unknown.png")}
-        />
-        <Headline style={[styles.title, { bottom: 14 }]}>
-          {"سجاد سیف اله"}
-        </Headline>
+        <Headline>{"پروفایل"}</Headline>
+        <Avatar size={96} uri={""} />
+        <Headline>{"سجاد سیف اله"}</Headline>
       </View>
-      <View style={styles.bodyContainer}>
+      <View style={styles.menuContainer}>
         <MenuItem
-          Icon={renderSupportAgent}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"profile"} size={size} color={color} />;
+          }}
           title="ویرایش پروفایل"
           onPress={() => navigation.push("EditProfile")}
-          line={true}
+          line
         />
         <MenuItem
-          Icon={renderInfocirlceo}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"headphones"} size={size} color={color} />;
+          }}
           title="پشتیبانی"
           onPress={() => navigation.push("Support")}
-          line={true}
+          line
         />
         <MenuItem
-          Icon={renderInfocirlceo}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"info"} size={size} color={color} />;
+          }}
           title="درباره ما"
           onPress={() => {
             navigation.push("AboutUs");
           }}
-          line={true}
+          line
         />
         <MenuItem
-          Icon={renderQuestiOnCircleo}
+          Icon={({ size, color }) => {
+            return (
+              <TaskynIcon name={"help-circle"} size={size} color={color} />
+            );
+          }}
           title="سوالات متداول"
-          onPress={() => navigation.push("FrequentlyQuestions")}
-          line={true}
+          onPress={() => navigation.push("FAQ")}
+          line
         />
         <MenuItem
-          Icon={renderClipboardNotes}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"law"} size={size} color={color} />;
+          }}
           title="شرایط و قوانین"
           onPress={() => Alert.alert("hi1")}
-          line={true}
+          line
         />
 
         <MenuItem
-          Icon={renderExitOutline}
-          style={{ backgroundColor: "#E7D9D8" }}
-          title="خروج از حساب کاربری"
-          onPress={() => {
-            onCollapsePress();
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"logout"} size={size} color={color} />;
           }}
-          line={false}
+          title="خروج از حساب کاربری"
+          onPress={onCollapsePress}
+          line
+          logout
         />
       </View>
       <BottomSheet
         ref={bottomSheetRef}
-        index={-1}
         snapPoints={snapPoints}
-        // onChange={handleSheetChanges}
         backdropComponent={CustomBackdrop}
-        enablePanDownToClose={true}
+        index={-1}
+        enablePanDownToClose
       >
-        <BottomSheetView
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "flex-start",
-          }}
-        >
-          <View style={{ width: widthPercentageToDP(90), top: 10 }}>
-            <Title style={{ textAlign: "center" }}>
-              {"خروج از حساب کاربری"}
-            </Title>
-            <Subheading style={{ textAlign: "center", top: 10 }}>
-              {"آیا میخواهید از حساب خود خارج شوید؟"}
-            </Subheading>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row-reverse",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-              top: 40,
-            }}
-          >
-            <Button
-              mode={"contained-grey"}
-              size={"medium"}
-              rippleColor={"lightGrey"}
-              onPress={() => {
-                handleSnapPress();
-              }}
-            >
-              {"انصراف"}
-            </Button>
-            <Button
-              mode={"contained"}
-              size={"medium"}
-              rippleColor={"lightGrey"}
-            >
-              {"ادامه میدهم"}
-            </Button>
-          </View>
-        </BottomSheetView>
+        <ExitSheet onCancelPress={close} />
       </BottomSheet>
-    </View>
+    </Container>
   );
-};
+}
+
+export const Profile = observer(ProfileScreen);
