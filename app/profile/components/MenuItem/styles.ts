@@ -1,49 +1,49 @@
 import { StyleSheet } from "react-native";
+import memoize from "fast-memoize";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 
-export const styles = StyleSheet.create({
-  container: {
-    width: widthPercentageToDP(90),
-    height: 60,
-    paddingTop:10,
-    // paddingLeft: 14,
-    // paddingRight: 10,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 16,
-    backgroundColor: "#EEE5FF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  collapsedContainer: {
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  plainHeight: {
-    // height: 72,
-  },
-  text: {
-    color: "black",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 200,
-    marginVertical: 2,
-    letterSpacing: 0.4,
-  },
-  line: {
-    width: widthPercentageToDP("90"),
-    height: 1,
-    backgroundColor: "#F2F2F2",
-  },
-  title: {
-    flex: 1,
-    alignItems: "flex-end",
-    paddingRight: 26,
-  },
-});
+function styleGenerator(logout: boolean | undefined) {
+  const styles = StyleSheet.create({
+    container: {
+      width: widthPercentageToDP(100),
+      backgroundColor: "white",
+      height: 60,
+      paddingHorizontal: widthPercentageToDP(5),
+    },
+    menuContainer: {
+      flex: 1,
+      flexDirection: "row-reverse",
+      alignItems: "center",
+    },
+    iconContainer: {
+      width: 40,
+      height: 40,
+      borderRadius: 16,
+      backgroundColor: logout
+        ? THEME.COLORS.TRANSPARENT.RED
+        : THEME.COLORS.TRANSPARENT.PRIMARY,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    itemText: {
+      paddingRight: 16,
+    },
+    line: {
+      width: widthPercentageToDP("90"),
+      height: StyleSheet.hairlineWidth,
+      backgroundColor: THEME.COLORS.GREY.LIGHT,
+      alignSelf: "center",
+    },
+  });
+  const iconStyle = {
+    color: logout ? THEME.COLORS.RED.NORMAL : THEME.COLORS.PRIMARY.NORMAL,
+    size: 24,
+  };
+  return {
+    styles,
+    iconStyle,
+  };
+}
+
+export const styleGen = memoize(styleGenerator);
