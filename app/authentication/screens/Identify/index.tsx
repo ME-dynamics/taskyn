@@ -21,12 +21,17 @@ import {
   TaskynIcon,
 } from "../../../library";
 import { inputState } from "../../entities";
-import { onOtpNumberChange, passwordlessVerify } from "../../usecases";
+import {
+  onOtpNumberChange,
+  passwordlessVerify,
+  passwordlessStart,
+} from "../../usecases";
 import { styles, logoSize } from "./styles";
 
 function IdentifyScreen() {
   const navigator = useNavigation();
   const [loading, setLoading] = useState<boolean>(false);
+  const [timerEnded, setTimerEnd] = useState<boolean>(false);
   const CELL_COUNT = 5;
   const ref = useBlurOnFulfill({
     value: inputState.otpNumber,
@@ -47,27 +52,32 @@ function IdentifyScreen() {
       return disposer();
     };
   }, []);
+  function onTimerEnd() {
+    setTimerEnd(true);
+  }
+  async function onResendPress() {
+    await passwordlessStart();
+    setTimerEnd(false);
+  }
   return (
     <Container>
       <Scroller style={styles.container} scrollEnabled={false}>
-        <View style={styles.titleContainer}>
-          <View style={styles.logoContainer}>
-            <Logo size={logoSize} color={"primary"} />
-          </View>
-          <View style={styles.title}>
-            <Subheading>
-              {"کد تایید برای شماره "}
-              <Subheading style={styles.phoneNumber}>{` (${digitsEnToFa(
-                inputState.phoneNumber
-              )}) `}</Subheading>
-              <Subheading>{"ارسال شد."}</Subheading>
-            </Subheading>
-            <Subheading style={styles.enterCodeText}>
-              {"لطفا کد را وارد کنید."}
-            </Subheading>
-          </View>
+        <View style={styles.logoContainer}>
+          <Logo size={logoSize} color={"primary"} />
         </View>
-        <View style={styles.textButtonContainer}>
+        <View style={styles.confirmationTextContainer}>
+          <Subheading>
+            {"کد تایید برای شماره "}
+            <Subheading style={styles.phoneNumber}>{` (${digitsEnToFa(
+              inputState.phoneNumber
+            )}) `}</Subheading>
+            <Subheading>{"ارسال شد."}</Subheading>
+          </Subheading>
+          <Subheading style={styles.enterCodeText}>
+            {"لطفا کد را وارد کنید."}
+          </Subheading>
+        </View>
+        <View style={styles.editNumberButtonContainer}>
           <Button
             mode={"text"}
             rippleColor={"lightGrey"}
@@ -80,7 +90,7 @@ function IdentifyScreen() {
             {"ویرایش شماره"}
           </Button>
         </View>
-        <View style={styles.textFieldContainer}>
+        <View style={styles.codeConfirmationContainer}>
           <CodeField
             ref={ref}
             {...props}
@@ -101,10 +111,26 @@ function IdentifyScreen() {
             )}
           />
           <View style={styles.timerContainer}>
-            <Timer minute={1} second={20} />
+            {timerEnded ? (
+              <Button
+                mode={"text"}
+                size={"small"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon name={"repeat"} size={size} color={color} />
+                  );
+                }}
+                rippleColor={"lightGrey"}
+                onPress={onResendPress}
+              >
+                {"ارسال مجدد"}
+              </Button>
+            ) : (
+              <Timer minute={1} second={0} onTimerEnd={onTimerEnd} />
+            )}
           </View>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={styles.submitButtonContainer}>
           <Button
             mode={"contained"}
             loading={loading}

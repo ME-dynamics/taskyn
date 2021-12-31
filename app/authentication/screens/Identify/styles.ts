@@ -9,46 +9,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: THEME.COLORS.BACKGROUND,
   },
-  titleContainer: {
-    width: widthPercentageToDP(100),
-    height: heightPercentageToDP(44),
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    flexDirection: "column",
-    paddingRight: widthPercentageToDP(4),
-  },
   logoContainer: {
-    left: widthPercentageToDP("5"),
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(32),
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: widthPercentageToDP(6),
   },
-  title: {
-    alignSelf: "flex-end",
+  logo: {
+    // left: widthPercentageToDP("5"),
   },
-  textFieldContainer: {
-    width: widthPercentageToDP(80),
-    height: heightPercentageToDP(12),
-    alignSelf: "center",
-    paddingRight: widthPercentageToDP(2),
-  },
-  textButtonContainer: {
-    width: widthPercentageToDP(90),
-    height: heightPercentageToDP(6),
-    alignItems: "flex-end",
-    left: 50,
-    bottom: 20,
-  },
-  codeFieldRoot: {
-    flex: 1,
-    marginLeft: 16,
-  },
-  cell: {
-    width: 40,
-    height: 40,
-    borderWidth: 2,
-    // borderColor: THEME.COLORS.GREY.NORMAL,
-    borderBottomColor: "red",
-    borderRightColor: "transparent",
-    textAlign: "center",
-    borderRadius: 0,
+  confirmationTextContainer: {
+    paddingRight: 16,
   },
   phoneNumber: {
     color: THEME.COLORS.PRIMARY.NORMAL,
@@ -56,6 +28,23 @@ export const styles = StyleSheet.create({
   enterCodeText: {
     paddingTop: 12,
   },
+  editNumberButtonContainer: {
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(8),
+    alignItems: "flex-end",
+    justifyContent: "center",
+    paddingRight: 16,
+  },
+  codeConfirmationContainer: {
+    width: widthPercentageToDP(80),
+    height: heightPercentageToDP(12),
+    alignSelf: "center",
+    marginTop: heightPercentageToDP(6),
+  },
+  codeFieldRoot: {
+    flex: 1,
+  },
+
   line: {
     width: 40,
     height: 40,
@@ -73,9 +62,11 @@ export const styles = StyleSheet.create({
   },
   timerContainer: {
     width: "100%",
+    height: 36,
     alignItems: "center",
+    justifyContent: "center",
   },
-  buttonContainer: {
+  submitButtonContainer: {
     width: "100%",
     height: heightPercentageToDP(22),
     alignItems: "center",
