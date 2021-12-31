@@ -1,6 +1,6 @@
 export * from "./screens";
 import { authState } from "./entities";
-export { initToken } from "./usecases";
+export { initToken, exit } from "./usecases";
 export function getLoggedIn() {
   return authState.loggedIn;
 }
