@@ -1,5 +1,5 @@
 import React, { Ref } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { observer, Observer } from "mobx-react-lite";
 import { RTLView } from "./RTLView";
@@ -66,3 +66,4 @@ function ScrollerComponent(
 }
 
 export const Scroller = observer(ScrollerComponent, { forwardRef: true });
+export { tScrollerRef } from "./types";
