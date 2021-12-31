@@ -1,1 +1,1 @@
-export { Profile } from "./screens/Profile";
+export * from "./screens";
