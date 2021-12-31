@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { Profile, EditProfile } from "../app/profile";
 import { Support } from "../app/support";
 import { AboutUs } from "../app/aboutUs";
@@ -7,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const ProfileStack = createNativeStackNavigator();
 
-export function profileNav() {
+function ProfileNavigation() {
   return (
     <ProfileStack.Navigator initialRouteName={"Profile"}>
       <ProfileStack.Screen
@@ -23,3 +24,4 @@ export function profileNav() {
     </ProfileStack.Navigator>
   );
 }
+export const ProfileNav = observer(ProfileNavigation)

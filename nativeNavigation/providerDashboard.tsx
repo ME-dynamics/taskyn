@@ -7,14 +7,25 @@ import { Note } from "../app/note";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 
-import { getRole } from "../app/authentication";
+import { PatientList } from "../app/patients";
+import { AcceptPatientList } from "../app/patients/screens/acceptPtaientList";
 
 const DashboardStack = createNativeStackNavigator();
 
-function DashboardNavigation() {
-  const role = getRole();
+function ProviderDashboardNavigation() {
   return (
-    <DashboardStack.Navigator initialRouteName={"dashboard"}>
+    <DashboardStack.Navigator initialRouteName={"patients"}>
+      <DashboardStack.Screen
+        name={"patients"}
+        options={{ headerShown: false }}
+        component={PatientList}
+      />
+      <DashboardStack.Screen
+        name={"acceptPatients"}
+        options={{ headerShown: false }}
+        component={AcceptPatientList}
+      />
+
       <DashboardStack.Screen
         name={"dashboard"}
         options={{ headerShown: false }}
@@ -23,11 +34,10 @@ function DashboardNavigation() {
       <DashboardStack.Screen name={"doctorList"} component={DoctorList} />
       <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
       <DashboardStack.Screen name={"tasks"} component={Tasks} />
-      {role === "provider" ? (
-        <DashboardStack.Screen name={"notes"} component={Note} />
-      ) : null}
+
+      <DashboardStack.Screen name={"notes"} component={Note} />
     </DashboardStack.Navigator>
   );
 }
 
-export const DashboardNav = observer(DashboardNavigation);
+export const ProviderDashboardNav = observer(ProviderDashboardNavigation);

@@ -1,15 +1,17 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { DashboardNav } from "./dashboardNav";
-import { profileNav } from "./profileNav";
+import { ProviderDashboardNav } from "./providerDashboard";
+import { CustomerDashboardNav } from "./customerDashboard";
+import { ProfileNav } from "./profileNav";
 import { getRole } from "../app/authentication";
 import { TaskynIcon, THEME } from "../app/library";
 import { FormList } from "../app/formList/screens/formList";
 
 const Tab = createBottomTabNavigator();
 
-export function TabNav() {
-  const role = getRole();
+function TabNavigation() {
+  const isProvider = getRole() === "provider";
   return (
     <Tab.Navigator
       initialRouteName={"dashboardTab"}
@@ -20,7 +22,7 @@ export function TabNav() {
     >
       <Tab.Screen
         name="ProfileTab"
-        component={profileNav}
+        component={ProfileNav}
         options={{
           tabBarLabel: "پروفایل",
           headerShown: false,
@@ -42,9 +44,9 @@ export function TabNav() {
       />
       <Tab.Screen
         name={"dashboardTab"}
-        component={DashboardNav}
+        component={isProvider ? ProviderDashboardNav : CustomerDashboardNav}
         options={{
-          tabBarLabel: role === "provider" ? "بیماران" : "داشبورد",
+          tabBarLabel: isProvider ? "بیماران" : "داشبورد",
           tabBarIcon: ({ color, size }) => (
             <TaskynIcon name={"home"} color={color} size={size} />
           ),
@@ -53,3 +55,5 @@ export function TabNav() {
     </Tab.Navigator>
   );
 }
+
+export const TabNav = observer(TabNavigation);

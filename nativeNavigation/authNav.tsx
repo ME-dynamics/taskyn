@@ -1,11 +1,12 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { Authentication, Identify } from "../app/authentication";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Title, THEME } from "../app/library";
 
 const AuthStack = createNativeStackNavigator();
 
-export function AuthNav() {
+function AuthNavigation() {
   return (
     <AuthStack.Navigator initialRouteName={"Authentication"}>
       <AuthStack.Screen
@@ -26,3 +27,5 @@ export function AuthNav() {
     </AuthStack.Navigator>
   );
 }
+
+export const AuthNav = observer(AuthNavigation)
