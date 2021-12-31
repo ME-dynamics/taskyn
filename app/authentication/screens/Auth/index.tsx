@@ -41,7 +41,7 @@ function AuthenticationScreen() {
   }
   useEffect(() => {
     const disposer = autorun(() => {
-      if (authState.otpToken) {
+      if (authState.otpToken && navigator.isFocused()) {
         navigator.push("Identify");
       }
     });
