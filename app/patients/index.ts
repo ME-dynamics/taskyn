@@ -1,1 +1,0 @@
-export { PatientList } from "./screens/patientList"
