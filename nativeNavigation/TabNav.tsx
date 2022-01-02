@@ -6,7 +6,7 @@ import { CustomerDashboardNav } from "./customerDashboard";
 import { ProfileNav } from "./profileNav";
 import { getRole } from "../app/authentication";
 import { TaskynIcon, THEME } from "../app/library";
-import { FormList } from "../app/formList/screens/formList";
+import { TestList, Questionnaire, FormDetails, MbtiResult } from "../app/psychologyTests";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +21,7 @@ function TabNavigation() {
       }}
     >
       <Tab.Screen
-        name="ProfileTab"
+        name={"profileTab"}
         component={ProfileNav}
         options={{
           tabBarLabel: "پروفایل",
@@ -33,10 +33,10 @@ function TabNavigation() {
       />
 
       <Tab.Screen
-        name="Form"
-        component={FormList}
+        name={"testTab"}
+        component={MbtiResult}
         options={{
-          tabBarLabel: "فرم",
+          tabBarLabel: "تست",
           tabBarIcon: ({ color, size }) => (
             <TaskynIcon name={"document"} color={color} size={size} />
           ),

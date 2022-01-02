@@ -1,29 +1,27 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import { DoctorList } from "../app/doctorList";
 import { UserInfo } from "../app/userInfo";
 import { Note } from "../app/note";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 
-import { PatientList } from "../app/patients";
-import { AcceptPatientList } from "../app/patients/screens/acceptPtaientList";
+import { Customers, CustomerRequests } from "../app/userList";
 
 const DashboardStack = createNativeStackNavigator();
 
 function ProviderDashboardNavigation() {
   return (
-    <DashboardStack.Navigator initialRouteName={"patients"}>
+    <DashboardStack.Navigator initialRouteName={"customers"}>
       <DashboardStack.Screen
-        name={"patients"}
+        name={"customers"}
         options={{ headerShown: false }}
-        component={PatientList}
+        component={Customers}
       />
       <DashboardStack.Screen
-        name={"acceptPatients"}
+        name={"customerRequests"}
         options={{ headerShown: false }}
-        component={AcceptPatientList}
+        component={CustomerRequests}
       />
 
       <DashboardStack.Screen
@@ -31,7 +29,6 @@ function ProviderDashboardNavigation() {
         options={{ headerShown: false }}
         component={Dashboard}
       />
-      <DashboardStack.Screen name={"doctorList"} component={DoctorList} />
       <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
       <DashboardStack.Screen name={"tasks"} component={Tasks} />
 

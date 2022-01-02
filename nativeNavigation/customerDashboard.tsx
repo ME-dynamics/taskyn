@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import { DoctorList } from "../app/doctorList";
+import { Providers } from "../app/userList";
 import { UserInfo } from "../app/userInfo";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
@@ -16,7 +16,7 @@ function CustomerDashboardNavigation() {
         options={{ headerShown: false }}
         component={Dashboard}
       />
-      <DashboardStack.Screen name={"doctorList"} component={DoctorList} />
+      <DashboardStack.Screen name={"providers"} component={Providers} />
       <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
       <DashboardStack.Screen name={"tasks"} component={Tasks} />
     </DashboardStack.Navigator>
