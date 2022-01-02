@@ -5,13 +5,16 @@ import { Paragraph } from "../Typography";
 import { ITimerProps } from "./types";
 
 function TimerComponent(props: ITimerProps) {
-  const { minute, second } = props;
+  const { minute, second, onTimerEnd } = props;
   const [timer, setTimer] = useState<number>(minute * 60 + second);
   const interval = useRef<NodeJS.Timer>();
   useEffect(() => {
     interval.current = setTimeout(nextTime, 1000);
     if (timer === 0) {
       clearTimeout(interval.current);
+      if (onTimerEnd) {
+        onTimerEnd();
+      }
     }
     return () => {
       if (interval.current) {
