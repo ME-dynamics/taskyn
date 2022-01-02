@@ -4,7 +4,7 @@ import { THEME } from "../theme";
 export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.WIDE,
-    height: 36,
+    height: 38,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 12,
@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 11,
+    paddingRight: 16,
   },
   input: {
     flex: 1,

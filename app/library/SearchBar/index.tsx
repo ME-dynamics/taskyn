@@ -22,7 +22,7 @@ function SearchBarComponent(props: ISearchBarProps) {
           style={[material.body1, styles.input]}
           textAlign={"right"}
           value={value}
-          placeholder={placeholder}
+          placeholder={placeholder || "جستجو..."}
           onChangeText={onChangeText}
           selectionColor={selectionColor}
         />
