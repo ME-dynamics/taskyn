@@ -1,3 +1,5 @@
+import { StyleProp, TextStyle } from "react-native";
+
 export type tTaskynIconNames =
   | "close"
   | "close-circle"
@@ -41,10 +43,14 @@ export type tTaskynIconNames =
   | "google";
 
 export interface ITaskynIconProps {
+  style?: StyleProp<TextStyle>;
   name: tTaskynIconNames;
   size: number;
   color: string;
   svg?: boolean;
+  boxed?: boolean;
+  boxSize?: number;
+  boxColor?: string;
 }
 
 export interface ISvgIconProps {

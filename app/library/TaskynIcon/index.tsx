@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { createIconSetFromIcoMoon } from "@expo/vector-icons";
 import { observer } from "mobx-react-lite";
 
@@ -10,6 +11,8 @@ import { Instagram } from "./Instagram";
 import { Note } from "./Note";
 import { Practice } from "./Practice";
 
+import { styleGen } from "./styles";
+
 import { ITaskynIconProps } from "./types";
 const Icon = createIconSetFromIcoMoon(
   require("./selection.json"),
@@ -17,7 +20,7 @@ const Icon = createIconSetFromIcoMoon(
   "iconmoon.ttf"
 );
 function TaskynIconComponent(props: ITaskynIconProps) {
-  const { name, size, color, svg } = props;
+  const { style, name, size, color, svg, boxed, boxColor, boxSize } = props;
   if (name === "google") {
     return <Google size={size} />;
   }
@@ -41,9 +44,24 @@ function TaskynIconComponent(props: ITaskynIconProps) {
     if (name === "practice") {
       return <Practice />;
     }
-    return <Icon name={name} size={size} color={color} />;
+    return <Icon style={style} name={name} size={size} color={color} />;
   }
-  return <Icon name={name === "note" ? "ph_note" : name} size={size} color={color} />;
+  if (boxed) {
+    const { styles, iconSize } = styleGen(boxSize, boxColor);
+    return (
+      <View style={[styles.container, style]}>
+        <Icon name={name} size={iconSize} color={color} />
+      </View>
+    );
+  }
+  return (
+    <Icon
+      style={style}
+      name={name === "note" ? "ph_note" : name}
+      size={size}
+      color={color}
+    />
+  );
 }
 
 export const TaskynIcon = observer(TaskynIconComponent);
