@@ -26,6 +26,7 @@ const COLORS = {
     DARK: "#000000",
   },
   GREY: {
+    WHITEN_LIGHT: "#efefef",
     LIGHT: "#cfcfcf",
     NORMAL: "#9e9e9e",
     DARK: "#707070",
