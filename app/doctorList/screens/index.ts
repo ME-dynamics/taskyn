@@ -1,1 +1,0 @@
-export { DoctorList } from "./DoctorList"
