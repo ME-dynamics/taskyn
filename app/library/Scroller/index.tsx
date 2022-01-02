@@ -1,5 +1,6 @@
 import React, { Ref } from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
+import { ScrollView as GestureScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { observer, Observer } from "mobx-react-lite";
 import { RTLView } from "./RTLView";
@@ -8,9 +9,9 @@ import { IScroller } from "./types";
 
 function ScrollerComponent(
   props: IScroller,
-  ref: Ref<KeyboardAwareScrollView & ScrollView>
+  ref: Ref<KeyboardAwareScrollView & ScrollView & GestureScrollView>
 ) {
-  const { horizontal, rtl, keyboard, children, style } = props;
+  const { horizontal, rtl, keyboard, gestureScroll, children, style } = props;
   const isRtlHorizontal = horizontal && rtl;
   function renderItems() {
     if (!children) {
@@ -48,6 +49,21 @@ function ScrollerComponent(
       >
         {renderItems()}
       </KeyboardAwareScrollView>
+    );
+  }
+  if (gestureScroll) {
+    return (
+      <GestureScrollView
+        {...props}
+        ref={ref}
+        style={[
+          styles.container,
+          isRtlHorizontal ? styles.rtlScrollView : undefined,
+          style,
+        ]}
+      >
+        {renderItems()}
+      </GestureScrollView>
     );
   }
   return (
