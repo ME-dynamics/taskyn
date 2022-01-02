@@ -1,15 +1,18 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 
 export const styles = StyleSheet.create({
   container: {
-    width: widthPercentageToDP(66),
-    height: 72,
+    width: widthPercentageToDP(68),
+    height: 80,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 12,
     elevation: 4,
-    overflow: "hidden",
+    marginTop: heightPercentageToDP(16),
   },
   imageContainer: {
     flex: 3,

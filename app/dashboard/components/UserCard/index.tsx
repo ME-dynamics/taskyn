@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Title, Touchable } from "../../../library";
+import { Button, Caption, Title} from "../../../library";
 import { UnknownImage } from "../../assets";
 import { styles } from "./styles";
 import { ICardProps } from "../../types";
