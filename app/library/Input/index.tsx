@@ -173,11 +173,7 @@ function InputComponent(props: IInputProps) {
       const text = errors[index];
       errorText += `*${text}    `;
     }
-    return (
-      <Caption numberOfLines={1} style={styles.error}>
-        {errorText}
-      </Caption>
-    );
+    return <Caption style={styles.error}>{errorText}</Caption>;
   }
 
   function renderLimit() {
