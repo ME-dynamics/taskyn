@@ -109,7 +109,10 @@ function buttonBorderColor(mode: tMode) {
   }
   return "transparent";
 }
-function buttonElevation(mode: tMode) {
+function buttonElevation(mode: tMode, disabled: boolean | undefined) {
+  if (disabled) {
+    return {};
+  }
   if (
     mode === "contained" ||
     mode === "contained-grey" ||
@@ -159,7 +162,7 @@ function buttonStyle(args: IButtonStyles) {
       justifyContent: "center",
       paddingHorizontal: 4,
       overflow: "hidden",
-      ...buttonElevation(mode),
+      ...buttonElevation(mode, disabled),
     },
     text: {
       fontSize: 14,
