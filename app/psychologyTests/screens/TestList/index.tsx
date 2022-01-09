@@ -1,0 +1,78 @@
+import React, { useEffect } from "react";
+import { View } from "react-native";
+import { observer } from "mobx-react-lite";
+import { useNavigation } from "@react-navigation/core";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import {
+  SearchBar,
+  Container,
+  Title,
+  Scroller,
+  Subheading,
+} from "../../../library";
+
+import { TestHistoryCard, TextIcon, FormCard } from "../../components";
+import { testListState } from "../../entities";
+import { retrieveTests, searchTestList } from "../../usecases";
+
+import { styles } from "./styles";
+
+function TestListScreen() {
+  const navigator = useNavigation<NativeStackNavigationProp<any>>();
+  function navigateToFormHistory() {
+    navigator.push("formHistory");
+  }
+  function navigateToFormDetails(id: string) {
+    navigator.push("testDetails", { id });
+  }
+  function renderTestCard() {
+    if (testListState.tests.length === 0) {
+      return <Subheading>{"تستی پیدا نشد"}</Subheading>;
+    }
+    const tests = 
+      !testListState.query && testListState.searchResult.length === 0
+        ? testListState.tests
+        : testListState.searchResult;
+    const testCards: JSX.Element[] = [];
+    for (let index = 0; index < tests.length; index++) {
+      const { id, title, description } = tests[index];
+
+      testCards.push(
+        <FormCard
+          key={id}
+          id={id}
+          Icon={() => <TextIcon label={id} labelColor={"#3C6ADC"} />}
+          title={title.fa}
+          subtitle={title.en}
+          onPress={navigateToFormDetails}
+        />
+      );
+    }
+    return testCards;
+  }
+  useEffect(() => {
+    retrieveTests();
+  }, []);
+  return (
+    <Container>
+      <View style={styles.searchBarContainer}>
+        <SearchBar onChangeText={searchTestList} value={testListState.query} />
+      </View>
+      <View style={styles.formHistoryContainer}>
+        <TestHistoryCard onPress={navigateToFormHistory} />
+        <View style={styles.line} />
+      </View>
+      <View style={styles.title}>
+        <Title>{"لیست تست ها"}</Title>
+      </View>
+      <View style={styles.formCardContainer}>
+        <Scroller contentContainerStyle={styles.containerContentStyle}>
+          {renderTestCard()}
+        </Scroller>
+      </View>
+    </Container>
+  );
+}
+
+export const TestList = observer(TestListScreen);
