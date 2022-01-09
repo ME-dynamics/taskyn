@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Container, Scroller, TaskynIcon } from "../../../library";
 import { getRole } from "../../../authentication";
-import { Card, Tile } from "../../components";
+import { UserCard, Tile } from "../../components";
 import { dashboardState } from "../../entities";
 import { retrieveProvider } from "../../usecases";
 import { styles } from "./styles";
@@ -18,17 +18,15 @@ function DashboardScreen() {
   return (
     <Container>
       <View style={styles.titleContainer}>
-        <View style={styles.card}>
-          <Card
-            id={dashboardState.provider?.id || ""}
-            name={role === "provider" ? "" : "نامشخص"}
-            description={role ? "" : "نامشخص"}
-            onPress={() => {
-              navigation.push("doctorList");
-            }}
-            role={role}
-          />
-        </View>
+        <UserCard
+          id={dashboardState.provider?.id || ""}
+          name={role === "provider" ? "" : "دکتر انتخاب نکردید"}
+          description={role ? "" : "نامشخص"}
+          onPress={() => {
+            navigation.push("providers");
+          }}
+          role={role}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <Scroller contentContainerStyle={styles.containerContentStyle}>
