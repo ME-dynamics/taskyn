@@ -3,6 +3,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from "react-native-responsive-screen";
+import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
@@ -39,3 +40,5 @@ export const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
+
+export const iconColor = THEME.COLORS.PRIMARY.NORMAL;
