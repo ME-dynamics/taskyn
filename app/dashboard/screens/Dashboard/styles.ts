@@ -18,9 +18,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: widthPercentageToDP(8),
     borderBottomRightRadius: widthPercentageToDP(8),
   },
-  card: {
-    top: heightPercentageToDP("8"),
-  },
+
   buttonContainer: {
     flex: 6,
   },
