@@ -5,7 +5,7 @@ function styleGenerator(size: number) {
   return StyleSheet.create({
     container: {
       minWidth: size * 2,
-      height: size * 2,
+      minHeight: size * 2,
       flexDirection: "row-reverse",
     },
     selectorContainer: {
@@ -15,7 +15,8 @@ function styleGenerator(size: number) {
       justifyContent: "center",
     },
     labelContainer: {
-      alignItems: "center",
+      flex: 1,
+      alignItems: "flex-end",
       justifyContent: "center",
     },
   });
