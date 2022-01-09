@@ -3,10 +3,10 @@ import { observer } from "mobx-react-lite";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProviderDashboardNav } from "./providerDashboard";
 import { CustomerDashboardNav } from "./customerDashboard";
+import { TestNav } from "./testNav"
 import { ProfileNav } from "./profileNav";
 import { getRole } from "../app/authentication";
 import { TaskynIcon, THEME } from "../app/library";
-import { TestList, Questionnaire, FormDetails, MbtiResult } from "../app/psychologyTests";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +34,7 @@ function TabNavigation() {
 
       <Tab.Screen
         name={"testTab"}
-        component={MbtiResult}
+        component={TestNav}
         options={{
           tabBarLabel: "تست",
           tabBarIcon: ({ color, size }) => (

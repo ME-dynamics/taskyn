@@ -1,2 +1,2 @@
 export { AuthNav } from "./authNav";
-export { TabNav } from "./TabNav";
+export { TabNav } from "./tabNav";
