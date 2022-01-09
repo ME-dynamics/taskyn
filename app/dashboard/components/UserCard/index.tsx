@@ -1,26 +1,23 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Title} from "../../../library";
+import { Button, Caption, Subheading, TaskynIcon } from "../../../library";
 import { UnknownImage } from "../../assets";
-import { styles } from "./styles";
+import { styles, iconColor } from "./styles";
 import { ICardProps } from "../../types";
 
-function CardComponent(props: ICardProps) {
+function UserCardComponent(props: ICardProps) {
   const { name, description, onPress, role } = props;
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image
-          source={role !== "provider" ? UnknownImage : null}
-          style={styles.patientImage}
-        />
+        <TaskynIcon name={"profile"} size={24} color={iconColor} boxed boxSize={52} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
-          <Title>{name}</Title>
-          <Caption>{description}</Caption>
+          <Subheading>{name}</Subheading>
+          {/* <Caption>{description}</Caption> */}
         </View>
         <View style={styles.buttonContainer}>
           {role !== "provider" ? (
@@ -39,4 +36,4 @@ function CardComponent(props: ICardProps) {
   );
 }
 
-export const Card = observer(CardComponent);
+export const UserCard = observer(UserCardComponent);
