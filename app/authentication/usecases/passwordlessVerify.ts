@@ -25,18 +25,19 @@ export async function passwordlessVerify() {
   await Promise.all([
     secureStorage.add("refresh_token", refreshToken),
     secureStorage.add("token", jwt),
-    storage.add("token_expires_at", `${jwtExpires}`),
-    storage.add("refresh_expires_at", `${refreshExpires}`),
-    storage.add("role", role),
-    storage.add("userId", userId),
   ]);
-
+  storage.add("token_expires_at", jwtExpires);
+  storage.add("refresh_expires_at", refreshExpires);
+  storage.add("role", role);
+  storage.add("userId", userId);
   authState.setRefreshToken(refreshToken);
   authState.setToken(jwt);
   authState.setRefreshExpire(refreshExpires);
   authState.setTokenExpire(jwtExpires);
   if (role === "customer" || role === "provider") {
     authState.setRole(role);
+  } else {
+    authState.setRole("customer");
   }
   inputState.setOtpNumber("");
 }

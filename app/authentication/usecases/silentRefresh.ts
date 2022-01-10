@@ -1,9 +1,9 @@
 import { autorun } from "mobx";
 
-import { storage, secureStorage } from "../../library";
+import { storage, secureStorage, toString } from "../../library";
 import { fetchRefresh } from "../adapters";
 import { authState } from "../entities";
-
+import { exit } from "./exit";
 let refreshTimer: NodeJS.Timer;
 
 async function silentRefresh() {
@@ -11,7 +11,7 @@ async function silentRefresh() {
     authState.tokenExpiresAt &&
     authState.tokenExpiresAt < Date.now() - 4000
   ) {
-    const userId = await storage.retrieve("userId");
+    const userId = toString(storage.retrieve("userId", "string"));
     if (userId) {
       const {
         error,
@@ -25,27 +25,16 @@ async function silentRefresh() {
       });
       if (error) {
         // TODO: show error
-        if (shouldLogout) {
-          authState.setToken("");
-          authState.setRefreshToken("");
-          authState.setRefreshExpire(0);
-          authState.setRefreshExpire(0);
-          await Promise.all([
-            secureStorage.remove("token"),
-            secureStorage.remove("refresh_token"),
-            storage.remove("token_expires_at"),
-            storage.remove("refresh_expires_at"),
-            storage.remove("role"),
-          ]);
-        }
+      }
+      if (shouldLogout) {
+        await exit();
       }
       await Promise.all([
         secureStorage.add("token", jwtToken),
         secureStorage.add("refresh_token", refreshToken),
-        storage.add("token_expires_at", `${jwtExpires}`),
-        storage.add("refresh_expires_at", `${refreshExpires}`),
       ]);
-
+      storage.add("token_expires_at", jwtExpires);
+      storage.add("refresh_expires_at", refreshExpires);
       authState.setToken(jwtToken);
       authState.setRefreshToken(refreshToken);
       authState.setRefreshExpire(jwtExpires);
