@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from "mobx";
+import { observable, action, computed, makeObservable } from "mobx";
 import { IPsychologyTest } from "../types";
 
 export class TestDetailState {
@@ -31,5 +31,8 @@ export class TestDetailState {
       description: "",
       fields: {},
     };
+  }
+  get fieldSize(): number {
+    return Object.keys(this.test.fields).length;
   }
 }
