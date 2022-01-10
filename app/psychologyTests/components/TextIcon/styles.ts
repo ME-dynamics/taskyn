@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { THEME } from "../../../library";
 
 function styleGenerator(labelColor?: string) {
-  const size = 42;
+  const size = 48;
   const styles = StyleSheet.create({
     container: {
       width: size,
