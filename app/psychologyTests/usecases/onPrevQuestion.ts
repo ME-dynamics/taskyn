@@ -1,9 +1,8 @@
 import { questionnaireState } from "../entities";
 
-
-
 export function onPrevQuestion() {
-    questionnaireState.setCurrentQuestion(
-      questionnaireState.currentQuestion - 1
-    );
+  if (questionnaireState.currentQuestion === 1) {
+    return;
   }
+  questionnaireState.setCurrentQuestion(questionnaireState.currentQuestion - 1);
+}
