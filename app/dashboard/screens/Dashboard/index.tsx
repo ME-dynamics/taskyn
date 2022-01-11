@@ -93,7 +93,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  navigation.push("Note");
+                  navigation.push("notes");
                 }}
               />
             </View>
