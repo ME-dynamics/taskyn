@@ -7,6 +7,7 @@ export class QuestionnaireState {
       answers: observable,
       setCurrentQuestion: action,
       setAnswer: action,
+      reset: action,
     });
   }
   currentQuestion: number = 1;
@@ -16,5 +17,9 @@ export class QuestionnaireState {
   }
   setAnswer(question: number, answer: string) {
     this.answers[`${question}`] = answer;
+  }
+  reset() {
+    this.answers = {};
+    this.currentQuestion = 1;
   }
 }
