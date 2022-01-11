@@ -8,18 +8,11 @@ import { Container, Scroller, Title } from "../../../library";
 
 import { ChoicesList, QuestionNavigator } from "../../components";
 import { testDetailState, questionnaireState } from "../../entities";
-import { onNextQuestion, onPrevQuestion } from "../../usecases";
 
 import { styles } from "./styles";
 function QuestionnaireScreen() {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
 
-  const nextQuestion = useCallback(onNextQuestion, [
-    questionnaireState.currentQuestion,
-  ]);
-  const prevQuestion = useCallback(onPrevQuestion, [
-    questionnaireState.currentQuestion,
-  ]);
   function formatTitle() {
     return (
       digitsEnToFa(questionnaireState.currentQuestion) +
@@ -38,13 +31,7 @@ function QuestionnaireScreen() {
           <ChoicesList />
         </Scroller>
       </View>
-      <QuestionNavigator
-        currentQuestion={questionnaireState.currentQuestion}
-        totalQuestionSize={testDetailState.fieldSize}
-        nextQuestion={nextQuestion}
-        prevQuestion={prevQuestion}
-        onSubmit={() => {}}
-      />
+      <QuestionNavigator />
     </Container>
   );
 }
