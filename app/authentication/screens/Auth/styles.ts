@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   authContainer: {
+    width: "100%",
     height: heightPercentageToDP(58),
     alignItems: "center",
     justifyContent: "flex-start",
@@ -31,13 +32,10 @@ export const styles = StyleSheet.create({
     marginTop: 64,
   },
   itemsMargin: {
-    width: "100%",
     marginVertical: 8,
   },
   termsContainer: {
-    width: widthPercentageToDP(90),
-    alignItems: "flex-start",
-    paddingLeft: 6,
+    alignItems: "flex-end",
     paddingTop: 10,
     marginBottom: 16,
   },
