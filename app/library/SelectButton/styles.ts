@@ -9,9 +9,9 @@ function styleGenerator(size: number) {
       flexDirection: "row-reverse",
     },
     selectorContainer: {
-      width: size * 2,
+      width: size + 8,
       height: size * 2,
-      alignItems: "center",
+      alignItems: "flex-end",
       justifyContent: "center",
     },
     labelContainer: {
