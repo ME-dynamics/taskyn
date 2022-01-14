@@ -4,15 +4,23 @@ import { observer } from "mobx-react-lite";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Button, Paragraph } from "../../../library";
 
+import { questionnaireState, testDetailState } from "../../entities";
+import { onNextQuestion, onPrevQuestion, onTestSubmit } from "../../usecases";
 import { styles } from "./styles";
 
-import { IQuestionNavigatorProps } from "../../types";
-
-function QuestionNavigatorComponent(props: IQuestionNavigatorProps) {
-  const { currentQuestion, totalQuestionSize, nextQuestion, prevQuestion } =
-    props;
-  const isFirst = currentQuestion === 1;
-  const finished = currentQuestion === totalQuestionSize;
+function QuestionNavigatorComponent() {
+  const isFirst = questionnaireState.currentQuestion === 1;
+  const finished =
+    questionnaireState.currentQuestion === testDetailState.fieldSize;
+  const answered =
+    questionnaireState.answers[`${questionnaireState.currentQuestion}`];
+  async function onNextPress() {
+    if(finished) {
+     return await onTestSubmit();
+    }
+    onNextQuestion()
+  }
+  
   function nextButtonText() {
     if (finished) {
       return "دیدن نتیجه";
@@ -26,24 +34,25 @@ function QuestionNavigatorComponent(props: IQuestionNavigatorProps) {
         rippleColor={"lightGrey"}
         size={"small"}
         disabled={isFirst}
-        onPress={prevQuestion}
+        onPress={onPrevQuestion}
       >
         {"قبلی"}
       </Button>
       <Paragraph>
         <Paragraph style={styles.questionNumber}>
-          {digitsEnToFa(currentQuestion)}
+          {digitsEnToFa(questionnaireState.currentQuestion)}
         </Paragraph>
         {" از "}
         <Paragraph style={styles.questionNumber}>
-          {digitsEnToFa(totalQuestionSize)}
+          {digitsEnToFa(testDetailState.fieldSize)}
         </Paragraph>
       </Paragraph>
       <Button
         mode={finished ? "contained-secondary" : "contained"}
         rippleColor={"lightGrey"}
         size={"small"}
-        onPress={nextQuestion}
+        onPress={onNextPress}
+        disabled={!answered}
       >
         {nextButtonText()}
       </Button>
