@@ -39,6 +39,11 @@ export const styles = StyleSheet.create({
   infoText: {
     paddingLeft: 32,
   },
+  activityContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 export const iconStyle = {
   size: 20,
@@ -46,3 +51,4 @@ export const iconStyle = {
 };
 export const statusBarBackgroundColor = THEME.COLORS.PRIMARY.NORMAL;
 export const translateNetInfoStart = -HEIGHT;
+export const activityColor = THEME.COLORS.PRIMARY.NORMAL;
