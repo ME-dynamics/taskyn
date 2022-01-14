@@ -3,7 +3,11 @@ import { View } from "react-native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { observer } from "mobx-react-lite";
 import { Button, Input, Container, Scroller } from "../../../library";
+
 import { Avatar, CustomBackdrop, PickImageSheet } from "../../components";
+import { profileState } from "../../entities";
+import { updateUser } from "../../usecases";
+
 import { styles } from "./styles";
 
 function EditProfileScreen() {
@@ -22,16 +26,32 @@ function EditProfileScreen() {
             <Avatar uri={""} size={120} edit onEditPress={onCollapsePress} />
           </View>
           <View style={styles.inputContainer}>
-            <Input mode={"outlined"} textAlign={"right"} title={"نام"} />
+            <Input
+              mode={"outlined"}
+              textAlign={"right"}
+              title={"نام"}
+              value={profileState.firstName}
+              onChangeText={(text) => {
+                profileState.setFirstName(text);
+              }}
+            />
             <Input
               mode={"outlined"}
               textAlign={"right"}
               title={"نام خانوادگی"}
+              value={profileState.lastName}
+              onChangeText={(text) => {
+                profileState.setLastName(text);
+              }}
             />
             <Input
               mode={"outlined"}
               textAlign={"right"}
               title={"درباره ی خود"}
+              value={profileState.description}
+              onChangeText={(text) => {
+                profileState.setDescription(text);
+              }}
             />
           </View>
           <View style={styles.buttonContainer}>
@@ -39,9 +59,7 @@ function EditProfileScreen() {
               mode={"contained"}
               size={"wide"}
               rippleColor={"lightGrey"}
-              onPress={() => {
-                console.log("s");
-              }}
+              onPress={updateUser}
             >
               {"ذخیره"}
             </Button>
