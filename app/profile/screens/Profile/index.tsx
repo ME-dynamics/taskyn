@@ -1,11 +1,16 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useEffect } from "react";
 import { View, Alert } from "react-native";
 import { observer } from "mobx-react-lite";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Container, Headline, TaskynIcon } from "../../../library";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { Container, Headline, TaskynIcon } from "../../../library";
+
 import { MenuItem, Avatar, CustomBackdrop, ExitSheet } from "../../components";
+import { profileState } from "../../entities";
+import { retrieveUser } from "../../usecases";
+
 import { styles } from "./styles";
 
 function ProfileScreen() {
@@ -19,13 +24,15 @@ function ProfileScreen() {
   const onCollapsePress = useCallback(() => {
     bottomSheetRef.current?.collapse();
   }, []);
-
+  useEffect(() => {
+    retrieveUser();
+  }, []);
   return (
     <Container>
       <View style={styles.header}>
         <Headline>{"پروفایل"}</Headline>
-        <Avatar size={96} uri={""} />
-        <Headline>{"سجاد سیف اله"}</Headline>
+        <Avatar size={96} uri={profileState.avatar} />
+        <Headline>{`${profileState.firstName} ${profileState.lastName}`}</Headline>
       </View>
       <View style={styles.menuContainer}>
         <MenuItem
