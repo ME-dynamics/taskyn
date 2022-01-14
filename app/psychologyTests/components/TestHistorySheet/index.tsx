@@ -4,9 +4,22 @@ import { observer } from "mobx-react-lite";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import { Button, Subheading, Title } from "../../../library";
 
-import { styles } from "./styles";
+import { testDetailState } from "../../entities";
+import { removeTestSession, continueTestSession } from "../../usecases";
 
-function TestHistorySheetComponent() {
+import { styles } from "./styles";
+import { ITestHistorySheet } from "../../types";
+
+function TestHistorySheetComponent(props: ITestHistorySheet) {
+  const { navigateToQuestionnaire } = props;
+  function onStartFromBeginningPress() {
+    removeTestSession(testDetailState.test.id, testDetailState.fieldSize);
+    navigateToQuestionnaire();
+  }
+  function onContinuePress() {
+    continueTestSession(testDetailState.test.id, testDetailState.fieldSize);
+    navigateToQuestionnaire();
+  }
   return (
     <BottomSheetView style={styles.container}>
       <Title style={styles.title}>{"شروع تست"}</Title>
@@ -21,7 +34,7 @@ function TestHistorySheetComponent() {
           mode={"contained-grey"}
           size={"medium"}
           rippleColor={"lightGrey"}
-          onPress={() => {}}
+          onPress={onStartFromBeginningPress}
         >
           {"شروع از اول"}
         </Button>
@@ -29,7 +42,7 @@ function TestHistorySheetComponent() {
           mode={"contained"}
           size={"medium"}
           rippleColor={"lightGrey"}
-          onPress={() => {}}
+          onPress={onContinuePress}
         >
           {"ادامه میدهم"}
         </Button>
