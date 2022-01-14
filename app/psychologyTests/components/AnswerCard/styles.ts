@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(100),
     marginVertical: 6,
+    paddingRight: 16
   },
   paragraph: {
     paddingLeft: 8,
