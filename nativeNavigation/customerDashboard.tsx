@@ -6,6 +6,8 @@ import { UserInfo } from "../app/userInfo";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 
+import { headerOptions } from "./headerOptions";
+
 const DashboardStack = createNativeStackNavigator();
 
 function CustomerDashboardNavigation() {
@@ -17,8 +19,16 @@ function CustomerDashboardNavigation() {
         component={Dashboard}
       />
       <DashboardStack.Screen name={"providers"} component={Providers} />
-      <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
-      <DashboardStack.Screen name={"tasks"} component={Tasks} />
+      <DashboardStack.Screen
+        name={"userInfo"}
+        component={UserInfo}
+        options={{ ...headerOptions, title: "پرونده بیمار" }}
+      />
+      <DashboardStack.Screen
+        name={"tasks"}
+        component={Tasks}
+        options={{ ...headerOptions, title: "تمرینات" }}
+      />
     </DashboardStack.Navigator>
   );
 }
