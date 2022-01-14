@@ -1,6 +1,7 @@
+import { storage } from "../../library";
 import { questionnaireState } from "../entities";
 
-export function onSetAnswer(id: string) {
-  // TODO: write every answer to database with current form
-  questionnaireState.setAnswer(questionnaireState.currentQuestion, id);
+export function onSetAnswer(answer: string, testId: string) {
+  storage.add(`${testId}@${questionnaireState.currentQuestion}`, answer);
+  questionnaireState.setAnswer(questionnaireState.currentQuestion, answer);
 }
