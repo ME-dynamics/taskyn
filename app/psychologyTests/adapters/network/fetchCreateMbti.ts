@@ -9,4 +9,15 @@ export async function fetchCreateMbti(mbtiAnswers: tMbtiAnswers) {
       fields: mbtiAnswers,
     },
   });
+  if (!success) {
+    return {
+      error,
+      mbtiResult: {},
+    };
+  }
+  // TODO: parse mbti result
+  return {
+    error: "",
+    mbtiResult: payload,
+  };
 }
