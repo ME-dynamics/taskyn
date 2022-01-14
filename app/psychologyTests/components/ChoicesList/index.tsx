@@ -9,7 +9,10 @@ function ChoicesListComponent() {
     testDetailState.test.fields[`${questionnaireState.currentQuestion}`]
       .choices;
   const answerCards: JSX.Element[] = [];
-  const setAnswer = useCallback(onSetAnswer, [
+  function onSetAnswerPress(id: string) {
+    onSetAnswer(id, testDetailState.test.id)
+  }
+  const setAnswer = useCallback(onSetAnswerPress, [
     questionnaireState.currentQuestion,
   ]);
   for (let index = 0; index < choices.length; index++) {
