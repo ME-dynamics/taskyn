@@ -3,6 +3,7 @@ import { I18nManager } from "react-native";
 import { observer } from "mobx-react-lite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SplashScreen from "expo-splash-screen";
+import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthNav, TabNav } from "./nativeNavigation";
@@ -34,7 +35,7 @@ function AppComponent() {
     }
   }, [isAppReady, fontsLoaded]);
   if (!isAppReady || !fontsLoaded) {
-    return null;
+    return <AppLoading />;
   }
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
