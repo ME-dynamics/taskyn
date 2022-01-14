@@ -20,4 +20,4 @@ export interface IPsychologyTest extends ITest {
   fields: tQuestionFields;
 }
 
-export type tMbtiAnswers = Record<string, "1" | "2">;
+export type tMbtiAnswers = Record<string, string>;

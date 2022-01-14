@@ -31,10 +31,6 @@ export interface IAnswerCardProps {
   text: string;
 }
 
-export interface IQuestionNavigatorProps {
-  currentQuestion: number;
-  totalQuestionSize: number;
-  nextQuestion: () => void;
-  prevQuestion: () => void;
-  onSubmit: () => void;
+export interface ITestHistorySheet {
+  navigateToQuestionnaire: () => void;
 }
