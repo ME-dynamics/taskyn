@@ -1,205 +1,298 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 import { Button, Input, Container, Scroller } from "../../../library";
-import { styles } from "./style";
-import { IUserInfoProps } from "./type";
-import { TwoChoice } from "../../components";
-import { DropPicker } from "../../components/dropPicker";
-function UserInfoScreen(props: IUserInfoProps) {
-  const { IInput, IButton, IDropPicker } = props;
-  const [gender, setGender] = useState<"female" | "male" | null>(null);
-  const [state, setState] = useState({
-    gender: false,
-    taahol: false,
-    family: false,
-  });
 
+import { TwoChoice, ScrollPicker } from "../../components";
+import { userInfoState } from "../../entities";
+import { updateUserProfile, retrieveUserProfile } from "../../usecases";
+
+import { styles } from "./styles";
+
+function UserInfoScreen() {
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    async function prepare() {
+      await retrieveUserProfile();
+      setLoading(false);
+    }
+    prepare();
+  }, []);
   return (
-    <Container>
+    <Container loading={loading}>
       <Scroller
-        style={styles.inputContainer}
-        contentContainerStyle={{
-          alignItems: "center",
-          paddingVertical: 16,
-        }}
+        contentContainerStyle={styles.scrollViewContentContainer}
+        nestedScrollEnabled
       >
         <Input
           mode={"with-label"}
           title={"نام"}
           placeholder={"نام خود را وارد کنید"}
+          value={userInfoState.firstName}
+          onChangeText={(text) => {
+            userInfoState.setFirstName(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"نام خانوادگی"}
           placeholder={"نام خانوادگی خود را وارد کنید"}
+          value={userInfoState.lastName}
+          onChangeText={(text) => {
+            userInfoState.setLastName(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"تاریخ تولد"}
-          placeholder={"1376/12/12"}
+          placeholder={"1376/10/24"}
+          textAlign={"center"}
+          value={userInfoState.birthday}
+          onChangeText={(text) => {
+            userInfoState.setBirthday(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"آدرس"}
           placeholder={"آدرس خود را وارد کنید"}
+          value={userInfoState.address}
+          onChangeText={(text) => {
+            userInfoState.setAddress(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"تلفن ثابت"}
-          placeholder={"02XXXXXXXXXX"}
+          placeholder={"02XXXXXXXXX"}
+          textAlign={"center"}
+          value={userInfoState.telephone}
+          onChangeText={(text) => {
+            userInfoState.setTelephone(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"شرح مشکل"}
           placeholder={"مشکل خود را به طور کامل شرح دهید"}
+          value={userInfoState.problemDescription}
+          onChangeText={(text) => {
+            userInfoState.setProblemDescription(text);
+          }}
         />
         <TwoChoice
           title={"جنسیت:"}
-          choiceState={"مرد"}
+          choiceState={userInfoState.genderPersianText}
           firstChoice={"مرد"}
           secondChoice={"زن"}
           onFirstChoicePress={() => {
-            console.log("first press");
+            userInfoState.setGender("male");
           }}
           onSecondChoicePress={() => {
-            console.log("second press");
+            userInfoState.setGender("female");
           }}
         />
         <TwoChoice
           title={"وضعیت تاهل:"}
-          choiceState={"مجرد"}
+          choiceState={userInfoState.maritalStatusText}
           firstChoice={"مجرد"}
           secondChoice={"متاهل"}
           onFirstChoicePress={() => {
-            console.log("first press");
+            userInfoState.setMaritalStatus("single");
           }}
           onSecondChoicePress={() => {
-            console.log("second press");
+            userInfoState.setMaritalStatus("engaged");
           }}
         />
-        <DropPicker
-          title={"وضعیت زناشویی"}
-          item={[
-            "نامزد",
-            "عقد",
-            "عقد دایم",
-            "ازدواج موقت",
-            "تعدد زوجات",
-            "متارکه",
-            "مطلقه",
-            "بیوه",
-          ]}
-        />
-        <DropPicker
-          title={"تحصیلات"}
-          item={[
-            "بی سواد (برای سنین بالا)",
-            "زیر سن مدرسه",
-            "سن پیش دبستانی",
-            "ابتدایی",
-            "راهنمایی",
-            "دبیرستان",
-            "ترک تحصیل ابتدایی",
-            "ترک تحصیل راهنمایی",
-            "ترک تحصیل دبیرستان",
-            "دیپلم و پیش دانشگاهی",
-            "دارای مدرک دانشگاهی",
-            "دانشجو",
-            "مدرک حوزوی",
-          ]}
-        />
 
-        <Input
-          mode={"with-label"}
-          title={"رشته تحصیلی"}
-          placeholder={"رشته تحصیلی خود را وارد کنید"}
+        <ScrollPicker
+          title={"وضعیت تاهل"}
+          itemKey={toJS(userInfoState.maritalState)}
+          items={[
+            { label: "نامزد", key: "namzad" },
+            { label: "عقد", key: "aghed" },
+            { label: "عقد دائم", key: "aghedDayem" },
+            { label: "ازدواج موقت", key: "movaghat" },
+            { label: "تعدد زوجات", key: "wives" },
+            { label: "متارکه", key: "motarekeh" },
+            { label: "مطلقه", key: "motalagheh" },
+            { label: "بیوه", key: "widow" },
+          ]}
+          onItemSelected={(item) => {
+            userInfoState.setMaritalState(item.key);
+          }}
         />
-        <DropPicker
+        <ScrollPicker
+          title={"تحصیلات"}
+          itemKey={toJS(userInfoState.education)}
+          items={[
+            { label: "بی سواد", key: "uneducated" },
+            { label: "زیر سن مدرسه", key: "underAged" },
+            { label: "سن پیش دبستانی", key: "preSchool" },
+            { label: "ابتدایی", key: "school" },
+            { label: "راهنمایی", key: "preHighSchool" },
+            { label: "دبیرستان", key: "highSchool" },
+            { label: "ترک تحصیل ابتدایی", key: "dropoutPreSchool" },
+            { label: "ترک تحصیل راهنمایی", key: "dropoutSchool" },
+            { label: "ترک تحصیل دبیرستان", key: "dropoutHighSchool" },
+            { label: "دیپلم و پیش دانشگاهی", key: "diploma" },
+            { label: "دارای مدرک دانشگاهی", key: "graduate" },
+            { label: "دانشجو", key: "student" },
+            { label: "مدرک حوزوی", key: "clergyman" },
+          ]}
+          onItemSelected={(item) => {
+            userInfoState.setEducation(item.key);
+          }}
+        />
+        {userInfoState.education === "student" ||
+        userInfoState.education === "graduate" ? (
+          <Input
+            mode={"with-label"}
+            title={"رشته تحصیلی"}
+            placeholder={"رشته تحصیلی خود را وارد کنید"}
+            value={userInfoState.academicField}
+            onChangeText={(text) => {
+              userInfoState.setAcademicField(text);
+            }}
+          />
+        ) : null}
+        <ScrollPicker
           title={"دین"}
-          item={["اسلام شیعه", "اسلام سنی", "زرتشتی", "مسیحی", "سایر"]}
+          itemKey={toJS(userInfoState.religion)}
+          items={[
+            { label: "اسلام شیعه", key: "islamShia" },
+            { label: "اسلام سنی", key: "islamSunny" },
+            { label: "زرتشتی", key: "zoroastrianism" },
+            { label: "مسیحی", key: "christianity" },
+            { label: "سایر", key: "other" },
+          ]}
+          onItemSelected={(item) => {
+            userInfoState.setReligion(item.key);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"شغل"}
           placeholder={"شغل خود را وارد کنید"}
+          value={userInfoState.job}
+          onChangeText={(text) => {
+            userInfoState.setJob(text);
+          }}
         />
         <Input
           mode={"with-label"}
-          title={"بیماری حسمی"}
-          placeholder={"بیماری حسمی خود را وارد کنید"}
+          title={"بیماری جسمی"}
+          placeholder={"بیماری جسمی خود را وارد کنید"}
+          value={userInfoState.bodyDiseases}
+          onChangeText={(text) => {
+            userInfoState.setBodyDiseases(text);
+          }}
         />
         <Input
           mode={"with-label"}
           title={"بیماری روحی"}
           placeholder={"بیماری روحی خود را وارد کنید"}
+          value={userInfoState.mindDiseases}
+          onChangeText={(text) => {
+            userInfoState.setMindDiseases(text);
+          }}
         />
+        {/* TODO: family diseases if exists */}
         <Input
           mode={"with-label"}
           title={"بیماری افراد خانواده"}
           placeholder={"بیماری افراد خانواده را برای هر شخص وارد کنید"}
           multiline
           numberOfLines={6}
+          // value=
         />
         <Input
           mode={"with-label"}
-          title={"اعتیاد به مواد مخدر"}
-          placeholder={"اعتیاد به مواد مخدر را وارد کنید"}
+          title={"مصرف دارو"}
+          placeholder={"در صورتی که دارو مصرف می کنید آن را وارد کنید"}
+          value={userInfoState.drugUse}
+          onChangeText={(text) => {
+            userInfoState.setDrugUse(text);
+          }}
         />
         <Input
           mode={"with-label"}
-          title={"اعتیاد به مشروبات الکلی"}
-          placeholder={"اعتیاد به مشروبات الکلی را وارد کنید"}
+          title={"اعتیاد"}
+          placeholder={"اعتیاد را وارد کنید"}
+          value={userInfoState.addiction}
+          onChangeText={(text) => {
+            userInfoState.setAddiction(text);
+          }}
         />
         <TwoChoice
           title={"پدر در قید حیات هستند؟"}
-          choiceState={"بله"}
+          choiceState={userInfoState.isFatherAliveText}
           firstChoice={"بله"}
           secondChoice={"خیر"}
           onFirstChoicePress={() => {
-            console.log("first press");
+            userInfoState.setIsFatherAlive(true);
           }}
           onSecondChoicePress={() => {
-            console.log("second press");
+            userInfoState.setIsFatherAlive(false);
           }}
         />
-        <Input
-          mode={"with-label"}
-          title={"علت فوت پدر"}
-          placeholder={"علت فوت پدر را وارد کنید"}
-        />
+
+        {userInfoState.isFatherAlive === false ? (
+          <Input
+            mode={"with-label"}
+            title={"علت فوت پدر"}
+            placeholder={"علت فوت پدر را وارد کنید"}
+            value={userInfoState.fatherDeathReason}
+            onChangeText={(text) => {
+              userInfoState.setFatherDeathReason(text);
+            }}
+          />
+        ) : null}
         <TwoChoice
           title={"مادر در قید حیات هستند؟"}
-          choiceState={"بله"}
+          choiceState={userInfoState.isMotherAliveText}
           firstChoice={"بله"}
           secondChoice={"خیر"}
           onFirstChoicePress={() => {
-            console.log("first press");
+            userInfoState.setIsMotherAlive(true);
           }}
           onSecondChoicePress={() => {
-            console.log("second press");
+            userInfoState.setIsMotherAlive(false);
           }}
         />
-        <Input
-          mode={"with-label"}
-          title={"علت فوت مادر"}
-          placeholder={"علت فوت مادر را وارد کنید"}
-        />
+        {userInfoState.isMotherAlive === false ? (
+          <Input
+            mode={"with-label"}
+            title={"علت فوت مادر"}
+            placeholder={"علت فوت مادر را وارد کنید"}
+            value={userInfoState.motherDeathReason}
+            onChangeText={(text) => {
+              userInfoState.setMotherDeathReason(text);
+            }}
+          />
+        ) : null}
         <TwoChoice
           title={"ازدواج فامیلی؟"}
-          choiceState={"بله"}
+          choiceState={userInfoState.cousinMarriageText}
           firstChoice={"بله"}
           secondChoice={"خیر"}
           onFirstChoicePress={() => {
-            console.log("first press");
+            userInfoState.setCousinMarriage(true);
           }}
           onSecondChoicePress={() => {
-            console.log("second press");
+            userInfoState.setCousinMarriage(false);
           }}
         />
         <Input
           mode={"with-label"}
           title={"فرزند چندم"}
           placeholder={"فرزند چندم را وارد کنید"}
+          textAlign={"right"}
+          keyboardType={"number-pad"}
+          value={userInfoState.siblingsPosition}
+          onChangeText={(text) => {
+            userInfoState.setSiblingsPosition(text);
+          }}
         />
         <Input
           mode={"with-label"}
@@ -207,8 +300,20 @@ function UserInfoScreen(props: IUserInfoProps) {
           placeholder={"چنتایید چطوری"}
           multiline
           numberOfLines={6}
+          value={userInfoState.siblings}
+          onChangeText={(text) => {
+            userInfoState.setSiblings(text);
+          }}
         />
-        <Button mode={"contained"} rippleColor={"lightGrey"} size={"wide"}>
+        <Button
+          mode={"contained"}
+          rippleColor={"lightGrey"}
+          size={"wide"}
+          onPress={async () => {
+            const result = await updateUserProfile();
+            console.log(result);
+          }}
+        >
           {"ثبت اطلاعات"}
         </Button>
       </Scroller>
