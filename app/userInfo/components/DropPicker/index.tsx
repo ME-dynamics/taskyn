@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
-import { THEME } from "../../../library";
-import { IDropPickerProps } from "../type";
+import { observer } from "mobx-react-lite";
+import { View } from "react-native";
+import DropDownPicker, { ValueType } from "react-native-dropdown-picker";
+import { THEME, toString } from "../../../library";
+import { IDropPickerProps } from "../../types";
 
 function itemConventor(item: string[]) {
   const result = [];
@@ -13,17 +14,22 @@ function itemConventor(item: string[]) {
   return result;
 }
 
-export function DropPicker(props: IDropPickerProps) {
-  const { title, item } = props;
-  const myTheme = require("./style");
+function DropPickerComponent(props: IDropPickerProps) {
+  const { title, item, onValueChange } = props;
+  const myTheme = require("./styles");
   DropDownPicker.addTheme("myTheme", myTheme);
   DropDownPicker.setTheme("myTheme");
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(itemConventor(item ? item : [""]));
+  function oChangeValue(value: ValueType | ValueType[] | null) {
+    onValueChange(toString(value));
+  }
   return (
-    <View>
+    <View
+      style={{ alignSelf: "flex-end", paddingRight: 16, paddingVertical: 8 }}
+    >
       <DropDownPicker
         textStyle={{ fontFamily: THEME.FONTS.REGULAR }}
         rtl={true}
@@ -42,12 +48,14 @@ export function DropPicker(props: IDropPickerProps) {
         showBadgeDot={true}
         open={open}
         value={value}
-        
         items={items}
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
+        onChangeValue={oChangeValue}
       />
     </View>
   );
 }
+
+export const DropPicker = observer(DropPickerComponent);

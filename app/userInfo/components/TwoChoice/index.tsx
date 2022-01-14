@@ -18,22 +18,26 @@ function TwoChoiceComponent(props: ITwoChoiceProps) {
   return (
     <View style={styles.container}>
       <Subheading>{title}</Subheading>
-      <SelectButton
-        mode={"radio"}
-        selected={choiceState === firstChoice}
-        size={24}
-        onPress={onFirstChoicePress}
-      >
-        <Subheading style={styles.choiceText}>{firstChoice}</Subheading>
-      </SelectButton>
-      <SelectButton
-        mode={"radio"}
-        selected={choiceState === secondChoice}
-        size={24}
-        onPress={onSecondChoicePress}
-      >
-        <Subheading style={styles.choiceText}>{secondChoice}</Subheading>
-      </SelectButton>
+      <View style={styles.selectButtonContainer}>
+        <SelectButton
+          mode={"radio"}
+          selected={choiceState === firstChoice}
+          size={24}
+          onPress={onFirstChoicePress}
+        >
+          <Subheading style={styles.choiceText}>{firstChoice}</Subheading>
+        </SelectButton>
+      </View>
+      <View style={styles.selectButtonContainer}>
+        <SelectButton
+          mode={"radio"}
+          selected={choiceState === secondChoice}
+          size={24}
+          onPress={onSecondChoicePress}
+        >
+          <Subheading style={styles.choiceText}>{secondChoice}</Subheading>
+        </SelectButton>
+      </View>
     </View>
   );
 }

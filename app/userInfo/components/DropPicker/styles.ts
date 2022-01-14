@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
 import { THEME } from "../../../library";
+
+import { userInfoAssets } from "../../assets";
+
 export const ICONS = {
-  ARROW_DOWN: require("../../../../assets/image/arrow-down.png"),
-  ARROW_UP: require("../../../../assets/image/arrow-up.png"),
-  TICK: require("../../../../assets/image/tick.png"),
+  ARROW_DOWN: userInfoAssets.arrowDown,
+  ARROW_UP: userInfoAssets.arrowUp,
+  TICK: userInfoAssets.check,
   //   CLOSE: require("../../../../node_modules/react-native-dropdown-picker/src/themes/light/icons/close.png"),
 };
 

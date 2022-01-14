@@ -1,2 +1,3 @@
 export { TwoChoice } from "./TwoChoice";
-export {} from "./dropPicker";
+export { DropPicker } from "./DropPicker";
+export { ScrollPicker } from "./ScrollPicker";

@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: widthPercentageToDP(5),
   },
+  selectButtonContainer: {
+    width: "20%",
+    marginRight: 8,
+  },
   choiceText: {
     color: THEME.COLORS.GREY.DARK,
   },
