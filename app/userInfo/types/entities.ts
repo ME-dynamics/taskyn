@@ -7,7 +7,7 @@ export type tEducation =
   | "highSchool"
   | "dropoutPreSchool"
   | "dropoutSchool"
-  | "dropoutSchool"
+  | "dropoutHighSchool"
   | "student"
   | "graduate"
   | "diploma"
