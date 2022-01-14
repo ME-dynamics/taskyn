@@ -12,7 +12,7 @@ import {
   Subheading,
 } from "../../../library";
 
-import { TestHistoryCard, TextIcon, FormCard } from "../../components";
+import { TestHistoryCard, TextIcon, TestCard } from "../../components";
 import { testListState } from "../../entities";
 import { retrieveTests, searchTestList } from "../../usecases";
 
@@ -24,7 +24,7 @@ function TestListScreen() {
     navigator.push("formHistory");
   }
   function navigateToFormDetails(id: string) {
-    navigator.push("testDetails", { id });
+    navigator.push("testDetails", { id, title: "تست" });
   }
   function renderTestCard() {
     if (testListState.tests.length === 0) {
@@ -39,7 +39,7 @@ function TestListScreen() {
       const { id, title, description } = tests[index];
 
       testCards.push(
-        <FormCard
+        <TestCard
           key={id}
           id={id}
           Icon={() => <TextIcon label={id} labelColor={"#3C6ADC"} />}
