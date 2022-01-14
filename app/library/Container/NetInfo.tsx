@@ -31,15 +31,6 @@ function NetInfoComponent() {
       };
     });
   }, []);
-  async function openSettings() {
-    try {
-      Platform.OS === "ios"
-        ? await Linking.openURL("app-settings:")
-        : await Linking.openURL("settings:");
-    } catch (error) {
-      console.warn(error);
-    }
-  }
 
   return (
     <Animated.View style={[styles.netInfoContainer, netInfoStyles]}>
