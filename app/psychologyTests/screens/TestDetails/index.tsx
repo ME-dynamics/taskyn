@@ -17,30 +17,41 @@ import {
 
 import { TestHistorySheet } from "../../components";
 import { testDetailState } from "../../entities";
-import { retrieveTestDetail } from "../../usecases";
+import { retrieveTestDetail, testSessionExists } from "../../usecases";
 
-import { styles } from "./styles";
+import { styles, iconStyle } from "./styles";
+type TestStackParamList = {
+  testList: undefined;
+  testDetails: { id: string };
+  questionnaire: undefined;
+  mbtiResult: undefined;
+};
+type RouteParams = RouteProp<TestStackParamList, "testDetails">;
 
 export function TestDetailsScreen() {
-  const route = useRoute();
+  const route = useRoute<RouteParams>();
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ["30%", "30%"], []);
 
-  const handleSnapPress = useCallback(() => {
-    bottomSheetRef.current?.close();
-  }, []);
   const onCollapsePress = useCallback(() => {
     bottomSheetRef.current?.collapse();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  function navigateToQuestionnaire() {
+    navigator.push("questionnaire", { id: route.params.id });
+  }
+  function onStartTestPress() {
+    if (testSessionExists(testDetailState.test.id)) {
+      onCollapsePress();
+      return;
+    }
+    navigateToQuestionnaire();
+  }
   useEffect(() => {
-    navigator.setOptions({ headerTitle: route.params.id });
+    // navigator.setOptions({ headerTitle: route.params.id });
     retrieveTestDetail(route.params.id);
     return () => {
-      testDetailState.reset();
+      // testDetailState.reset();
     };
   }, []);
   return (
@@ -54,7 +65,7 @@ export function TestDetailsScreen() {
       </View>
       <View style={styles.detailsContainer}>
         <Title>{testDetailState.test.title.fa}</Title>
-        <Subheading style={{ textAlign: "right", top: 10 }}>
+        <Subheading style={styles.enTitle}>
           {testDetailState.test.title.en}
         </Subheading>
       </View>
@@ -66,46 +77,40 @@ export function TestDetailsScreen() {
           <Paragraph>{testDetailState.test.description}</Paragraph>
         </Scroller>
       </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.formDetails}>
-          <View style={styles.formDetailsBody}>
-            <Paragraph style={{ color: "#727272", right: 10 }}>
-              {"تعداد تست ها: "}
-              <Paragraph>
-                {Object.keys(testDetailState.test.fields).length}
-              </Paragraph>
-            </Paragraph>
-            <TaskynIcon name={"timer"} size={24} color={"red"} />
-          </View>
-          <View style={styles.formDetailsBody}>
-            <Paragraph style={{ color: "#727272", right: 8 }}>
-              {"زمان لازم: "} <Paragraph>{"۱۰ دقیقه"}</Paragraph>
-            </Paragraph>
-            <TaskynIcon name={"task"} size={24} color={"red"} />
-          </View>
+      <View style={styles.formDetails}>
+        <View style={styles.formDetailsBody}>
+          <Paragraph style={styles.timeNeeded}>
+            {"زمان لازم: "} <Paragraph>{"۱۰ دقیقه"}</Paragraph>
+          </Paragraph>
+          <TaskynIcon
+            name={"timer"}
+            size={iconStyle.size}
+            color={iconStyle.color}
+          />
         </View>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "flex-start",
-            zIndex: 0,
-          }}
+        <View style={styles.formDetailsBody}>
+          <Paragraph style={styles.testCount}>
+            {"تعداد تست ها: "}
+            <Paragraph>
+              {Object.keys(testDetailState.test.fields).length}
+            </Paragraph>
+          </Paragraph>
+          <TaskynIcon
+            name={"task"}
+            size={iconStyle.size}
+            color={iconStyle.color}
+          />
+        </View>
+      </View>
+      <View style={styles.startTestContainer}>
+        <Button
+          mode={"contained"}
+          size={"wide"}
+          rippleColor={"lightGrey"}
+          onPress={onStartTestPress}
         >
-          <Button
-            mode={"contained"}
-            size={"wide"}
-            rippleColor={"lightGrey"}
-            onPress={() => {
-              // check if test is already started
-              // set correct state
-              // onCollapsePress();\
-              navigator.push("questionnaire");
-            }}
-          >
-            {"شروع تست"}
-          </Button>
-        </View>
+          {"شروع تست"}
+        </Button>
       </View>
       <BottomSheet
         ref={bottomSheetRef}
@@ -115,7 +120,7 @@ export function TestDetailsScreen() {
         backdropComponent={CustomBackdrop}
         enablePanDownToClose={true}
       >
-        <TestHistorySheet />
+        <TestHistorySheet navigateToQuestionnaire={navigateToQuestionnaire} />
       </BottomSheet>
     </Container>
   );
