@@ -12,8 +12,6 @@ export const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 5,
-    alignItems: "center",
-    justifyContent: "flex-start",
   },
   body: {
     borderRadius: 20,
