@@ -1,7 +1,4 @@
 import { ReactElement } from "react";
-export interface ITestHistoryCardProps {
-  onPress?: () => void;
-}
 
 export interface IProgressProps {
   description: string;
@@ -33,4 +30,15 @@ export interface IAnswerCardProps {
 
 export interface ITestHistorySheet {
   navigateToQuestionnaire: () => void;
+}
+export interface ITestHistoryCardProps {
+  onPress?: () => void;
+}
+export interface ITestResultHistoryCardProps {
+  id: string;
+  Icon: () => ReactElement;
+  title: string;
+  answer: string;
+  onPress?: (id: string) => any;
+  date: string;
 }
