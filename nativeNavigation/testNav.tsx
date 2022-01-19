@@ -7,9 +7,11 @@ import {
   Questionnaire,
   TestDetails,
   MbtiResult,
+  TestHistory,
 } from "../app/psychologyTests";
 type TestStackParamList = {
   testList: undefined;
+  testHistory: { id: string } | undefined;
   testDetails: { id: string };
   questionnaire: { id: string };
   mbtiResult: undefined;
@@ -32,6 +34,11 @@ function TestNavigator() {
           ...headerOptions,
           title: `تست ${route.params.id?.toUpperCase()}`,
         })}
+      />
+      <TestStack.Screen
+        name={"testHistory"}
+        component={TestHistory}
+        options={{ headerShown: false }}
       />
       <TestStack.Screen
         name={"questionnaire"}
