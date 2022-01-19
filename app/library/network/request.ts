@@ -13,9 +13,10 @@ export function buildRequest() {
    */
   async function setToken() {
     const jwtToken = await secureStorage.retrieve("token");
-    const tokenExpiresAt = await storage.retrieve("token_expires_at");
+    const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
     tokenCache = jwtToken ? jwtToken : "";
-    tokenCacheValidTime = tokenExpiresAt ? parseInt(tokenExpiresAt, 10) : 0;
+    tokenCacheValidTime =
+      typeof tokenExpiresAt === "number" ? tokenExpiresAt : 0;
   }
   /**
    * get token from cache
@@ -94,6 +95,7 @@ export function buildRequest() {
           error: "سرور در زمان مناسب پاسخ گو نبود.",
         };
       }
+
       return {
         success: false,
         httpStatus: 0,
