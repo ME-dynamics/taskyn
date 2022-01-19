@@ -4,7 +4,9 @@ import { observer } from "mobx-react-lite";
 import { UserInfo } from "../app/userInfo";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
-import { Customers, CustomerRequests } from "../app/userList";
+import { Requests } from "../app/requests";
+import { Customers } from "../app/customers"
+// import { } from "../app/"
 
 import { headerOptions } from "./headerOptions";
 
@@ -20,9 +22,9 @@ function ProviderDashboardNavigation() {
         component={Customers}
       />
       <DashboardStack.Screen
-        name={"customerRequests"}
+        name={"requests"}
         options={{ ...headerOptions, title: "درخواست ها" }}
-        component={CustomerRequests}
+        component={Requests}
       />
 
       <DashboardStack.Screen
