@@ -1,1 +1,1 @@
-export const serverUrl = "https://white-baboon-3.loca.lt/api/v1";
+export const serverUrl = "https://761b-198-23-143-147.ngrok.io/api/v1";
