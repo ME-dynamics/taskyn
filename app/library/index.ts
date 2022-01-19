@@ -12,7 +12,7 @@ export { Logo } from "./Logo";
 export { Container } from "./Container";
 export { Scroller, tScrollerRef } from "./Scroller";
 export { IconButton } from "./IconButton";
-export { toJalaaliDate } from "./toJalaaliDate";
+export { toJalaaliDate, parseDate } from "./toJalaaliDate";
 export { toString } from "./toString";
 
 export { Checkbox } from "./CheckBox";
