@@ -16,4 +16,6 @@ export type tFileType = "image";
 export interface IUploadFile {
   path: string;
   type: tFileType;
+  access: "private" | "public";
+  transform: "note" | "profile";
 }
