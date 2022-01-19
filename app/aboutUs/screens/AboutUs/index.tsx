@@ -7,6 +7,7 @@ import {
   Logo,
   Paragraph,
   Scroller,
+  Container,
 } from "../../../library";
 import { aboutUsText } from "../../constant";
 import { styles, buttonIconSize, iconColors } from "./styles";
@@ -15,7 +16,7 @@ import Communications from "react-native-communications";
 export function AboutUs() {
   const { web, telegram, linkedin, instagram } = iconColors;
   return (
-    <View style={styles.container}>
+    <Container>
       <View style={styles.logoContainer}>
         <Logo size={120} color={"primary"} />
       </View>
@@ -62,6 +63,6 @@ export function AboutUs() {
           size={buttonIconSize}
         />
       </View>
-    </View>
+    </Container>
   );
 }

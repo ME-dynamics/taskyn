@@ -5,6 +5,7 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.COLORS.BACKGROUND,
   },
   logoContainer: {
     flex: 2,
