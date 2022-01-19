@@ -21,7 +21,7 @@ function EditProfileScreen() {
   return (
     <>
       <Container>
-        <Scroller>
+        <Scroller gestureScroll>
           <View style={styles.profileImageContainer}>
             <Avatar
               uri={profileState.avatar}
