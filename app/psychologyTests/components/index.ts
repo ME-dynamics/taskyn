@@ -6,3 +6,4 @@ export { TestCard } from "./TestCard";
 export { QuestionNavigator } from "./QuestionNavigator";
 export { TestHistorySheet } from "./TestHistorySheet"
 export { ChoicesList } from "./ChoicesList";
+export { TestResultHistoryCard } from "./TestResultHistoryCard";
