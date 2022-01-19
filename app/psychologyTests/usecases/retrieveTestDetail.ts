@@ -29,5 +29,5 @@ export async function retrieveTestDetail(id: string) {
     testDetailState.setTest(beckAnxiety);
     return;
   }
-  throw new Error("form is not available");
+  throw new Error("test is not available");
 }
