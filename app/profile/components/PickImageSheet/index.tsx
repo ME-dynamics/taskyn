@@ -1,7 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
+
 import { Button, TaskynIcon, Title } from "../../../library";
+
+import { uploadProfilePicture } from "../../usecases";
 
 import { styles } from "./styles";
 
@@ -26,6 +29,7 @@ function PickImageSheetComponent() {
         Icon={({ size, color }) => {
           return <TaskynIcon name={"image"} size={size} color={color} />;
         }}
+        onPress={uploadProfilePicture}
       >
         {"عکس از گالری"}
       </Button>
