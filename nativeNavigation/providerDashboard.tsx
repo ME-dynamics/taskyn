@@ -6,12 +6,14 @@ import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 import { Customers, CustomerRequests } from "../app/userList";
 
+import { headerOptions } from "./headerOptions";
+
 import { NoteNav } from "./noteNav";
 const DashboardStack = createNativeStackNavigator();
 
 function ProviderDashboardNavigation() {
   return (
-    <DashboardStack.Navigator initialRouteName={"dashboard"}>
+    <DashboardStack.Navigator initialRouteName={"customers"}>
       <DashboardStack.Screen
         name={"customers"}
         options={{ headerShown: false }}
@@ -19,17 +21,25 @@ function ProviderDashboardNavigation() {
       />
       <DashboardStack.Screen
         name={"customerRequests"}
-        options={{ headerShown: false }}
+        options={{ ...headerOptions, title: "درخواست ها" }}
         component={CustomerRequests}
       />
 
       <DashboardStack.Screen
         name={"dashboard"}
-        options={{ headerShown: false }}
+        options={{ ...headerOptions, title: "داشبورد" }}
         component={Dashboard}
       />
-      <DashboardStack.Screen name={"userInfo"} component={UserInfo} />
-      <DashboardStack.Screen name={"tasks"} component={Tasks} />
+      <DashboardStack.Screen
+        name={"userInfo"}
+        component={UserInfo}
+        options={{ ...headerOptions, title: "پرونده بیمار" }}
+      />
+      <DashboardStack.Screen
+        name={"tasks"}
+        component={Tasks}
+        options={{ ...headerOptions, title: "تمرینات" }}
+      />
 
       <DashboardStack.Screen
         name={"notes"}
