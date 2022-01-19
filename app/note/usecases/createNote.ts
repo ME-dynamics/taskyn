@@ -1,5 +1,5 @@
 import { fetchCreateNote } from "../adapters";
-import { note as noteState } from "../entities";
+import { noteState } from "../entities";
 
 export async function createNote(customerId: string) {
   const { error, note } = await fetchCreateNote({

@@ -1,5 +1,5 @@
-import { note } from "../entities";
+import { noteState} from "../entities";
 
 export function onContentChange(text: string) {
-  note.setNoteContent(text);
+  noteState.setNoteContent(text);
 }

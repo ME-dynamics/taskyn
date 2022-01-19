@@ -1,5 +1,5 @@
-import { note } from "../entities";
+import { noteState } from "../entities";
 
 export function onRemovePress(path: string) {
-  note.removeImage(path);
+  noteState.removeImage(path);
 }
