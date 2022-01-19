@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import { Providers } from "../app/userList";
+import { Providers } from "../app/providers";
 import { UserInfo } from "../app/userInfo";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";

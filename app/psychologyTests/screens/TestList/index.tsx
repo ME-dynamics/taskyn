@@ -21,7 +21,7 @@ import { styles } from "./styles";
 function TestListScreen() {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   function navigateToFormHistory() {
-    navigator.push("formHistory");
+    navigator.push("testHistory");
   }
   function navigateToFormDetails(id: string) {
     navigator.push("testDetails", { id, title: "تست" });
