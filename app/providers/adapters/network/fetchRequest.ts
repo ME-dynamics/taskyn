@@ -1,8 +1,9 @@
 import { request, toString } from "../../../library";
+import { parseRequest } from "../utils";
 
-import { IFetchRequest } from "../../types";
+import type { IFetchRequestResult } from "../../types";
 
-export async function fetchCustomerRequest(): Promise<IFetchRequest> {
+export async function fetchRequest(): Promise<IFetchRequestResult> {
   const { success, error, httpStatus, payload } = await request({
     endpoint: "/customer/requests",
     method: "GET",
@@ -12,17 +13,11 @@ export async function fetchCustomerRequest(): Promise<IFetchRequest> {
   if (!success) {
     return {
       error: errorMessage,
-      request: {
-        providerId: "",
-        requestConfirmed: false,
-      },
+      request: undefined,
     };
   }
   return {
     error: "",
-    request: {
-      providerId: toString(payload?.providerId),
-      requestConfirmed: Boolean(payload?.requestConfirmed),
-    },
+    request: parseRequest(payload),
   };
 }

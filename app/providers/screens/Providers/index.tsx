@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { SearchBar, Container, Scroller, Title } from "../../../library";
-import { UserCard } from "../../components";
-import { providersState } from "../../entities";
+import {
+  SearchBar,
+  Container,
+  Scroller,
+  Title,
+  Subheading,
+} from "../../../library";
+import { ProviderCard } from "../../components";
+import { providerState } from "../../entities";
 import { retrieveProviders, retrieveRequest } from "../../usecases";
 import { styles } from "./styles";
 
@@ -14,25 +20,31 @@ const image =
 
 function ProvidersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const [loading, setLoading] = useState<boolean>(false);
+  async function init() {
+    setLoading(true);
+    await Promise.all([retrieveProviders(), retrieveRequest()]);
+    setLoading(false);
+  }
   useEffect(() => {
-    async function prepare() {
-      await Promise.all([retrieveProviders(), retrieveRequest()]);
-    }
-    prepare();
+    init();
   }, []);
   function renderProviderList() {
     const providers: JSX.Element[] = [];
-    for (let index = 0; index < providersState.providers.length; index++) {
-      const { id, description, firstName, lastName, profilePictureUrl, role } =
-        providersState.providers[index];
+    const length = providerState.providers.length;
+    if (length === 0) {
+      return <Subheading>{"دکتری پیدا نشد"}</Subheading>;
+    }
+    for (let index = 0; index < length; index++) {
+      const { id, description, firstName, lastName, profilePictureUrl } =
+        providerState.providers[index];
       providers.push(
-        <UserCard
+        <ProviderCard
           key={id}
           id={id}
-          mode={"providers"}
           fullName={`${firstName} ${lastName}`}
-          description={description || ""}
-          profileImageUrl={image || ""}
+          description={description}
+          profileImageUrl={profilePictureUrl}
         />
       );
     }
@@ -54,11 +66,10 @@ function ProvidersScreen() {
       <View style={styles.requestContainer}>
         <View style={styles.horizontalLine} />
         <Title style={styles.myDoctorTitle}>{"دکتر من"}</Title>
-        <UserCard
-          mode={"myProvider"}
-          id={providersState.myProvider?.id || ""}
-          fullName={`${providersState.myProvider?.firstName} ${providersState.myProvider?.lastName}`}
-          description={providersState.myProvider?.description || "دکتر نیست"}
+        <ProviderCard
+          id={providerState.myProvider?.id || ""}
+          fullName={`${providerState.myProvider?.firstName} ${providerState.myProvider?.lastName}`}
+          description={providerState.myProvider?.description || "متخصص"}
           profileImageUrl={
             "https://cdn01.zoomit.ir/Avatars//ef71899b-b0fc-4c3b-984e-5a41e450d942.png?w=115"
           }
