@@ -1,12 +1,12 @@
 import React from "react";
 import { View } from "react-native";
-import { Button, Logo, Paragraph } from "../../../library";
+import { Button, Container, Logo, Paragraph } from "../../../library";
 import { styles } from "./styles";
 import Communications from "react-native-communications";
 
 export function Support() {
   return (
-    <View style={styles.container}>
+    <Container>
       <View style={styles.logoContainer}>
         <Logo size={120} color={"primary"} />
       </View>
@@ -48,6 +48,6 @@ export function Support() {
           {"تماس با ما"}
         </Button>
       </View>
-    </View>
+    </Container>
   );
 }
