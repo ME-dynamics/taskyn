@@ -24,7 +24,7 @@ function ProvidersScreen() {
     const providers: JSX.Element[] = [];
     for (let index = 0; index < providersState.providers.length; index++) {
       const { id, description, firstName, lastName, profilePictureUrl, role } =
-      providersState.providers[index];
+        providersState.providers[index];
       providers.push(
         <UserCard
           key={id}
@@ -55,10 +55,9 @@ function ProvidersScreen() {
         <View style={styles.horizontalLine} />
         <Title style={styles.myDoctorTitle}>{"دکتر من"}</Title>
         <UserCard
-          key={"key"}
-          mode={"customerRequest"}
-          id={"id"}
-          fullName={`${"عرفان"} ${"یوسفی فر"}`}
+          mode={"myProvider"}
+          id={providersState.myProvider?.id || ""}
+          fullName={`${providersState.myProvider?.firstName} ${providersState.myProvider?.lastName}`}
           description={providersState.myProvider?.description || "دکتر نیست"}
           profileImageUrl={
             "https://cdn01.zoomit.ir/Avatars//ef71899b-b0fc-4c3b-984e-5a41e450d942.png?w=115"

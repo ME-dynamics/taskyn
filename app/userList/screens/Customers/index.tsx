@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { observer } from "mobx-react-lite";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/core";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 import {
   SearchBar,
   Touchable,
@@ -10,13 +13,19 @@ import {
   Container,
   Scroller,
 } from "../../../library";
-import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/core";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import { UserCard } from "../../components";
+import { retrieveProviderRequests, retrieveCustomers } from "../../usecases";
+import { customerRequestState } from "../../entities";
+
+import { styles } from "./styles";
 
 function CustomersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  useEffect(() => {
+    Promise.all([retrieveCustomers(), retrieveProviderRequests()]);
+  }, []);
 
   return (
     <Container>
@@ -30,7 +39,9 @@ function CustomersScreen() {
         <View style={styles.iconContainer}>
           <View style={styles.redCircleContainer}>
             <View style={styles.redCircle}>
-              <Text style={styles.numberStyle}>1</Text>
+              <Text style={styles.numberStyle}>
+                {digitsEnToFa(customerRequestState.requests.length)}
+              </Text>
             </View>
           </View>
           <View style={styles.icon}>
@@ -44,7 +55,7 @@ function CustomersScreen() {
         </View>
         <Touchable
           onPress={() => {
-            navigation.push("AcceptPatientList");
+            navigation.push("customerRequests");
           }}
           rippleColor={"grey"}
         />

@@ -4,7 +4,6 @@ import { IFetchRequest } from "../../types";
 export async function fetchCreateRequest(
   providerId: string
 ): Promise<IFetchRequest> {
-  console.log({ providerId });
   const { success, error, httpStatus, payload } = await request({
     endpoint: "/customer/requests",
     method: "POST",

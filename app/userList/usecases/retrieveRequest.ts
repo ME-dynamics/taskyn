@@ -1,8 +1,8 @@
-import { fetchRequest, fetchUser } from "../adapters";
+import { fetchCustomerRequest, fetchUser } from "../adapters";
 import { providersState } from "../entities";
 
 export async function retrieveRequest() {
-  const { error: requestError, request } = await fetchRequest();
+  const { error: requestError, request } = await fetchCustomerRequest();
   if (requestError) {
   }
   const { providerId, requestConfirmed } = request;

@@ -24,6 +24,7 @@ function styleGenerator(mode: tUserMode) {
       flexDirection: "row-reverse",
       backgroundColor: "white",
       borderRadius: 12,
+      overflow: "hidden",
     },
     buttonContainer: {
       flex: 1,

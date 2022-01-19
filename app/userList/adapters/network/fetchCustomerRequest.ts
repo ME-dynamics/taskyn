@@ -2,7 +2,7 @@ import { request, toString } from "../../../library";
 
 import { IFetchRequest } from "../../types";
 
-export async function fetchRequest(): Promise<IFetchRequest> {
+export async function fetchCustomerRequest(): Promise<IFetchRequest> {
   const { success, error, httpStatus, payload } = await request({
     endpoint: "/customer/requests",
     method: "GET",

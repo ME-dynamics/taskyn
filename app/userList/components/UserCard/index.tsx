@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import { unknownImage } from "../../assets";
-import { Button, Caption, Paragraph } from "../../../library";
+import { Button, Caption, Paragraph, Touchable } from "../../../library";
 import { providersState } from "../../entities";
-import { createRequest } from "../../usecases";
+import { createRequest, rejectRequest, confirmRequest } from "../../usecases";
 
 import { styleGen } from "./styles";
 import { IUserCardProps } from "../../types";
 
 function UserComponent(props: IUserCardProps) {
   const { id, fullName, profileImageUrl, description, mode } = props;
+  const [firstButtonLoading, setFirstButtonLoading] = useState<boolean>(false);
+  const [secondButtonLoading, setSecondButtonLoading] =
+    useState<boolean>(false);
   const { styles } = styleGen(mode);
-  async function onPress() {
-    if (mode === "providers") {
-      await createRequest(id);
-    }
+  async function onCreateRequest() {
+    setFirstButtonLoading(true);
+    await createRequest(id);
+    setFirstButtonLoading(false);
   }
+  async function onRejectRequest() {
+    setFirstButtonLoading(true);
+    await rejectRequest(id);
+    setFirstButtonLoading(false);
+  }
+  async function onConfirmRequest() {
+    setSecondButtonLoading(true);
+    await confirmRequest(id);
+    setSecondButtonLoading(false);
+  }
+  async function onRemoveRequest() {
+    setFirstButtonLoading(true);
+    await rejectRequest(id);
+    setFirstButtonLoading(false);
+  }
+  async function onRemoveProvider() {
+    // TODO: implement remove provider
+    console.log("not implemented");
+  }
+  async function onRemoveCustomer() {}
   function renderButton() {
     if (mode === "customerRequest") {
       return (
@@ -26,7 +49,8 @@ function UserComponent(props: IUserCardProps) {
             rippleColor={"lightGrey"}
             size={"extra-small"}
             fullRadius
-            onPress={onPress}
+            loading={firstButtonLoading}
+            onPress={onRejectRequest}
           >
             {"رد کردن"}
           </Button>
@@ -35,7 +59,8 @@ function UserComponent(props: IUserCardProps) {
             rippleColor={"lightGrey"}
             size={"extra-small"}
             fullRadius
-            onPress={onPress}
+            loading={secondButtonLoading}
+            onPress={onConfirmRequest}
           >
             {"قبول کردن"}
           </Button>
@@ -49,7 +74,8 @@ function UserComponent(props: IUserCardProps) {
           rippleColor={"lightGrey"}
           size={"extra-small"}
           fullRadius
-          onPress={onPress}
+          loading={firstButtonLoading}
+          onPress={onRemoveCustomer}
         >
           {"لغو اتصال"}
         </Button>
@@ -62,7 +88,8 @@ function UserComponent(props: IUserCardProps) {
           rippleColor={"lightGrey"}
           size={"extra-small"}
           fullRadius
-          onPress={onPress}
+          loading={firstButtonLoading}
+          onPress={onCreateRequest}
         >
           {"درخواست اتصال"}
         </Button>
@@ -70,18 +97,19 @@ function UserComponent(props: IUserCardProps) {
     }
     if (mode === "myProvider") {
       const cancelConnection = "لغو اتصال";
-      const waitingForConfirmation = "در انتظار تایید";
+      const cancelRequest = "لغو درخواست";
       return (
         <Button
           mode={"contained"}
           rippleColor={"lightGrey"}
           size={"extra-small"}
           fullRadius
-          onPress={onPress}
+          loading={firstButtonLoading}
+          onPress={
+            providersState.requestConfirmed ? onRemoveProvider : undefined
+          }
         >
-          {providersState.requestConfirmed
-            ? cancelConnection
-            : waitingForConfirmation}
+          {providersState.requestConfirmed ? cancelConnection : cancelRequest}
         </Button>
       );
     }
@@ -108,6 +136,7 @@ function UserComponent(props: IUserCardProps) {
           <Paragraph>{fullName}</Paragraph>
           <Caption>{description}</Caption>
         </View>
+        {mode === "customers" ? <Touchable rippleColor={"lightGrey"} /> : null}
       </View>
       <View style={styles.buttonContainer}>{renderButton()}</View>
     </View>
