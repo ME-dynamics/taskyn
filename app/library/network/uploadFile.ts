@@ -45,34 +45,43 @@ export function buildUploadFile() {
     return tokenCache;
   }
   return async function uploadFile(info: IUploadFile): Promise<IResponse> {
-    const { path, type } = info;
+    const { path, type, access, transform } = info;
     const endPoint = endpointGen(type);
-    const { body, headers, mimeType, status } = await uploadAsync(
-      endPoint,
-      path,
-      {
-        fieldName: "imageFile",
-        httpMethod: "POST",
-        uploadType: FileSystemUploadType.MULTIPART,
-        headers: {
-          Authorization: (await getJwtToken()) || "no-token",
-          "Content-type": "multipart/form-data",
-          Accept: "application/json",
-          "Accept-Encoding": "gzip",
-        },
-        parameters: {
-          access: "private",
-          transform: "note",
-        },
-      }
-    );
-    const success = status >= 200 && status <= 299;
-    const data = JSON.parse(body);
-    return {
-      success,
-      error: success ? "" : data.error,
-      httpStatus: status,
-      payload: success ? data?.payload : "",
-    };
+    try {
+      const token = `Bearer ${await getJwtToken()}`;
+      const { body, headers, mimeType, status } = await uploadAsync(
+        endPoint,
+        path,
+        {
+          fieldName: "imageFile",
+          httpMethod: "POST",
+          uploadType: FileSystemUploadType.MULTIPART,
+          headers: {
+            Authorization: token,
+            "Content-type": "multipart/form-data",
+            Accept: "application/json",
+          },
+          parameters: {
+            access,
+            transform,
+          },
+        }
+      );
+      const success = status >= 200 && status <= 299;
+      const data = JSON.parse(body);
+      return {
+        success,
+        error: success ? "" : data.error,
+        httpStatus: status,
+        payload: success ? data?.payload : "",
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: "",
+        httpStatus: 0,
+        payload: {},
+      };
+    }
   };
 }
