@@ -23,7 +23,12 @@ function EditProfileScreen() {
       <Container>
         <Scroller>
           <View style={styles.profileImageContainer}>
-            <Avatar uri={""} size={120} edit onEditPress={onCollapsePress} />
+            <Avatar
+              uri={profileState.avatar}
+              size={120}
+              edit
+              onEditPress={onCollapsePress}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Input
