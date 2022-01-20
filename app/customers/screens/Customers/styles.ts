@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   requestContainer: {
     width: widthPercentageToDP(90),
-    height: 72,
+    height: 56,
     elevation: 2,
     borderRadius: 12,
     flexDirection: "row-reverse",
@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   },
   line: {
     width: widthPercentageToDP(90),
+    alignSelf: "center",
     marginTop: 16,
     height: 1,
     backgroundColor: THEME.COLORS.GREY.LIGHT,
