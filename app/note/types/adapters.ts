@@ -1,10 +1,13 @@
 import { INote } from "./entities";
 
-export interface IUploadImagePayload {
+export interface IUploadImageResult {
   error: string;
-  payload: {
-    id: string;
-  };
+  imageId: string;
+}
+
+export interface IFetchGetNotesResult {
+  error: string;
+  notes: INote[];
 }
 
 export interface IFetchCreateNote {
@@ -14,7 +17,7 @@ export interface IFetchCreateNote {
   imageIds: string[];
 }
 
-export interface IFetchCreateNotePayload {
+export interface IFetchCreateNoteResult {
   error: string;
-  note: INote;
+  note: INote | undefined;
 }
