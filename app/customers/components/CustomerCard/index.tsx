@@ -13,7 +13,7 @@ import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
 
 function CustomerCardComponent(props: ICustomerCardProps) {
-  const { id, fullName, profileImageUrl, description, onPress } = props;
+  const { id, fullName, profileImageUrl, description, onPress, date } = props;
   const [loading, setLoading] = useState<boolean>(false);
 
   async function onRemoveCustomer() {
@@ -46,7 +46,6 @@ function CustomerCardComponent(props: ICustomerCardProps) {
         <Touchable onPress={onCustomerPress} rippleColor={"lightGrey"} />
       </View>
       <View style={styles.buttonContainer}>
-        {" "}
         <Button
           mode={"contained-grey"}
           rippleColor={"lightGrey"}
