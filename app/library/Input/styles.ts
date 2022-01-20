@@ -167,17 +167,19 @@ function styleGenerator(args: IInputStyleGen) {
     inputError: {
       borderColor: THEME.COLORS.ERROR,
     },
-    animatedText: {
+    animatedTextContainer: {
       position: "absolute",
       zIndex: 1,
       paddingHorizontal: 4,
-      ...material.subheadingObject,
       backgroundColor: isFlat ? undefined : THEME.COLORS.BACKGROUND,
       top: inputHeight / 2 - 10,
       right: 16,
+      overflow: "hidden",
+    },
+    animatedText: {
+      ...material.subheadingObject,
       fontFamily: THEME.FONTS.REGULAR,
       textAlign: "right",
-      overflow: "hidden",
     },
     animatedTextActive: {
       color: THEME.COLORS.PRIMARY.NORMAL,
