@@ -122,7 +122,7 @@ function InputComponent(props: IInputProps) {
   }
   function renderTitle() {
     if (isRaw) {
-      if (focused) {
+      if (focused || value) {
         return null;
       }
       return <Subheading style={styles.titleRaw}>{title}</Subheading>;
