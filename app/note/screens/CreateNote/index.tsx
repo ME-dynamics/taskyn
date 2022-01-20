@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
+import { autorun } from "mobx";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Animated, {
   useSharedValue,
@@ -29,13 +30,12 @@ import {
 } from "../../usecases";
 
 import { styles, translateYFooter, footerHeight } from "./styles";
-import { tScrollRef } from "../../types";
-import { autorun } from "mobx";
+import type { tScrollerRef } from "../../types";
 
 function CreateNoteScreen() {
   const navigator = useNavigation();
   const route = useRoute();
-  const scrollRef = useRef<tScrollRef>(null);
+  const scrollRef = useRef<tScrollerRef>(null);
   const { keyboardShown } = useKeyboard();
   const [createLoading, setCreateLoading] = useState<boolean>(false);
   const keyboardAnimation = useSharedValue<number>(0);
