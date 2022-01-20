@@ -153,12 +153,11 @@ function InputComponent(props: IInputProps) {
       };
     });
     return (
-      <Animated.Text
-        style={[animatedStyle, animatedTextStyle]}
-        onPress={onPress}
-      >
-        {title}
-      </Animated.Text>
+      <Animated.View style={[styles.animatedTextContainer, animatedStyle]}>
+        <Tap onPress={onPress}>
+          <Animated.Text style={animatedTextStyle}>{title}</Animated.Text>
+        </Tap>
+      </Animated.View>
     );
   }
   function renderErrors() {
