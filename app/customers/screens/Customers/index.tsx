@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,21 +15,46 @@ import {
 } from "../../../library";
 
 import { requestCount, retrieveRequests } from "../../../requests";
-
+import { customerState } from "../../entities";
 import { CustomerCard } from "../../components";
-import { retrieveCustomers } from "../../usecases";
-
 import { styles } from "./styles";
+import { retrieveCustomers } from "../../usecases/retrieveCustomers";
 
 function CustomersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
+  const [loading, setLoading] = useState<boolean>(true);
+  async function init() {
+    await Promise.all([retrieveCustomers(), retrieveRequests()]);
+    setLoading(false);
+  }
   useEffect(() => {
-    Promise.all([retrieveCustomers(), retrieveRequests()]);
+    init();
   }, []);
-
+  function renderCustomers() {
+    const customers: JSX.Element[] = [];
+    const length = customerState.customers.length;
+    if (length === 0) {
+      return <Subheading>{"مریضی یافت نشد!"}</Subheading>;
+    }
+    for (let index = 0; index < length; index++) {
+      const { customerId, description, name, profilePictureUrl, createdAt } =
+        customerState.customers[index];
+      customers.push(
+        <CustomerCard
+          key={customerId}
+          description={description}
+          fullName={name}
+          id={customerId}
+          profileImageUrl={profilePictureUrl}
+          date={createdAt}
+          onPress={() => {}}
+        />
+      );
+    }
+    return customers;
+  }
   return (
-    <Container>
+    <Container loading={loading}>
       <View style={styles.titleContainer}>
         <Title>{"لیست مراجعین"}</Title>
       </View>
@@ -56,37 +81,14 @@ function CustomersScreen() {
         </View>
         <Touchable
           onPress={() => {
-            navigation.push("customerRequests");
+            navigation.push("requests");
           }}
           rippleColor={"grey"}
         />
       </View>
       <View style={styles.line} />
 
-      <Scroller>
-        <CustomerCard
-          id={"sd"}
-          description={"مشسیم"}
-          profileImageUrl={
-            "https://cdn01.zoomit.ir/Avatars//ef71899b-b0fc-4c3b-984e-5a41e450d942.png?w=115"
-          }
-          fullName={"سجاد سیف اله"}
-          onPress={(id) => {
-            console.log("customer pressed", { customerId: id });
-          }}
-        />
-        <CustomerCard
-          id={"sd"}
-          description={"مشسیم"}
-          profileImageUrl={
-            "https://cdn01.zoomit.ir/Avatars//ef71899b-b0fc-4c3b-984e-5a41e450d942.png?w=115"
-          }
-          fullName={"سجاد سیف اله"}
-          onPress={(id) => {
-            console.log("customer pressed", { customerId: id });
-          }}
-        />
-      </Scroller>
+      <Scroller>{renderCustomers()}</Scroller>
     </Container>
   );
 }

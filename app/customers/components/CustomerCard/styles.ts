@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: mode === "customerRequest" ? "space-between" : "center",
+    // justifyContent: mode === "customerRequest" ? "space-between" : "center",
+    justifyContent: "center",
   },
   profileContainer: {
     flex: 1,

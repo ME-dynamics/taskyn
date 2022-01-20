@@ -1,0 +1,32 @@
+import { request } from "../../../library";
+import { ICustomer, IFetchGetRequests } from "../../types";
+import { parseCustomer } from "../utils";
+
+export async function fetchGetCustomers(): Promise<IFetchGetRequests> {
+  const { success, error, httpStatus, payload } = await request({
+    endpoint: "/provider/customers",
+    method: "GET",
+    body: undefined,
+  });
+  if (!success) {
+    return {
+      error,
+      customers: [],
+    };
+  }
+  if (Array.isArray(payload)) {
+    const result: ICustomer[] = [];
+    for (let index = 0; index < payload.length; index++) {
+      const customers = payload[index];
+      result.push(parseCustomer(customers));
+    }
+    return {
+      error: "",
+      customers: result,
+    };
+  }
+  return {
+    error: "مریضی یافت نشد!",
+    customers: [],
+  };
+}

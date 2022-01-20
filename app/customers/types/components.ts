@@ -4,4 +4,5 @@ export interface ICustomerCardProps {
   description: string;
   profileImageUrl: string;
   onPress: (id: string) => void;
+  date: string;
 }

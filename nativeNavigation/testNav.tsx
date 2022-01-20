@@ -38,7 +38,7 @@ function TestNavigator() {
       <TestStack.Screen
         name={"testHistory"}
         component={TestHistory}
-        options={{ headerShown: false }}
+        options={{ ...headerOptions, title: "تاریخچه تست ها" }}
       />
       <TestStack.Screen
         name={"questionnaire"}
