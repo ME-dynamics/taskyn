@@ -120,13 +120,12 @@ function styleGenerator(args: IInputStyleGen) {
     inputRawContainer: {
       width: "100%",
       height: "100%",
-      paddingTop: 0,
+      paddingTop: 4,
       paddingHorizontal: 16,
-      paddingBottom: 16,
     },
     input: {
       flex: 9,
-      paddingBottom: isFlat ? 0 : undefined,
+      paddingBottom: isFlat || isRaw ? 0 : undefined,
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
