@@ -1,6 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  interpolate,
+  Extrapolate,
+} from "react-native-reanimated";
+import { useKeyboard } from "@react-native-community/hooks";
 import {
   Button,
   Input,
@@ -10,15 +19,52 @@ import {
   IconButton,
 } from "../../../library";
 import { CreateNoteImage, AttachMenu, AttachCounter } from "../../components";
-import { noteState } from "../../entities";
-import { onCropPress, onRemovePress } from "../../usecases";
+import { createNoteState } from "../../entities";
+import {
+  onCropPress,
+  onRemovePress,
+  createNote,
+  onTitleChange,
+  onContentChange,
+} from "../../usecases";
 
-import { styles } from "./styles";
+import { styles, translateYFooter, footerHeight } from "./styles";
 import { tScrollRef } from "../../types";
 import { autorun } from "mobx";
 
 function CreateNoteScreen() {
+  const navigator = useNavigation();
+  const route = useRoute();
   const scrollRef = useRef<tScrollRef>(null);
+  const { keyboardShown } = useKeyboard();
+  const [createLoading, setCreateLoading] = useState<boolean>(false);
+  const keyboardAnimation = useSharedValue<number>(0);
+  const animationRunning = useSharedValue<number>(0);
+
+  const footerContainerStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: interpolate(
+            keyboardAnimation.value,
+            [0, 0.8],
+            [0, translateYFooter],
+            Extrapolate.CLAMP
+          ),
+        },
+      ],
+      height: interpolate(keyboardAnimation.value, [0, 1], [footerHeight, 0]),
+    };
+  });
+  function onNoteInputFocus() {
+    "worklet";
+    animationRunning.value = 1;
+    keyboardAnimation.value = withTiming(1, { duration: 300 }, () => {
+      "worklet";
+      animationRunning.value = 0;
+    });
+  }
+
   function onNoteImageCropPress(path: string) {
     onCropPress(path);
   }
@@ -26,31 +72,34 @@ function CreateNoteScreen() {
     onRemovePress(path);
   }
   function onAttachMenuPress() {
-    noteState.toggleMenu(undefined);
+    createNoteState.toggleMenu(undefined);
   }
-  function renderNoteImages() {
-    const notes: JSX.Element[] = [];
-    for (let index = 0; index < noteState.images.length; index++) {
-      const { id, path } = noteState.images[index];
-      notes.push(
-        <CreateNoteImage
-          key={path}
-          imageId={id}
-          path={path}
-          onCropPress={onNoteImageCropPress}
-          onRemovePress={onNoteImageRemovePress}
-        />
-      );
-    }
-    return notes;
+  async function onCreateNotePress() {
+    setCreateLoading(true);
+    // TODO: use route id
+    await createNote("3c959478-8333-4d90-8ede-05d4c9226488");
+    navigator.goBack();
   }
   useEffect(() => {
-    autorun(() => {
-      if (noteState.prevImagesCount < noteState.images.length) {
+    if (keyboardShown) {
+      if (animationRunning.value === 0 && keyboardAnimation.value === 0) {
+        keyboardAnimation.value = withTiming(1, { duration: 300 });
+      }
+    } else {
+      keyboardAnimation.value = withTiming(0, { duration: 300 });
+    }
+  }, [keyboardShown]);
+  useEffect(() => {
+    const disposer = autorun(() => {
+      if (createNoteState.prevImagesCount < createNoteState.images.length) {
         scrollRef.current?.scrollToEnd({ animated: true });
       }
     });
+    return () => {
+      disposer();
+    };
   }, []);
+
   return (
     <Container>
       <View style={styles.titleInputContainer}>
@@ -58,6 +107,9 @@ function CreateNoteScreen() {
           mode={"raw"}
           title={"موضوع"}
           placeholder={"موضوع یادداشت خود را وارد کنید"}
+          onFocus={onNoteInputFocus}
+          value={createNoteState.noteTitle}
+          onChangeText={onTitleChange}
         />
       </View>
       <View style={styles.horizontalLine} />
@@ -66,41 +118,58 @@ function CreateNoteScreen() {
           mode={"raw"}
           title={"متن یادداشت"}
           placeholder={"متن یادداشت خود را وارد کنید"}
+          onFocus={onNoteInputFocus}
+          multiline
+          value={createNoteState.noteContent}
+          onChangeText={onContentChange}
         />
       </View>
-      <View style={styles.pickImageContainer}>
-        <View style={styles.imageListContainer}>
-          <Scroller ref={scrollRef} horizontal rtl>
-            {renderNoteImages()}
-          </Scroller>
+      <Animated.View style={footerContainerStyle}>
+        <View style={styles.pickImageContainer}>
+          <View style={styles.imageListContainer}>
+            <Scroller ref={scrollRef} horizontal rtl>
+              {createNoteState.images.map((image) => {
+                const { id, path } = image;
+                return (
+                  <CreateNoteImage
+                    key={path}
+                    imageId={id}
+                    path={path}
+                    onCropPress={onNoteImageCropPress}
+                    onRemovePress={onNoteImageRemovePress}
+                  />
+                );
+              })}
+            </Scroller>
+          </View>
+          <View style={styles.attachButtonContainer}>
+            <IconButton
+              size={24}
+              color={"black"}
+              Icon={({ size, color }) => {
+                return (
+                  <TaskynIcon name={"paperclip"} size={size} color={color} />
+                );
+              }}
+              onPress={onAttachMenuPress}
+            />
+            <AttachCounter />
+            <AttachMenu />
+          </View>
         </View>
-        <View style={styles.attachButtonContainer}>
-          <IconButton
-            size={24}
-            color={"black"}
-            Icon={({ size, color }) => {
-              return (
-                <TaskynIcon name={"paperclip"} size={size} color={color} />
-              );
-            }}
-            onPress={onAttachMenuPress}
-          />
-          <AttachCounter />
-
-          <AttachMenu />
+        <View style={styles.horizontalLine} />
+        <View style={styles.submitButtonContainer}>
+          <Button
+            mode={"contained"}
+            size={"wide"}
+            rippleColor={"lightGrey"}
+            onPress={onCreateNotePress}
+            loading={createLoading}
+          >
+            {"ثبت کردن یادداشت"}
+          </Button>
         </View>
-      </View>
-      <View style={styles.horizontalLine} />
-      <View style={styles.submitButtonContainer}>
-        <Button
-          mode={"contained"}
-          size={"wide"}
-          rippleColor={"lightGrey"}
-          onPress={() => {}}
-        >
-          {"ثبت کردن یادداشت"}
-        </Button>
-      </View>
+      </Animated.View>
     </Container>
   );
 }
