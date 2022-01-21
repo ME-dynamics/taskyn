@@ -77,8 +77,12 @@ function CreateNoteScreen() {
   async function onCreateNotePress() {
     setCreateLoading(true);
     // TODO: use route id
-    await createNote("3c959478-8333-4d90-8ede-05d4c9226488");
-    navigator.goBack();
+    const created = await createNote("3c959478-8333-4d90-8ede-05d4c9226488");
+    if (created) {
+      navigator.goBack();
+      return;
+    }
+    setCreateLoading(false);
   }
   useEffect(() => {
     if (keyboardShown) {
