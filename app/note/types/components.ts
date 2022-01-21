@@ -14,3 +14,10 @@ export interface ICreateNoteImageProps {
 export interface INoteHeaderProps {
   onDeletePress: () => void;
 }
+
+export interface INoteProps {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: string;
+}

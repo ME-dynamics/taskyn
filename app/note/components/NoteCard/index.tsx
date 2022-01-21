@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import {
   Caption,
@@ -9,13 +10,17 @@ import {
   THEME,
   Touchable,
 } from "../../../library";
+
 import { styles } from "./styles";
-import { INoteProps } from "./types";
+
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { INoteProps } from "../../types";
 
 function NoteCardComponent(props: INoteProps) {
-  const { id, title, onPress, date, description } = props;
+  const navigator = useNavigation<NativeStackNavigationProp<any>>();
+  const { id, title, createdAt, description } = props;
   function onNotePress() {
-    onPress(id);
+    navigator.push("note", { id });
   }
   return (
     <View style={styles.container}>
@@ -31,7 +36,7 @@ function NoteCardComponent(props: INoteProps) {
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
           <Subheading>{title}</Subheading>
-          <Caption>{date}</Caption>
+          <Caption>{createdAt}</Caption>
         </View>
         <View style={styles.descriptionContainer}>
           <Paragraph
