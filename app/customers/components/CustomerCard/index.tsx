@@ -1,22 +1,36 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import {
   Button,
   Caption,
   Paragraph,
   Touchable,
   TaskynIcon,
+  CustomBackdrop,
 } from "../../../library";
-
 import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
+import { removeCustomers } from "../../usecases";
+import { RemoveCustomerSheet } from "..";
 
 function CustomerCardComponent(props: ICustomerCardProps) {
   const { id, fullName, profileImageUrl, description, onPress, date } = props;
   const [loading, setLoading] = useState<boolean>(false);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ["40%", "40%"], []);
 
+  const close = useCallback(() => {
+    bottomSheetModalRef.current?.close();
+  }, []);
+  const onCollapsePress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
   async function onRemoveCustomer() {
+    setLoading(true);
+    await removeCustomers(id);
+    setLoading(false);
     // TODO: remove customer
   }
   const onCustomerPress = useCallback(
@@ -48,15 +62,27 @@ function CustomerCardComponent(props: ICustomerCardProps) {
       <View style={styles.buttonContainer}>
         <Button
           mode={"contained-grey"}
-          rippleColor={"lightGrey"}
+          rippleColor={"darkGrey"}
           size={"extra-small"}
           fullRadius
           loading={loading}
-          onPress={onRemoveCustomer}
+          onPress={onCollapsePress}
         >
           {"لغو اتصال"}
         </Button>
       </View>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        backdropComponent={CustomBackdrop}
+        index={1}
+        enablePanDownToClose
+      >
+        <RemoveCustomerSheet
+          onCancelPress={close}
+          onRemoveCustomerPress={onRemoveCustomer}
+        />
+      </BottomSheetModal>
     </View>
   );
 }

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProviderDashboardNav } from "./providerDashboard";
 import { CustomerDashboardNav } from "./customerDashboard";
-import { TestNav } from "./testNav"
+import { TestNav } from "./testNav";
 import { ProfileNav } from "./profileNav";
 import { getRole } from "../app/authentication";
 import { TaskynIcon, THEME } from "../app/library";

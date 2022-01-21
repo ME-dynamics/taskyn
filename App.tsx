@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthNav, TabNav } from "./nativeNavigation";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 import { getLoggedIn, initToken } from "./app/authentication";
 
@@ -38,11 +39,13 @@ function AppComponent() {
     return <AppLoading />;
   }
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer onReady={onLayoutRootView}>
-        {isSignedIn ? <TabNav /> : <AuthNav />}
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <BottomSheetModalProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer onReady={onLayoutRootView}>
+          {isSignedIn ? <TabNav /> : <AuthNav />}
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </BottomSheetModalProvider>
   );
 }
 

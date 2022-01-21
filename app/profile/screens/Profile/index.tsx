@@ -5,9 +5,15 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { Container, Headline, Scroller, TaskynIcon } from "../../../library";
+import {
+  Container,
+  Headline,
+  Scroller,
+  TaskynIcon,
+  CustomBackdrop,
+} from "../../../library";
 
-import { MenuItem, Avatar, CustomBackdrop, ExitSheet } from "../../components";
+import { MenuItem, Avatar, ExitSheet } from "../../components";
 import { profileState } from "../../entities";
 import { retrieveUser } from "../../usecases";
 
