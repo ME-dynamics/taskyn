@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Container, Scroller } from "../../../library";
+import { Container, Scroller, Subheading } from "../../../library";
 
 import { RequestCard } from "../../components";
 import { requestState } from "../../entities";
@@ -18,8 +18,12 @@ export function RequestsScreen() {
     loadRequests();
   }, []);
   function renderCustomerRequests() {
+    const length = requestState.requests.length;
+    if (length === 0) {
+      return <Subheading>{"درخواستی یافت نشد!"}</Subheading>;
+    }
     const components: JSX.Element[] = [];
-    for (let index = 0; index < requestState.requests.length; index++) {
+    for (let index = 0; index < length; index++) {
       const {
         customerId,
         description,
