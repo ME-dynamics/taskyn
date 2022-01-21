@@ -1,6 +1,6 @@
 import { request } from "../../../library";
-import { ICustomer, IFetchGetRequests } from "../../types";
 import { parseCustomer } from "../utils";
+import type { ICustomer, IFetchGetRequests } from "../../types";
 
 export async function fetchGetCustomers(): Promise<IFetchGetRequests> {
   const { success, error, httpStatus, payload } = await request({
