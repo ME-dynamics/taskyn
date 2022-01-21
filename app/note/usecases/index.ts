@@ -5,3 +5,4 @@ export { onGalleryPress } from "./onGalleryPress";
 export { onTitleChange } from "./onTitleChange";
 export { onContentChange } from "./onContentChange";
 export { createNote } from "./createNote";
+export { retrieveNotes } from "./retrieveNotes";
