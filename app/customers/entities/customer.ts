@@ -1,4 +1,4 @@
-import { observable, action, makeObservable, computed } from "mobx";
+import { observable, action, makeObservable } from "mobx";
 import type { ICustomer } from "../types";
 
 export class CustomerState {
@@ -6,14 +6,16 @@ export class CustomerState {
     makeObservable(this, {
       customers: observable,
       setCustomers: action,
-      customersCount: computed,
+      removeCustomer: action,
     });
   }
   customers: ICustomer[] = [];
   setCustomers(customers: ICustomer[]) {
     this.customers = customers;
   }
-  get customersCount(): number {
-    return this.customers.length;
+  removeCustomer(customerId: string) {
+    this.customers = this.customers.filter(
+      (customer) => customer.customerId !== customerId
+    );
   }
 }
