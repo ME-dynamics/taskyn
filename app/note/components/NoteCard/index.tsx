@@ -25,13 +25,12 @@ function NoteCardComponent(props: INoteProps) {
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <View style={styles.icon}>
-          <TaskynIcon
-            name={"notes"}
-            size={24}
-            color={THEME.COLORS.PRIMARY.NORMAL}
-          />
-        </View>
+        <TaskynIcon
+          name={"notes"}
+          size={24}
+          color={THEME.COLORS.PRIMARY.NORMAL}
+          boxed
+        />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>

@@ -18,14 +18,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  icon: {
-    width: 40,
-    height: 40,
-    borderRadius: 40 / 2,
-    backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   infoContainer: {
     flex: 4,
     paddingLeft: 10,
