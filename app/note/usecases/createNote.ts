@@ -10,8 +10,9 @@ export async function createNote(customerId: string) {
   });
   if (error || !note) {
     console.log(error);
-    return;
+    return false;
   }
   noteListState.addNote(note);
   createNoteState.reset();
+  return true;
 }
