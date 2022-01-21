@@ -1,4 +1,3 @@
-import memoize from "fast-memoize";
 import { StyleSheet } from "react-native";
 import { THEME } from "../../../library";
 
