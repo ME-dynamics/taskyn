@@ -1,4 +1,4 @@
-import { ICustomer } from ".";
+import { ICustomer } from "./entities";
 
 export interface IFetchGetRequests {
   error: string;

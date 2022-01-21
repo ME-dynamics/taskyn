@@ -6,3 +6,7 @@ export interface ICustomerCardProps {
   onPress: (id: string) => void;
   date: string;
 }
+export interface IRemoveCustomerSheetComponentProps {
+  onCancelPress: () => void;
+  onRemoveCustomerPress: () => void;
+}
