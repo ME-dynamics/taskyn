@@ -25,7 +25,7 @@ function NoteNavigation() {
       <NoteStack.Screen
         name={"note"}
         component={Note}
-        options={{ title: "یادداشت" }}
+        options={{ headerShown: false }}
       />
     </NoteStack.Navigator>
   );
