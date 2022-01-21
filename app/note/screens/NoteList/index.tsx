@@ -46,11 +46,8 @@ function NoteListScreen() {
         <NoteCard
           key={id}
           id={id}
-          onPress={(id) => {
-            console.log(id);
-          }}
           title={title}
-          date={createdAt}
+          createdAt={createdAt}
           description={content}
         />
       );
