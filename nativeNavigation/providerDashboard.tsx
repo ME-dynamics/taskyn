@@ -5,7 +5,7 @@ import { UserInfo } from "../app/userInfo";
 import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 import { Requests } from "../app/requests";
-import { Customers } from "../app/customers"
+import { Customers } from "../app/customers";
 // import { } from "../app/"
 
 import { headerOptions } from "./headerOptions";
