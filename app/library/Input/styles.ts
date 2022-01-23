@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { material } from "react-native-typography";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
@@ -126,6 +126,11 @@ function styleGenerator(args: IInputStyleGen) {
     input: {
       flex: 9,
       paddingBottom: isFlat || isRaw ? 0 : undefined,
+      ...Platform.select({
+        web: {
+          outlineStyle: "none",
+        },
+      }),
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,
