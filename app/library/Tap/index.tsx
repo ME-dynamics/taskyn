@@ -1,23 +1,28 @@
 import React from "react";
 import { View } from "react-native";
+import { observer } from "mobx-react-lite";
 import {
+  State,
   TapGestureHandler,
   TapGestureHandlerGestureEvent,
 } from "react-native-gesture-handler";
-import { useDoublePress } from "../doublePress"
+import { useDoublePress } from "../doublePress";
 import { ITapProps } from "./types";
 
-export function Tap(props: ITapProps) {
+function TapComponent(props: ITapProps) {
   const { children, onPress, waitFor } = props;
+  const { onTouchablePress } = useDoublePress(onTapPress);
   function onTapPress(event: TapGestureHandlerGestureEvent) {
-    const { state } = event.nativeEvent;
-    if (onPress && state === 4) {
+    // WHY: after adding useDoublePress, state does not activate
+    if (onPress) {
       onPress();
     }
   }
-  const { onTouchablePress } = useDoublePress(onTapPress);
   return (
-    <TapGestureHandler onHandlerStateChange={onTouchablePress} waitFor={waitFor}>
+    <TapGestureHandler
+      onHandlerStateChange={onTouchablePress}
+      waitFor={waitFor}
+    >
       {
         // there must be a view around children to avoid ref bug
         // that causes crash
@@ -26,3 +31,5 @@ export function Tap(props: ITapProps) {
     </TapGestureHandler>
   );
 }
+
+export const Tap = observer(TapComponent);
