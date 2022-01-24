@@ -13,12 +13,13 @@ export const styles = StyleSheet.create({
   },
   imageContainer: {
     width: widthPercentageToDP(100),
-    height: 300,
+    height: 180,
     padding: 16,
   },
   avatar: {
-    width: "100%",
-    height: "100%",
+    width: 140,
+    height: 140,
+    alignSelf: "center",
   },
   line: {
     width: widthPercentageToDP("90"),

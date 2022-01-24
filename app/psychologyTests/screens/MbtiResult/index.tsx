@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ScrollView } from "react-native-gesture-handler";
 import {
   Button,
   Headline,
@@ -15,12 +14,21 @@ import {
   Container,
 } from "../../../library";
 import { ProgressBar } from "../../components";
-import { IFromProps } from "../../types";
 import { styles } from "./styles";
-export function MbtiResultScreen(props: IFromProps) {
+import { onTestSubmit } from "../../usecases";
+import { mbtiState } from "../../entities";
+export function MbtiResultScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
-  const { description, answer, type } = props;
+  async function init() {
+    await onTestSubmit();
+    console.log(mbtiState.mbtiResult);
+  }
+  useEffect(() => {
+    init();
+  }, []);
+  function renderMbtiResult() {
+   
+  }
   return (
     <Container>
       <Scroller>
@@ -39,8 +47,9 @@ export function MbtiResultScreen(props: IFromProps) {
             source={require("../../assets/enfj-protagonist.png")}
           />
         </View>
-        <View style={styles.answerContainer}>
-          <Headline>{"INTJ"}</Headline>
+
+        {/* <View style={styles.answerContainer}>
+          <Headline>{"mbtj"}</Headline>
           <View style={styles.line} />
         </View>
         <View style={styles.title}>
@@ -98,7 +107,7 @@ export function MbtiResultScreen(props: IFromProps) {
             rightName={"آشفته"}
             title={"هویت"}
           />
-        </View>
+        </View> */}
       </Scroller>
       <View style={styles.buttonContainer}>
         <Button
