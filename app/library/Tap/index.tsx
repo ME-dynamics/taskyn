@@ -4,6 +4,7 @@ import {
   TapGestureHandler,
   TapGestureHandlerGestureEvent,
 } from "react-native-gesture-handler";
+import { useDoublePress } from "../doublePress"
 import { ITapProps } from "./types";
 
 export function Tap(props: ITapProps) {
@@ -14,8 +15,9 @@ export function Tap(props: ITapProps) {
       onPress();
     }
   }
+  const { onTouchablePress } = useDoublePress(onTapPress);
   return (
-    <TapGestureHandler onHandlerStateChange={onTapPress} waitFor={waitFor}>
+    <TapGestureHandler onHandlerStateChange={onTouchablePress} waitFor={waitFor}>
       {
         // there must be a view around children to avoid ref bug
         // that causes crash
