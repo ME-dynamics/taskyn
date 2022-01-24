@@ -1,6 +1,6 @@
 import { fetchCreateMbti } from "../adapters";
 
-import { questionnaireState, testDetailState } from "../entities";
+import { mbtiState, questionnaireState, testDetailState } from "../entities";
 
 // TODO: move selection process to a different usecase
 export async function onTestSubmit() {
@@ -12,9 +12,12 @@ export async function onTestSubmit() {
     if (error) {
       // console.log(error);
       // TODO: handle error
+      console.log(error);
     }
-    console.log(JSON.stringify(mbtiResult, null, 2));
+    // console.log(JSON.stringify(mbtiResult, null, 2));
     // TODO: set result to mbti result state
+    //@ts-ignore // need fix type
+    mbtiState.setMbtiResult(mbtiResult);
     return;
   }
   if (testId.includes("beckDepressionII")) {
