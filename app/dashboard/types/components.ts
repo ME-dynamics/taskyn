@@ -4,8 +4,7 @@ export interface ICardProps {
   id: string;
   name: string;
   description: string;
-  // imageUrl: string;
-  onPress: () => void;
+  imageUrl: string;
   role: string;
 }
 
