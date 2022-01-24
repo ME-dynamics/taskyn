@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
@@ -6,11 +6,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { IconButton, Button, TaskynIcon } from "../../../library";
 
 import { styles, iconButtonStyle } from "./styles";
-import { INoteHeaderProps } from "../../types";
+import type { INoteHeaderProps } from "../../types";
 
 function NoteHeaderComponent(props: INoteHeaderProps) {
+  const { onDeletePress, onUpdateNotePress } = props;
   const navigator = useNavigation();
-  const { onDeletePress } = props;
+  const [loading, setLoading] = useState<boolean>(false);
+  async function onUpdateNote() {
+    setLoading(true);
+    await onUpdateNotePress();
+    setLoading(false);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.backContainer}>
@@ -53,7 +59,13 @@ function NoteHeaderComponent(props: INoteHeaderProps) {
       </View>
 
       <View style={styles.saveContainer}>
-        <Button mode={"text"} rippleColor={"lightGrey"} size={"growWithText"}>
+        <Button
+          mode={"text"}
+          rippleColor={"lightGrey"}
+          size={"growWithText"}
+          loading={loading}
+          onPress={onUpdateNote}
+        >
           {"ذخیره"}
         </Button>
       </View>
