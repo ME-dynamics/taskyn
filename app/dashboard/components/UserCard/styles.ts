@@ -15,12 +15,15 @@ export const styles = StyleSheet.create({
     elevation: 4,
     marginTop: heightPercentageToDP(16),
   },
+  textAlignRight: {
+    textAlign: "right",
+  },
   imageContainer: {
     flex: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  patientImage: {
+  image: {
     width: 40,
     height: 40,
     borderRadius: 8,

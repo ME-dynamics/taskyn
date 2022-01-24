@@ -48,7 +48,11 @@ function TestNavigator() {
           title: `تست ${route.params.id?.toUpperCase()}`,
         })}
       />
-      <TestStack.Screen name={"mbtiResult"} component={MbtiResult} />
+      <TestStack.Screen
+        name={"mbtiResult"}
+        component={MbtiResult}
+        options={{ ...headerOptions, title: "نتیجه تست" }}
+      />
     </TestStack.Navigator>
   );
 }

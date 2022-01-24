@@ -14,9 +14,12 @@ import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
 import { removeCustomers } from "../../usecases";
 import { RemoveCustomerSheet } from "../RemoveCustomerSheet";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function CustomerCardComponent(props: ICustomerCardProps) {
-  const { id, fullName, profileImageUrl, description, onPress, date } = props;
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const { id, fullName, profileImageUrl, description, date } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["40%", "40%"], []);
@@ -36,7 +39,7 @@ function CustomerCardComponent(props: ICustomerCardProps) {
   const onCustomerPress = useCallback(
     function onCustomer() {
       // TODO: navigation to dashboard screen
-      onPress(id);
+      navigation.push("dashboard", { id: id });
     },
     [id]
   );

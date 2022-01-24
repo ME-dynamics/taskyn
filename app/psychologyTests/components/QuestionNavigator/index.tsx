@@ -7,20 +7,25 @@ import { Button, Paragraph } from "../../../library";
 import { questionnaireState, testDetailState } from "../../entities";
 import { onNextQuestion, onPrevQuestion, onTestSubmit } from "../../usecases";
 import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function QuestionNavigatorComponent() {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const isFirst = questionnaireState.currentQuestion === 1;
   const finished =
     questionnaireState.currentQuestion === testDetailState.fieldSize;
   const answered =
     questionnaireState.answers[`${questionnaireState.currentQuestion}`];
   async function onNextPress() {
-    if(finished) {
-     return await onTestSubmit();
+    if (finished) {
+      await onTestSubmit();
+      navigation.push("mbtiResult");
+      return;
     }
-    onNextQuestion()
+    onNextQuestion();
   }
-  
+
   function nextButtonText() {
     if (finished) {
       return "دیدن نتیجه";

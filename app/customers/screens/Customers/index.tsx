@@ -39,7 +39,6 @@ function CustomersScreen() {
           id={customerId}
           profileImageUrl={profilePictureUrl}
           date={createdAt}
-          onPress={() => {}}
         />
       );
     }

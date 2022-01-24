@@ -8,40 +8,91 @@ import { dashboardState } from "../../entities";
 import { retrieveProvider } from "../../usecases";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/core";
+import { useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { retrieveCustomers } from "../../usecases/retriveCustomer";
 function DashboardScreen() {
+  const route = useRoute();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const role = getRole();
+  const isProvider = getRole() === "provider";
+  const isCustomer = getRole() === "customer";
+  async function init() {
+    if (isCustomer) {
+      await retrieveProvider();
+      return;
+    }
+    if (isProvider) {
+      // @ts-expect-error
+      await retrieveCustomers(route.params?.id);
+    }
+  }
+  function renderUserCard() {
+    if (isCustomer) {
+      return (
+        <UserCard
+          id={dashboardState.provider?.id || ""}
+          name={dashboardState.provider?.name || ""}
+          description={dashboardState.provider?.description || ""}
+          role={"customer"}
+          imageUrl={dashboardState.provider?.profilePictureUrl || ""}
+        />
+      );
+    }
+    if (isProvider) {
+      return (
+        <UserCard
+          id={dashboardState.customer?.id || ""}
+          name={
+            `${dashboardState.customer?.firstName} ${dashboardState.customer?.lastName}` ||
+            ""
+          }
+          description={dashboardState.customer?.description || ""}
+          imageUrl={dashboardState.customer?.profilePictureUrl || ""}
+          role={"provider"}
+        />
+      );
+    }
+  }
   useEffect(() => {
-    retrieveProvider();
+    init();
   }, []);
   return (
     <Container>
-      <View style={styles.titleContainer}>
-        <UserCard
-          id={dashboardState.provider?.id || ""}
-          name={role === "provider" ? "" : "دکتر انتخاب نکردید"}
-          description={role ? "" : "نامشخص"}
-          onPress={() => {
-            navigation.push("providers");
-          }}
-          role={role}
-        />
-      </View>
+      <View style={styles.titleContainer}>{renderUserCard()}</View>
       <View style={styles.buttonContainer}>
         <Scroller contentContainerStyle={styles.containerContentStyle}>
           <View style={styles.row}>
-            <Tile
-              title={"تمرینات"}
-              Icon={({ size, color }) => {
-                return (
-                  <TaskynIcon name={"practice"} color={color} size={size} svg />
-                );
-              }}
-              onPress={() => {
-                navigation.push("tasks");
-              }}
-            />
+            {isProvider ? (
+              <Tile
+                title={"نوت برداری"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon name={"note"} color={color} size={size} svg />
+                  );
+                }}
+                onPress={() => {
+                  navigation.push("notes");
+                }}
+              />
+            ) : (
+              <Tile
+                title={"تمرینات"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon
+                      name={"practice"}
+                      color={color}
+                      size={size}
+                      svg
+                    />
+                  );
+                }}
+                onPress={() => {
+                  navigation.push("tasks");
+                }}
+              />
+            )}
+
             <Tile
               title={"پرونده بیمار"}
               Icon={({ size, color }) => {
@@ -55,17 +106,31 @@ function DashboardScreen() {
             />
           </View>
           <View style={styles.row}>
-            <Tile
-              title={"فرم ها"}
-              Icon={({ size, color }) => {
-                return (
-                  <TaskynIcon name={"form"} color={color} size={size} svg />
-                );
-              }}
-              onPress={() => {
-                navigation.push("form");
-              }}
-            />
+            {isProvider ? (
+              <Tile
+                title={"تاریخچه تست ها"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon name={"form"} color={color} size={size} svg />
+                  );
+                }}
+                onPress={() => {
+                  // navigation.push("form");
+                }}
+              />
+            ) : (
+              <Tile
+                title={"فرم ها"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon name={"form"} color={color} size={size} svg />
+                  );
+                }}
+                onPress={() => {
+                  navigation.push("form");
+                }}
+              />
+            )}
             <Tile
               title={"تاریخچه فرم ها"}
               Icon={({ size, color }) => {
@@ -83,17 +148,33 @@ function DashboardScreen() {
               }}
             />
           </View>
-          {role === "provider" ? (
+          {isProvider ? (
             <View style={styles.row}>
               <Tile
-                title={"نوت برداری"}
+                title={"تمرینات"}
                 Icon={({ size, color }) => {
                   return (
-                    <TaskynIcon name={"note"} color={color} size={size} svg />
+                    <TaskynIcon
+                      name={"practice"}
+                      color={color}
+                      size={size}
+                      svg
+                    />
                   );
                 }}
                 onPress={() => {
-                  navigation.push("notes");
+                  navigation.push("tasks");
+                }}
+              />
+              <Tile
+                title={"فرم ها"}
+                Icon={({ size, color }) => {
+                  return (
+                    <TaskynIcon name={"form"} color={color} size={size} svg />
+                  );
+                }}
+                onPress={() => {
+                  navigation.push("form");
                 }}
               />
             </View>

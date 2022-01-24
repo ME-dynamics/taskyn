@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     borderBottomLeftRadius: widthPercentageToDP(8),
     borderBottomRightRadius: widthPercentageToDP(8),
+    zIndex:4
   },
 
   buttonContainer: {

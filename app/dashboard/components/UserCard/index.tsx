@@ -1,36 +1,41 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Subheading, TaskynIcon } from "../../../library";
-import { UnknownImage } from "../../assets";
-import { styles, iconColor } from "./styles";
+import { Button, Caption, Subheading } from "../../../library";
+import { styles } from "./styles";
 import { ICardProps } from "../../types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function UserCardComponent(props: ICardProps) {
-  const { name, description, onPress, role } = props;
-  
+  const { name, description, role, imageUrl, id } = props;
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  // TODO: support image avatar
+  // TODO: support select doctor state
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <TaskynIcon name={"profile"} size={24} color={iconColor} boxed boxSize={52} />
+        <Image source={{ uri: imageUrl }} style={styles.image} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
-          <Subheading>{name}</Subheading>
-          {/* <Caption>{description}</Caption> */}
+          <Subheading style={styles.textAlignRight}>{name}</Subheading>
+          { <Caption>{description}</Caption>}
         </View>
-        <View style={styles.buttonContainer}>
-          {role !== "provider" ? (
+        {role === "customer" && !id ? (
+          <View style={styles.buttonContainer}>
             <Button
               mode={"contained"}
               size={"extra-small"}
               rippleColor={"lightGrey"}
-              onPress={onPress}
+              onPress={() => {
+                navigation.push("Provider");
+              }}
             >
               {"انتخاب دکتر"}
             </Button>
-          ) : null}
-        </View>
+          </View>
+        ) : null}
       </View>
     </View>
   );

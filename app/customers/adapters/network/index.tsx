@@ -1,2 +1,2 @@
-export { fetchGetCustomers } from "./fetchGetRequests";
+export { fetchGetCustomers } from "./fetchGetCustomers";
 export { fetchRemoveCustomers } from "./fetchRemoveCustomers";
