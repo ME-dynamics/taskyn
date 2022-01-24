@@ -29,7 +29,7 @@ function ProviderDashboardNavigation() {
 
       <DashboardStack.Screen
         name={"dashboard"}
-        options={{ ...headerOptions, title: "داشبورد" }}
+        options={{headerShown: false}}
         component={Dashboard}
       />
       <DashboardStack.Screen
