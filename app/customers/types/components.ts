@@ -3,7 +3,6 @@ export interface ICustomerCardProps {
   fullName: string;
   description: string;
   profileImageUrl: string;
-  onPress: (id: string) => void;
   date: string;
 }
 export interface IRemoveCustomerSheetComponentProps {
