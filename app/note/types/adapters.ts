@@ -21,3 +21,8 @@ export interface IFetchCreateNoteResult {
   error: string;
   note: INote | undefined;
 }
+
+export interface IFetchUpdateNoteResult {
+  error: string;
+  note: INote | undefined;
+}
