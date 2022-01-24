@@ -13,7 +13,7 @@ import {
 import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
 import { removeCustomers } from "../../usecases";
-import { RemoveCustomerSheet } from "..";
+import { RemoveCustomerSheet } from "../RemoveCustomerSheet";
 
 function CustomerCardComponent(props: ICustomerCardProps) {
   const { id, fullName, profileImageUrl, description, onPress, date } = props;
