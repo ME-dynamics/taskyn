@@ -26,3 +26,13 @@ export interface IFetchUpdateNoteResult {
   error: string;
   note: INote | undefined;
 }
+
+export interface IFetchRetrievePrivateImageResult {
+  error: string;
+  url: string;
+}
+
+export interface IFetchDeleteNote {
+  error: string;
+  deleted: string;
+}
