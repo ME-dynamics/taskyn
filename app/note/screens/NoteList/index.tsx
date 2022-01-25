@@ -9,6 +9,7 @@ import {
   TaskynIcon,
   Container,
   Scroller,
+  toString,
 } from "../../../library";
 
 import { NoteCard } from "../../components/NoteCard";
@@ -23,8 +24,10 @@ function NoteListScreen() {
   const [loading, setLoading] = useState<boolean>(true);
 
   async function init() {
-    // await retrieveNotes(route?.params?.id);
-    await retrieveNotes("3c959478-8333-4d90-8ede-05d4c9226488");
+    console.log(route.params);
+    // @ts-expect-error
+    await retrieveNotes(toString(route?.params?.id));
+    // await retrieveNotes("3c959478-8333-4d90-8ede-05d4c9226488");
     setLoading(false);
   }
   useEffect(() => {
