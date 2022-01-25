@@ -2,10 +2,12 @@ import { toJalaaliDate } from "../utils";
 import { request, toString } from "../../../library";
 import { IFetchTasksPayload, ITask } from "../../types";
 
-export async function fetchTasks(): Promise<IFetchTasksPayload> {
+export async function fetchTasks(
+  customerId: string | undefined
+): Promise<IFetchTasksPayload> {
   const { error, httpStatus, payload, success } = await request({
     body: undefined,
-    endpoint: "/tasks/",
+    endpoint: `/tasks/${customerId}`,
     method: "GET",
   });
   if (!success) {
