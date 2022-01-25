@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 
 export interface IProgressProps {
-  description: string;
-  title: string;
+  description?: string;
+  title?: string;
   leftName: string;
   rightName: string;
   leftPercent: number;
