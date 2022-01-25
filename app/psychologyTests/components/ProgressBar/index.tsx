@@ -4,7 +4,7 @@ import { Paragraph, THEME, Title } from "../../../library";
 import { IProgressProps } from "../../types";
 import { styles } from "./styles";
 export function ProgressBar(props: IProgressProps) {
-  const { description, leftName, leftPercent, rightName, title } = props;
+  const { leftName, leftPercent, rightName } = props;
   // function rightPercent(arg: number){
   //   const value = (100-leftPercent)/100;
   //   return value;
@@ -18,12 +18,12 @@ export function ProgressBar(props: IProgressProps) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.progressTitle}>
+      {/* <View style={styles.progressTitle}>
         <Title>{title}</Title>
-      </View>
-      <View style={styles.progressDescription}>
+      </View> */}
+      {/* <View style={styles.progressDescription}>
         <Paragraph style={{ color: "#727272" }}>{description}</Paragraph>
-      </View>
+      </View> */}
       <View style={styles.progressBar}>
         <View style={[styles.progressLeft, leftStyle]}>
           <View style={styles.titleWithPercent}>
