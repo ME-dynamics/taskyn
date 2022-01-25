@@ -56,4 +56,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  dataOfInterpret: {
+    width: widthPercentageToDP(90),
+    alignItems: "flex-start",
+  },
+  titleOfInterpret: {
+    width: widthPercentageToDP(90),
+    alignItems: "flex-start",
+    paddingVertical:10,
+  },
 });
