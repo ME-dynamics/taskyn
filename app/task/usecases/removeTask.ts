@@ -1,8 +1,11 @@
 import { fetchRemoveTask } from "../adapters";
 import { taskState } from "../entities";
 
-export async function removeTask(taskId: string) {
-  const removed = await fetchRemoveTask(taskId);
+export async function removeTask(
+  taskId: string,
+  customerId: string | undefined
+) {
+  const removed = await fetchRemoveTask(taskId, customerId);
   if (!removed) {
     // show error
     return;
