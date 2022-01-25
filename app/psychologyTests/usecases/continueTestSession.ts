@@ -8,7 +8,8 @@ export function continueTestSession(testId: string, fieldSize: number) {
       questionnaireState.setAnswer(index, answer);
     }
   }
+  const currentQuestionIndex = Object.keys(questionnaireState.answers).length
   questionnaireState.setCurrentQuestion(
-    Object.keys(questionnaireState.answers).length + 1
+    currentQuestionIndex === fieldSize ? fieldSize : currentQuestionIndex + 1
   );
 }
