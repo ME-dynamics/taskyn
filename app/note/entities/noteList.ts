@@ -4,14 +4,16 @@ import type { INote } from "../types";
 export class NoteListState {
   constructor() {
     makeObservable(this, {
+      currentNote: observable,
       notes: observable,
       setNotes: action,
       addNote: action,
       updateNote: action,
-      getNote: action,
+      setCurrentNote: action,
     });
   }
   notes: INote[] = [];
+  currentNote: INote | undefined = undefined;
   setNotes(notes: INote[]) {
     this.notes = notes;
   }
@@ -33,13 +35,23 @@ export class NoteListState {
       }
     }
   }
-  getNote(id: string) {
+  setCurrentNote(id: string) {
     for (let index = 0; index < this.notes.length; index++) {
       const { id: noteId } = this.notes[index];
       if (id === noteId) {
-        return this.notes[index];
+        this.currentNote = this.notes[index];
       }
     }
-    return undefined;
+    this.currentNote = undefined;
+  }
+  setCurrentNoteTitle(title: string) {
+    if (this.currentNote) {
+      this.currentNote.title = title;
+    }
+  }
+  setCurrentNoteContent(content: string) {
+    if (this.currentNote) {
+      this.currentNote.content = content;
+    }
   }
 }
