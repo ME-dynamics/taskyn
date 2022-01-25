@@ -2,12 +2,14 @@ import { request, toString } from "../../../library";
 import { toJalaaliDate } from "../utils";
 import { IFetchCreateTaskPayload } from "../../types";
 export async function fetchCreateTask(
-  content: string
+  content: string,
+  userId: string | undefined
 ): Promise<IFetchCreateTaskPayload> {
   const { success, error, httpStatus, payload } = await request({
     endpoint: "/tasks",
     body: {
       content,
+      userId,
     },
     method: "POST",
   });

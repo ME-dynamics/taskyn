@@ -14,7 +14,6 @@ export async function fetchUpdateTask(
       userId,
     },
     method: "PATCH",
-    token: "",
   });
   if (!success) {
     return {

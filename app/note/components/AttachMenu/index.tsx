@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { autorun } from "mobx";
 import Animated, {
@@ -9,14 +9,14 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Button, TaskynIcon } from "../../../library";
-import { noteState } from "../../entities";
+import { createNoteState } from "../../entities";
 import { onCameraPress, onGalleryPress } from "../../usecases";
 import { styles } from "./styles";
 function AttachMenuComponent() {
   const animation = useSharedValue(0);
   useEffect(() => {
     const disposer = autorun(() => {
-      if (noteState.showMenu) {
+      if (createNoteState.showMenu) {
         animation.value = withTiming(1, { duration: 240 });
       } else {
         animation.value = withTiming(0, { duration: 180 });

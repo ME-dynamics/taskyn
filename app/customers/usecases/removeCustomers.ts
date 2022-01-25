@@ -1,4 +1,4 @@
-import { fetchRemoveCustomers } from "../adapters/network";
+import { fetchRemoveCustomers } from "../adapters";
 import { customerState } from "../entities";
 
 export async function removeCustomers(customerId: string) {

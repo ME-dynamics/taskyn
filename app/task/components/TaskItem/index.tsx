@@ -15,10 +15,10 @@ import { ITaskItemProps } from "../../types";
 
 function TaskItemComponent(props: ITaskItemProps) {
   const { id, userId, content, done, createdAt } = props;
-  const isEmpty = !content && !createdAt;
+  const isEmpty = !createdAt;
   const [showMenu, setShowMenu] = useState(false);
 
-  const [edit, setEdit] = useState<boolean>(!content && !createdAt);
+  const [edit, setEdit] = useState<boolean>(isEmpty);
   const [doneLoading, setDoneLoading] = useState<boolean>(false);
   const [upsertTaskLoading, setUpsertTaskLoading] = useState<boolean>(false);
   const [tempContent, setTempContent] = useState(content);
@@ -31,7 +31,7 @@ function TaskItemComponent(props: ITaskItemProps) {
     }
   }
   async function onRemovePress() {
-    await removeTask(id);
+    await removeTask(id, userId);
   }
   async function onDone() {
     try {
@@ -48,9 +48,12 @@ function TaskItemComponent(props: ITaskItemProps) {
   }
   async function onCreatePress() {
     setUpsertTaskLoading(true);
-    await createTask(id, tempContent);
+    const created = await createTask(id, tempContent, userId);
+    if (created) {
+      setEdit(false);
+      // TODO: handle error state here
+    }
     setUpsertTaskLoading(false);
-    setEdit(false);
   }
 
   function renderFooter() {

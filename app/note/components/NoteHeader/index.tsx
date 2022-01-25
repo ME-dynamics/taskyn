@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
+import { Ionicons } from "@expo/vector-icons";
 import { IconButton, Button, TaskynIcon } from "../../../library";
 
 import { styles, iconButtonStyle } from "./styles";
-import { INoteHeaderProps } from "../../types";
+import type { INoteHeaderProps } from "../../types";
 
 function NoteHeaderComponent(props: INoteHeaderProps) {
-  const { onDeletePress } = props;
+  const { onDeletePress, onUpdateNotePress } = props;
+  const navigator = useNavigation();
+  const [loading, setLoading] = useState<boolean>(false);
+  async function onUpdateNote() {
+    setLoading(true);
+    await onUpdateNotePress();
+    setLoading(false);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.backContainer}>
@@ -15,11 +24,15 @@ function NoteHeaderComponent(props: INoteHeaderProps) {
           color={iconButtonStyle.color}
           size={iconButtonStyle.size}
           Icon={({ size, color }) => {
-            return <TaskynIcon name={"back"} size={size} color={color} />;
+            return (
+              <Ionicons
+                name={"ios-arrow-forward"}
+                size={size + 2}
+                color={color}
+              />
+            );
           }}
-          onPress={() => {
-            console.log("go back");
-          }}
+          onPress={navigator.goBack}
         />
       </View>
       <View style={styles.iconButtonContainer}>
@@ -45,8 +58,14 @@ function NoteHeaderComponent(props: INoteHeaderProps) {
         />
       </View>
 
-      <View style={styles.buttonContainer}>
-        <Button mode={"text"} rippleColor={"lightGrey"} size={"extra-small"}>
+      <View style={styles.saveContainer}>
+        <Button
+          mode={"text"}
+          rippleColor={"lightGrey"}
+          size={"growWithText"}
+          loading={loading}
+          onPress={onUpdateNote}
+        >
           {"ذخیره"}
         </Button>
       </View>

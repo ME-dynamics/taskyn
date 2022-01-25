@@ -1,44 +1,32 @@
 import { observable, action, computed, makeObservable } from "mobx";
-import { INoteImage, INote } from "../types";
-export class NoteState {
+import type { INoteImage } from "../types";
+
+export class CreateNoteState {
   constructor() {
     makeObservable(this, {
       prevImagesCount: observable,
       images: observable,
-      notes: observable,
       noteTitle: observable,
       noteContent: observable,
       showMenu: observable,
-      hasImages: computed,
-      imageIds: computed,
       addImage: action,
       addImageId: action,
       removeImage: action,
       replaceImage: action,
-      addNote: action,
       setNoteTitle: action,
       setNoteContent: action,
       reset: action,
       toggleMenu: action,
+      hasImages: computed,
+      imageIds: computed,
     });
   }
   prevImagesCount: number = 0;
   images: INoteImage[] = [];
-  notes: INote[] = [];
   noteTitle: string = "";
   noteContent: string = "";
   showMenu: boolean = false;
-  get hasImages(): boolean {
-    return this.images.length !== 0;
-  }
-  get imageIds(): string[] {
-    const imageIds: string[] = [];
-    for (let index = 0; index < this.images.length; index++) {
-      const { id } = this.images[index];
-      imageIds.push(id);
-    }
-    return imageIds;
-  }
+
   addImage(newImagePath: string) {
     this.prevImagesCount = this.images.length;
     for (let index = 0; index < this.images.length; index++) {
@@ -59,16 +47,17 @@ export class NoteState {
     }
   }
   removeImage(path: string) {
-    const images: INoteImage[] = [];
-    this.prevImagesCount = this.images.length;
-    for (let index = 0; index < this.images.length; index++) {
-      const image = this.images[index];
-      if (image.path === path) {
-        continue;
-      }
-      images.push(image);
-    }
-    this.images = images;
+    // const images: INoteImage[] = [];
+    // this.prevImagesCount = this.images.length;
+    // for (let index = 0; index < this.images.length; index++) {
+    //   const image = this.images[index];
+    //   if (image.path === path) {
+    //     continue;
+    //   }
+    //   images.push(image);
+    // }
+    // this.images = images;
+    this.images = this.images.filter((image) => image.path !== path);
   }
 
   replaceImage(oldPath: string, newPath: string) {
@@ -82,15 +71,6 @@ export class NoteState {
       images.push(image);
     }
     this.images = images;
-  }
-  addNote(note: INote) {
-    for (let index = 0; index < this.notes.length; index++) {
-      const { id } = this.notes[index];
-      if (note.id === id) {
-        return;
-      }
-    }
-    this.notes.push(note);
   }
   setNoteTitle(title: string) {
     this.noteTitle = title;
@@ -110,5 +90,16 @@ export class NoteState {
     } else {
       this.showMenu = status;
     }
+  }
+  get hasImages(): boolean {
+    return this.images.length !== 0;
+  }
+  get imageIds(): string[] {
+    const imageIds: string[] = [];
+    for (let index = 0; index < this.images.length; index++) {
+      const { id } = this.images[index];
+      imageIds.push(id);
+    }
+    return imageIds;
   }
 }

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { material } from "react-native-typography";
 import memoize from "fast-memoize";
 import { THEME } from "../theme";
@@ -103,8 +103,8 @@ function styleGenerator(args: IInputStyleGen) {
     },
     titleRaw: {
       position: "absolute",
-      right: 18,
-      top: 10,
+      right: 20,
+      top: 14,
     },
     focusedTitle: {
       color: THEME.COLORS.PRIMARY.NORMAL,
@@ -120,13 +120,17 @@ function styleGenerator(args: IInputStyleGen) {
     inputRawContainer: {
       width: "100%",
       height: "100%",
-      paddingTop: 0,
+      paddingTop: 4,
       paddingHorizontal: 16,
-      paddingBottom: 16,
     },
     input: {
       flex: 9,
-      paddingBottom: isFlat ? 0 : undefined,
+      paddingBottom: isFlat || isRaw ? 0 : undefined,
+      ...Platform.select({
+        web: {
+          outlineStyle: "none",
+        },
+      }),
     },
     inputFont: {
       fontFamily: THEME.FONTS.REGULAR,

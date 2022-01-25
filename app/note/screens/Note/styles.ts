@@ -7,20 +7,20 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   titleInputContainer: {
-    width: widthPercentageToDP(100),
-    height: heightPercentageToDP(8),
-    marginTop: 24
+    width: "100%",
+    height: 52,
+    marginTop: 2,
   },
   noteInputContainer: {
-    width: widthPercentageToDP(100),
-    minHeight: heightPercentageToDP(16),
+    width: "100%",
+    minHeight: 128,
   },
   horizontalLine: {
     width: THEME.WIDTH.WIDE,
     height: StyleSheet.hairlineWidth,
-    borderRadius: 0.5,
-    backgroundColor: THEME.COLORS.GREY.NORMAL,
+    borderRadius: StyleSheet.hairlineWidth / 2,
+    backgroundColor: THEME.COLORS.GREY.LIGHT,
     alignSelf: "center",
-    top: -heightPercentageToDP(2)
+    // top: -heightPercentageToDP(2),
   },
 });

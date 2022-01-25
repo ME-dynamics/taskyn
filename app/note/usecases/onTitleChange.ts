@@ -1,7 +1,7 @@
-import { noteState } from "../entities";
+import { createNoteState } from "../entities";
 
 
 
 export function onTitleChange(text: string) {
-    noteState.setNoteTitle(text);
+    createNoteState.setNoteTitle(text);
 }

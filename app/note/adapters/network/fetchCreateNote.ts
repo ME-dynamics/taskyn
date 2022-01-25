@@ -1,10 +1,12 @@
-import { request, toString, toJalaaliDate } from "../../../library";
+import { request } from "../../../library";
 
-import { IFetchCreateNote, IFetchCreateNotePayload } from "../../types";
+import { parseNote } from "../utils";
+
+import type { IFetchCreateNote, IFetchCreateNoteResult } from "../../types";
 
 export async function fetchCreateNote(
   args: IFetchCreateNote
-): Promise<IFetchCreateNotePayload> {
+): Promise<IFetchCreateNoteResult> {
   const { content, customerId, imageIds, title } = args;
   const { success, error, payload, httpStatus } = await request({
     endpoint: "/provider/notes",
@@ -16,36 +18,15 @@ export async function fetchCreateNote(
       imageIds,
     },
   });
-  if (!success) {
+  if (!success || !payload) {
     return {
-      error: error ? error : "",
-      note: {
-        id: "",
-        title: "",
-        content: "",
-        imageIds: [],
-        createdAt: "",
-      },
+      error,
+      note: undefined,
     };
   }
-  const ids = payload?.imageIds;
-  const images: string[] = [];
-  if (Array.isArray(ids)) {
-    for (let index = 0; index < ids.length; index++) {
-      const id = ids[index];
-      images.push(toString(id));
-    }
-  }
-  const createdAt = toString(payload?.createdAt);
+
   return {
     error: "",
-    note: {
-      id: toString(payload?.id),
-      title: toString(payload?.title),
-      content: toString(payload?.content),
-      imageIds: images,
-      createdAt:
-        Date.parse(createdAt) !== NaN ? toJalaaliDate(new Date(createdAt)) : "",
-    },
+    note: parseNote(payload),
   };
 }

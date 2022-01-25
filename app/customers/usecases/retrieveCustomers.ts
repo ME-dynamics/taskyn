@@ -1,5 +1,5 @@
 // adatpers
-import { fetchGetCustomers } from "../adapters/network";
+import { fetchGetCustomers } from "../adapters";
 import { customerState } from "../entities";
 
 export async function retrieveCustomers() {

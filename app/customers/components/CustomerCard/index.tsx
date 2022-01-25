@@ -13,7 +13,7 @@ import {
 import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
 import { removeCustomers } from "../../usecases";
-import { RemoveCustomerSheet } from "..";
+import { RemoveCustomerSheet } from "../RemoveCustomerSheet";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 

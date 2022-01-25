@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
 import { THEME } from "../theme";
+import { useDoublePress } from "../doublePress";
 
 import { ITouchableProps } from "./types";
 
@@ -22,10 +23,11 @@ function TouchableComponent(props: ITouchableProps, ref: Ref<RectButton>) {
     default:
       throw new Error("color must be of valid types");
   }
+  const { onTouchablePress } = useDoublePress(onPress);
   return (
     <RectButton
       ref={ref}
-      onPress={onPress}
+      onPress={onTouchablePress}
       rippleColor={color}
       style={StyleSheet.absoluteFill}
     />

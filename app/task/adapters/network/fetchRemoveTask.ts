@@ -1,11 +1,10 @@
 import { request } from "../../../library";
 
-export async function fetchRemoveTask(taskId: string) {
+export async function fetchRemoveTask(taskId: string, customerId: string | undefined) {
   const { success } = await request({
-    endpoint: `/tasks/${taskId}/`,
+    endpoint: `/tasks/${taskId}/${customerId}`,
     body: {},
     method: "DELETE",
-    token: "",
   });
   return success;
 }

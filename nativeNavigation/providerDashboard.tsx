@@ -6,6 +6,7 @@ import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 import { Requests } from "../app/requests";
 import { Customers } from "../app/customers";
+import { TestHistory } from "../app/psychologyTests";
 // import { } from "../app/"
 
 import { headerOptions } from "./headerOptions";
@@ -29,7 +30,7 @@ function ProviderDashboardNavigation() {
 
       <DashboardStack.Screen
         name={"dashboard"}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         component={Dashboard}
       />
       <DashboardStack.Screen
@@ -47,6 +48,11 @@ function ProviderDashboardNavigation() {
         name={"notes"}
         component={NoteNav}
         options={{ headerShown: false }}
+      />
+      <DashboardStack.Screen
+        name={"testHistory"}
+        component={TestHistory}
+        options={{ ...headerOptions, title: "تاریخچه تست ها" }}
       />
     </DashboardStack.Navigator>
   );

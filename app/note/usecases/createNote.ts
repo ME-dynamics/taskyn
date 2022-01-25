@@ -1,16 +1,18 @@
 import { fetchCreateNote } from "../adapters";
-import { noteState } from "../entities";
+import { createNoteState, noteListState } from "../entities";
 
 export async function createNote(customerId: string) {
   const { error, note } = await fetchCreateNote({
-    customerId: "ed7f0bae-4be3-4846-a263-5435a08c9f16",
-    title: noteState.noteTitle,
-    content: noteState.noteContent,
-    imageIds: noteState.imageIds,
+    customerId,
+    title: createNoteState.noteTitle,
+    content: createNoteState.noteContent,
+    imageIds: createNoteState.imageIds,
   });
-  if (error) {
+  if (error || !note) {
     console.log(error);
+    return false;
   }
-  noteState.addNote(note);
-  noteState.reset();
+  noteListState.addNote(note);
+  createNoteState.reset();
+  return true;
 }

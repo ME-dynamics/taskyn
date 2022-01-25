@@ -6,12 +6,12 @@ const size = 16
 export const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 34,
+    bottom: 24,
     left: widthPercentageToDP(3),
     width: size,
     height: size,
     borderRadius: size / 2,
-    backgroundColor: THEME.COLORS.PRIMARY.DARK,
+    backgroundColor: THEME.COLORS.SECONDARY.NORMAL,
     alignItems: "center",
     justifyContent: "center",
   },

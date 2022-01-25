@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
+import { useRoute } from "@react-navigation/native";
+import { getRole } from "../../../authentication";
 import { Button, Container, Scroller, tScrollerRef } from "../../../library";
 import { TaskItem } from "../../components/TaskItem";
 import { taskState } from "../../entities";
@@ -9,11 +11,14 @@ import { styles } from "./styles";
 import { Entypo } from "@expo/vector-icons";
 function TasksScreen() {
   const scrollRef = useRef<tScrollerRef>(null);
+  const route = useRoute();
+  // @ts-expect-error
+  const customerId = route.params?.id;
   function onNewTaskPress() {
     addEmptyTask();
     scrollRef.current?.scrollToEnd({ animated: true });
   }
-  
+
   function renderTaskItems() {
     const components: JSX.Element[] = [];
     for (let index = 0; index < taskState.taskList.length; index++) {
@@ -22,7 +27,7 @@ function TasksScreen() {
         <TaskItem
           key={id}
           id={id}
-          userId={undefined} // TODO: get user id from  navigation
+          userId={customerId} // TODO: get user id from  navigation
           content={content}
           done={done}
           createdAt={createdAt}
@@ -32,7 +37,8 @@ function TasksScreen() {
     return components;
   }
   useEffect(() => {
-    retrieveTasks().catch((error) => {
+    
+    retrieveTasks(customerId).catch((error) => {
       console.log(error);
     });
   }, []);
