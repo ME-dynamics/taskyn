@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Container, Scroller, TaskynIcon } from "../../../library";
+import { Ionicons } from "@expo/vector-icons";
+import { Container, Scroller, TaskynIcon, IconButton } from "../../../library";
 import { getRole } from "../../../authentication";
 import { UserCard, Tile } from "../../components";
 import { dashboardState } from "../../entities";
@@ -13,18 +14,20 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { retrieveCustomers } from "../../usecases/retriveCustomer";
 function DashboardScreen() {
   const route = useRoute();
+  const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const isProvider = getRole() === "provider";
   const isCustomer = getRole() === "customer";
+  // @ts-expect-error
+  const id = route.params.id || "";
   async function init() {
     if (isCustomer) {
       await retrieveProvider();
-      return;
     }
     if (isProvider) {
-      // @ts-expect-error
-      await retrieveCustomers(route.params?.id);
+      await retrieveCustomers(id);
     }
+    setLoading(false);
   }
   function renderUserCard() {
     if (isCustomer) {
@@ -53,11 +56,27 @@ function DashboardScreen() {
       );
     }
   }
+  // TODO: convert to component
+  function renderBack() {
+    return (
+      <View style={{ position: "absolute", top: 8, left: 12, zIndex: 5 }}>
+        <IconButton
+          color={"white"}
+          size={24}
+          Icon={({ size, color }) => (
+            <Ionicons name="arrow-back" size={size} color={color} />
+          )}
+          onPress={navigation.goBack}
+        />
+      </View>
+    );
+  }
   useEffect(() => {
     init();
   }, []);
   return (
-    <Container>
+    <Container loading={loading}>
+      {renderBack()}
       <View style={styles.titleContainer}>{renderUserCard()}</View>
       <View style={styles.buttonContainer}>
         <Scroller contentContainerStyle={styles.containerContentStyle}>
@@ -71,7 +90,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  navigation.push("notes");
+                  navigation.push("notes", { id });
                 }}
               />
             ) : (
@@ -88,7 +107,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  navigation.push("tasks");
+                  navigation.push("tasks", { id });
                 }}
               />
             )}
@@ -101,7 +120,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("userInfo");
+                navigation.push("userInfo", { id });
               }}
             />
           </View>
@@ -115,7 +134,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  // navigation.push("form");
+                  navigation.push("testHistory", { id });
                 }}
               />
             ) : (
@@ -127,7 +146,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  navigation.push("form");
+                  // navigation.push("form");
                 }}
               />
             )}
@@ -144,7 +163,7 @@ function DashboardScreen() {
                 );
               }}
               onPress={() => {
-                navigation.push("formsHistory");
+                // navigation.push("formsHistory");
               }}
             />
           </View>
@@ -163,7 +182,7 @@ function DashboardScreen() {
                   );
                 }}
                 onPress={() => {
-                  navigation.push("tasks");
+                  navigation.push("tasks", { id });
                 }}
               />
               <Tile
