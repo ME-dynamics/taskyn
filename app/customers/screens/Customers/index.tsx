@@ -26,7 +26,12 @@ function CustomersScreen() {
     const customers: JSX.Element[] = [];
     const length = customerState.customers.length;
     if (length === 0) {
-      return <Subheading>{"مریضی یافت نشد!"}</Subheading>;
+      // TODO: convert styles to inline styles
+      return (
+        <Subheading style={{ width: "100%", marginTop: 64, textAlign: "center" }}>
+          {"مراجعی یافت نشد!"}
+        </Subheading>
+      );
     }
     for (let index = 0; index < length; index++) {
       const { customerId, description, name, profilePictureUrl, createdAt } =
