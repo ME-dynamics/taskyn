@@ -20,7 +20,14 @@ export interface IPsychologyTest extends ITest {
   fields: tQuestionFields;
 }
 
-export type tMbtiAnswers = Record<string, string>|undefined;
+export type tMbtiAnswers = Record<string, string> | undefined;
 // export interface IMbtiResult {
 //   mbtiResult: any;
 // }
+
+export interface ITestHistory {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: string;
+}
