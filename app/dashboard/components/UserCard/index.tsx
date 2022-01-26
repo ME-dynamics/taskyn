@@ -20,7 +20,7 @@ function UserCardComponent(props: ICardProps) {
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
           <Subheading style={styles.textAlignRight}>{name}</Subheading>
-          { <Caption>{description}</Caption>}
+          {<Caption>{description}</Caption>}
         </View>
         {role === "customer" && !id ? (
           <View style={styles.buttonContainer}>
@@ -29,7 +29,7 @@ function UserCardComponent(props: ICardProps) {
               size={"extra-small"}
               rippleColor={"lightGrey"}
               onPress={() => {
-                navigation.push("Provider");
+                navigation.push("providers");
               }}
             >
               {"انتخاب دکتر"}
