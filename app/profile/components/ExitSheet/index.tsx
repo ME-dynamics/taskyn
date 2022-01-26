@@ -40,7 +40,7 @@ function ExitSheetComponent(props: IExitSheetProps) {
           rippleColor={"lightGrey"}
           onPress={exit}
         >
-          {"ادامه میدهم"}
+          {"خروج"}
         </Button>
       </View>
     </BottomSheetView>
