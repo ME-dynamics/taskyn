@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useRoute } from "@react-navigation/native";
 import { toJS } from "mobx";
 import { Button, Input, Container, Scroller } from "../../../library";
 
@@ -10,10 +11,13 @@ import { updateUserProfile, retrieveUserProfile } from "../../usecases";
 import { styles } from "./styles";
 
 function UserInfoScreen() {
+  const route = useRoute();
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     async function prepare() {
-      await retrieveUserProfile();
+      // @ts-expect-error
+      const id = route.params?.id;
+      await retrieveUserProfile(id);
       setLoading(false);
     }
     prepare();
