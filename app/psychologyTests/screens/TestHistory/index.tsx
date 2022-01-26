@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
@@ -7,9 +7,35 @@ import { TaskynIcon, Container, IconButton, Scroller } from "../../../library";
 import { TestResultHistoryCard, TextIcon } from "../../components";
 
 import { styles, iconButtonColor } from "./styles";
+import { retiriveTestHistory } from "../../usecases";
+import { testHistoryState } from "../../entities";
 
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  function renderTestResultCard() {
+    const result: JSX.Element[] = [];
+    for (let index = 0; index < testHistoryState.testHistory.length; index++) {
+      const { createdAt, description, id, title } =
+        testHistoryState.testHistory[index];
+      result.push(
+        <TestResultHistoryCard
+          key={id}
+          id={id}
+          Icon={() => <TextIcon label={title} labelColor={"red"} />}
+          title={title}
+          description={description}
+          date={createdAt}
+        />
+      );
+    }
+    return result;
+  }
+  async function init() {
+    await retiriveTestHistory("");
+  }
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <Container>
@@ -23,20 +49,7 @@ function TestHistoryScreen() {
         <View style={styles.line} />
       </View>
       <Scroller contentContainerStyle={styles.historyCardScroller}>
-        <TestResultHistoryCard
-          id={"1"}
-          Icon={() => <TextIcon label={"mbti"} labelColor={"red"} />}
-          title={"MBTI"}
-          answer={"INTJ"}
-          date={"1376/06/06"}
-        />
-        <TestResultHistoryCard
-          id={"2"}
-          Icon={() => <TextIcon label={"mbti"} labelColor={"red"} />}
-          title={"MBTI"}
-          answer={"INTJ"}
-          date={"1376/06/06"}
-        />
+        {renderTestResultCard()}
       </Scroller>
     </Container>
   );
