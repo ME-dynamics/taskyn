@@ -3,7 +3,7 @@ import type { INote } from "../../types";
 
 export function parseNote(payload: any): INote {
   const obj = Object(payload);
-  const imageIds = obj?.imageids;
+  const imageIds = obj?.imageIds;
   const createdAt = parseDate(toString(obj?.createdAt));
   const modifiedAt = parseDate(toString(obj?.modifiedAt));
   return {
