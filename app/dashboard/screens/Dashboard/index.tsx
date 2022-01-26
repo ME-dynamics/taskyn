@@ -19,7 +19,7 @@ function DashboardScreen() {
   const isProvider = getRole() === "provider";
   const isCustomer = getRole() === "customer";
   // @ts-expect-error
-  const id = route.params.id || "";
+  const id = route.params?.id || "";
   async function init() {
     if (isCustomer) {
       await retrieveProvider();
