@@ -11,7 +11,7 @@ import { styles } from "./styles";
 import { ITestHistorySheet } from "../../types";
 
 function TestHistorySheetComponent(props: ITestHistorySheet) {
-  const { navigateToQuestionnaire } = props;
+  const { navigateToQuestionnaire, onClosePress } = props;
   function onStartFromBeginningPress() {
     removeTestSession(testDetailState.test.id, testDetailState.fieldSize);
     navigateToQuestionnaire();
@@ -34,7 +34,10 @@ function TestHistorySheetComponent(props: ITestHistorySheet) {
           mode={"contained-grey"}
           size={"medium"}
           rippleColor={"lightGrey"}
-          onPress={onStartFromBeginningPress}
+          onPress={() => {
+            onClosePress();
+            onStartFromBeginningPress();
+          }}
         >
           {"شروع از اول"}
         </Button>
@@ -42,7 +45,10 @@ function TestHistorySheetComponent(props: ITestHistorySheet) {
           mode={"contained"}
           size={"medium"}
           rippleColor={"lightGrey"}
-          onPress={onContinuePress}
+          onPress={() => {
+            onClosePress();
+            onContinuePress();
+          }}
         >
           {"ادامه میدهم"}
         </Button>

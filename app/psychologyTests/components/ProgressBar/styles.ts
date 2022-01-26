@@ -4,7 +4,7 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingTop: 24,
+    paddingTop: 10,
     alignItems: "center",
   },
   progressBar: {
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     width: widthPercentageToDP(90),
     height: 28,
     borderRadius: 10,
-    backgroundColor: THEME.COLORS.GREY.NORMAL,
+    backgroundColor: THEME.COLORS.GREY.LIGHT,
     flexDirection: "row",
     overflow: "hidden",
   },
@@ -26,35 +26,17 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  typeTitle: {
-    width: widthPercentageToDP(90),
-    height: 22,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  progressTitle: {
-    width: widthPercentageToDP(90),
-    height: 30,
-    alignItems: "flex-end",
-    justifyContent: "center",
-  },
-  progressDescription: {
-    width: widthPercentageToDP(90),
-    height: 50,
-    alignItems: "flex-end",
-    justifyContent: "center",
-    // paddingHorizontal: widthPercentageToDP("12"),
-  },
   fullLine: {
     marginTop: 10,
     width: widthPercentageToDP("90"),
     height: 1,
     backgroundColor: THEME.COLORS.TRANSPARENT.PRIMARY,
   },
-  titleWithPercent: {
+  titles: {
+    width: widthPercentageToDP("90"),
+    height: 30,
     flexDirection: "row",
-    // alignItems: "center",
-    // justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });

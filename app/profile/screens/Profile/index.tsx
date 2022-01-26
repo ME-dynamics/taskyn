@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useEffect } from "react";
 import { View, Alert } from "react-native";
 import { observer } from "mobx-react-lite";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -20,15 +20,15 @@ import { retrieveUser } from "../../usecases";
 import { styles } from "./styles";
 
 function ProfileScreen() {
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const snapPoints = useMemo(() => ["30%", "30%"], []);
+  const snapPoints = useMemo(() => ["40%", "40%"], []);
 
   const close = useCallback(() => {
-    bottomSheetRef.current?.close();
+    BottomSheetModalRef.current?.close();
   }, []);
   const onCollapsePress = useCallback(() => {
-    bottomSheetRef.current?.collapse();
+    BottomSheetModalRef.current?.present();
   }, []);
   useEffect(() => {
     retrieveUser();
@@ -100,15 +100,15 @@ function ProfileScreen() {
           />
         </Scroller>
       </View>
-      <BottomSheet
-        ref={bottomSheetRef}
+      <BottomSheetModal
+        ref={BottomSheetModalRef}
         snapPoints={snapPoints}
         backdropComponent={CustomBackdrop}
-        index={-1}
+        index={1}
         enablePanDownToClose
       >
         <ExitSheet onCancelPress={close} />
-      </BottomSheet>
+      </BottomSheetModal>
     </Container>
   );
 }

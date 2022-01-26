@@ -8,3 +8,4 @@ export { onTestSubmit } from "./onTestSubmit";
 export { testSessionExists } from "./testSessionExits";
 export { removeTestSession } from "./removeTestSession";
 export { continueTestSession } from "./continueTestSession";
+export { retiriveTestHistory } from "./retriveTestHistory";

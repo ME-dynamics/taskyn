@@ -28,14 +28,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
-  descriptionContainer: {
+  testDetailsContainer: {
     flex: 5,
   },
-  answerContainer: {
+  descriptionContainer: {
     flex: 1,
     justifyContent: "center",
   },
-  answer: {
+  description: {
     textAlign: "right",
     color: THEME.COLORS.GREY.LIGHT,
   },

@@ -7,14 +7,16 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   imageContainer: {
-    flex: 6,
+    width: "100%",
+    height: 220,
   },
   image: {
     width: "100%",
     height: "100%",
   },
   detailsContainer: {
-    flex: 1,
+    width: "100%",
+    height: 90,
     padding: 16,
   },
   enTitle: {
@@ -22,14 +24,14 @@ export const styles = StyleSheet.create({
     marginTop: 12,
   },
   descriptionContainer: {
-    flex: 5,
+    width: "100%",
+    minHeight: 70,
+    paddingHorizontal: 16,
+    paddingBottom: 10,
   },
-  descriptionScrollViewContent: {
-    padding: 16,
-  },
-
   formDetails: {
-    flex: 1,
+    width: "100%",
+    height: 30,
     flexDirection: "row",
   },
   formDetailsBody: {
@@ -48,7 +50,8 @@ export const styles = StyleSheet.create({
     paddingRight: 8,
   },
   startTestContainer: {
-    flex: 1,
+    width: "100%",
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
     zIndex: 0,

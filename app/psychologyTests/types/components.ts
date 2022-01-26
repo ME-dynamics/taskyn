@@ -30,6 +30,7 @@ export interface IAnswerCardProps {
 
 export interface ITestHistorySheet {
   navigateToQuestionnaire: () => void;
+  onClosePress: () => void;
 }
 export interface ITestHistoryCardProps {
   onPress?: () => void;
@@ -38,7 +39,7 @@ export interface ITestResultHistoryCardProps {
   id: string;
   Icon: () => ReactElement;
   title: string;
-  answer: string;
+  description: string;
   onPress?: (id: string) => any;
   date: string;
 }

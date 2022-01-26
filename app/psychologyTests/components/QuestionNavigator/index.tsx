@@ -20,6 +20,7 @@ function QuestionNavigatorComponent() {
   async function onNextPress() {
     if (finished) {
       await onTestSubmit();
+      navigation.popToTop();
       navigation.push("mbtiResult");
       return;
     }
