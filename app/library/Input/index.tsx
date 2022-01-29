@@ -25,6 +25,7 @@ function InputComponent(props: IInputProps) {
     numberOfLines,
     onChangeText,
     onBlur,
+    editable,
     placeholder,
     clearButton,
     limit,
@@ -72,7 +73,7 @@ function InputComponent(props: IInputProps) {
     animation = useSharedValue(value ? 1 : 0);
   }
   function onPress() {
-    if (inputRef) {
+    if (inputRef && editable !== false) {
       setFocused(true);
       inputRef.current?.focus();
     }

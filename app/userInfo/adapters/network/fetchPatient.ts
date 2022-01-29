@@ -2,9 +2,9 @@ import { request } from "../../../library";
 
 import { parsePatient } from "../utils";
 
-export async function fetchPatient() {
+export async function fetchPatient(customerId: string | undefined) {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/patients",
+    endpoint: `/patients/${customerId}`,
     method: "GET",
     body: undefined,
   });

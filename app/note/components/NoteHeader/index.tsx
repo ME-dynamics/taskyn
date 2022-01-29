@@ -7,6 +7,7 @@ import { IconButton, Button, TaskynIcon } from "../../../library";
 
 import { styles, iconButtonStyle } from "./styles";
 import type { INoteHeaderProps } from "../../types";
+import { noteListState } from "../../entities";
 
 function NoteHeaderComponent(props: INoteHeaderProps) {
   const { onDeletePress, onUpdateNotePress } = props;
@@ -46,28 +47,45 @@ function NoteHeaderComponent(props: INoteHeaderProps) {
             onPress={onDeletePress}
           />
         </View>
-        <IconButton
-          color={iconButtonStyle.color}
-          size={iconButtonStyle.size}
-          Icon={({ size, color }) => {
-            return <TaskynIcon name={"paperclip"} size={size} color={color} />;
-          }}
-          onPress={() => {
-            console.log("attach");
-          }}
-        />
+        {noteListState.currentNote?.edit ? (
+          <IconButton
+            color={iconButtonStyle.color}
+            size={iconButtonStyle.size}
+            Icon={({ size, color }) => {
+              return (
+                <TaskynIcon name={"paperclip"} size={size} color={color} />
+              );
+            }}
+            onPress={() => {
+              console.log("attach");
+            }}
+          />
+        ) : (
+          <IconButton
+            color={iconButtonStyle.color}
+            size={iconButtonStyle.size}
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"pencil"} size={size} color={color} />;
+            }}
+            onPress={() => {
+              noteListState.setEditable(true);
+            }}
+          />
+        )}
       </View>
 
       <View style={styles.saveContainer}>
-        <Button
-          mode={"text"}
-          rippleColor={"lightGrey"}
-          size={"growWithText"}
-          loading={loading}
-          onPress={onUpdateNote}
-        >
-          {"ذخیره"}
-        </Button>
+        {noteListState.currentNote?.edit ? (
+          <Button
+            mode={"text"}
+            rippleColor={"lightGrey"}
+            size={"growWithText"}
+            loading={loading}
+            onPress={onUpdateNote}
+          >
+            {"ذخیره"}
+          </Button>
+        ) : null}
       </View>
     </View>
   );

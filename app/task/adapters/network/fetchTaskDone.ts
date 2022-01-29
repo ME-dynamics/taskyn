@@ -7,7 +7,6 @@ export async function fetchTaskDone(taskId: string) {
     },
     endpoint: "/tasks/done",
     method: "PATCH",
-    token: "",
   });
   return success;
 }

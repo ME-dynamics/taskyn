@@ -1,8 +1,8 @@
 import { fetchPatient, fetchUser } from "../adapters";
 import { userInfoState } from "../entities";
 
-export async function retrieveUserProfile() {
-  const [patient, user] = await Promise.all([fetchPatient(), fetchUser()]);
+export async function retrieveUserProfile(customerId: string | undefined) {
+  const [patient, user] = await Promise.all([fetchPatient(customerId), fetchUser(customerId)]);
   if (patient.error || user.error) {
     console.log(patient.error, user.error);
     return "error";

@@ -18,7 +18,6 @@ import { styles } from "./styles";
 
 function NoteScreen() {
   const route = useRoute();
-  
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["30%", "30%"], []);
   async function onUpdateNote() {
@@ -33,7 +32,10 @@ function NoteScreen() {
     console.log(id, "open gallery here");
   }
   function onRemovePress(id: string) {
-    console.log(id, "remove image from state");
+    const imageIds =
+      noteListState.currentNote?.imageIds.filter((imageId) => imageId !== id) ||
+      [];
+    noteListState.updateCurrentNoteImageIds(imageIds);
   }
   return (
     <BottomSheetModalProvider>
@@ -50,6 +52,7 @@ function NoteScreen() {
               title={"موضوع"}
               placeholder={"موضوع خود را وارد کنید"}
               value={noteListState.currentNote?.title}
+              editable={noteListState.currentNote?.edit}
               onChangeText={(text) => {
                 noteListState.setCurrentNoteTitle(text);
               }}
@@ -63,26 +66,22 @@ function NoteScreen() {
               placeholder={"موضوع خود را وارد کنید"}
               multiline
               value={noteListState.currentNote?.content}
+              editable={noteListState.currentNote?.edit}
               onChangeText={(text) => {
                 noteListState.setCurrentNoteContent(text);
               }}
             />
           </View>
-          <NoteImage
-            id={"sdsad"}
-            onImagePress={onImagePress}
-            onRemovePress={onRemovePress}
-          />
-          <NoteImage
-            id={"sdssdad"}
-            onImagePress={onImagePress}
-            onRemovePress={onRemovePress}
-          />
-          <NoteImage
-            id={"sdsdsad"}
-            onImagePress={onImagePress}
-            onRemovePress={onRemovePress}
-          />
+          {noteListState.currentNote?.imageIds.map((item) => {
+            return (
+              <NoteImage
+                key={item}
+                id={item}
+                onImagePress={onImagePress}
+                onRemovePress={onRemovePress}
+              />
+            );
+          })}
           {/* note images */}
         </Scroller>
         <BottomSheetModal

@@ -13,7 +13,7 @@ function TasksScreen() {
   const scrollRef = useRef<tScrollerRef>(null);
   const route = useRoute();
   // @ts-expect-error
-  const customerId = route.params?.id;
+  const customerId = route.params?.id || "";
   function onNewTaskPress() {
     addEmptyTask();
     scrollRef.current?.scrollToEnd({ animated: true });
@@ -27,7 +27,7 @@ function TasksScreen() {
         <TaskItem
           key={id}
           id={id}
-          userId={customerId} // TODO: get user id from  navigation
+          userId={customerId} 
           content={content}
           done={done}
           createdAt={createdAt}
@@ -37,7 +37,6 @@ function TasksScreen() {
     return components;
   }
   useEffect(() => {
-    
     retrieveTasks(customerId).catch((error) => {
       console.log(error);
     });

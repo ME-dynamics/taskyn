@@ -15,11 +15,13 @@ import { styles } from "./styles";
 
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { INoteProps } from "../../types";
+import { noteListState } from "../../entities";
 
 function NoteCardComponent(props: INoteProps) {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const { id, title, createdAt, description } = props;
   function onNotePress() {
+    noteListState.setCurrentNote(id);
     navigator.push("note", { id });
   }
   return (

@@ -31,7 +31,7 @@ function TaskItemComponent(props: ITaskItemProps) {
     }
   }
   async function onRemovePress() {
-    await removeTask(id, userId);
+    await removeTask(id, userId || "");
   }
   async function onDone() {
     try {
@@ -48,7 +48,7 @@ function TaskItemComponent(props: ITaskItemProps) {
   }
   async function onCreatePress() {
     setUpsertTaskLoading(true);
-    const created = await createTask(id, tempContent, userId);
+    const created = await createTask(id, tempContent, userId || "");
     if (created) {
       setEdit(false);
       // TODO: handle error state here

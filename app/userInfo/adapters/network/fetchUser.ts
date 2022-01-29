@@ -1,9 +1,9 @@
 import { request } from "../../../library";
 import { parseUser } from "../utils";
 
-export async function fetchUser() {
+export async function fetchUser(customerId: string | undefined) {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/users/",
+    endpoint: `/users/${customerId}`,
     method: "GET",
     body: undefined,
   });

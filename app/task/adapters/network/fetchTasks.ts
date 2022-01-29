@@ -3,7 +3,7 @@ import { request, toString } from "../../../library";
 import { IFetchTasksPayload, ITask } from "../../types";
 
 export async function fetchTasks(
-  customerId: string | undefined
+  customerId: string
 ): Promise<IFetchTasksPayload> {
   const { error, httpStatus, payload, success } = await request({
     body: undefined,

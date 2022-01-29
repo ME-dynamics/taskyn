@@ -9,5 +9,6 @@ export async function updateNote(updateNote: IUpdateNote) {
     // TODO: handle error
     return;
   }
+  noteListState.setEditable(false);
   noteListState.updateNote(note);
 }

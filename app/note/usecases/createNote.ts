@@ -8,6 +8,7 @@ export async function createNote(customerId: string) {
     content: createNoteState.noteContent,
     imageIds: createNoteState.imageIds,
   });
+  console.log(createNoteState.imageIds);
   if (error || !note) {
     console.log(error);
     return false;
