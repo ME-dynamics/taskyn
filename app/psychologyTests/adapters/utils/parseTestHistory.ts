@@ -8,5 +8,7 @@ export function parseTestHistory(payload: any): ITestHistory {
     title: toString(payload?.structureId),
     description: toString(payload?.formName),
     createdAt: createdAt ? toJalaaliDate(createdAt) : "",
+    //@ts-expect-error
+    result:payload, //TODO: remove this line
   };
 }

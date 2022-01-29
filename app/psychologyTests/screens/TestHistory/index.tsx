@@ -8,7 +8,7 @@ import { TestResultHistoryCard, TextIcon } from "../../components";
 
 import { styles, iconButtonColor } from "./styles";
 import { retiriveTestHistory } from "../../usecases";
-import { testHistoryState } from "../../entities";
+import { mbtiState, testHistoryState } from "../../entities";
 
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -25,6 +25,11 @@ function TestHistoryScreen() {
           title={title}
           description={description}
           date={createdAt}
+          onPress={() => {
+            //@ts-expect-error
+            mbtiState.setMbtiResult(testHistoryState.testHistory[index].result); //TODO: remove this line
+            navigation.push("mbtiResult");
+          }}
         />
       );
     }
