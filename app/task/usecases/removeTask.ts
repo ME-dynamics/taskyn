@@ -3,7 +3,7 @@ import { taskState } from "../entities";
 
 export async function removeTask(
   taskId: string,
-  customerId: string | undefined
+  customerId: string
 ) {
   const removed = await fetchRemoveTask(taskId, customerId);
   if (!removed) {
