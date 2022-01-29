@@ -1,3 +1,5 @@
+import { copyAsync, documentDirectory ,} from "expo-file-system";
+import { storage } from "../../library";
 import { fetchUploadImage } from "../adapters";
 import { createNoteState } from "../entities";
 import { openGallery } from "../../library";
@@ -5,6 +7,7 @@ import { openGallery } from "../../library";
 export async function onGalleryPress() {
   const images = await openGallery("note");
   const uploadPromises = [];
+  
   if (Array.isArray(images)) {
     for (let index = 0; index < images.length; index++) {
       const image = images[index];
@@ -21,6 +24,8 @@ export async function onGalleryPress() {
           }
           continue;
         }
+        await copyAsync({from: images[index].path, to: `${documentDirectory}${imageId}`});
+        storage.add(imageId, `${documentDirectory}${imageId}`);
         createNoteState.addImageId(images[index].path, imageId);
       }
     } catch (error) {

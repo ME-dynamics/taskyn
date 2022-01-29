@@ -10,10 +10,14 @@ export class NoteListState {
       addNote: action,
       updateNote: action,
       setCurrentNote: action,
+      setCurrentNoteTitle: action,
+      setCurrentNoteContent: action,
+      setEditable: action,
+      updateCurrentNoteImageIds: action
     });
   }
   notes: INote[] = [];
-  currentNote: INote | undefined = undefined;
+  currentNote: (INote & { edit: boolean }) | undefined = undefined;
   setNotes(notes: INote[]) {
     this.notes = notes;
   }
@@ -37,9 +41,10 @@ export class NoteListState {
   }
   setCurrentNote(id: string) {
     for (let index = 0; index < this.notes.length; index++) {
-      const { id: noteId } = this.notes[index];
-      if (id === noteId) {
-        this.currentNote = this.notes[index];
+      const note = this.notes[index];
+      if (id === note.id) {
+        this.currentNote = { ...note, edit: false };
+        return;
       }
     }
     this.currentNote = undefined;
@@ -52,6 +57,16 @@ export class NoteListState {
   setCurrentNoteContent(content: string) {
     if (this.currentNote) {
       this.currentNote.content = content;
+    }
+  }
+  setEditable(state: boolean) {
+    if (this.currentNote) {
+      this.currentNote.edit = state;
+    }
+  }
+  updateCurrentNoteImageIds(imageIds: string[]) {
+    if (this.currentNote) {
+      this.currentNote.imageIds = imageIds;
     }
   }
 }
