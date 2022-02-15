@@ -66,14 +66,16 @@ function ProvidersScreen() {
       <View style={styles.requestContainer}>
         <View style={styles.horizontalLine} />
         <Title style={styles.myDoctorTitle}>{"دکتر من"}</Title>
-        <ProviderCard
+        {providerState.myProvider ? <ProviderCard
           id={providerState.myProvider?.id || ""}
           fullName={`${providerState.myProvider?.firstName} ${providerState.myProvider?.lastName}`}
           description={providerState.myProvider?.description || "متخصص"}
           profileImageUrl={
-            "https://cdn01.zoomit.ir/Avatars//ef71899b-b0fc-4c3b-984e-5a41e450d942.png?w=115"
+            ""
           }
-        />
+          // @ts-expect-error
+          myDoctor
+        />: <Subheading style={{textAlign: "center"}}>{"دکتری ثبت نشده است"}</Subheading>}
       </View>
     </Container>
   );
