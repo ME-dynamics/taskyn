@@ -24,3 +24,8 @@ export interface ITaskItemProps {
   done: boolean;
   createdAt: string;
 }
+
+export interface IEditModalProps {
+  onClosePress: () => void;
+  customerId: string | undefined;
+}
