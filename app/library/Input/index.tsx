@@ -213,6 +213,12 @@ function InputComponent(props: IInputProps) {
       );
     }
   }
+  function renderPlaceHolder() {
+    if (mode === "with-label" || focused || isRaw) {
+      return placeholder;
+    }
+    return undefined;
+  }
   return (
     <View style={containerStyles}>
       {renderLimit()}
@@ -225,13 +231,7 @@ function InputComponent(props: IInputProps) {
           {renderClearButton()}
           <TextInput
             {...props}
-            placeholder={
-              mode === "with-label"
-                ? placeholder
-                : focused
-                ? placeholder
-                : undefined
-            }
+            placeholder={renderPlaceHolder()}
             ref={inputRef}
             style={inputStyles}
             onBlur={onBlurPress}
