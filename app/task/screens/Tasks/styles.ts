@@ -11,4 +11,7 @@ export const styles = StyleSheet.create({
     right: 16,
     bottom: 16,
   },
+  modal: {
+    marginHorizontal: "5%",
+  },
 });
