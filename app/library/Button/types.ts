@@ -42,6 +42,7 @@ export interface IButtonProps {
 export interface IActivityProps {
   mode: tMode;
   size: tSize;
+  activityColor?: string;
 }
 
 export interface IButtonStyles {

@@ -20,6 +20,8 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
     disabled,
     children,
     fullRadius,
+    textColor,
+    backgroundColor,
   } = props;
   const { styles, iconStyle } = styleGen({
     dark,
@@ -28,6 +30,8 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
     mode,
     size,
     fullRadius,
+    textColor,
+    backgroundColor
   });
 
   return (
@@ -38,7 +42,7 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
         </View>
       )}
       {loading ? (
-        <Loading mode={mode} size={size} />
+        <Loading mode={mode} size={size} activityColor={textColor} />
       ) : (
         <Paragraph numberOfLines={1} style={styles.text}>
           {children}
