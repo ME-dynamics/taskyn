@@ -8,7 +8,8 @@ import { styles, iconColor } from "./styles";
 import { IProviderCardProps } from "../../types";
 
 function ProviderCardComponent(props: IProviderCardProps) {
-  const { id, fullName, profileImageUrl, description } = props;
+  // @ts-expect-error
+  const { id, fullName, profileImageUrl, description, myDoctor } = props;
   const [loading, setLoading] = useState<boolean>(false);
   async function onCreateRequest() {
     setLoading(true);
@@ -23,7 +24,8 @@ function ProviderCardComponent(props: IProviderCardProps) {
     }
     return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;
   }
-
+  const requestText = "درخواست اتصال";
+  const cancelRequestText = "لغو اتصال"
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -43,7 +45,7 @@ function ProviderCardComponent(props: IProviderCardProps) {
             loading={loading}
             onPress={onCreateRequest}
           >
-            {"درخواست اتصال"}
+            {myDoctor ? cancelRequestText : requestText}
           </Button>
         }
       </View>
