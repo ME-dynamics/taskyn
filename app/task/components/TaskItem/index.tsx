@@ -40,15 +40,17 @@ function TaskItemComponent(props: ITaskItemProps) {
       setDoneLoading(false);
     } catch (error) {}
   }
+  // TODO: move update to edit modal
   async function onUpdatePress() {
     setUpsertTaskLoading(true);
     await updateTask({ taskId: id, content: tempContent, userId });
     setUpsertTaskLoading(false);
     setEdit(false);
   }
+  // TODO: remvove create task, empty task
   async function onCreatePress() {
     setUpsertTaskLoading(true);
-    const created = await createTask(id, tempContent, userId || "");
+    const created = await createTask(tempContent, userId || "");
     if (created) {
       setEdit(false);
       // TODO: handle error state here

@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  scrollViewContentContainer: {
+  container: {
+    flex: 1,
     alignItems: "center",
-    paddingVertical: 16,
-  },
-  modal: {
-    marginHorizontal: "5%",
+    justifyContent: "space-around",
   },
 });

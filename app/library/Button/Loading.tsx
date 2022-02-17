@@ -7,13 +7,13 @@ import { activityStyleGen } from "./styles";
 import { IActivityProps } from "./types";
 
 function LoadingComponent(props: IActivityProps) {
-  const { mode, size } = props;
+  const { mode, size, activityColor: activityColorProp } = props;
   const { activityColor, styles } = activityStyleGen(mode, size);
   return (
     <ActivityIndicator
       style={styles.container}
       size={"small"}
-      color={activityColor}
+      color={activityColorProp ? activityColorProp : activityColor}
     />
   );
 }

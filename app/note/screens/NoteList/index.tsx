@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import {
-  Button,
-  Title,
-  TaskynIcon,
-  Container,
-  Scroller,
-  toString,
-} from "../../../library";
+import { Button, Title, Container, Scroller, toString } from "../../../library";
 
 import { NoteCard } from "../../components/NoteCard";
 import { retrieveNotes } from "../../usecases";
@@ -68,7 +62,7 @@ function NoteListScreen() {
           rippleColor={"lightGrey"}
           size={"FAB"}
           Icon={({ size, color }) => {
-            return <TaskynIcon name={"camera"} size={size} color={color} />;
+            return <Entypo name="plus" size={size} color={color} />;
           }}
           fullRadius
           onPress={() => {

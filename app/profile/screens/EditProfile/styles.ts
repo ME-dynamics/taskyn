@@ -19,4 +19,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  modal: {
+    marginHorizontal: "5%",
+  },
 });

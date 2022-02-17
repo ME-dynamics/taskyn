@@ -2,7 +2,7 @@ import { fetchCreateTask } from "../adapters";
 import { taskState } from "../entities";
 
 export async function createTask(
-  emptyId: string,
+  // emptyId: string,
   content: string,
   customerId: string
 ) {
@@ -16,8 +16,8 @@ export async function createTask(
     console.log({ createTaskError: error });
     return false;
   }
-  console.log({ taskResult: task });
-  taskState.updateEmptyTask(task, emptyId);
+  // console.log({ taskResult: task });
+  taskState.addTask(task);
   // console.log(taskState.tasks);
   return true;
 }

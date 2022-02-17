@@ -43,6 +43,7 @@ function InputComponent(props: IInputProps) {
   const [focused, setFocused] = useState<boolean>(false);
   const [inputHeight, setHeight] = useState<number>(inputHeightGen(mode));
   const isRaw = mode === "raw";
+  const isNoStyle = mode === "no-style";
   const {
     styles,
     containerStyles,
@@ -124,6 +125,7 @@ function InputComponent(props: IInputProps) {
     }
   }
   function renderTitle() {
+    if(isNoStyle) return null;
     if (isRaw) {
       if (focused || value) {
         return null;
@@ -164,7 +166,7 @@ function InputComponent(props: IInputProps) {
     );
   }
   function renderErrors() {
-    if (isRaw) {
+    if (isRaw || isNoStyle) {
       return null;
     }
     if (!errors) {
@@ -179,6 +181,7 @@ function InputComponent(props: IInputProps) {
   }
 
   function renderLimit() {
+    if(isRaw || isNoStyle) return null;
     if (!limit) {
       return null;
     }
@@ -190,7 +193,7 @@ function InputComponent(props: IInputProps) {
     );
   }
   function renderClearButton() {
-    if (isRaw) {
+    if (isRaw || isNoStyle) {
       return null;
     }
     if (value && clearButton) {
@@ -217,6 +220,12 @@ function InputComponent(props: IInputProps) {
   }
   
   const tap = Gesture.Tap().onEnd(onPress);
+  function renderPlaceHolder() {
+    if (mode === "with-label" || focused || isRaw || isNoStyle) {
+      return placeholder;
+    }
+    return undefined;
+  }
   return (
     <View style={containerStyles}>
       {renderLimit()}
@@ -229,13 +238,7 @@ function InputComponent(props: IInputProps) {
           {renderClearButton()}
           <TextInput
             {...props}
-            placeholder={
-              mode === "with-label"
-                ? placeholder
-                : focused
-                ? placeholder
-                : undefined
-            }
+            placeholder={renderPlaceHolder()}
             ref={inputRef}
             style={inputStyles}
             onBlur={onBlurPress}
