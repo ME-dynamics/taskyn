@@ -17,6 +17,7 @@ function DashboardScreen() {
   const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const isProvider = getRole() === "provider";
+  // const isProvider = true;
   const isCustomer = getRole() === "customer";
   // @ts-expect-error
   const id = route.params?.id || "";
@@ -56,8 +57,83 @@ function DashboardScreen() {
       );
     }
   }
+  function providerTileRenderer() {
+    return (
+      <>
+        <View style={styles.row}>
+          <Tile
+            title={"نوت برداری"}
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"note"} color={color} size={size} svg />;
+            }}
+            onPress={() => {
+              navigation.push("notes", { id });
+            }}
+          />
+          <Tile
+            title={"پرونده بیمار"}
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"file"} color={color} size={size} svg />;
+            }}
+            onPress={() => {
+              navigation.push("userInfo", { id });
+            }}
+          />
+        </View>
+        <View style={styles.row}>
+          <Tile
+            title={"تاریخچه تست ها"}
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"form"} color={color} size={size} svg />;
+            }}
+            onPress={() => {
+              navigation.push("testHistory", { id });
+            }}
+          />
+          <Tile
+            title={"تمرینات"}
+            Icon={({ size, color }) => {
+              return (
+                <TaskynIcon name={"practice"} color={color} size={size} svg />
+              );
+            }}
+            onPress={() => {
+              navigation.push("tasks", { id });
+            }}
+          />
+        </View>
+      </>
+    );
+  }
+  function customerTileRenderer() {
+    return (
+      <View style={styles.row}>
+        <Tile
+          title={"تمرینات"}
+          Icon={({ size, color }) => {
+            return (
+              <TaskynIcon name={"practice"} color={color} size={size} svg />
+            );
+          }}
+          onPress={() => {
+            navigation.push("tasks", { id });
+          }}
+        />
+        <Tile
+          title={"پرونده بیمار"}
+          Icon={({ size, color }) => {
+            return <TaskynIcon name={"file"} color={color} size={size} svg />;
+          }}
+          onPress={() => {
+            navigation.push("userInfo", { id });
+          }}
+        />
+      </View>
+    );
+  }
   // TODO: convert to component
   function renderBack() {
+    if (!isProvider) return null;
     return (
       <View style={{ position: "absolute", top: 8, left: 12, zIndex: 5 }}>
         <IconButton
@@ -80,124 +156,7 @@ function DashboardScreen() {
       <View style={styles.titleContainer}>{renderUserCard()}</View>
       <View style={styles.buttonContainer}>
         <Scroller contentContainerStyle={styles.containerContentStyle}>
-          <View style={styles.row}>
-            {isProvider ? (
-              <Tile
-                title={"نوت برداری"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon name={"note"} color={color} size={size} svg />
-                  );
-                }}
-                onPress={() => {
-                  navigation.push("notes", { id });
-                }}
-              />
-            ) : (
-              <Tile
-                title={"تمرینات"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon
-                      name={"practice"}
-                      color={color}
-                      size={size}
-                      svg
-                    />
-                  );
-                }}
-                onPress={() => {
-                  navigation.push("tasks", { id });
-                }}
-              />
-            )}
-
-            <Tile
-              title={"پرونده بیمار"}
-              Icon={({ size, color }) => {
-                return (
-                  <TaskynIcon name={"file"} color={color} size={size} svg />
-                );
-              }}
-              onPress={() => {
-                navigation.push("userInfo", { id });
-              }}
-            />
-          </View>
-          <View style={styles.row}>
-            {isProvider ? (
-              <Tile
-                title={"تاریخچه تست ها"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon name={"form"} color={color} size={size} svg />
-                  );
-                }}
-                onPress={() => {
-                  navigation.push("testHistory", { id });
-                }}
-              />
-            ) : (
-              <Tile
-                title={"فرم ها"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon name={"form"} color={color} size={size} svg />
-                  );
-                }}
-                onPress={() => {
-                  // navigation.push("form");
-                }}
-              />
-            )}
-            <Tile
-              title={"تاریخچه فرم ها"}
-              Icon={({ size, color }) => {
-                return (
-                  <TaskynIcon
-                    name={"file-history"}
-                    color={color}
-                    size={size}
-                    svg
-                  />
-                );
-              }}
-              onPress={() => {
-                // navigation.push("formsHistory");
-              }}
-            />
-          </View>
-          {isProvider ? (
-            <View style={styles.row}>
-              <Tile
-                title={"تمرینات"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon
-                      name={"practice"}
-                      color={color}
-                      size={size}
-                      svg
-                    />
-                  );
-                }}
-                onPress={() => {
-                  navigation.push("tasks", { id });
-                }}
-              />
-              <Tile
-                title={"فرم ها"}
-                Icon={({ size, color }) => {
-                  return (
-                    <TaskynIcon name={"form"} color={color} size={size} svg />
-                  );
-                }}
-                onPress={() => {
-                  navigation.push("form");
-                }}
-              />
-            </View>
-          ) : null}
+          {isCustomer ? customerTileRenderer() : providerTileRenderer()}
         </Scroller>
       </View>
     </Container>
