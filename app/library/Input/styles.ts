@@ -64,7 +64,7 @@ function inputBorderGen(mode: tInputMode) {
 }
 
 function containerStyleGen(mode: tInputMode, height: number) {
-  if (mode === "raw") {
+  if (mode === "raw" || mode === "no-style") {
     return {
       flex: 1,
     };
@@ -91,6 +91,7 @@ function styleGenerator(args: IInputStyleGen) {
   const height = containerHeightGen(mode);
   const isFlat = mode === "flat";
   const isRaw = mode === "raw";
+  const isNoStyle = mode === "no-style";
   const flatBackgroundColor = isFlat ? "rgba(0,0,0,0.12)" : undefined;
   const styles = StyleSheet.create({
     container: containerStyleGen(mode, height),
@@ -116,6 +117,10 @@ function styleGenerator(args: IInputStyleGen) {
       backgroundColor: flatBackgroundColor,
       paddingRight: 16,
       ...inputBorderGen(mode),
+    },
+    inputNoStyleContainer: {
+      width: "100%",
+      height: "100%",
     },
     inputRawContainer: {
       width: "100%",
@@ -227,7 +232,9 @@ function styleGenerator(args: IInputStyleGen) {
         }
       : undefined,
   ];
-  const inputContainerStyles = isRaw
+  const inputContainerStyles = isNoStyle
+    ? styles.inputNoStyleContainer
+    : isRaw
     ? styles.inputRawContainer
     : [
         styles.inputContainer,
