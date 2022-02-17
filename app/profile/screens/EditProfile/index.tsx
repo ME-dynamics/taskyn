@@ -1,23 +1,44 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { observer } from "mobx-react-lite";
-import { Button, Input, Container, Scroller } from "../../../library";
+import {
+  Button,
+  Input,
+  Container,
+  Scroller,
+  CustomBackdrop,
+} from "../../../library";
 
-import { Avatar, CustomBackdrop, PickImageSheet } from "../../components";
+import { Avatar, PickImageSheet } from "../../components";
 import { profileState } from "../../entities";
 import { updateUser } from "../../usecases";
 
 import { styles } from "./styles";
+import { SuccessAlert } from "../../../library/SuccessAlert";
 
 function EditProfileScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [updateUserLoading, setUpdateUserLoading] = useState(false);
   const snapPoints = useMemo(() => ["30%", "30%"], []);
-
+  const snapPointsModal = useMemo(() => [150, 180], []);
+  const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const onCollapsePress = useCallback(() => {
     bottomSheetRef.current?.collapse();
   }, []);
-
+  const close = useCallback(() => {
+    BottomSheetModalRef.current?.close();
+  }, []);
+  const onCollapsePressModal = useCallback(() => {
+    BottomSheetModalRef.current?.present();
+  }, []);
+  async function onPress() {
+    setUpdateUserLoading(true);
+    await updateUser(); // TODO: handle error
+    setUpdateUserLoading(false);
+    onCollapsePressModal();
+    return;
+  }
   return (
     <>
       <Container>
@@ -64,7 +85,8 @@ function EditProfileScreen() {
               mode={"contained"}
               size={"wide"}
               rippleColor={"lightGrey"}
-              onPress={updateUser}
+              onPress={onPress}
+              loading={updateUserLoading}
             >
               {"ذخیره"}
             </Button>
@@ -80,6 +102,18 @@ function EditProfileScreen() {
       >
         <PickImageSheet />
       </BottomSheet>
+      <BottomSheetModal
+        ref={BottomSheetModalRef}
+        snapPoints={snapPointsModal}
+        backdropComponent={CustomBackdrop}
+        detached={true}
+        bottomInset={250}
+        style={styles.modal}
+        index={1}
+        enablePanDownToClose
+      >
+        <SuccessAlert onClosePress={close} />
+      </BottomSheetModal>
     </>
   );
 }
