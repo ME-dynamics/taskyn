@@ -5,4 +5,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 16,
   },
+  modal: {
+    marginHorizontal: "5%",
+  },
 });

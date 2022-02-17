@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { toJS } from "mobx";
-import { Button, Input, Container, Scroller } from "../../../library";
+import {
+  Button,
+  Input,
+  Container,
+  Scroller,
+  CustomBackdrop,
+} from "../../../library";
 
 import { TwoChoice, ScrollPicker } from "../../components";
 import { userInfoState } from "../../entities";
@@ -10,6 +22,10 @@ import { updateUserProfile, retrieveUserProfile } from "../../usecases";
 
 import { styles } from "./styles";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { BirthDayInput } from "../../components/BirthDayInput";
+import type { IBirthDay } from "../../types";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { SuccessAlert } from "../../../library/SuccessAlert";
 
 function UserInfoScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -18,15 +34,27 @@ function UserInfoScreen() {
   const [loading, setLoading] = useState<boolean>(true);
   const [editable, setEditable] = useState<boolean>(false);
   const [updateUserLoading, setUpdateUserLoading] = useState<boolean>(false);
+
+  const snapPoints = useMemo(() => [150, 180], []);
+  const BottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const close = useCallback(() => {
+    BottomSheetModalRef.current?.close();
+  }, []);
+  const onCollapsePress = useCallback(() => {
+    BottomSheetModalRef.current?.present();
+  }, []);
   function renderEditButton(props: { tintColor?: string }) {
     const { tintColor } = props;
     const save = "ذخیره";
     const edit = "ویرایش";
+
     async function onPress() {
       if (editable) {
         setUpdateUserLoading(true);
         await updateUserProfile(); // TODO: handle error
         setUpdateUserLoading(false);
+        onCollapsePress();
         setEditable(false);
         return;
       }
@@ -86,7 +114,7 @@ function UserInfoScreen() {
             userInfoState.setLastName(text);
           }}
         />
-        <Input
+        {/* <Input
           editable={editable}
           mode={"with-label"}
           title={"تاریخ تولد"}
@@ -96,7 +124,7 @@ function UserInfoScreen() {
           onChangeText={(text) => {
             userInfoState.setBirthday(text);
           }}
-        />
+        /> */}
         <Input
           editable={editable}
           mode={"with-label"}
@@ -130,6 +158,13 @@ function UserInfoScreen() {
             userInfoState.setProblemDescription(text);
           }}
         />
+        <BirthDayInput
+          onBirthdayChange={(birthDay: IBirthDay) => {
+            userInfoState.setBirthday(
+              `${birthDay.day}-${birthDay.month}-${birthDay.year}`
+            );
+          }}
+        />
         <TwoChoice
           title={"جنسیت:"}
           choiceState={userInfoState.genderPersianText}
@@ -154,7 +189,6 @@ function UserInfoScreen() {
             userInfoState.setMaritalStatus("engaged");
           }}
         />
-
         <ScrollPicker
           title={"وضعیت تاهل"}
           itemKey={toJS(userInfoState.maritalState)}
@@ -306,7 +340,6 @@ function UserInfoScreen() {
             userInfoState.setIsFatherAlive(false);
           }}
         />
-
         {userInfoState.isFatherAlive === false ? (
           <Input
             editable={editable}
@@ -382,6 +415,19 @@ function UserInfoScreen() {
           }}
         />
       </Scroller>
+      <BottomSheetModal
+        ref={BottomSheetModalRef}
+        snapPoints={snapPoints}
+        backdropComponent={CustomBackdrop}
+        detached={true}
+        bottomInset={250}
+        style={styles.modal}
+        index={1}
+        enablePanDownToClose
+        
+      >
+        <SuccessAlert onClosePress={close} />
+      </BottomSheetModal>
     </Container>
   );
 }
