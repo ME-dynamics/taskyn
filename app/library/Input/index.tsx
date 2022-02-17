@@ -5,6 +5,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { observer } from "mobx-react-lite";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -73,7 +74,8 @@ function InputComponent(props: IInputProps) {
     animation = useSharedValue(value ? 1 : 0);
   }
   function onPress() {
-    if (inputRef && editable !== false) {
+    if (editable === false) return;
+    if (inputRef) {
       setFocused(true);
       inputRef.current?.focus();
     }
@@ -213,13 +215,15 @@ function InputComponent(props: IInputProps) {
       );
     }
   }
+  
+  const tap = Gesture.Tap().onEnd(onPress);
   return (
     <View style={containerStyles}>
       {renderLimit()}
       {renderTitle()}
-      <Tap onPress={onPress} waitFor={clearRef}>
+      <GestureDetector gesture={tap}>
         <View
-          pointerEvents={focused ? "box-none" : value ? "box-none" : "box-only"}
+          pointerEvents={focused ? "box-none" : "box-only"}
           style={inputContainerStyles}
         >
           {renderClearButton()}
@@ -242,7 +246,7 @@ function InputComponent(props: IInputProps) {
             onContentSizeChange={multiline ? onContentSize : undefined}
           />
         </View>
-      </Tap>
+      </GestureDetector>
 
       <View style={styles.errorContainer}>{renderErrors()}</View>
     </View>
