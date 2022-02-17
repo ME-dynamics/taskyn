@@ -24,3 +24,11 @@ export interface IScrollPickerProps {
   items: IScrollPickerItem[];
   onItemSelected: (item: IScrollPickerItem) => void;
 }
+export interface IBirthDayInputProps {
+  onBirthdayChange: (value: IBirthDay) => void;
+}
+export interface IBirthDay {
+  day: string;
+  month: string;
+  year: string;
+}
