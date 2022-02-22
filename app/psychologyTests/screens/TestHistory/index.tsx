@@ -28,7 +28,7 @@ function TestHistoryScreen() {
           onPress={() => {
             //@ts-expect-error
             mbtiState.setMbtiResult(testHistoryState.testHistory[index].result); //TODO: remove this line
-            navigation.push("mbtiResult");
+            navigation.push("testResultScreen");
           }}
         />
       );
