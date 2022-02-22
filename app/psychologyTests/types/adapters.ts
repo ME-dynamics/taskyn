@@ -1,3 +1,4 @@
+import { ITestResult } from ".";
 import { ITest, IPsychologyTest } from "./entities";
 
 export interface IFetchTests {
@@ -5,17 +6,17 @@ export interface IFetchTests {
   tests: ITest[];
 }
 
-
-
 export interface IFetchMBTI {
   error: string;
   mbti: IPsychologyTest;
 }
 
-
-
-
 export interface IFetchCreateMbti {
   error: string;
-  mbtiResult: any 
+  mbtiResult: any;
+}
+
+export interface IFetchGetTestResultById {
+  error: string;
+  testResult: ITestResult[];
 }

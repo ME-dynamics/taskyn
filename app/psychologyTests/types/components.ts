@@ -43,3 +43,12 @@ export interface ITestResultHistoryCardProps {
   onPress?: (id: string) => any;
   date: string;
 }
+export interface ITestResultProps {
+  faName: string;
+  enName: string;
+  variable: string;
+  rawScore: number;
+  baseRate: number;
+  sideColor: string;
+  interpret: string;
+}

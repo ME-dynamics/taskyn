@@ -31,3 +31,13 @@ export interface ITestHistory {
   description: string;
   createdAt: string;
 }
+
+export interface ITestResult {
+  type: string;
+  faName: string;
+  enName: string;
+  variable: string;
+  rawScore: number;
+  baseRate: number;
+  interpret: string;
+}
