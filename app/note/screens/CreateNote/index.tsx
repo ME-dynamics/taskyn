@@ -35,6 +35,7 @@ import type { tScrollerRef } from "../../types";
 function CreateNoteScreen() {
   const navigator = useNavigation();
   const route = useRoute();
+  const customerId = route.params?.customerId || "";
   const scrollRef = useRef<tScrollerRef>(null);
   const { keyboardShown } = useKeyboard();
   const [createLoading, setCreateLoading] = useState<boolean>(false);
@@ -77,7 +78,7 @@ function CreateNoteScreen() {
   async function onCreateNotePress() {
     setCreateLoading(true);
     // TODO: use route id
-    const created = await createNote("3c959478-8333-4d90-8ede-05d4c9226488");
+    const created = await createNote(customerId);
     if (created) {
       navigator.goBack();
       return;
