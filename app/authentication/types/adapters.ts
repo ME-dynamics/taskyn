@@ -1,5 +1,6 @@
 export interface IFetchPasswordlessStartResult {
   otpToken: string;
+  deviceId: string;
   error: string;
 }
 
