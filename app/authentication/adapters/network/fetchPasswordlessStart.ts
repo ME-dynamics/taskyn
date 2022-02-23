@@ -1,8 +1,8 @@
 import { request, toString } from "../../../library";
 import { adapterTypes } from "../../types";
-import * as Device from "expo-device";
+import * as Device from "expo-device"; // TODO: move data to usecase
 import { Platform } from "react-native";
-import { v4 as uuid } from "uuid";
+import { nanoid } from "nanoid";
 export async function fetchPasswordlessStart(
   phoneNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessStartResult> {
@@ -11,7 +11,7 @@ export async function fetchPasswordlessStart(
     method: "POST",
     body: {
       phoneNumber,
-      deviceUniqueId: uuid(), ////
+      deviceUniqueId: nanoid(64), ////
       isDevice: Device.isDevice,
       platform: Platform.OS, ////
       brand: Device.brand,
@@ -21,7 +21,7 @@ export async function fetchPasswordlessStart(
       designName: Device.designName,
       productName: Device.productName,
       deviceYearClass: Device.deviceYearClass,
-      supportedCpuArch: Device.supportedCpuArchitectures,
+      supportedCpuArch: Device.supportedCpuArchitectures?.join(","),
       os: Device.osName,
       osVersion: Device.osVersion,
       osBuildId: Device.osBuildId,
