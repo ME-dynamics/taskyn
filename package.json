@@ -38,6 +38,7 @@
     "mobx": "^6.3.9",
     "mobx-react-lite": "^3.2.2",
     "moti": "^0.17.1",
+    "nanoid": "^3.3.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
@@ -60,8 +61,7 @@
     "react-native-tab-view": "^3.1.1",
     "react-native-typography": "^1.4.1",
     "react-native-web": "0.17.1",
-    "recyclerlistview": "^3.0.5",
-    "uuid": "^8.3.2"
+    "recyclerlistview": "^3.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -72,7 +72,6 @@
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "@types/react-native-communications": "^2.2.1",
-    "@types/uuid": "^8.3.4",
     "babel-preset-expo": "9.0.2",
     "jest-expo": "^44.0.0",
     "patch-package": "^6.4.7",
