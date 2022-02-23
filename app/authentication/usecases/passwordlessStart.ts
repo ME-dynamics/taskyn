@@ -1,6 +1,6 @@
 import { fetchPasswordlessStart, validatePhoneNumber } from "../adapters";
 import { inputState, authState } from "../entities";
-
+import { storage } from "../../library";
 export async function passwordlessStart() {
   if (inputState.phoneNumber && inputState.phoneNumber.length >= 10) {
     const isPhoneValid = validatePhoneNumber(inputState.phoneNumber);
@@ -10,7 +10,7 @@ export async function passwordlessStart() {
       inputState.setPhoneValidation([]);
     }
     if (isPhoneValid) {
-      const { otpToken, error } = await fetchPasswordlessStart(
+      const { otpToken, error, deviceId } = await fetchPasswordlessStart(
         inputState.phoneNumber
       );
       if (error) {
@@ -19,6 +19,7 @@ export async function passwordlessStart() {
       }
       if (otpToken) {
         authState.setOtpToken(otpToken);
+        storage.add("device_id", deviceId);
         return;
       }
     }
