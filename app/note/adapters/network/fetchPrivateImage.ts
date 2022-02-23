@@ -6,7 +6,7 @@ export async function fetchPrivateImage(
   imageId: string
 ): Promise<IFetchRetrievePrivateImageResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: `/images/private/${imageId}`,
+    endpoint: `/storage/private/${imageId}`,
     method: "GET",
     body: undefined,
   });

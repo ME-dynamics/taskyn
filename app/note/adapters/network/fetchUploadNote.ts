@@ -8,7 +8,7 @@ export async function fetchUpdateNote(
   body: IUpdateNote
 ): Promise<IFetchUpdateNoteResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/provider/notes",
+    endpoint: "/notes",
     method: "PUT",
     body: Object(body),
   });
