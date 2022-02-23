@@ -6,7 +6,7 @@ import { IResponse, IUploadFile, tFileType } from "./types";
 function endpointGen(type: tFileType) {
   switch (type) {
     case "image":
-      return `${serverUrl}/images/upload`;
+      return `${serverUrl}/storage/upload`;//TODO: fix this
     default:
       return "no where";
   }

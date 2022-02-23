@@ -2,7 +2,10 @@ import { fetchPatient, fetchUser } from "../adapters";
 import { userInfoState } from "../entities";
 
 export async function retrieveUserProfile(customerId: string | undefined) {
-  const [patient, user] = await Promise.all([fetchPatient(customerId), fetchUser(customerId)]);
+  const [patient, user] = await Promise.all([
+    fetchPatient(customerId),
+    fetchUser(customerId),
+  ]);
   if (patient.error || user.error) {
     console.log(patient.error, user.error);
     return "error";
@@ -19,6 +22,7 @@ export async function retrieveUserProfile(customerId: string | undefined) {
   userInfoState.setTelephone(userData.telephone);
   userInfoState.setBirthday(userData.birthday);
   userInfoState.setGender(userData.gender);
+  ``;
   userInfoState.setProblemDescription(patientData.problemDescription);
   userInfoState.setMaritalStatus(patientData.maritalStatus);
   userInfoState.setMaritalState(patientData.maritalState || "");
@@ -37,4 +41,5 @@ export async function retrieveUserProfile(customerId: string | undefined) {
   userInfoState.setCousinMarriage(patientData.cousinMarriage);
   userInfoState.setSiblingsPosition(patientData.siblingsPosition);
   userInfoState.setSiblings(patientData.siblings);
+  userInfoState.setSiblingDiseases(patientData.siblingDiseases || "");
 }

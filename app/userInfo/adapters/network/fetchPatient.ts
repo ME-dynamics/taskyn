@@ -4,7 +4,7 @@ import { parsePatient } from "../utils";
 
 export async function fetchPatient(customerId: string | undefined) {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: `/patients/${customerId}`,
+    endpoint: `/users/patients/${customerId}`,
     method: "GET",
     body: undefined,
   });

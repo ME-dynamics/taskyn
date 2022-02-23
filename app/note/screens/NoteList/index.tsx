@@ -15,6 +15,7 @@ import { noteListState } from "../../entities";
 function NoteListScreen() {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
+  const customerId = route.params?.id || "";
   const [loading, setLoading] = useState<boolean>(true);
 
   async function init() {
@@ -66,7 +67,7 @@ function NoteListScreen() {
           }}
           fullRadius
           onPress={() => {
-            navigator.push("createNote");
+            navigator.push("createNote",{customerId});
           }}
         >
           {"ایجاد یادداشت جدید"}

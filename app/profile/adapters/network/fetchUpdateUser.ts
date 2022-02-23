@@ -4,7 +4,7 @@ import { IUser } from "../../types";
 
 export async function fetchUpdateUser(body: IUser) {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/users",
+    endpoint: "/users/",
     method: "PUT",
     body: Object(body),
   });

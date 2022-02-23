@@ -20,6 +20,7 @@ export interface IPatient {
   addiction: string | undefined;
   isFatherAlive: boolean;
   isMotherAlive: boolean;
+  siblingDiseases: string;
   fatherDeathReason: string | undefined;
   motherDeathReason: string | undefined;
   cousinMarriage: boolean;
