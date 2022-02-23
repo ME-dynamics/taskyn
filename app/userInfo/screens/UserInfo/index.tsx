@@ -31,6 +31,8 @@ function UserInfoScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const route = useRoute();
+  //@ts-expect-error
+  const id = route.params?.id || "";
   const [loading, setLoading] = useState<boolean>(true);
   const [editable, setEditable] = useState<boolean>(false);
   const [updateUserLoading, setUpdateUserLoading] = useState<boolean>(false);
@@ -51,8 +53,9 @@ function UserInfoScreen() {
 
     async function onPress() {
       if (editable) {
+        console.log("update user");
         setUpdateUserLoading(true);
-        await updateUserProfile(); // TODO: handle error
+        await updateUserProfile(id); // TODO: handle error
         setUpdateUserLoading(false);
         onCollapsePress();
         setEditable(false);
@@ -286,8 +289,12 @@ function UserInfoScreen() {
         <Input
           editable={editable}
           mode={"with-label"}
-          title={"بیماری روحی خود را بنویسید و در صورت نیاز آن را شرح دهید."}
-          placeholder={"بیماری روحی خود را وارد کنید"}
+          numberOfLines={1}
+          multiline
+          title={"بیماری روحی خود را وارد کنید."}
+          placeholder={
+            "بیماری روحی خود را بنویسید و در صورت نیاز آن را شرح دهید."
+          }
           value={userInfoState.mindDiseases}
           onChangeText={(text) => {
             userInfoState.setMindDiseases(text);
@@ -301,8 +308,12 @@ function UserInfoScreen() {
           placeholder={`بیماری افراد خانواده را برای هر شخص وارد کنید.
 مثال: برادر اولم دچار بیماری سرطانی است.`}
           multiline
-          numberOfLines={6}
-
+          numberOfLines={8}
+          limit={320}
+          value={userInfoState.siblingDiseases}
+          onChangeText={(text) => {
+            userInfoState.setSiblingDiseases(text);
+          }}
           // value=
         />
         <Input
@@ -424,7 +435,6 @@ function UserInfoScreen() {
         style={styles.modal}
         index={1}
         enablePanDownToClose
-        
       >
         <SuccessAlert onClosePress={close} />
       </BottomSheetModal>

@@ -101,6 +101,7 @@ export function parsePatient(payload: Record<string, unknown>): IPatient {
     maritalStatus,
     maritalState,
     education,
+    siblingDiseases: toString(payload.siblingDiseases),
     academicField: toString(payload.academicField),
     religion: parseReligion(toString(payload.religion)),
     job: toString(payload.job),

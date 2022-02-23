@@ -27,6 +27,7 @@ export class UserInfoState {
       motherDeathReason: observable,
       cousinMarriage: observable,
       siblingsPosition: observable,
+      siblingDiseases: observable,
       siblings: observable,
       setFirstName: action,
       setLastName: action,
@@ -51,6 +52,7 @@ export class UserInfoState {
       setMotherDeathReason: action,
       setCousinMarriage: action,
       setSiblingsPosition: action,
+      setSiblingDiseases: action,
       setSiblings: action,
       genderPersianText: computed,
       maritalStatusText: computed,
@@ -76,6 +78,7 @@ export class UserInfoState {
   mindDiseases: string = "";
   drugUse: string = "";
   addiction: string = "";
+  siblingDiseases: string = "";
   isFatherAlive: boolean | undefined = undefined;
   isMotherAlive: boolean | undefined = undefined;
   fatherDeathReason: string = "";
@@ -83,6 +86,9 @@ export class UserInfoState {
   cousinMarriage: boolean | undefined = undefined;
   siblingsPosition: string = "";
   siblings: string = "";
+  setSiblingDiseases(siblingDiseases: string) {
+    this.siblingDiseases = siblingDiseases;
+  }
   setFirstName(firstName: string) {
     this.firstName = firstName;
   }
@@ -206,7 +212,7 @@ export class UserInfoState {
       return;
     }
     if (religion === "islamSunny") {
-      this.religion= "islamSunny";
+      this.religion = "islamSunny";
       return;
     }
     if (religion === "zoroastrianism") {
