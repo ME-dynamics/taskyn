@@ -1,3 +1,4 @@
+import { toGregorian } from "jalaali-js";
 import { fetchCreatePatient, fetchUpdateUser } from "../adapters";
 import { userInfoState } from "../entities";
 
@@ -49,14 +50,22 @@ export async function updateUserProfile() {
     siblingsPosition: userInfoState.siblingsPosition,
     siblings: userInfoState.siblings,
   });
+  const [year, month, day] = userInfoState.birthday.split("-");
+  const birthDate = toGregorian(
+    parseInt(year, 10),
+    parseInt(month, 10),
+    parseInt(day, 10)
+  );
   const { error: userError, user } = await fetchUpdateUser({
     firstName: userInfoState.firstName,
     lastName: userInfoState.lastName,
     address: userInfoState.address,
     telephone: userInfoState.telephone,
-    birthday: new Date().toISOString(),
+    birthday: new Date(
+      `${birthDate.gy}-${birthDate.gm}-${birthDate.gd}`
+    ).toISOString(),
     gender: userInfoState.gender,
   });
-  console.log(error, patient);
-  console.log(userError, user);
+  // console.log(error, patient);
+  // console.log(userError, user);
 }
