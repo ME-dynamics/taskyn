@@ -34,10 +34,12 @@ export async function fetchPasswordlessStart(
     return {
       error: error || "",
       otpToken: "",
+      deviceId: "",
     };
   }
   return {
     otpToken: toString(payload?.otpToken),
+    deviceId: toString(payload?.deviceId),
     error: "",
   };
 }

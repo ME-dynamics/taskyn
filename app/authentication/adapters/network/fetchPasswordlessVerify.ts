@@ -1,13 +1,15 @@
 import { request, toString } from "../../../library";
 import { authState } from "../../entities";
 import { adapterTypes } from "../../types";
+import { storage } from "../../../library";
 export async function fetchPasswordlessVerify(
   otpNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
+  const deviceId = storage.retrieve("device_id", "string");
   const { success, payload, error } = await request({
     endpoint: "/authnz/passwordless/verify",
     method: "POST",
-    body: { otpCode: otpNumber, otpToken: authState.otpToken },
+    body: { otpCode: otpNumber, otpToken: authState.otpToken, deviceId },
   });
   if (!success) {
     return {
