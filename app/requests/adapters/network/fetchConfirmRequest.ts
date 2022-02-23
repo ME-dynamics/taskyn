@@ -7,7 +7,7 @@ export async function fetchConfirmRequest(
   customerId: string
 ): Promise<IFetchConfirmRequestResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/provider/requests/confirm",
+    endpoint: "/business/requests/confirm",
     body: {
       customerId,
     },

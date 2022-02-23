@@ -9,7 +9,7 @@ export async function fetchCreateNote(
 ): Promise<IFetchCreateNoteResult> {
   const { content, customerId, imageIds, title } = args;
   const { success, error, payload, httpStatus } = await request({
-    endpoint: "/provider/notes",
+    endpoint: "/notes",
     method: "POST",
     body: {
       customerId,

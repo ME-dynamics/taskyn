@@ -4,7 +4,7 @@ import type { ICustomer, IFetchGetRequests } from "../../types";
 
 export async function fetchGetCustomers(): Promise<IFetchGetRequests> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/provider/customers",
+    endpoint: "/business/customers",
     method: "GET",
     body: undefined,
   });

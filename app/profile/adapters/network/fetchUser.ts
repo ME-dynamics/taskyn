@@ -3,7 +3,7 @@ import { parseUser } from "../utils";
 
 export async function fetchUser() {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/users/",
+    endpoint: "/users",
     method: "GET",
     body: undefined,
   });

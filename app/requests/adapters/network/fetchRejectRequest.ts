@@ -6,7 +6,7 @@ export async function fetchRejectRequest(
   customerId: string
 ): Promise<IFetchRejectRequestResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: `/provider/requests/reject/${customerId}`,
+    endpoint: `/business/requests/reject/${customerId}`,
     method: "DELETE",
     body: undefined,
   });

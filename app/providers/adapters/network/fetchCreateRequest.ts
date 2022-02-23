@@ -7,7 +7,7 @@ export async function fetchCreateRequest(
   providerId: string
 ): Promise<IFetchCreateRequestResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/customer/requests",
+    endpoint: "/business/requests",
     method: "POST",
     body: {
       providerId,

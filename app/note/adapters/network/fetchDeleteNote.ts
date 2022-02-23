@@ -4,7 +4,7 @@ import type { IFetchDeleteNote } from "../../types";
 
 export async function fetchDeleteNote(id: string): Promise<IFetchDeleteNote> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: `/provider/notes/${id}`,
+    endpoint: `/notes/${id}`,
     method: "DELETE",
     body: undefined,
   });

@@ -7,7 +7,7 @@ export async function fetchRefresh(
 ): Promise<adapterTypes.IFetchRefreshResult> {
   const { userId } = args;
   const { success, httpStatus, payload, error } = await request({
-    endpoint: "/refresh",
+    endpoint: "/authnz/refresh",
     method: "POST",
     body: {
       userId,

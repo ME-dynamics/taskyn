@@ -8,7 +8,7 @@ export async function fetchGetNotes(
   customerId: string
 ): Promise<IFetchGetNotesResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: `/provider/notes/${customerId}`,
+    endpoint: `/notes/${customerId}`,
     method: "GET",
     body: undefined,
   });

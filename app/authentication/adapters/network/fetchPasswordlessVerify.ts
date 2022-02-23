@@ -5,7 +5,7 @@ export async function fetchPasswordlessVerify(
   otpNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
   const { success, payload, error } = await request({
-    endpoint: "/passwordless/verify",
+    endpoint: "/authnz/passwordless/verify",
     method: "POST",
     body: { otpCode: otpNumber, otpToken: authState.otpToken },
   });

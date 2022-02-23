@@ -2,7 +2,7 @@ import { request, toString } from "../../../library";
 import { IFetchProviderInfoResult } from "../../types";
 export async function fetchProviderInfo(): Promise<IFetchProviderInfoResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/customer/providers",
+    endpoint: "/business/providers",
     method: "GET",
     body: undefined,
   });

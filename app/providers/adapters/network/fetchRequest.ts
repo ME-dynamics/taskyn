@@ -5,7 +5,7 @@ import type { IFetchRequestResult } from "../../types";
 
 export async function fetchRequest(): Promise<IFetchRequestResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/customer/requests",
+    endpoint: "/business/requests",
     method: "GET",
     body: undefined,
   });
