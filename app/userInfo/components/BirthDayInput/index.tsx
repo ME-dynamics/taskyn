@@ -1,28 +1,50 @@
+import React, { useState } from "react";
 import { View } from "react-native";
-import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
+import { digitsFaToEn } from "@persian-tools/persian-tools";
 import { Input, Subheading } from "../../../library";
 import { userInfoState } from "../../entities";
 
 import { styles } from "./styles";
 import type { IBirthDayInputProps } from "../../types";
 function BirthDayInputComponent(props: IBirthDayInputProps) {
-  const { onBirthdayChange } = props;
+  const { editable } = props;
   const [activeBorder, setActiveBorder] = useState({
     day: false,
     month: false,
     year: false,
   });
-  const [year, month, day] = toJS(userInfoState.birthday.split("-")); // TODO: write a parser for this
-  const [birthDay, setBirthDay] = useState({ day, month, year });
-  useEffect(() => {
-    const { day, month, year } = birthDay;
-    if (day && month && year) {
-      // console.log("birthday", `${year}-${month}-${day}`);
-      onBirthdayChange(birthDay);
+
+  function setDay(text: string) {
+    const day = parseInt(digitsFaToEn(text), 10);
+    if (isNaN(day)) {
+      const prevBirthday = userInfoState.birthday;
+      userInfoState.setBirthday({ ...prevBirthday, day: 0 });
+      return;
     }
-  }, [birthDay]);
+    const prevBirthday = userInfoState.birthday;
+    userInfoState.setBirthday({ ...prevBirthday, day });
+  }
+  function setMonth(text: string) {
+    const month = parseInt(digitsFaToEn(text), 10);
+    if (isNaN(month)) {
+      const prevBirthday = userInfoState.birthday;
+      userInfoState.setBirthday({ ...prevBirthday, month: 0 });
+      return;
+    }
+    const prevBirthday = userInfoState.birthday;
+    userInfoState.setBirthday({ ...prevBirthday, month });
+  }
+  function setYear(text: string) {
+    const year = parseInt(digitsFaToEn(text), 10);
+    if (isNaN(year)) {
+      const prevBirthday = userInfoState.birthday;
+      userInfoState.setBirthday({ ...prevBirthday, year: 0 });
+      return;
+    }
+    const prevBirthday = userInfoState.birthday;
+    userInfoState.setBirthday({ ...prevBirthday, year });
+  }
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -31,70 +53,90 @@ function BirthDayInputComponent(props: IBirthDayInputProps) {
       <View
         style={[
           styles.dayInput,
-          activeBorder.day ? styles.activeBorder : styles.deActiveBorder,
+          !!userInfoState.birthday.day || activeBorder.day
+            ? styles.activeBorder
+            : styles.deActiveBorder,
         ]}
       >
         <Input
           mode={"no-style"}
           style={{ textAlign: "center" }}
           placeholder={"روز"}
-          value={birthDay.day}
-          onChangeText={(text) => {
-            setBirthDay({ ...birthDay, day: text });
-          }}
+          value={`${
+            userInfoState.birthday.day === 0 ? "" : userInfoState.birthday.day
+          }`}
+          onChangeText={setDay}
           maxLength={2}
           onFocus={() => {
             setActiveBorder({ ...activeBorder, day: true });
           }}
           onBlur={() => {
-            setActiveBorder({ ...activeBorder, day: false });
+            setActiveBorder({
+              ...activeBorder,
+              day: false,
+            });
           }}
+          editable={editable}
         />
       </View>
       <View
         style={[
           styles.monthInput,
-          activeBorder.month ? styles.activeBorder : styles.deActiveBorder,
+          !!userInfoState.birthday.month || activeBorder.month
+            ? styles.activeBorder
+            : styles.deActiveBorder,
         ]}
       >
         <Input
           mode={"no-style"}
           placeholder={"ماه"}
           style={{ textAlign: "center" }}
-          value={birthDay.month}
-          onChangeText={(text) => {
-            setBirthDay({ ...birthDay, month: text });
-          }}
+          value={`${
+            userInfoState.birthday.month === 0
+              ? ""
+              : userInfoState.birthday.month
+          }`}
+          onChangeText={setMonth}
           maxLength={2}
           onFocus={() => {
             setActiveBorder({ ...activeBorder, month: true });
           }}
           onBlur={() => {
-            setActiveBorder({ ...activeBorder, month: false });
+            setActiveBorder({
+              ...activeBorder,
+              month: false,
+            });
           }}
+          editable={editable}
         />
       </View>
       <View
         style={[
           styles.yearInput,
-          activeBorder.year ? styles.activeBorder : styles.deActiveBorder,
+          !!userInfoState.birthday.year || activeBorder.year
+            ? styles.activeBorder
+            : styles.deActiveBorder,
         ]}
       >
         <Input
           mode={"no-style"}
-          value={birthDay.year}
+          value={`${
+            userInfoState.birthday.year === 0 ? "" : userInfoState.birthday.year
+          }`}
           placeholder={"سال"}
           style={{ textAlign: "center" }}
-          onChangeText={(text) => {
-            setBirthDay({ ...birthDay, year: text });
-          }}
+          onChangeText={setYear}
           maxLength={4}
           onFocus={() => {
             setActiveBorder({ ...activeBorder, year: true });
           }}
           onBlur={() => {
-            setActiveBorder({ ...activeBorder, year: false });
+            setActiveBorder({
+              ...activeBorder,
+              year: false,
+            });
           }}
+          editable={editable}
         />
       </View>
     </View>
