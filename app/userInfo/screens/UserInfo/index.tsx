@@ -161,13 +161,7 @@ function UserInfoScreen() {
             userInfoState.setProblemDescription(text);
           }}
         />
-        <BirthDayInput
-          onBirthdayChange={(birthDay: IBirthDay) => {
-            userInfoState.setBirthday(
-              `${birthDay.day}-${birthDay.month}-${birthDay.year}`
-            );
-          }}
-        />
+        <BirthDayInput editable={editable} />
         <TwoChoice
           title={"جنسیت:"}
           choiceState={userInfoState.genderPersianText}
@@ -179,6 +173,7 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setGender("female");
           }}
+          editable={editable}
         />
         <TwoChoice
           title={"وضعیت تاهل:"}
@@ -191,6 +186,7 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setMaritalStatus("engaged");
           }}
+          editable={editable}
         />
         <ScrollPicker
           title={"وضعیت تاهل"}
@@ -208,6 +204,7 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setMaritalState(item.key);
           }}
+          editable={editable}
         />
         <ScrollPicker
           title={"تحصیلات"}
@@ -230,6 +227,7 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setEducation(item.key);
           }}
+          editable={editable}
         />
         {userInfoState.education === "student" ||
         userInfoState.education === "graduate" ? (
@@ -257,6 +255,7 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setReligion(item.key);
           }}
+          editable={editable}
         />
         <Input
           editable={editable}
@@ -350,6 +349,7 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setIsFatherAlive(false);
           }}
+          editable={editable}
         />
         {userInfoState.isFatherAlive === false ? (
           <Input
@@ -361,6 +361,7 @@ function UserInfoScreen() {
             onChangeText={(text) => {
               userInfoState.setFatherDeathReason(text);
             }}
+
           />
         ) : null}
         <TwoChoice
@@ -374,6 +375,8 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setIsMotherAlive(false);
           }}
+          editable={editable}
+
         />
         {userInfoState.isMotherAlive === false ? (
           <Input
@@ -385,6 +388,7 @@ function UserInfoScreen() {
             onChangeText={(text) => {
               userInfoState.setMotherDeathReason(text);
             }}
+
           />
         ) : null}
         <TwoChoice
@@ -398,6 +402,8 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setCousinMarriage(false);
           }}
+          editable={editable}
+
         />
         <Input
           editable={editable}
@@ -410,6 +416,7 @@ function UserInfoScreen() {
           onChangeText={(text) => {
             userInfoState.setSiblingsPosition(text);
           }}
+
         />
         <Input
           editable={editable}
