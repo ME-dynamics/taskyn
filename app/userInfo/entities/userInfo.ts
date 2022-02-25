@@ -1,5 +1,11 @@
 import { observable, action, makeObservable, computed } from "mobx";
-import { tMaritalStatus, tMaritalState, tEducation, tReligion } from "../types";
+import type {
+  tMaritalStatus,
+  tMaritalState,
+  tEducation,
+  tReligion,
+  IBirthDay,
+} from "../types";
 
 export class UserInfoState {
   constructor() {
@@ -63,7 +69,11 @@ export class UserInfoState {
   }
   firstName: string = "";
   lastName: string = "";
-  birthday: string = ""; // TODO: birthday should be a Date object
+  birthday: IBirthDay = {
+    day: 0,
+    month: 0,
+    year: 0,
+  }; // TODO: birthday should be a Date object
   problemDescription: string = "";
   gender: "male" | "female" | undefined = undefined;
   address: string = "";
@@ -95,7 +105,7 @@ export class UserInfoState {
   setLastName(lastName: string) {
     this.lastName = lastName;
   }
-  setBirthday(birthday: string) {
+  setBirthday(birthday: IBirthDay) {
     this.birthday = birthday;
   }
   setProblemDescription(problemDescription: string) {
