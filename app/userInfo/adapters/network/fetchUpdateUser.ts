@@ -1,8 +1,9 @@
 import { request } from "../../../library";
 
-import { IUser } from "../../types";
+import { IUpdateUser } from "../../types";
 
-export async function fetchUpdateUser(body: IUser,customerId: String) {
+
+export async function fetchUpdateUser(body: IUpdateUser,customerId: String) {
   const { success, error, httpStatus, payload } = await request({
     endpoint: `/users/${customerId}`,
     method: "PUT",
