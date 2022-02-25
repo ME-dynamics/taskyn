@@ -58,21 +58,15 @@ export async function updateUserProfile(customerId: string) {
     },
     customerId
   );
-  const [year, month, day] = userInfoState.birthday.split("-");
-  const birthDate = toGregorian(
-    parseInt(year, 10),
-    parseInt(month, 10),
-    parseInt(day, 10)
-  );
+  const { year, month, day } = userInfoState.birthday;
+  const { gy, gm, gd } = toGregorian(year, month, day);
   const { error: userError, user } = await fetchUpdateUser(
     {
       firstName: userInfoState.firstName,
       lastName: userInfoState.lastName,
       address: userInfoState.address,
       telephone: userInfoState.telephone,
-      birthday:  new Date(
-        `${birthDate.gy}-${birthDate.gm}-${birthDate.gd}`
-      ).toISOString(),
+      birthday: new Date(`${gy}-${gm}-${gd}`).toISOString(),
       gender: userInfoState.gender,
     },
     customerId
