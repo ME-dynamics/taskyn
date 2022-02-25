@@ -1,4 +1,4 @@
-import { request, toString } from "../../../library";
+import { request, storage, toString } from "../../../library";
 import { adapterTypes } from "../../types";
 import * as Device from "expo-device"; // TODO: move data to usecase
 import { Platform } from "react-native";
@@ -6,12 +6,13 @@ import { nanoid } from "nanoid";
 export async function fetchPasswordlessStart(
   phoneNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessStartResult> {
+  const deviceUniqueId = storage.retrieve("device_id", "string");
   const { success, httpStatus, payload, error } = await request({
     endpoint: "/authnz/passwordless/start",
     method: "POST",
     body: {
       phoneNumber,
-      deviceUniqueId: nanoid(64), ////
+      deviceUniqueId: deviceUniqueId || nanoid(64), ////
       isDevice: Device.isDevice,
       platform: Platform.OS, ////
       brand: Device.brand,
