@@ -11,6 +11,7 @@ export class InputState {
       setOtpNumber: action,
       setPhoneValidation: action,
       setOtpValidation: action,
+      reset: action,
     });
   }
   phoneNumber: string = "";
@@ -28,5 +29,11 @@ export class InputState {
   }
   setOtpValidation(validation: string[]) {
     this.otpValidation = validation;
+  }
+  reset() {
+    this.phoneNumber = "";
+    this.otpNumber = "";
+    this.phoneValidation = [];
+    this.otpValidation = [];
   }
 }

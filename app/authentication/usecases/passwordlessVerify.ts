@@ -39,5 +39,5 @@ export async function passwordlessVerify() {
   } else {
     authState.setRole("customer");
   }
-  inputState.setOtpNumber("");
+  inputState.reset();
 }
