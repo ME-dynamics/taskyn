@@ -19,6 +19,7 @@ function PickImageSheetComponent() {
         Icon={({ size, color }) => {
           return <TaskynIcon name={"camera"} size={size} color={color} />;
         }}
+        onPress={() => uploadProfilePicture("camera")}
       >
         {"عکس از دوربین"}
       </Button>
@@ -29,7 +30,7 @@ function PickImageSheetComponent() {
         Icon={({ size, color }) => {
           return <TaskynIcon name={"image"} size={size} color={color} />;
         }}
-        onPress={uploadProfilePicture}
+        onPress={() => uploadProfilePicture("gallery")}
       >
         {"عکس از گالری"}
       </Button>
