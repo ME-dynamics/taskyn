@@ -1,4 +1,4 @@
-import React, { Ref } from "react";
+import React, { forwardRef, Ref } from "react";
 import { StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
@@ -34,4 +34,4 @@ function TouchableComponent(props: ITouchableProps, ref: Ref<RectButton>) {
   );
 }
 
-export const Touchable = observer(TouchableComponent, { forwardRef: true });
+export const Touchable = observer(forwardRef(TouchableComponent));

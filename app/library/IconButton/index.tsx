@@ -1,8 +1,8 @@
-import React, { Ref } from "react";
+import React, { forwardRef, Ref } from "react";
 import { View } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { observer } from "mobx-react-lite";
-import { useDoublePress } from "../doublePress"
+import { useDoublePress } from "../doublePress";
 import { iconStyleGen } from "./styles";
 
 import { IIconButtonProps } from "./types";
@@ -31,6 +31,4 @@ function IconButtonComponent(
   );
 }
 
-export const IconButton = observer(IconButtonComponent, {
-  forwardRef: true,
-});
+export const IconButton = observer(forwardRef(IconButtonComponent));
