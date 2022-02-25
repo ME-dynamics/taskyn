@@ -14,9 +14,10 @@ function TwoChoiceComponent(props: ITwoChoiceProps) {
     secondChoice,
     onFirstChoicePress,
     onSecondChoicePress,
+    editable,
   } = props;
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents={editable ? "auto" : "none"}>
       <Subheading>{title}</Subheading>
       <View style={styles.selectButtonContainer}>
         <SelectButton

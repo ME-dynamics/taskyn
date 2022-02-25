@@ -8,7 +8,7 @@ import { styles } from "./styles";
 import { IScrollPickerProps, IScrollPickerItem } from "../../types";
 
 function ScrollPickerComponent(props: IScrollPickerProps) {
-  const { title, items, itemKey, onItemSelected } = props;
+  const { title, items, itemKey, onItemSelected, editable } = props;
   const scrollRef = useRef<tScrollerRef>(null);
   const selectedRef = useRef<View>(null);
   const [rendered, setRendered] = useState<boolean>(false);
@@ -69,7 +69,7 @@ function ScrollPickerComponent(props: IScrollPickerProps) {
     return components;
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents={editable ? "auto" : "none"}>
       <View style={styles.titleContainer}>
         <Subheading>{formatTitle()}</Subheading>
       </View>
