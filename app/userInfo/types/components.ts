@@ -5,6 +5,7 @@ export interface ITwoChoiceProps {
   choiceState: string | undefined;
   onFirstChoicePress: () => void;
   onSecondChoicePress: () => void;
+  editable?: boolean;
 }
 
 export interface IDropPickerProps {
@@ -23,9 +24,10 @@ export interface IScrollPickerProps {
   itemKey: string | undefined;
   items: IScrollPickerItem[];
   onItemSelected: (item: IScrollPickerItem) => void;
+  editable?: boolean;
 }
 export interface IBirthDayInputProps {
-  onBirthdayChange: (value: IBirthDay) => void;
+  editable?: boolean;
 }
 export interface IBirthDay {
   day: string;

@@ -4,6 +4,7 @@ import {
   tEducation,
   tReligion,
   tGender,
+  IBirthDay,
 } from "./entities";
 
 export interface IPatient {
@@ -28,6 +29,10 @@ export interface IPatient {
   siblings: string;
 }
 
+export interface IUpdateUser extends Omit<IUser, "birthday"> {
+  birthday: string;
+}
+
 export interface IFetchCreatePatientResult {
   error: string;
   patient: IPatient;
@@ -39,5 +44,5 @@ export interface IUser {
   address: string;
   telephone: string;
   gender: tGender;
-  birthday: string;
+  birthday: IBirthDay;
 }

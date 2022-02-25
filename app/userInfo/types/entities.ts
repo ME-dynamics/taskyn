@@ -32,12 +32,17 @@ export type tReligion =
   | "christianity"
   | "other";
 
+export interface IBirthDay {
+  day: number;
+  month: number;
+  year: number;
+}
 export interface IUserInfo {
   firstName: string | undefined;
   lastName: string | undefined;
   description: string | undefined;
   gender: tGender | undefined;
-  birthday: Date | undefined;
+  birthday: IBirthDay;
   address: string | undefined;
   telephone: string | undefined;
   problemDescription: string | undefined;
