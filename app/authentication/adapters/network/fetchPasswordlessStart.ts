@@ -6,13 +6,18 @@ import { nanoid } from "nanoid";
 export async function fetchPasswordlessStart(
   phoneNumber: string
 ): Promise<adapterTypes.IFetchPasswordlessStartResult> {
-  const deviceUniqueId = storage.retrieve("device_id", "string");
+  const deviceUniqueId = storage.retrieve("device_unique_id", "string");
+  let nid: string = "";
+  if (!deviceUniqueId) {
+    nid = nanoid(64);
+    storage.add("device_unique_id", nid);
+  }
   const { success, httpStatus, payload, error } = await request({
     endpoint: "/authnz/passwordless/start",
     method: "POST",
     body: {
       phoneNumber,
-      deviceUniqueId: deviceUniqueId || nanoid(64), ////
+      deviceUniqueId: deviceUniqueId || nid, ////
       isDevice: Device.isDevice,
       platform: Platform.OS, ////
       brand: Device.brand,
