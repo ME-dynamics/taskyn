@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  noCustomersFound: {
+    width: "100%",
+    marginTop: 64,
+    textAlign: "center",
+  },
   searchBarContainer: {
     width: widthPercentageToDP("100"),
     height: heightPercentageToDP("10"),

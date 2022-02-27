@@ -12,23 +12,29 @@ import { customerState } from "../../entities";
 import { CustomerCard, RequestCard } from "../../components";
 import { styles } from "./styles";
 import { retrieveCustomers } from "../../usecases";
+import { useIsFocused } from "@react-navigation/native";
 
 function CustomersScreen() {
+  const isFocused = useIsFocused();
   const [loading, setLoading] = useState<boolean>(true);
   async function init() {
     await retrieveCustomers();
     setLoading(false);
   }
   useEffect(() => {
-    init();
-  }, []);
+    if (isFocused) {
+      init();
+    }
+  }, [isFocused]);
   function renderCustomers() {
     const customers: JSX.Element[] = [];
     const length = customerState.customers.length;
     if (length === 0) {
       // TODO: convert styles to inline styles
       return (
-        <Subheading style={{ width: "100%", marginTop: 64, textAlign: "center" }}>
+        <Subheading
+          style={styles.noCustomersFound}
+        >
           {"مراجعی یافت نشد!"}
         </Subheading>
       );
