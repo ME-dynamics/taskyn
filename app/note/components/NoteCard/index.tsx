@@ -42,7 +42,7 @@ function NoteCardComponent(props: INoteProps) {
         <View style={styles.descriptionContainer}>
           <Paragraph
             numberOfLines={1}
-            style={{ color: THEME.COLORS.GREY.DARK }}
+            style={{ color: THEME.COLORS.GREY.DARK, textAlign: "right" }}
           >
             {description}
           </Paragraph>

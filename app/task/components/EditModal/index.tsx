@@ -28,8 +28,8 @@ function EditModalComponent(props: IEditModalProps) {
     <BottomSheetView style={styles.container}>
       <Input
         value={tempContent}
-        title={""}
-        mode={"raw"}
+        mode={"no-style"}
+        style={{paddingRight:10,}}
         placeholder={"موضوع تمرین را بنویسید ..."}
         multiline={true}
         onChangeText={(text) => setTempContent(text)}

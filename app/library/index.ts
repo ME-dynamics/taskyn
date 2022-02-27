@@ -21,5 +21,5 @@ export { SelectButton } from "./SelectButton";
 export { TaskynIcon } from "./TaskynIcon";
 export { Timer } from "./Timer";
 export { CustomBackdrop } from "./CustomBackdrop";
-
-export * from "./events"
+export { Avatar } from "./Avatar";
+export * from "./events";
