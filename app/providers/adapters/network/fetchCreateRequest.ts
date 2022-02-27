@@ -16,11 +16,13 @@ export async function fetchCreateRequest(
   if (!success) {
     return {
       error,
+      nameMustBeDefined: httpStatus === 400,
       request: undefined,
     };
   }
   return {
     error: "",
+    nameMustBeDefined: false,
     request: parseRequest(payload),
   };
 }
