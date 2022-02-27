@@ -1,16 +1,16 @@
 import { request } from "../../../library";
 import { parseTest } from "../utils";
 
-export async function fetchBeckDepressionII() {
+export async function fetchTestById(testId:string) {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/tests/beckDepressionII",
+    endpoint: `/tests/${testId}`,
     method: "GET",
     body: undefined,
   });
   if (!success || !payload) {
     return {
       error,
-      beckDepressionII: {
+      tests: {
         id: "",
         title: {
           fa: "",
@@ -23,6 +23,6 @@ export async function fetchBeckDepressionII() {
   }
   return {
     error: "",
-    beckDepressionII: parseTest(payload),
+    tests: parseTest(payload),
   };
 }
