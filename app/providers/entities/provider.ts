@@ -7,6 +7,8 @@ export class ProviderState {
       providers: observable,
       myProvider: observable,
       requestConfirmed: observable,
+      setRemoveRequest: action,
+      setRemoveProvider: action,
       setProviders: action,
       setMyProvider: action,
       setRequestConfirmed: action,
@@ -23,5 +25,13 @@ export class ProviderState {
   }
   setRequestConfirmed(request: boolean) {
     this.requestConfirmed = request;
+  }
+  setRemoveRequest() {
+    this.myProvider = undefined;
+    this.requestConfirmed = false;
+  }
+  setRemoveProvider() {
+    this.myProvider = undefined;
+    this.requestConfirmed = false;
   }
 }

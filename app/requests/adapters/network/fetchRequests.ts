@@ -4,7 +4,7 @@ import type { IFetchRequestsResult, IRequest } from "../../types";
 
 export async function fetchRequests(): Promise<IFetchRequestsResult> {
   const { success, error, httpStatus, payload } = await request({
-    endpoint: "/business/requests",
+    endpoint: "/business/requests/provider",
     method: "GET",
     body: undefined,
   });

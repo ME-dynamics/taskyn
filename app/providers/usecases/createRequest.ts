@@ -2,9 +2,14 @@ import { fetchCreateRequest, fetchProvider } from "../adapters";
 import { providerState } from "../entities";
 
 export async function createRequest(providerId: string) {
-  const { error: createRequestError, request } = await fetchCreateRequest(
-    providerId
-  );
+  const {
+    error: createRequestError,
+    request,
+    nameMustBeDefined,
+  } = await fetchCreateRequest(providerId);
+  if (nameMustBeDefined) {
+    return nameMustBeDefined;
+  }
   if (createRequestError || !request) {
     return;
   }

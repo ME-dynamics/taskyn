@@ -3,13 +3,14 @@ import { parseTestHistory } from "../utils";
 
 export async function fetchGetTestData(customerId: string) {
   const { error, httpStatus, payload, success } = await request({
-    endpoint: `/formData/${customerId}`,
+    endpoint: `/tests/testHistory/${customerId}`,
     method: "GET",
     body: undefined,
   });
   if (!success || !Array.isArray(payload)) {
     return {
       error,
+      testHistory: [],
     };
   }
   const testHistory = [];
@@ -17,9 +18,8 @@ export async function fetchGetTestData(customerId: string) {
     const item = payload[index];
     testHistory.push(parseTestHistory(item));
   }
-  const TestHistory = Array.isArray(payload) ? payload : [];
   return {
-    error: undefined,
-    TestHistory: testHistory,
+    error: "",
+    testHistory,
   };
 }

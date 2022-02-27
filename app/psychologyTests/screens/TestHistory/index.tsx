@@ -9,26 +9,29 @@ import { TestResultHistoryCard, TextIcon } from "../../components";
 import { styles, iconButtonColor } from "./styles";
 import { retiriveTestHistory } from "../../usecases";
 import { mbtiState, testHistoryState } from "../../entities";
+import ColorHash from "color-hash";
 
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   function renderTestResultCard() {
     const result: JSX.Element[] = [];
+    const colorHash = new ColorHash();
     for (let index = 0; index < testHistoryState.testHistory.length; index++) {
-      const { createdAt, description, id, title } =
+      const { createdAt, enName, faName, id, shortName } =
         testHistoryState.testHistory[index];
+
+      const labelColor = colorHash.hex(shortName);
+
       result.push(
         <TestResultHistoryCard
           key={id}
           id={id}
-          Icon={() => <TextIcon label={title} labelColor={"red"} />}
-          title={title}
-          description={description}
-          date={createdAt}
+          Icon={() => <TextIcon label={shortName} labelColor={labelColor} />}
+          enName={enName}
+          faName={faName}
+          createdAt={createdAt}
           onPress={() => {
-            //@ts-expect-error
-            mbtiState.setMbtiResult(testHistoryState.testHistory[index].result); //TODO: remove this line
-            navigation.push("testResultScreen");
+            navigation.push("testResultScreen", { id, mode: "testHistory" });
           }}
         />
       );

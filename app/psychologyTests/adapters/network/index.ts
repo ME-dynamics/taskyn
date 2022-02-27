@@ -1,7 +1,5 @@
 export { fetchTests } from "./fetchTests";
-export { fetchMBTI } from "./fetchMBTI";
-export { fetchBeckAnxiety } from "./fetchBeckAnxiety";
-export { fetchBeckDepressionII } from "./fetchBeckDepressionII";
-export { fetchCreateMbti } from "./fetchCreateMbti";
-export { fetchGetTestData } from "./fetchGetTestData";
+export { fetchTestById } from "./fetchTestById";
 export { fetchGetTestResultById } from "./fetchGetTestResultById";
+export { fetchOnSubmitTest } from "./fetchOnSubmitTest";
+export { fetchGetTestData } from "./fetchGetTestData";

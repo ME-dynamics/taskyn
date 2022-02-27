@@ -38,10 +38,10 @@ export interface ITestHistoryCardProps {
 export interface ITestResultHistoryCardProps {
   id: string;
   Icon: () => ReactElement;
-  title: string;
-  description: string;
+  faName: string;
+  enName: string;
   onPress?: (id: string) => any;
-  date: string;
+  createdAt: string;
 }
 export interface ITestResultProps {
   faName: string;
@@ -49,6 +49,6 @@ export interface ITestResultProps {
   variable: string;
   rawScore: number;
   baseRate: number;
-  sideColor: string;
+  type: "factor" | "facet" | "error" | "warning";
   interpret: string;
 }

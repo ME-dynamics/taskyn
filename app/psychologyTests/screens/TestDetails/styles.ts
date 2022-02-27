@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   descriptionContainer: {
     width: "100%",
-    minHeight: 70,
+    minHeight: 260,
     paddingHorizontal: 16,
     paddingBottom: 10,
   },
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     zIndex: 0,
   },
 });

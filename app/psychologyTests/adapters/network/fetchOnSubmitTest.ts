@@ -1,14 +1,14 @@
 import { request } from "../../../library";
-import { IFetchGetTestResultById } from "../../types";
 import { parseTestResult } from "../utils";
 
-export async function fetchGetTestResultById(
-  testId: string
-): Promise<IFetchGetTestResultById> {
+export async function fetchOnSubmitTest(
+  testId: string,
+  fields: Record<string, number>
+) {
   const { error, httpStatus, payload, success } = await request({
-    endpoint: `/tests/testResult/${testId}/`,
-    method: "GET",
-    body: undefined,
+    endpoint: "/tests",
+    method: "POST",
+    body: { testId, fields, gender: "male" },
   });
   if (!success || !payload) {
     return {
@@ -18,15 +18,15 @@ export async function fetchGetTestResultById(
   }
   const testResult = [];
   // console.log("payload", payload.results);
-  //TODO: refactor
   const length = Array.isArray(payload?.results) ? payload?.results.length : 0;
   const results = Array.isArray(payload?.results) ? payload?.results : [];
   for (let index = 0; index < length; index++) {
     const element = results[index];
     testResult.push(parseTestResult(element));
   }
+
   return {
-    error,
+    error: "",
     testResult,
   };
 }

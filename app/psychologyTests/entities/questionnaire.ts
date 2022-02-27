@@ -11,11 +11,11 @@ export class QuestionnaireState {
     });
   }
   currentQuestion: number = 1;
-  answers: Record<string, string> = {};
+  answers: Record<string, number> = {};
   setCurrentQuestion(currentQuestion: number) {
     this.currentQuestion = currentQuestion;
   }
-  setAnswer(question: number, answer: string) {
+  setAnswer(question: number, answer: number) {
     this.answers[`${question}`] = answer;
   }
   reset() {

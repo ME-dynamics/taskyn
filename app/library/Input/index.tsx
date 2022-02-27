@@ -125,7 +125,7 @@ function InputComponent(props: IInputProps) {
     }
   }
   function renderTitle() {
-    if(isNoStyle) return null;
+    if (isNoStyle) return null;
     if (isRaw) {
       if (focused || value) {
         return null;
@@ -181,7 +181,7 @@ function InputComponent(props: IInputProps) {
   }
 
   function renderLimit() {
-    if(isRaw || isNoStyle) return null;
+    if (isRaw || isNoStyle) return null;
     if (!limit) {
       return null;
     }
@@ -218,10 +218,13 @@ function InputComponent(props: IInputProps) {
       );
     }
   }
-  
+
   const tap = Gesture.Tap().onEnd(onPress);
   function renderPlaceHolder() {
-    if (mode === "with-label" || focused || isRaw || isNoStyle) {
+    if (isRaw && focused) {
+      return placeholder;
+    }
+    if (mode === "with-label" || focused || isNoStyle) {
       return placeholder;
     }
     return undefined;

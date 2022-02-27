@@ -1,19 +1,65 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Paragraph, TaskynIcon } from "../../../library";
-import { createRequest } from "../../usecases";
+import {
+  Button,
+  Caption,
+  CustomBackdrop,
+  Paragraph,
+  TaskynIcon,
+} from "../../../library";
+import { createRequest, removeProvider, removeRequest } from "../../usecases";
 
 import { styles, iconColor } from "./styles";
 import { IProviderCardProps } from "../../types";
+import { providerState } from "../../entities";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { SuccessAlert } from "../../../library/SuccessAlert";
 
 function ProviderCardComponent(props: IProviderCardProps) {
-  // @ts-expect-error
   const { id, fullName, profileImageUrl, description, myDoctor } = props;
+  const snapPointsModal = useMemo(() => [150, 180], []);
+  const BottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const close = useCallback(() => {
+    BottomSheetModalRef.current?.close();
+  }, []);
+  const onCollapsePressModal = useCallback(() => {
+    BottomSheetModalRef.current?.present();
+  }, []);
+  function buttonMode() {
+    if (myDoctor === false) {
+      return requestText;
+    }
+    if (myDoctor && providerState.requestConfirmed === false) {
+      return cancelRequestText;
+    }
+    if (myDoctor && providerState.requestConfirmed) {
+      return cancelConnectionText;
+    }
+    return "";
+  }
+  const requestText = "درخواست اتصال";
+  const cancelRequestText = "لغو درخواست";
+  const cancelConnectionText = "لغو اتصال";
+
+  // const providerConnection = providerState.requestConfirmed
+  //   ? cancelConnectionText
+  //   : cancelRequestText;
   const [loading, setLoading] = useState<boolean>(false);
-  async function onCreateRequest() {
+  async function onPress() {
+    const mode = buttonMode();
     setLoading(true);
-    await createRequest(id);
+    if (mode === requestText) {
+      const nameMustBeDefined = await createRequest(id);
+      if (nameMustBeDefined) {
+        onCollapsePressModal();
+      }
+    } else if (mode === cancelRequestText) {
+      await removeRequest();
+    } else if (mode === cancelConnectionText) {
+      await removeProvider(id);
+    }
+    // myDoctor ? await removeRequest() : await createRequest(id);
     setLoading(false);
   }
   function renderAvatar() {
@@ -24,8 +70,6 @@ function ProviderCardComponent(props: IProviderCardProps) {
     }
     return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;
   }
-  const requestText = "درخواست اتصال";
-  const cancelRequestText = "لغو اتصال"
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -41,14 +85,30 @@ function ProviderCardComponent(props: IProviderCardProps) {
             mode={"contained"}
             rippleColor={"lightGrey"}
             size={"extra-small"}
+            disabled={providerState.requestConfirmed && myDoctor === false}
             fullRadius
             loading={loading}
-            onPress={onCreateRequest}
+            onPress={onPress}
           >
-            {myDoctor ? cancelRequestText : requestText}
+            {buttonMode()}
           </Button>
         }
       </View>
+      <BottomSheetModal
+        ref={BottomSheetModalRef}
+        snapPoints={snapPointsModal}
+        backdropComponent={CustomBackdrop}
+        detached={true}
+        bottomInset={250}
+        style={styles.modal}
+        index={1}
+        enablePanDownToClose
+      >
+        <SuccessAlert
+          onClosePress={close}
+          title={"در بخش پروفایل و یا پرونده بیمار، اسم خود را وارد کنید"}
+        />
+      </BottomSheetModal>
     </View>
   );
 }

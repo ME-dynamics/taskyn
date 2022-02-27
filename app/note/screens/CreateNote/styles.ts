@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   imageListContainer: {
     flex: 9,
+    bottom: 6,
     paddingBottom: 8,
     paddingRight: "5%",
   },

@@ -10,6 +10,7 @@ export async function passwordlessVerify() {
     await fetchPasswordlessVerify(inputState.otpNumber);
   if (error) {
     inputState.setOtpValidation([error]);
+    inputState.setOtpNumber("");
     return;
   }
   if (
@@ -30,14 +31,15 @@ export async function passwordlessVerify() {
   storage.add("refresh_expires_at", refreshExpires);
   storage.add("role", role);
   storage.add("userId", userId);
-  authState.setRefreshToken(refreshToken);
-  authState.setToken(jwt);
-  authState.setRefreshExpire(refreshExpires);
-  authState.setTokenExpire(jwtExpires);
+  console.log("passwordlessVerify", { role });
   if (role === "customer" || role === "provider") {
     authState.setRole(role);
   } else {
     authState.setRole("customer");
   }
+  authState.setRefreshToken(refreshToken);
+  authState.setToken(jwt);
+  authState.setRefreshExpire(refreshExpires);
+  authState.setTokenExpire(jwtExpires);
   inputState.reset();
 }

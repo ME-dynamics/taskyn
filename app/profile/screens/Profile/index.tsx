@@ -1,5 +1,11 @@
-import React, { useCallback, useMemo, useRef, useEffect } from "react";
-import { View, Alert } from "react-native";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+  useState,
+} from "react";
+import { View, Alert, ActivityIndicator } from "react-native";
 import { observer } from "mobx-react-lite";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -11,6 +17,7 @@ import {
   Scroller,
   TaskynIcon,
   CustomBackdrop,
+  THEME,
 } from "../../../library";
 
 import { MenuItem, Avatar, ExitSheet } from "../../components";
@@ -21,9 +28,26 @@ import { styles } from "./styles";
 
 function ProfileScreen() {
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const snapPoints = useMemo(() => ["40%", "40%"], []);
+  async function init() {
+    setLoading(true);
+    await retrieveUser();
+    setLoading(false);
+  }
+  // function nameRenderer() {
+  //   if (loading) {
+  //     return (
+  //       <ActivityIndicator
+  //         size="small"
+  //         color={THEME.COLORS.PRIMARY.NORMAL}
+  //         style={{ width: 100, height: 110 }}
+  //       />
+  //     );
+  //   }
 
+  // }
   const close = useCallback(() => {
     BottomSheetModalRef.current?.close();
   }, []);
@@ -31,13 +55,14 @@ function ProfileScreen() {
     BottomSheetModalRef.current?.present();
   }, []);
   useEffect(() => {
-    retrieveUser();
+    init();
   }, []);
   return (
-    <Container>
+    <Container loading={loading}>
       <View style={styles.header}>
         <Headline>{"پروفایل"}</Headline>
         <Avatar size={96} uri={profileState.avatar} />
+        {/* {nameRenderer()} */}
         <Headline>{`${profileState.firstName} ${profileState.lastName}`}</Headline>
       </View>
       <View style={styles.menuContainer}>

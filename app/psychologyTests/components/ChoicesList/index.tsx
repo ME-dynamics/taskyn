@@ -10,7 +10,7 @@ function ChoicesListComponent() {
       .choices;
   const answerCards: JSX.Element[] = [];
   function onSetAnswerPress(id: string) {
-    onSetAnswer(id, testDetailState.test.id)
+    onSetAnswer(id, testDetailState.test.id);
   }
   const setAnswer = useCallback(onSetAnswerPress, [
     questionnaireState.currentQuestion,
@@ -22,9 +22,8 @@ function ChoicesListComponent() {
         key={label}
         id={`${value}`}
         selected={
-          questionnaireState.answers[
-            `${questionnaireState.currentQuestion}`
-          ] === `${value}`
+          questionnaireState.answers[questionnaireState.currentQuestion] ===
+          value
         }
         text={label}
         onPress={setAnswer}

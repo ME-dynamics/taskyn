@@ -3,4 +3,5 @@ export interface IProviderCardProps {
   fullName: string;
   description: string;
   profileImageUrl: string;
+  myDoctor: boolean;
 }

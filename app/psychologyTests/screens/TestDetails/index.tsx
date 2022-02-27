@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useEffect } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+  useState,
+} from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/core";
@@ -27,9 +33,10 @@ type TestStackParamList = {
   mbtiResult: undefined;
 };
 type RouteParams = RouteProp<TestStackParamList, "testDetails">;
-
+//TODO: refactor styles
 export function TestDetailsScreen() {
   const route = useRoute<RouteParams>();
+  const [loading, setLoading] = useState(true);
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["40%", "40%"], []);
@@ -49,15 +56,15 @@ export function TestDetailsScreen() {
     }
     navigateToQuestionnaire();
   }
+  async function init() {
+    await retrieveTestDetail(route.params.id);
+    setLoading(false);
+  }
   useEffect(() => {
-    // navigator.setOptions({ headerTitle: route.params.id });
-    retrieveTestDetail(route.params.id);
-    return () => {
-      // testDetailState.reset();
-    };
+    init();
   }, []);
   return (
-    <Container>
+    <Container loading={loading}>
       <Scroller>
         <View style={styles.imageContainer}>
           <Image

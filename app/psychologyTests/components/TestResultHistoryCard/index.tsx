@@ -5,12 +5,13 @@ import { Touchable, Paragraph, Subheading, Caption } from "../../../library";
 import { ITestResultHistoryCardProps } from "../../types";
 import { styles } from "./styles";
 function TestResultHistoryCardComponent(props: ITestResultHistoryCardProps) {
-  const { Icon, title, description, onPress, date, id } = props;
+  const { Icon, createdAt, enName, onPress, faName, id } = props;
   function onCardPress() {
     if (onPress) {
       onPress(id);
     }
   }
+  //TODO: refactor styles
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
@@ -19,16 +20,14 @@ function TestResultHistoryCardComponent(props: ITestResultHistoryCardProps) {
       <View style={styles.infoContainer}>
         <View style={styles.testDetailsContainer}>
           <View style={styles.titleContainer}>
-            <Subheading
-              style={styles.textAlignRight}
-            >{`تست ${title}`}</Subheading>
+            <Subheading style={styles.textAlignRight}>{faName}</Subheading>
           </View>
           <View style={styles.descriptionContainer}>
-            <Paragraph style={styles.description}>{description}</Paragraph>
+            <Paragraph style={styles.description}>{enName}</Paragraph>
           </View>
         </View>
         <View style={styles.dateContainer}>
-          <Caption numberOfLines={1}>{date}</Caption>
+          <Caption numberOfLines={1}>{createdAt}</Caption>
         </View>
       </View>
       <Touchable onPress={onCardPress} rippleColor={"grey"} />

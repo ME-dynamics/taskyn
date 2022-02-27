@@ -12,6 +12,7 @@ import {
 } from "../../../library";
 import { ProviderCard } from "../../components";
 import { providerState } from "../../entities";
+import { useIsFocused } from "@react-navigation/native";
 import { retrieveProviders, retrieveRequest } from "../../usecases";
 import { styles } from "./styles";
 
@@ -20,6 +21,7 @@ const image =
 
 function ProvidersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const isFocused = useIsFocused();
   const [loading, setLoading] = useState<boolean>(false);
   async function init() {
     setLoading(true);
@@ -27,8 +29,10 @@ function ProvidersScreen() {
     setLoading(false);
   }
   useEffect(() => {
-    init();
-  }, []);
+    if (isFocused) {
+      init();
+    }
+  }, [isFocused]);
   function renderProviderList() {
     const providers: JSX.Element[] = [];
     const length = providerState.providers.length;
@@ -45,6 +49,7 @@ function ProvidersScreen() {
           fullName={`${firstName} ${lastName}`}
           description={description}
           profileImageUrl={profilePictureUrl}
+          myDoctor={false}
         />
       );
     }
@@ -66,16 +71,19 @@ function ProvidersScreen() {
       <View style={styles.requestContainer}>
         <View style={styles.horizontalLine} />
         <Title style={styles.myDoctorTitle}>{"دکتر من"}</Title>
-        {providerState.myProvider ? <ProviderCard
-          id={providerState.myProvider?.id || ""}
-          fullName={`${providerState.myProvider?.firstName} ${providerState.myProvider?.lastName}`}
-          description={providerState.myProvider?.description || "متخصص"}
-          profileImageUrl={
-            ""
-          }
-          // @ts-expect-error
-          myDoctor
-        />: <Subheading style={{textAlign: "center"}}>{"دکتری ثبت نشده است"}</Subheading>}
+        {providerState.myProvider ? (
+          <ProviderCard
+            id={providerState.myProvider?.id || ""}
+            fullName={`${providerState.myProvider?.firstName} ${providerState.myProvider?.lastName}`}
+            description={providerState.myProvider?.description || "متخصص"}
+            profileImageUrl={""}
+            myDoctor
+          />
+        ) : (
+          <Subheading style={{ textAlign: "center" }}>
+            {"دکتری ثبت نشده است"}
+          </Subheading>
+        )}
       </View>
     </Container>
   );

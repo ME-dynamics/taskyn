@@ -43,6 +43,9 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-evenly",
   },
+  modal: {
+    marginHorizontal: "5%",
+  },
 });
 
 export const iconColor = THEME.COLORS.PRIMARY.NORMAL;

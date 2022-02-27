@@ -7,7 +7,7 @@ import { Button, Paragraph } from "../../../library";
 import { questionnaireState, testDetailState } from "../../entities";
 import { onNextQuestion, onPrevQuestion, onTestSubmit } from "../../usecases";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function QuestionNavigatorComponent() {
@@ -16,12 +16,16 @@ function QuestionNavigatorComponent() {
   const finished =
     questionnaireState.currentQuestion === testDetailState.fieldSize;
   const answered =
-    questionnaireState.answers[`${questionnaireState.currentQuestion}`];
+    questionnaireState.answers[questionnaireState.currentQuestion];
+  const route = useRoute();
+  //@ts-ignore
+  const id = route.params?.id || "";
+
   async function onNextPress() {
     if (finished) {
-      await onTestSubmit();
+      await onTestSubmit(id, questionnaireState.answers);
       navigation.popToTop();
-      navigation.push("mbtiResult");
+      navigation.push("testResultScreen", { mode: "finalResult" });
       return;
     }
     onNextQuestion();
@@ -58,7 +62,7 @@ function QuestionNavigatorComponent() {
         rippleColor={"lightGrey"}
         size={"small"}
         onPress={onNextPress}
-        disabled={!answered}
+        disabled={!(typeof answered === "number")}
       >
         {nextButtonText()}
       </Button>
