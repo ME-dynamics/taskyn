@@ -3,7 +3,8 @@ import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
+import { useIsFocused } from "@react-navigation/native";
+import ColorHash from "color-hash";
 import {
   SearchBar,
   Container,
@@ -19,6 +20,7 @@ import { retrieveTests, searchTestList } from "../../usecases";
 import { styles } from "./styles";
 
 function TestListScreen() {
+  const isFocused = useIsFocused();
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   function navigateToFormHistory() {
     navigator.push("testHistory");
@@ -30,19 +32,20 @@ function TestListScreen() {
     if (testListState.tests.length === 0) {
       return <Subheading>{"تستی پیدا نشد"}</Subheading>;
     }
-    const tests = 
+    const tests =
       !testListState.query && testListState.searchResult.length === 0
         ? testListState.tests
         : testListState.searchResult;
     const testCards: JSX.Element[] = [];
+    const colorHash = new ColorHash();
     for (let index = 0; index < tests.length; index++) {
       const { id, title, description } = tests[index];
-
+      const labelColor = colorHash.hex(id);
       testCards.push(
         <TestCard
           key={id}
           id={id}
-          Icon={() => <TextIcon label={id} labelColor={"#3C6ADC"} />}
+          Icon={() => <TextIcon label={id} labelColor={labelColor} />} //TODO: change id to shortName
           title={title.fa}
           subtitle={title.en}
           onPress={navigateToFormDetails}
@@ -52,8 +55,10 @@ function TestListScreen() {
     return testCards;
   }
   useEffect(() => {
-    retrieveTests();
-  }, []);
+    if (isFocused) {
+      retrieveTests();
+    }
+  }, [isFocused]);
   return (
     <Container>
       <View style={styles.searchBarContainer}>
