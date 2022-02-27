@@ -12,7 +12,10 @@ import { useNavigation } from "@react-navigation/core";
 import { useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { retrieveCustomers } from "../../usecases/retriveCustomer";
+import { useIsFocused } from "@react-navigation/native";
+
 function DashboardScreen() {
+  const isFocused = useIsFocused();
   const route = useRoute();
   const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -22,6 +25,7 @@ function DashboardScreen() {
   // @ts-expect-error
   const id = route.params?.id || "";
   async function init() {
+    // console.log({ isCustomer });
     if (isCustomer) {
       await retrieveProvider();
     }
@@ -35,7 +39,7 @@ function DashboardScreen() {
       return (
         <UserCard
           id={dashboardState.provider?.id || ""}
-          name={dashboardState.provider?.name || ""}
+          name={dashboardState.provider?.name || "دکتر انتخاب نکردید"}
           description={dashboardState.provider?.description || ""}
           role={"customer"}
           imageUrl={dashboardState.provider?.profilePictureUrl || ""}
@@ -107,28 +111,45 @@ function DashboardScreen() {
   }
   function customerTileRenderer() {
     return (
-      <View style={styles.row}>
-        <Tile
-          title={"تمرینات"}
-          Icon={({ size, color }) => {
-            return (
-              <TaskynIcon name={"practice"} color={color} size={size} svg />
-            );
-          }}
-          onPress={() => {
-            navigation.push("tasks", { id });
-          }}
-        />
-        <Tile
-          title={"پرونده بیمار"}
-          Icon={({ size, color }) => {
-            return <TaskynIcon name={"file"} color={color} size={size} svg />;
-          }}
-          onPress={() => {
-            navigation.push("userInfo", { id });
-          }}
-        />
-      </View>
+      <>
+        <View style={styles.row}>
+          <Tile
+            title={"تمرینات"}
+            Icon={({ size, color }) => {
+              return (
+                <TaskynIcon name={"practice"} color={color} size={size} svg />
+              );
+            }}
+            onPress={() => {
+              navigation.push("tasks", { id });
+            }}
+          />
+          <Tile
+            title={"پرونده بیمار"}
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"file"} color={color} size={size} svg />;
+            }}
+            onPress={() => {
+              navigation.push("userInfo", { id });
+            }}
+          />
+        </View>
+        {dashboardState.customer?.id ? (
+          <View style={styles.row}>
+            <Tile
+              title={"لیست دکترها"}
+              Icon={({ size, color }) => {
+                return (
+                  <TaskynIcon name={"file"} color={color} size={size} svg />
+                );
+              }}
+              onPress={() => {
+                navigation.push("providers", { id });
+              }}
+            />
+          </View>
+        ) : null}
+      </>
     );
   }
   // TODO: convert to component
@@ -148,8 +169,10 @@ function DashboardScreen() {
     );
   }
   useEffect(() => {
-    init();
-  }, []);
+    if (isFocused) {
+      init();
+    }
+  }, [isFocused]);
   return (
     <Container loading={loading}>
       {renderBack()}

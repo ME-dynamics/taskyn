@@ -20,7 +20,7 @@ function UserCardComponent(props: ICardProps) {
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
           <Subheading style={styles.textAlignRight}>{name}</Subheading>
-          {<Caption>{description}</Caption>}
+          {<Caption style={styles.textAlignRight}>{description}</Caption>}
         </View>
         {role === "customer" && !id ? (
           <View style={styles.buttonContainer}>
