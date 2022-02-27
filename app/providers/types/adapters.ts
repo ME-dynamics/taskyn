@@ -13,6 +13,7 @@ export interface IFetchProvidersResult {
 export interface IFetchCreateRequestResult {
   error: string;
   request: IRequest | undefined;
+  nameMustBeDefined: boolean;
 }
 
 export interface IFetchProviderResult {
