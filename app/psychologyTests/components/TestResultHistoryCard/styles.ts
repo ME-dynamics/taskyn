@@ -4,7 +4,7 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
-    height: 56,
+    height: 86,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 12,

@@ -3,7 +3,7 @@ import { THEME } from "../../../library";
 export const styles = StyleSheet.create({
   container: {
     width: THEME.WIDTH.WIDE,
-    height: 56,
+    height: 86,
     flexDirection: "row-reverse",
     backgroundColor: "white",
     borderRadius: 12,
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   persianNameContainer: {
     flex: 2,
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   englishNameContainer: {
     flex: 2,
