@@ -41,11 +41,15 @@ function IdentifyScreen() {
     value: inputState.otpNumber,
     setValue: onOtpNumberChange,
   });
+  async function init() {
+    setLoading(true);
+    await passwordlessVerify();
+    setLoading(false);
+  }
   useEffect(() => {
     const disposer = autorun(() => {
       if (inputState.otpNumber.length === 5) {
-        setLoading(true);
-        passwordlessVerify();
+        init();
       }
     });
     return () => {
