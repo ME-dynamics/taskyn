@@ -6,16 +6,17 @@ import { styles } from "./styles";
 import { ICardProps } from "../../types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Avatar } from "../../../library";
 
 function UserCardComponent(props: ICardProps) {
   const { name, description, role, imageUrl, id } = props;
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  // TODO: support image avatar
   // TODO: support select doctor state
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+        {/* <Image source={{ uri: imageUrl }} style={styles.image} /> */}
+        <Avatar size={50} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
