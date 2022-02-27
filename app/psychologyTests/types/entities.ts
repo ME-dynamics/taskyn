@@ -27,8 +27,9 @@ export type tMbtiAnswers = Record<string, string> | undefined;
 
 export interface ITestHistory {
   id: string;
-  title: string;
-  description: string;
+  faName: string;
+  enName: string;
+  shortName: string;
   createdAt: string;
 }
 
