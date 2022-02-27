@@ -4,6 +4,7 @@ import { openCamera } from "../../library";
 export async function onCameraPress() {
   try {
     const image = await openCamera("note");
+    createNoteState.toggleMenu(false);
     createNoteState.addImage(image.path);
     const { error, imageId } = await fetchUploadImage(image.path);
     if (error) {
@@ -11,8 +12,10 @@ export async function onCameraPress() {
       return;
     }
     createNoteState.addImageId(image.path, imageId);
-    createNoteState.toggleMenu(false);
   } catch (error) {
     console.log(error);
-  }
+    createNoteState.toggleMenu(false);
+  } 
+   
+
 }
