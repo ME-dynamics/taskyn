@@ -19,14 +19,14 @@ function TestResultHistoryCardComponent(props: ITestResultHistoryCardProps) {
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.testDetailsContainer}>
-          <View style={styles.titleContainer}>
+          <View style={styles.faNameContainer}>
             <Subheading style={styles.textAlignRight}>{faName}</Subheading>
           </View>
-          <View style={styles.descriptionContainer}>
+          <View style={styles.enNameContainer}>
             <Paragraph style={styles.description}>{enName}</Paragraph>
           </View>
         </View>
-        <View style={styles.dateContainer}>
+        <View style={styles.createdAtContainer}>
           <Caption numberOfLines={1}>{createdAt}</Caption>
         </View>
       </View>

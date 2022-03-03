@@ -24,14 +24,14 @@ export const styles = StyleSheet.create({
     flex: 10,
     flexDirection: "row-reverse",
   },
-  titleContainer: {
+  faNameContainer: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   testDetailsContainer: {
     flex: 5,
   },
-  descriptionContainer: {
+  enNameContainer: {
     flex: 1,
     justifyContent: "center",
   },
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     textAlign: "right",
     color: THEME.COLORS.GREY.LIGHT,
   },
-  dateContainer: {
+  createdAtContainer: {
     flex: 2,
     alignItems: "flex-end",
     justifyContent: "flex-start",
