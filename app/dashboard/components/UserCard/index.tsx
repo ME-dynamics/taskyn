@@ -11,12 +11,12 @@ import { Avatar } from "../../../library";
 function UserCardComponent(props: ICardProps) {
   const { name, description, role, imageUrl, id } = props;
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  // TODO: support select doctor state
+  // TODO: support select doctor state -- done: moved to tile by @sajjad
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         {/* <Image source={{ uri: imageUrl }} style={styles.image} /> */}
-        <Avatar size={50} />
+        <Avatar size={52} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
