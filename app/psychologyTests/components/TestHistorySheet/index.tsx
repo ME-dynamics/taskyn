@@ -35,8 +35,8 @@ function TestHistorySheetComponent(props: ITestHistorySheet) {
           size={"medium"}
           rippleColor={"lightGrey"}
           onPress={() => {
-            onClosePress();
             onStartFromBeginningPress();
+            onClosePress();
           }}
         >
           {"شروع از اول"}
@@ -46,8 +46,8 @@ function TestHistorySheetComponent(props: ITestHistorySheet) {
           size={"medium"}
           rippleColor={"lightGrey"}
           onPress={() => {
-            onClosePress();
             onContinuePress();
+            onClosePress();
           }}
         >
           {"ادامه میدهم"}
