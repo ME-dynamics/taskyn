@@ -23,9 +23,10 @@ export interface ITaskItemProps {
   content: string;
   done: boolean;
   createdAt: string;
+  showEditModal: () => void;
 }
 
 export interface IEditModalProps {
   onClosePress: () => void;
-  customerId: string | undefined;
+  customerId: string | undefined; // TODO: fix this type
 }
