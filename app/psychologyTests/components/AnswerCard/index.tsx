@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Paragraph, SelectButton } from "../../../library";
+import { Subheading, SelectButton } from "../../../library";
 
 import { styles, radioSize } from "./styles";
 
@@ -18,7 +18,7 @@ function AnswerCardComponent(props: IAnswerCardProps) {
         selected={selected}
         onPress={onPress}
       >
-        <Paragraph  style={styles.paragraph}>{text}</Paragraph>
+        <Subheading  style={styles.subheading}>{text}</Subheading>
       </SelectButton>
     </View>
   );

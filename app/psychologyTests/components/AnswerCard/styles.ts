@@ -6,11 +6,10 @@ export const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(100),
     marginVertical: 6,
-    paddingRight: 16
+    paddingRight: 16,
   },
-  paragraph: {
+  subheading: {
     paddingLeft: 8,
-    color: THEME.COLORS.GREY.DARK,
   },
 });
 
