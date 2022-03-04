@@ -22,4 +22,5 @@ export { TaskynIcon } from "./TaskynIcon";
 export { Timer } from "./Timer";
 export { CustomBackdrop } from "./CustomBackdrop";
 export { Avatar } from "./Avatar";
+export { SuccessAlert } from "./SuccessAlert";
 export * from "./events";
