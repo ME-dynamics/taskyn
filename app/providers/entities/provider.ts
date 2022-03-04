@@ -5,20 +5,32 @@ export class ProviderState {
   constructor() {
     makeObservable(this, {
       providers: observable,
+      query: observable,
+      searchResult: observable,
       myProvider: observable,
       requestConfirmed: observable,
       setRemoveRequest: action,
       setRemoveProvider: action,
       setProviders: action,
+      setQuery: action,
+      setSearchResult: action,
       setMyProvider: action,
       setRequestConfirmed: action,
     });
   }
   providers: IProvider[] = [];
+  query: string = "";
+  searchResult: IProvider[] = [];
   myProvider: IProvider | undefined = undefined;
   requestConfirmed: boolean = false;
   setProviders(newProviders: IProvider[]) {
     this.providers = newProviders;
+  }
+  setQuery(query: string) {
+    this.query = query;
+  }
+  setSearchResult(searchResult: IProvider[]) {
+    this.searchResult = searchResult;
   }
   setMyProvider(myProvider: IProvider) {
     this.myProvider = myProvider;
