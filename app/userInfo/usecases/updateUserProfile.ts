@@ -33,7 +33,7 @@ export async function updateUserProfile(customerId: string) {
   if (!userInfoState.siblingDiseases) {
     return "siblingDiseases is required";
   }
-  console.log("update user usecase");
+  // console.log("update user usecase");
   const { error, patient } = await fetchCreatePatient(
     {
       siblingDiseases: userInfoState.siblingDiseases,
