@@ -29,12 +29,13 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   infoContainer: {
-    flex: 9,
+    flex: 8,
     paddingRight: 8,
   },
   titleContainer: {
-    flex: 3.7,
+    flex: 4,
     justifyContent: "center",
+    alignItems: "flex-end",
   },
   buttonContainer: {
     flex: 3,
