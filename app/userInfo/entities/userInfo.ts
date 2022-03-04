@@ -10,6 +10,7 @@ import type {
 export class UserInfoState {
   constructor() {
     makeObservable(this, {
+      editable: observable,
       firstName: observable,
       lastName: observable,
       birthday: observable,
@@ -35,6 +36,7 @@ export class UserInfoState {
       siblingsPosition: observable,
       siblingDiseases: observable,
       siblings: observable,
+      setEditable: action,
       setFirstName: action,
       setLastName: action,
       setBirthday: action,
@@ -67,6 +69,7 @@ export class UserInfoState {
       cousinMarriageText: computed,
     });
   }
+  editable: boolean = false;
   firstName: string = "";
   lastName: string = "";
   birthday: IBirthDay = {
@@ -96,6 +99,9 @@ export class UserInfoState {
   cousinMarriage: boolean | undefined = undefined;
   siblingsPosition: string = "";
   siblings: string = "";
+  setEditable(editable: boolean) {
+    this.editable = editable;
+  }
   setSiblingDiseases(siblingDiseases: string) {
     this.siblingDiseases = siblingDiseases;
   }

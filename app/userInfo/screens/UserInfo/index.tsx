@@ -9,23 +9,25 @@ import { observer } from "mobx-react-lite";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { toJS } from "mobx";
 import {
-  Button,
   Input,
   Container,
   Scroller,
   CustomBackdrop,
+  SuccessAlert,
 } from "../../../library";
 
-import { TwoChoice, ScrollPicker } from "../../components";
+import {
+  TwoChoice,
+  ScrollPicker,
+  BirthDayInput,
+  EditButton,
+} from "../../components";
 import { userInfoState } from "../../entities";
-import { updateUserProfile, retrieveUserProfile } from "../../usecases";
+import { retrieveUserProfile } from "../../usecases";
 
 import { styles } from "./styles";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { BirthDayInput } from "../../components/BirthDayInput";
-import type { IBirthDay } from "../../types";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { SuccessAlert } from "../../../library/SuccessAlert";
 
 function UserInfoScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -34,8 +36,6 @@ function UserInfoScreen() {
   //@ts-expect-error
   const id = route.params?.id || "";
   const [loading, setLoading] = useState<boolean>(true);
-  const [editable, setEditable] = useState<boolean>(false);
-  const [updateUserLoading, setUpdateUserLoading] = useState<boolean>(false);
 
   const snapPoints = useMemo(() => [150, 180], []);
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -46,48 +46,23 @@ function UserInfoScreen() {
   const onCollapsePress = useCallback(() => {
     BottomSheetModalRef.current?.present();
   }, []);
-  function renderEditButton(props: { tintColor?: string }) {
-    const { tintColor } = props;
-    const save = "ذخیره";
-    const edit = "ویرایش";
 
-    async function onPress() {
-      if (editable) {
-        console.log("update user");
-        setUpdateUserLoading(true);
-        await updateUserProfile(id); // TODO: handle error
-        setUpdateUserLoading(false);
-        onCollapsePress();
-        setEditable(false);
-        return;
-      }
-      setEditable(true);
-    }
-    return (
-      <Button
-        mode={"text"}
-        size={"growWithText"}
-        rippleColor={"lightGrey"}
-        textColor={"white"}
-        onPress={onPress}
-        loading={updateUserLoading}
-      >
-        {editable ? save : edit}
-      </Button>
-    );
-  }
-
-  navigation.setOptions({
-    headerRight: renderEditButton,
-  });
   useEffect(() => {
     async function prepare() {
       // @ts-expect-error
       const id = route.params?.id;
+      navigation.setOptions({
+        headerRight: () => (
+          <EditButton onCollapsePress={onCollapsePress} userId={id} />
+        ),
+      });
       await retrieveUserProfile(id);
       setLoading(false);
     }
     prepare();
+    return () => {
+      userInfoState.setEditable(false);
+    };
   }, []);
   return (
     <Container loading={loading}>
@@ -98,7 +73,7 @@ function UserInfoScreen() {
         gestureScroll
       >
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"نام"}
           placeholder={"نام خود را وارد کنید."}
@@ -108,7 +83,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"نام خانوادگی"}
           placeholder={"نام خانوادگی خود را وارد کنید."}
@@ -129,7 +104,7 @@ function UserInfoScreen() {
           }}
         /> */}
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"آدرس"}
           multiline
@@ -141,7 +116,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"تلفن ثابت"}
           placeholder={"مثال: ۰۲۱۲۳۴۵۶۷۸۹"}
@@ -152,7 +127,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"شرح مشکل / علت مراجعه"}
           placeholder={"مشکل خود را به طور کامل شرح دهید."}
@@ -161,7 +136,7 @@ function UserInfoScreen() {
             userInfoState.setProblemDescription(text);
           }}
         />
-        <BirthDayInput editable={editable} />
+        <BirthDayInput editable={userInfoState.editable} />
         <TwoChoice
           title={"جنسیت:"}
           choiceState={userInfoState.genderPersianText}
@@ -173,7 +148,7 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setGender("female");
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         <TwoChoice
           title={"وضعیت تاهل:"}
@@ -186,7 +161,7 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setMaritalStatus("engaged");
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         <ScrollPicker
           title={"وضعیت تاهل"}
@@ -204,7 +179,7 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setMaritalState(item.key);
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         <ScrollPicker
           title={"تحصیلات"}
@@ -227,12 +202,12 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setEducation(item.key);
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         {userInfoState.education === "student" ||
         userInfoState.education === "graduate" ? (
           <Input
-            editable={editable}
+            editable={userInfoState.editable}
             mode={"with-label"}
             title={"رشته تحصیلی"}
             placeholder={"رشته تحصیلی خود را وارد کنید"}
@@ -255,10 +230,10 @@ function UserInfoScreen() {
           onItemSelected={(item) => {
             userInfoState.setReligion(item.key);
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           multiline
           numberOfLines={2}
@@ -272,7 +247,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"بیماری جسمی"}
           multiline
@@ -286,7 +261,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           numberOfLines={1}
           multiline
@@ -301,14 +276,14 @@ function UserInfoScreen() {
         />
         {/* TODO: family diseases if exists */}
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"بیماری افراد خانواده"}
           placeholder={`بیماری افراد خانواده را برای هر شخص وارد کنید.
 مثال: برادر اولم دچار بیماری سرطانی است.`}
           multiline
           numberOfLines={8}
-          limit={320}
+          // limit={320}
           value={userInfoState.siblingDiseases}
           onChangeText={(text) => {
             userInfoState.setSiblingDiseases(text);
@@ -316,7 +291,7 @@ function UserInfoScreen() {
           // value=
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"مصرف دارو"}
           placeholder={"در صورتی که دارو مصرف می کنید آن را وارد کنید."}
@@ -326,7 +301,7 @@ function UserInfoScreen() {
           }}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"اعتیاد"}
           placeholder={`موارد اعتیاد خود را بنویسید.
@@ -349,11 +324,11 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setIsFatherAlive(false);
           }}
-          editable={editable}
+          editable={userInfoState.editable}
         />
         {userInfoState.isFatherAlive === false ? (
           <Input
-            editable={editable}
+            editable={userInfoState.editable}
             mode={"with-label"}
             title={"علت فوت پدر"}
             placeholder={"علت فوت پدر را وارد کنید"}
@@ -361,7 +336,6 @@ function UserInfoScreen() {
             onChangeText={(text) => {
               userInfoState.setFatherDeathReason(text);
             }}
-
           />
         ) : null}
         <TwoChoice
@@ -375,12 +349,11 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setIsMotherAlive(false);
           }}
-          editable={editable}
-
+          editable={userInfoState.editable}
         />
         {userInfoState.isMotherAlive === false ? (
           <Input
-            editable={editable}
+            editable={userInfoState.editable}
             mode={"with-label"}
             title={"علت فوت مادر"}
             placeholder={"علت فوت مادر را وارد کنید"}
@@ -388,7 +361,6 @@ function UserInfoScreen() {
             onChangeText={(text) => {
               userInfoState.setMotherDeathReason(text);
             }}
-
           />
         ) : null}
         <TwoChoice
@@ -402,11 +374,10 @@ function UserInfoScreen() {
           onSecondChoicePress={() => {
             userInfoState.setCousinMarriage(false);
           }}
-          editable={editable}
-
+          editable={userInfoState.editable}
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"فرزند چندم"}
           placeholder={"فرزند چندم خانواده هستید."}
@@ -416,10 +387,9 @@ function UserInfoScreen() {
           onChangeText={(text) => {
             userInfoState.setSiblingsPosition(text);
           }}
-
         />
         <Input
-          editable={editable}
+          editable={userInfoState.editable}
           mode={"with-label"}
           title={"شرح برادر و خواهر"}
           placeholder={
