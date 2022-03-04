@@ -20,7 +20,11 @@ export function RequestsScreen() {
   function renderCustomerRequests() {
     const length = requestState.requests.length;
     if (length === 0) {
-      return <Subheading>{"درخواستی یافت نشد!"}</Subheading>;
+      return (
+        <Subheading style={styles.noRequestFound}>
+          {"درخواستی یافت نشد!"}
+        </Subheading>
+      );
     }
     const components: JSX.Element[] = [];
     for (let index = 0; index < length; index++) {

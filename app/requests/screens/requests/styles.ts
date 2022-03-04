@@ -4,4 +4,7 @@ export const styles = StyleSheet.create({
   scrollViewContentContainer: {
     alignItems: "center",
   },
+  noRequestFound: {
+    marginTop: 64,
+  },
 });
