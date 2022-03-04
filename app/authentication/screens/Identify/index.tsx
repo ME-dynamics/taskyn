@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { View } from "react-native";
 import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
@@ -29,6 +29,8 @@ import {
 import { styles, logoSize } from "./styles";
 
 function IdentifyScreen() {
+  // TODO: find a better way to do this
+  const isMounted = useRef<boolean>(false);
   const navigator = useNavigation();
   const [loading, setLoading] = useState<boolean>(false);
   const [timerEnded, setTimerEnd] = useState<boolean>(false);
@@ -41,18 +43,22 @@ function IdentifyScreen() {
     value: inputState.otpNumber,
     setValue: onOtpNumberChange,
   });
-  async function init() {
+  async function verify() {
     setLoading(true);
     await passwordlessVerify();
-    setLoading(false);
+    if (isMounted.current) {
+      setLoading(false);
+    }
   }
   useEffect(() => {
+    isMounted.current = true;
     const disposer = autorun(() => {
       if (inputState.otpNumber.length === 5) {
-        init();
+        verify();
       }
     });
     return () => {
+      isMounted.current = false;
       return disposer();
     };
   }, []);
