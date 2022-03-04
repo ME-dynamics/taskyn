@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
+import { useIsFocused } from "@react-navigation/native";
 import {
   SearchBar,
   Title,
@@ -8,17 +9,17 @@ import {
   Container,
   Scroller,
 } from "../../../library";
+import { retrieveRequests } from "../../../requests";
 import { customerState } from "../../entities";
 import { CustomerCard, RequestCard } from "../../components";
-import { styles } from "./styles";
 import { retrieveCustomers, searchCustomers } from "../../usecases";
-import { useIsFocused } from "@react-navigation/native";
+import { styles } from "./styles";
 
 function CustomersScreen() {
   const isFocused = useIsFocused();
   const [loading, setLoading] = useState<boolean>(true);
   async function init() {
-    await retrieveCustomers();
+    await Promise.all([retrieveCustomers(), retrieveRequests()]);
     setLoading(false);
   }
   useEffect(() => {
