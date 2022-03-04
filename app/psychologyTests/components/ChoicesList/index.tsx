@@ -10,7 +10,7 @@ function ChoicesListComponent() {
       .choices;
   const answerCards: JSX.Element[] = [];
   function onSetAnswerPress(id: string) {
-    onSetAnswer(id, testDetailState.test.id);
+    onSetAnswer(parseInt(id, 10), testDetailState.test.id);
   }
   const setAnswer = useCallback(onSetAnswerPress, [
     questionnaireState.currentQuestion,
