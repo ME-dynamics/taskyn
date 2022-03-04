@@ -15,8 +15,17 @@ function TabNavigation() {
   return (
     <Tab.Navigator
       initialRouteName={"dashboardTab"}
+      backBehavior={"initialRoute"}
       screenOptions={{
         tabBarActiveTintColor: THEME.COLORS.PRIMARY.NORMAL,
+        tabBarInactiveTintColor: THEME.COLORS.GREY.NORMAL,
+        tabBarStyle: {
+          height: 56,
+        },
+        tabBarLabelStyle: {
+          fontFamily: THEME.FONTS.MEDIUM,
+          fontSize: 14,
+        },
         headerShown: false,
       }}
     >
