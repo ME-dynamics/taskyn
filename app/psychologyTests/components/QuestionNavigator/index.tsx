@@ -5,7 +5,12 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Button, Paragraph } from "../../../library";
 
 import { questionnaireState, testDetailState } from "../../entities";
-import { onNextQuestion, onPrevQuestion, onTestSubmit } from "../../usecases";
+import {
+  onNextQuestion,
+  onPrevQuestion,
+  onTestSubmit,
+  removeTestSession,
+} from "../../usecases";
 import { styles } from "./styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -24,6 +29,8 @@ function QuestionNavigatorComponent() {
   async function onNextPress() {
     if (finished) {
       await onTestSubmit(id, questionnaireState.answers);
+      removeTestSession(testDetailState.test.id, testDetailState.fieldSize);
+      // TODO: there should be a better way instead of popToTop
       navigation.popToTop();
       navigation.push("testResultScreen", { mode: "finalResult" });
       return;
