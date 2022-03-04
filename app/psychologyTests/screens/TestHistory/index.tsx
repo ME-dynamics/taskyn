@@ -47,7 +47,7 @@ function TestHistoryScreen() {
 
   return (
     <Container>
-      <View style={styles.categoryContainer}>
+      {/* <View style={styles.categoryContainer}>
         <IconButton
           Icon={() => (
             <TaskynIcon name={"filter"} size={24} color={iconButtonColor} />
@@ -55,7 +55,7 @@ function TestHistoryScreen() {
           onPress={() => {}}
         />
         <View style={styles.line} />
-      </View>
+      </View> */}
       <Scroller contentContainerStyle={styles.historyCardScroller}>
         {renderTestResultCard()}
       </Scroller>
