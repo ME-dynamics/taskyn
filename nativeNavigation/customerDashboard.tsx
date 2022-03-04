@@ -18,7 +18,7 @@ function CustomerDashboardNavigation() {
         options={{ headerShown: false }}
         component={Dashboard}
       />
-      <DashboardStack.Screen name={"providers"} component={Providers} />
+      <DashboardStack.Screen name={"providers"} component={Providers} options={{...headerOptions, title: "دکتر ها"}}/>
       <DashboardStack.Screen
         name={"userInfo"}
         component={UserInfo}
