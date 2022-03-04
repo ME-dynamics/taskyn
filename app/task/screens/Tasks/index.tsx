@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+  useState,
+} from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useRoute } from "@react-navigation/native";
@@ -19,7 +25,8 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { EditModal } from "../../components/EditModal";
 
 function TasksScreen() {
-  const scrollRef = useRef<tScrollerRef>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  // const scrollRef = useRef<tScrollerRef>(null);
   const route = useRoute();
   const snapPoints = useMemo(() => [200, 230], []);
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -32,10 +39,10 @@ function TasksScreen() {
   }, []);
   // @ts-expect-error
   const customerId = route.params?.id || "";
-  function onNewTaskPress() {
-    addEmptyTask();
-    scrollRef.current?.scrollToEnd({ animated: true });
-  }
+  // function onNewTaskPress() {
+  //   addEmptyTask();
+  //   scrollRef.current?.scrollToEnd({ animated: true });
+  // }
 
   function renderTaskItems() {
     const components: JSX.Element[] = [];
@@ -49,21 +56,24 @@ function TasksScreen() {
           content={content}
           done={done}
           createdAt={createdAt}
+          showEditModal={onCollapsePress}
         />
       );
     }
     return components;
   }
+  async function init() {
+    await retrieveTasks(customerId);
+    setLoading(false);
+  }
   useEffect(() => {
-    retrieveTasks(customerId).catch((error) => {
-      console.log(error);
-    });
+    init();
   }, []);
 
   return (
-    <Container>
+    <Container loading={loading}>
       <Scroller
-        ref={scrollRef}
+        // ref={scrollRef}
         contentContainerStyle={styles.containerContentStyle}
         keyboard
         enableOnAndroid
