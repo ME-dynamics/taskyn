@@ -4,7 +4,8 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   searchContainer: {
-    flex: 2,
+    width: "100%",
+    height: 72,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -15,10 +16,11 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
   doctorListContainer: {
-    flex: 12,
+    flex: 1,
   },
   requestContainer: {
-    flex: 4,
+    width: "100%",
+    height: 128,
     justifyContent: "space-around",
   },
   myDoctorTitle: {

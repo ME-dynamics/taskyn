@@ -13,7 +13,11 @@ import {
 import { ProviderCard } from "../../components";
 import { providerState } from "../../entities";
 import { useIsFocused } from "@react-navigation/native";
-import { retrieveProviders, retrieveRequest } from "../../usecases";
+import {
+  retrieveProviders,
+  retrieveRequest,
+  searchProviders,
+} from "../../usecases";
 import { styles } from "./styles";
 
 const image =
@@ -22,9 +26,8 @@ const image =
 function ProvidersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const isFocused = useIsFocused();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   async function init() {
-    setLoading(true);
     await Promise.all([retrieveProviders(), retrieveRequest()]);
     setLoading(false);
   }
@@ -34,11 +37,37 @@ function ProvidersScreen() {
     }
   }, [isFocused]);
   function renderProviderList() {
-    const providers: JSX.Element[] = [];
+    if (providerState.query) {
+      const length = providerState.searchResult.length;
+      if (length === 0) {
+        return (
+          <Subheading style={{ textAlign: "center", marginTop: 32 }}>
+            {"دکتری پیدا نشد"}
+          </Subheading>
+        );
+      }
+      const providers: JSX.Element[] = [];
+      for (let index = 0; index < length; index++) {
+        const { id, description, firstName, lastName, profilePictureUrl } =
+          providerState.searchResult[index];
+        providers.push(
+          <ProviderCard
+            key={id}
+            id={id}
+            fullName={`${firstName} ${lastName}`}
+            description={description}
+            profileImageUrl={profilePictureUrl}
+            myDoctor={false}
+          />
+        );
+      }
+      return providers;
+    }
     const length = providerState.providers.length;
     if (length === 0) {
       return <Subheading>{"دکتری پیدا نشد"}</Subheading>;
     }
+    const providers: JSX.Element[] = [];
     for (let index = 0; index < length; index++) {
       const { id, description, firstName, lastName, profilePictureUrl } =
         providerState.providers[index];
@@ -56,13 +85,13 @@ function ProvidersScreen() {
     return providers;
   }
   return (
-    <Container>
+    <Container loading={loading}>
       <View style={styles.searchContainer}>
         <SearchBar
-          onChangeText={() => {}}
+          onChangeText={searchProviders}
           // onClear={() => {}}
-          value={""}
-          placeholder={""}
+          value={providerState.query}
+          placeholder={"جستجو دکتر ..."}
         />
       </View>
       <View style={styles.doctorListContainer}>
