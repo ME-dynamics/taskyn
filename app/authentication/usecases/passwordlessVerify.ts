@@ -41,5 +41,6 @@ export async function passwordlessVerify() {
   authState.setToken(jwt);
   authState.setRefreshExpire(refreshExpires);
   authState.setTokenExpire(jwtExpires);
+  authState.setOtpToken("");
   inputState.reset();
 }

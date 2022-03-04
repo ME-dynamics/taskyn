@@ -46,7 +46,7 @@ function AuthenticationScreen() {
       }
     });
     return () => {
-      // disposer();
+      disposer();
     };
   }, []);
   return (
