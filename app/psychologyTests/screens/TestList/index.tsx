@@ -20,7 +20,7 @@ import { retrieveTests, searchTestList } from "../../usecases";
 import { styles } from "./styles";
 
 function TestListScreen() {
-  // const isFocused = useIsFocused();
+  const isFocused = useIsFocused();
   const [loading, setLoading] = useState<boolean>(true);
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   async function init() {
@@ -60,10 +60,10 @@ function TestListScreen() {
     return testCards;
   }
   useEffect(() => {
-    // if (isFocused) {
-    init();
-    // }
-  }, []);
+    if (isFocused) {
+      init();
+    }
+  }, [isFocused]);
   return (
     <Container loading={loading}>
       <View style={styles.searchBarContainer}>
