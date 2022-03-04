@@ -6,23 +6,24 @@ export async function retrieveUserProfile(customerId: string | undefined) {
     fetchPatient(customerId),
     fetchUser(customerId),
   ]);
-  if (patient.error || user.error) {
-    console.log(patient.error, user.error);
-    return "error";
-  }
   const userData = user.user;
-  const patientData = patient.patient;
-  if (!userData || !patientData) {
-    console.log(userData, patientData);
-    return "error";
+  if (!userData || user.error) {
+    console.log("user data not found");
+    return;
   }
+  console.log(userData);
   userInfoState.setFirstName(userData.firstName);
   userInfoState.setLastName(userData.lastName);
   userInfoState.setAddress(userData.address);
   userInfoState.setTelephone(userData.telephone);
   userInfoState.setBirthday(userData.birthday);
   userInfoState.setGender(userData.gender);
-  ``;
+  const patientData = patient.patient;
+  if (!patientData || patient.error) {
+    console.log(patientData);
+    return "error";
+  }
+
   userInfoState.setProblemDescription(patientData.problemDescription);
   userInfoState.setMaritalStatus(patientData.maritalStatus);
   userInfoState.setMaritalState(patientData.maritalState || "");
