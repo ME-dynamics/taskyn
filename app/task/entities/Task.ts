@@ -4,10 +4,11 @@ export class TaskState {
   constructor() {
     makeObservable(this, {
       tasks: observable,
+      currentEditTask: observable,
       setTasks: action,
       addTask: action,
       updateTask: action,
-      updateEmptyTask: action,
+      // updateEmptyTask: action,
       removeTask: action,
       setTaskDone: action,
       taskList: computed,
@@ -15,6 +16,7 @@ export class TaskState {
     });
   }
   tasks: ITask[] = [];
+  currentEditTask: ITask | undefined = undefined;
   setTasks(list: ITask[]) {
     this.tasks = list;
   }
@@ -30,15 +32,15 @@ export class TaskState {
       }
     }
   }
-  updateEmptyTask(task: ITask, emptyId: string) {
-    for (let index = 0; index < this.tasks.length; index++) {
-      const id = this.tasks[index].id;
-      if (id === emptyId) {
-        this.tasks[index] = task;
-        break;
-      }
-    }
-  }
+  // updateEmptyTask(task: ITask, emptyId: string) {
+  //   for (let index = 0; index < this.tasks.length; index++) {
+  //     const id = this.tasks[index].id;
+  //     if (id === emptyId) {
+  //       this.tasks[index] = task;
+  //       break;
+  //     }
+  //   }
+  // }
   removeTask(taskId: string) {
     const result: ITask[] = [];
     for (let index = 0; index < this.tasks.length; index++) {
@@ -58,6 +60,18 @@ export class TaskState {
         break;
       }
     }
+  }
+  setCurrentEditTask(taskId: string | undefined) {
+    if (!taskId) {
+      this.currentEditTask = undefined;
+      return;
+    }
+    const task = this.tasks.find((task) => task.id === taskId);
+    if (!task) {
+      this.currentEditTask = undefined;
+      return;
+    }; // TODO: warning here
+    this.currentEditTask = task;
   }
   get taskList() {
     const done: ITask[] = [];
