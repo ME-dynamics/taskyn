@@ -31,7 +31,7 @@ export async function passwordlessVerify() {
   storage.add("refresh_expires_at", refreshExpires);
   storage.add("role", role);
   storage.add("userId", userId);
-  console.log("passwordlessVerify", { role });
+  // console.log("passwordlessVerify", { role });
   if (role === "customer" || role === "provider") {
     authState.setRole(role);
   } else {
