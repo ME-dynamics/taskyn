@@ -33,8 +33,17 @@ function add(key: string, value: string | number | boolean) {
   }
 }
 
+function has(key: string) {
+  try {
+    return mmkv.contains(key);
+  } catch (error) {
+    return false;
+  }
+}
+
 export const storage = {
   remove,
   retrieve,
   add,
+  has,
 };
