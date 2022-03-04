@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -21,6 +21,11 @@ function QuestionnaireScreen() {
         .question
     );
   }
+  useEffect(() => {
+    return () => {
+      questionnaireState.reset();
+    };
+  }, []);
   return (
     <Container>
       <View style={styles.questionContainer}>
