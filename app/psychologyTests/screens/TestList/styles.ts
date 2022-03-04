@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   },
   containerContentStyle: {
     alignItems: "center",
+    paddingBottom: 32,
   },
 
   line: {
