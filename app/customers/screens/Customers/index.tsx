@@ -11,7 +11,7 @@ import {
 import { customerState } from "../../entities";
 import { CustomerCard, RequestCard } from "../../components";
 import { styles } from "./styles";
-import { retrieveCustomers } from "../../usecases";
+import { retrieveCustomers, searchCustomers } from "../../usecases";
 import { useIsFocused } from "@react-navigation/native";
 
 function CustomersScreen() {
@@ -27,18 +27,42 @@ function CustomersScreen() {
     }
   }, [isFocused]);
   function renderCustomers() {
-    const customers: JSX.Element[] = [];
+    if (customerState.query) {
+      const searchLen = customerState.searchResult.length;
+      if (searchLen === 0) {
+        return (
+          <Subheading style={styles.noCustomersFound}>
+            {"مراجعی یافت نشد!"}
+          </Subheading>
+        );
+      }
+      const customers: JSX.Element[] = [];
+      for (let index = 0; index < searchLen; index++) {
+        const { customerId, description, name, profilePictureUrl, createdAt } =
+          customerState.searchResult[index];
+        customers.push(
+          <CustomerCard
+            key={customerId}
+            description={description}
+            fullName={name}
+            id={customerId}
+            profileImageUrl={profilePictureUrl}
+            date={createdAt}
+          />
+        );
+      }
+      return customers;
+    }
     const length = customerState.customers.length;
     if (length === 0) {
       // TODO: convert styles to inline styles
       return (
-        <Subheading
-          style={styles.noCustomersFound}
-        >
+        <Subheading style={styles.noCustomersFound}>
           {"مراجعی یافت نشد!"}
         </Subheading>
       );
     }
+    const customers: JSX.Element[] = [];
     for (let index = 0; index < length; index++) {
       const { customerId, description, name, profilePictureUrl, createdAt } =
         customerState.customers[index];
@@ -61,7 +85,11 @@ function CustomersScreen() {
         <Title>{"لیست مراجعین"}</Title>
       </View>
       <View style={styles.searchBarContainer}>
-        <SearchBar onChangeText={() => {}} value={""} placeholder={""} />
+        <SearchBar
+          onChangeText={searchCustomers}
+          value={customerState.query}
+          placeholder={"جستجو مراجعین ..."}
+        />
       </View>
       <RequestCard />
       <View style={styles.line} />
