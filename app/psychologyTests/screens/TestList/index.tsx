@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
@@ -20,8 +20,13 @@ import { retrieveTests, searchTestList } from "../../usecases";
 import { styles } from "./styles";
 
 function TestListScreen() {
-  const isFocused = useIsFocused();
+  // const isFocused = useIsFocused();
+  const [loading, setLoading] = useState<boolean>(true);
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
+  async function init() {
+    await retrieveTests();
+    setLoading(false);
+  }
   function navigateToFormHistory() {
     navigator.push("testHistory");
   }
@@ -39,13 +44,13 @@ function TestListScreen() {
     const testCards: JSX.Element[] = [];
     const colorHash = new ColorHash();
     for (let index = 0; index < tests.length; index++) {
-      const { id, title, description } = tests[index];
-      const labelColor = colorHash.hex(id);
+      const { id, title, shortName } = tests[index];
+      const labelColor = colorHash.hex(shortName);
       testCards.push(
         <TestCard
           key={id}
           id={id}
-          Icon={() => <TextIcon label={id} labelColor={labelColor} />} //TODO: change id to shortName
+          Icon={() => <TextIcon label={shortName} labelColor={labelColor} />} //TODO: change id to shortName
           title={title.fa}
           subtitle={title.en}
           onPress={navigateToFormDetails}
@@ -55,12 +60,12 @@ function TestListScreen() {
     return testCards;
   }
   useEffect(() => {
-    if (isFocused) {
-      retrieveTests();
-    }
-  }, [isFocused]);
+    // if (isFocused) {
+    init();
+    // }
+  }, []);
   return (
-    <Container>
+    <Container loading={loading}>
       <View style={styles.searchBarContainer}>
         <SearchBar onChangeText={searchTestList} value={testListState.query} />
       </View>
