@@ -134,13 +134,13 @@ function DashboardScreen() {
             }}
           />
         </View>
-        {dashboardState.customer?.id ? (
+        {dashboardState.provider?.id ? (
           <View style={styles.row}>
             <Tile
               title={"لیست دکترها"}
               Icon={({ size, color }) => {
                 return (
-                  <TaskynIcon name={"file"} color={color} size={size} svg />
+                  <TaskynIcon name={"users"} color={color} size={size} svg />
                 );
               }}
               onPress={() => {
