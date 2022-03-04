@@ -26,7 +26,7 @@ export async function fetchTests(): Promise<IFetchTests> {
           fa,
           en,
         },
-        description: toString(test?.description),
+        shortName: toString(test?.shortName),
       });
     }
     return {
