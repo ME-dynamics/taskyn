@@ -6,12 +6,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  
+
   title: {
     textAlign: "center",
   },
   subheading: {
     textAlign: "center",
+    marginHorizontal: 30,
     top: 12,
   },
   buttonContainer: {
