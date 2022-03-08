@@ -12,9 +12,10 @@ export async function uploadProfilePicture(mode: "camera" | "gallery") {
         : await openCamera("profile");
     if (!Array.isArray(image)) {
       const path = image.path;
-      profileState.setAvatar(path);
+      profileState.setProfilePictureUrl(path);
       const url = await uploadProfile(path);
-      profileState.setAvatar(url);
+      console.log(url);
+      profileState.setProfilePictureUrl(url);
     }
     await updateUser();
   } catch (error) {

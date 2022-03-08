@@ -3,7 +3,7 @@ import { profileState } from "../entities";
 
 export async function updateUser() {
   const { error, user } = await fetchUpdateUser({
-    avatar: profileState.avatar,
+    profilePictureUrl: profileState.profilePictureUrl,
     firstName: profileState.firstName,
     lastName: profileState.lastName,
     description: profileState.description,
