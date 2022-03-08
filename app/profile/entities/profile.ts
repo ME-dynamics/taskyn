@@ -3,22 +3,22 @@ import { observable, action, makeObservable } from "mobx";
 export class ProfileState {
   constructor() {
     makeObservable(this, {
-      avatar: observable,
+      profilePictureUrl: observable,
       firstName: observable,
       lastName: observable,
       description: observable,
-      setAvatar: action,
+      setProfilePictureUrl: action,
       setFirstName: action,
       setLastName: action,
       setDescription: action,
     });
   }
-  avatar: string = "";
+  profilePictureUrl: string = "";
   firstName: string = "";
   lastName: string = "";
   description: string = "";
-  setAvatar(avatar: string) {
-    this.avatar = avatar;
+  setProfilePictureUrl(avatar: string) {
+    this.profilePictureUrl = avatar;
   }
   setFirstName(firstName: string) {
     this.firstName = firstName;
