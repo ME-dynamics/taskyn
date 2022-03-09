@@ -3,4 +3,5 @@ export { onOtpNumberChange } from "./onOtpNumberChange";
 export { passwordlessStart } from "./passwordlessStart";
 export { passwordlessVerify } from "./passwordlessVerify";
 export { initToken } from "./initToken";
-export { exit } from "./exit"
+export { exit } from "./exit";
+export { registerSilentRefresh } from "./silentRefresh";
