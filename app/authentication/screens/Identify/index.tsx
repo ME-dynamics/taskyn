@@ -20,7 +20,7 @@ import {
   Timer,
   TaskynIcon,
 } from "../../../library";
-import { inputState } from "../../entities";
+import { authState, inputState } from "../../entities";
 import {
   onOtpNumberChange,
   passwordlessVerify,
@@ -53,13 +53,13 @@ function IdentifyScreen() {
   useEffect(() => {
     isMounted.current = true;
     const disposer = autorun(() => {
-      if (inputState.otpNumber.length === 5) {
+      if (authState.otpToken && inputState.otpNumber.length === 5) {
         verify();
       }
     });
     return () => {
       isMounted.current = false;
-      return disposer();
+      disposer();
     };
   }, []);
   function onTimerEnd() {
