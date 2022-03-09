@@ -9,7 +9,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthNav, TabNav } from "./nativeNavigation";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
-import { getLoggedIn, initToken } from "./app/authentication";
+import { registerAppState, removeAppStateListeners } from "./app/library";
+import {
+  getLoggedIn,
+  initToken,
+  registerSilentRefresh,
+} from "./app/authentication";
 
 function AppComponent() {
   I18nManager.allowRTL(false);
@@ -19,8 +24,11 @@ function AppComponent() {
     TaskynIcon: require("./assets/fonts/icomoon.ttf"),
   });
   useEffect(() => {
+    const removeSilentRefreshAutoRun = registerSilentRefresh();
     async function prepare() {
       try {
+        registerAppState();
+
         await Promise.all([SplashScreen.preventAutoHideAsync(), initToken()]);
       } catch (error) {
         console.warn(error);
@@ -29,6 +37,10 @@ function AppComponent() {
       }
     }
     prepare();
+    return () => {
+      removeAppStateListeners();
+      removeSilentRefreshAutoRun();
+    };
   }, []);
   const onLayoutRootView = useCallback(async () => {
     if (isAppReady && fontsLoaded) {
