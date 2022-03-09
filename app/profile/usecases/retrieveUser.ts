@@ -7,7 +7,7 @@ export async function retrieveUser() {
     console.log(error);
     return;
   }
-  profileState.setAvatar(user.avatar);
+  profileState.setProfilePictureUrl(user.profilePictureUrl);
   profileState.setFirstName(user.firstName);
   profileState.setLastName(user.lastName);
   profileState.setDescription(user.description);

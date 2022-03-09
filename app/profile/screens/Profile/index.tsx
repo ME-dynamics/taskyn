@@ -61,7 +61,7 @@ function ProfileScreen() {
     <Container loading={loading}>
       <View style={styles.header}>
         <Headline>{"پروفایل"}</Headline>
-        <Avatar size={96} uri={profileState.avatar} />
+        <Avatar size={96} uri={profileState.profilePictureUrl} />
         {/* {nameRenderer()} */}
         <Headline>{`${profileState.firstName} ${profileState.lastName}`}</Headline>
       </View>
