@@ -1,19 +1,26 @@
-import { request, toString } from "../../../library";
-import { authState } from "../../entities";
+import { request, toString, logger } from "../../../library";
+import { parsePasswordlessVerify } from "../parsers";
 import { adapterTypes } from "../../types";
-import { storage } from "../../../library";
 export async function fetchPasswordlessVerify(
-  otpNumber: string
+  info: adapterTypes.IFetchPasswordlessVerify
 ): Promise<adapterTypes.IFetchPasswordlessVerifyResult> {
-  const deviceId = storage.retrieve("device_id", "string");
-  const { success, payload, error } = await request({
+  const { deviceId, otpCode, otpToken } = info;
+  // const deviceId = storage.retrieve("device_id", "string");
+  const { success, payload, error, httpStatus } = await request({
     endpoint: "/authnz/passwordless/verify",
     method: "POST",
-    body: { otpCode: otpNumber, otpToken: authState.otpToken, deviceId },
+    body: { otpCode, otpToken, deviceId },
   });
+
   if (!success) {
+    logger({
+      container: "authnz",
+      type: "error",
+      path: { section: "adapters", file: "fetchPasswordlessVerify" },
+      logMessage: `httpStatus: ${httpStatus}, error: ${error}`,
+    });
     return {
-      error: error,
+      error,
       jwt: "",
       role: "",
       refreshToken: "",
@@ -23,19 +30,5 @@ export async function fetchPasswordlessVerify(
     };
   }
 
-  const jwt = toString(payload?.jwtToken);
-  const refreshToken = toString(payload?.refreshToken);
-  const refreshExpires = Number(payload?.refreshTokenExpiresAt);
-  const jwtExpires = Number(payload?.jwtTokenExpiresAt);
-  const role = toString(payload?.role);
-  const userId = toString(payload?.userId);
-  return {
-    jwt,
-    refreshToken,
-    jwtExpires,
-    refreshExpires,
-    role,
-    userId,
-    error: "",
-  };
+  return parsePasswordlessVerify(payload);
 }
