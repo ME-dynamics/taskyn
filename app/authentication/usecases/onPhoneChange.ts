@@ -6,7 +6,7 @@ export function onPhoneChange(value: string) {
     const isValid = validatePhoneNumber(value);
     if (!isValid) {
       inputState.setPhoneValidation(["شماره اشتباه است"]);
-    } else {
+    } else if (inputState.phoneValidation.length > 0) {
       inputState.setPhoneValidation([]);
     }
   }
