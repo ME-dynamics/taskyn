@@ -45,7 +45,7 @@ function EditProfileScreen() {
         <Scroller gestureScroll>
           <View style={styles.profileImageContainer}>
             <Avatar
-              uri={profileState.avatar}
+              uri={profileState.profilePictureUrl}
               size={120}
               edit
               onEditPress={onCollapsePress}
