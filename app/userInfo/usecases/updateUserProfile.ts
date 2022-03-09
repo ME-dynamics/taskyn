@@ -66,7 +66,7 @@ export async function updateUserProfile(customerId: string) {
       lastName: userInfoState.lastName,
       address: userInfoState.address,
       telephone: userInfoState.telephone,
-      birthday: new Date(`${gy}-${gm}-${gd}`).toISOString(),
+      birthday: new Date(gy, gm - 1, gd).toISOString(),
       gender: userInfoState.gender,
     },
     customerId

@@ -13,6 +13,7 @@ import {
   SelectButton,
   Container,
   Scroller,
+  logger
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
@@ -31,8 +32,12 @@ function AuthenticationScreen() {
       await passwordlessStart();
       setLoading(false);
     } catch (error) {
-      //TODO: toast error
-      console.log(error);
+      logger({
+        type: "error",
+        container: "authentication",
+        path: {section: "screens", file: "Auth/index.tsx"},
+        logMessage: `passwordless start error: ${error}`
+      })
       setLoading(false);
     }
   }

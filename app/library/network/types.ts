@@ -4,10 +4,11 @@ export interface IRequest {
   body: Record<string, unknown> | undefined;
 }
 
+export type tPayload = Record<string, unknown> | undefined;
 export interface IResponse {
   success: boolean;
   httpStatus: number;
-  payload: Record<string, unknown> | undefined;
+  payload: tPayload;
   error: string;
 }
 

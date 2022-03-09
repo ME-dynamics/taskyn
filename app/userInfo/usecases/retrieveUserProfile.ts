@@ -8,10 +8,10 @@ export async function retrieveUserProfile(customerId: string | undefined) {
   ]);
   const userData = user.user;
   if (!userData || user.error) {
-    console.log("user data not found");
+    // console.log("user data not found");
     return;
   }
-  console.log(userData);
+  // console.log(userData);
   userInfoState.setFirstName(userData.firstName);
   userInfoState.setLastName(userData.lastName);
   userInfoState.setAddress(userData.address);
@@ -20,7 +20,7 @@ export async function retrieveUserProfile(customerId: string | undefined) {
   userInfoState.setGender(userData.gender);
   const patientData = patient.patient;
   if (!patientData || patient.error) {
-    console.log(patientData);
+    // console.log(patientData);
     return "error";
   }
 

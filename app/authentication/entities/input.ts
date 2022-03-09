@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, computed } from "mobx";
 
 export class InputState {
   constructor() {
@@ -12,6 +12,7 @@ export class InputState {
       setPhoneValidation: action,
       setOtpValidation: action,
       reset: action,
+      isPhoneValid: computed,
     });
   }
   phoneNumber: string = "";
@@ -35,5 +36,8 @@ export class InputState {
     this.otpNumber = "";
     this.phoneValidation = [];
     this.otpValidation = [];
+  }
+  get isPhoneValid(): boolean {
+    return this.phoneValidation.length === 0;
   }
 }
