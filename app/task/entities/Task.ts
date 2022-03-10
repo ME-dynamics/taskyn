@@ -1,4 +1,5 @@
 import { action, makeObservable, observable, computed } from "mobx";
+import { logger } from "../../library";
 import { ITask } from "../types";
 export class TaskState {
   constructor() {
@@ -45,6 +46,13 @@ export class TaskState {
     const result: ITask[] = [];
     for (let index = 0; index < this.tasks.length; index++) {
       const task = this.tasks[index];
+      logger({
+        container: "task",
+        path: { section: "entities", file: "Task" },
+        type: "debug",
+        logMessage: `taskId: ${taskId} task.id, ${task.id}`,
+      });
+
       if (task.id === taskId) {
         continue;
       }
@@ -70,7 +78,7 @@ export class TaskState {
     if (!task) {
       this.currentEditTask = undefined;
       return;
-    }; // TODO: warning here
+    } // TODO: warning here
     this.currentEditTask = task;
   }
   get taskList() {
