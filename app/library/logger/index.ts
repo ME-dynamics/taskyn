@@ -28,11 +28,19 @@ const log = rnLogger.createLogger({
   },
 });
 
+function startWithCapitalLetter(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 export function logger(logInfo: ILogger) {
   if (!__DEV__) return;
   const { container, type, path, logMessage } = logInfo;
   const { section, file } = path;
-  const message = `${container.toUpperCase()}-->${section.toUpperCase()}-->${file.toUpperCase()}: ${logMessage}`;
+  const message = `${startWithCapitalLetter(
+    container
+  )} -> ${startWithCapitalLetter(section)} -> ${startWithCapitalLetter(
+    file
+  )}: ${logMessage}`;
   switch (type) {
     case "debug":
       log.debug(message);
