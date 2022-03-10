@@ -119,6 +119,7 @@ function UserInfoScreen() {
           editable={userInfoState.editable}
           mode={"with-label"}
           title={"تلفن ثابت"}
+          textAlign={"right"}
           placeholder={"مثال: ۰۲۱۲۳۴۵۶۷۸۹"}
           // textAlign={"center"}
           value={userInfoState.telephone}
@@ -163,24 +164,26 @@ function UserInfoScreen() {
           }}
           editable={userInfoState.editable}
         />
-        <ScrollPicker
-          title={"وضعیت تاهل"}
-          itemKey={toJS(userInfoState.maritalState)}
-          items={[
-            { label: "نامزد", key: "namzad" },
-            { label: "عقد", key: "aghed" },
-            { label: "عقد دائم", key: "aghedDayem" },
-            { label: "ازدواج موقت", key: "movaghat" },
-            { label: "تعدد زوجات", key: "wives" },
-            { label: "متارکه", key: "motarekeh" },
-            { label: "مطلقه", key: "motalagheh" },
-            { label: "بیوه", key: "widow" },
-          ]}
-          onItemSelected={(item) => {
-            userInfoState.setMaritalState(item.key);
-          }}
-          editable={userInfoState.editable}
-        />
+        {userInfoState.maritalStatusText === "متاهل" ? (
+          <ScrollPicker
+            title={"وضعیت تاهل"}
+            itemKey={toJS(userInfoState.maritalState)}
+            items={[
+              { label: "نامزد", key: "namzad" },
+              { label: "عقد", key: "aghed" },
+              { label: "عقد دائم", key: "aghedDayem" },
+              { label: "ازدواج موقت", key: "movaghat" },
+              { label: "تعدد زوجات", key: "wives" },
+              { label: "متارکه", key: "motarekeh" },
+              { label: "مطلقه", key: "motalagheh" },
+              { label: "بیوه", key: "widow" },
+            ]}
+            onItemSelected={(item) => {
+              userInfoState.setMaritalState(item.key);
+            }}
+            editable={userInfoState.editable}
+          />
+        ) : null}
         <ScrollPicker
           title={"تحصیلات"}
           itemKey={toJS(userInfoState.education)}
