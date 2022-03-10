@@ -161,20 +161,20 @@ export function registerSilentRefresh() {
         const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
         if (timeToRefresh < 1e4) {
           // if time to refresh is less than 10 seconds, then refresh
-          logger({
-            container: "authentication",
-            path: { section: "usecases", file: "silentRefresh" },
-            type: "info",
-            logMessage: `token expires in less than 10 seconds, refreshing in timer`,
-          });
+          // logger({
+          //   container: "authentication",
+          //   path: { section: "usecases", file: "silentRefresh" },
+          //   type: "info",
+          //   logMessage: `token expires in less than 10 seconds, refreshing in timer`,
+          // });
           refresh();
         }
-        logger({
-          container: "authentication",
-          path: { section: "usecases", file: "silentRefresh" },
-          type: "info",
-          logMessage: `interval ran, but token is not refreshed`,
-        });
+        // logger({
+        //   container: "authentication",
+        //   path: { section: "usecases", file: "silentRefresh" },
+        //   type: "info",
+        //   logMessage: `interval ran, but token is not refreshed`,
+        // });
       }, interval);
     }
   });
