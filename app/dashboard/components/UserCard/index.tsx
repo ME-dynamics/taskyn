@@ -16,7 +16,7 @@ function UserCardComponent(props: ICardProps) {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         {/* <Image source={{ uri: imageUrl }} style={styles.image} /> */}
-        <Avatar size={52} />
+        <Avatar size={52} imageUri={imageUrl} />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.titleContainer}>
