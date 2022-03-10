@@ -32,7 +32,7 @@ export function logger(logInfo: ILogger) {
   if (!__DEV__) return;
   const { container, type, path, logMessage } = logInfo;
   const { section, file } = path;
-  const message = `${container}-${section}-${file}: ${logMessage}`;
+  const message = `${container.toUpperCase()}-->${section.toUpperCase()}-->${file.toUpperCase()}: ${logMessage}`;
   switch (type) {
     case "debug":
       log.debug(message);
