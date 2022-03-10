@@ -20,9 +20,6 @@ import {
 } from "../../usecases";
 import { styles } from "./styles";
 
-const image =
-  "https://cdn01.zoomit.ir/2021/12/iran-national-network.jpg?w=1300";
-
 function ProvidersScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const isFocused = useIsFocused();
@@ -36,6 +33,15 @@ function ProvidersScreen() {
       init();
     }
   }, [isFocused]);
+  function renderTitleForMyProvider() {
+    if (providerState.myProvider && providerState.requestConfirmed) {
+      return "دکتر من";
+    }
+    if (providerState.myProvider && !providerState.requestConfirmed) {
+      return "در انتظار تایید دکتر";
+    }
+    return "دکتر من";
+  }
   function renderProviderList() {
     if (providerState.query) {
       const length = providerState.searchResult.length;
@@ -65,7 +71,11 @@ function ProvidersScreen() {
     }
     const length = providerState.providers.length;
     if (length === 0) {
-      return <Subheading>{"دکتری پیدا نشد"}</Subheading>;
+      return (
+        <Subheading style={{ textAlign: "center", marginTop: 32 }}>
+          {"دکتری پیدا نشد"}
+        </Subheading>
+      );
     }
     const providers: JSX.Element[] = [];
     for (let index = 0; index < length; index++) {
@@ -99,17 +109,17 @@ function ProvidersScreen() {
       </View>
       <View style={styles.requestContainer}>
         <View style={styles.horizontalLine} />
-        <Title style={styles.myDoctorTitle}>{"دکتر من"}</Title>
+        <Title style={styles.myDoctorTitle}>{renderTitleForMyProvider()}</Title>
         {providerState.myProvider ? (
           <ProviderCard
             id={providerState.myProvider?.id || ""}
             fullName={`${providerState.myProvider?.firstName} ${providerState.myProvider?.lastName}`}
             description={providerState.myProvider?.description || "متخصص"}
-            profileImageUrl={""}
+            profileImageUrl={providerState.myProvider?.profilePictureUrl || ""}
             myDoctor
           />
         ) : (
-          <Subheading style={{ textAlign: "center" }}>
+          <Subheading style={{ textAlign: "center", paddingBottom: 30 }}>
             {"دکتری ثبت نشده است"}
           </Subheading>
         )}
