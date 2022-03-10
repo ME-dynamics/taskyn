@@ -16,6 +16,7 @@ function TabNavigation() {
     <Tab.Navigator
       initialRouteName={"dashboardTab"}
       backBehavior={"initialRoute"}
+      safeAreaInsets={{ top: 0, bottom: 0 }}
       screenOptions={{
         tabBarActiveTintColor: THEME.COLORS.PRIMARY.NORMAL,
         tabBarInactiveTintColor: THEME.COLORS.GREY.NORMAL,
