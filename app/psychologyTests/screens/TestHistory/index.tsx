@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useNavigation } from "@react-navigation/core";
+import { useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { TaskynIcon, Container, IconButton, Scroller } from "../../../library";
 import { TestResultHistoryCard, TextIcon } from "../../components";
@@ -13,6 +14,8 @@ import ColorHash from "color-hash";
 
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const route = useRoute();
+  const id = route.params?.id || "";
   function renderTestResultCard() {
     const result: JSX.Element[] = [];
     const colorHash = new ColorHash();
@@ -39,7 +42,7 @@ function TestHistoryScreen() {
     return result;
   }
   async function init() {
-    await retiriveTestHistory("");
+    await retiriveTestHistory(id);
   }
   useEffect(() => {
     init();
