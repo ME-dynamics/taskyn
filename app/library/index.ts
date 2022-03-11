@@ -29,3 +29,4 @@ export {
   registerAppState,
   removeAppStateListeners,
 } from "./appState";
+export { TaskynImage } from "./TaskynImage"
