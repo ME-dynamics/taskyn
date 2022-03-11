@@ -3,10 +3,11 @@ import { IFetchGetTestResultById } from "../../types";
 import { parseTestResult } from "../utils";
 
 export async function fetchGetTestResultById(
-  testId: string
+  testId: string,
+  customerId: string
 ): Promise<IFetchGetTestResultById> {
   const { error, httpStatus, payload, success } = await request({
-    endpoint: `/tests/testResult/${testId}/`,
+    endpoint: `/tests/testResult/${testId}/${customerId}`,
     method: "GET",
     body: undefined,
   });
