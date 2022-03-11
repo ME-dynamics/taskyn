@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import { MaterialIcons } from "@expo/vector-icons";
-import { TaskynIcon, Tap } from "../../../library";
+import { TaskynIcon, Tap, TaskynImage } from "../../../library";
 
 import { styleGen } from "./styles";
 import { IAvatarProps } from "../../types";
@@ -19,7 +19,7 @@ function AvatarComponent(props: IAvatarProps) {
     <Tap onPress={onPress}>
       <View style={styles.container}>
         {uri ? (
-          <Image style={styles.image} source={{ uri }} />
+          <TaskynImage style={styles.image} source={{ uri }} />
         ) : (
           <MaterialIcons
             name={"person"}
