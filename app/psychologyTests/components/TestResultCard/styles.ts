@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 import { THEME } from "../../../library";
 export const errorColor = THEME.COLORS.TEST.RED.DARK;
 export const warningColor = THEME.COLORS.TEST.YELLOW.DARK;
-export const factorColor = THEME.COLORS.TEST.GREEN.DARK;
-export const facetColor = THEME.COLORS.TEST.GREEN.NORMAL;
+export const factorColor = THEME.COLORS.BLACK.NORMAL;
+export const facetColor = THEME.COLORS.GREY.DARK;
 export const styles = StyleSheet.create({
   container: {
     width: "95%",
@@ -15,19 +15,18 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: "hidden",
   },
-  TextContainer: {
+  textContainer: {
     flex: 20,
     flexDirection: "column",
     paddingRight: 10,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
   row: {
     flexDirection: "row-reverse",
     alignItems: "center",
   },
-  sideBarColorr: {
-    flex: 0.5,
-    // marginRight: 10,
+  sideBarColor: {
+    flex: 0.3,
     backgroundColor: "red",
   },
 });

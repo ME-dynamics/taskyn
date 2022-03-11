@@ -9,7 +9,7 @@ import {
   warningColor,
 } from "./styles";
 import { ITestResultProps } from "../../types";
-import { Subheading } from "../../../library";
+import { Headline, Subheading, THEME, Title } from "../../../library";
 function TestResultCardComponent(props: ITestResultProps) {
   const { faName, enName, variable, rawScore, baseRate, type, interpret } =
     props;
@@ -42,28 +42,62 @@ function TestResultCardComponent(props: ITestResultProps) {
         return "";
     }
   }
+  function baseRateCal() {
+    if (rawScore === baseRate) {
+      return null;
+    }
+    return (
+      <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+        {`نرخ تبدیل پایه = `}
+        <Subheading>{baseRate}</Subheading>
+      </Subheading>
+    );
+  }
+  function interpretRenderer() {
+    if (interpret) {
+      return (
+        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+          {`وضعیت: `}
+          <Subheading>{interpret}</Subheading>
+        </Subheading>
+      );
+    }
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <View
         style={[
           type
-            ? { ...styles.sideBarColorr, backgroundColor: typeToColor(type) }
-            : styles.sideBarColorr,
+            ? { ...styles.sideBarColor, backgroundColor: typeToColor(type) }
+            : styles.sideBarColor,
         ]}
       />
-      <View style={styles.TextContainer}>
-        <Subheading>{typeToTitle(type)}</Subheading>
-        <Subheading>{`نام فارسی عامل: ${faName}`}</Subheading>
-        <Subheading
-          style={{ textAlign: "right" }}
-        >{`نام انگلیسی عامل: ${enName}`}</Subheading>
-        <Subheading style={{ textAlign: "right" }}>
-          {`نماد عامل: ${variable.toUpperCase()}`}
+      <View style={styles.textContainer}>
+        <Headline>{typeToTitle(type)}</Headline>
+        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+          {`نام فارسی:`} <Subheading>{faName}</Subheading>
         </Subheading>
-        <Subheading>{`نمره خام = ${rawScore}`}</Subheading>
-        <Subheading>{`نرخ تبدیل پایه = ${baseRate}`}</Subheading>
-        <Subheading>{`وضعیت: ${interpret}`}</Subheading>
+
+        <Subheading
+          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
+        >
+          {`نام انگلیسی: `}
+          <Subheading>{enName}</Subheading>
+        </Subheading>
+        <Subheading
+          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
+        >
+          {`نماد: `}
+          <Subheading>{variable.toUpperCase()}</Subheading>
+        </Subheading>
+        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+          {`نمره خام: `}
+          <Subheading>{rawScore}</Subheading>
+        </Subheading>
+        {baseRateCal()}
+        {interpretRenderer()}
       </View>
     </View>
   );
