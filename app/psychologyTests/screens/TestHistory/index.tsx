@@ -15,7 +15,7 @@ import ColorHash from "color-hash";
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
-  const id = route.params?.id || "";
+  const customerId = route.params?.id || "";
   function renderTestResultCard() {
     const result: JSX.Element[] = [];
     const colorHash = new ColorHash();
@@ -34,7 +34,11 @@ function TestHistoryScreen() {
           faName={faName}
           createdAt={createdAt}
           onPress={() => {
-            navigation.push("testResultScreen", { id, mode: "testHistory" });
+            navigation.push("testResultScreen", {
+              testId: id,
+              customerId,
+              mode: "testHistory",
+            });
           }}
         />
       );
@@ -42,7 +46,7 @@ function TestHistoryScreen() {
     return result;
   }
   async function init() {
-    await retiriveTestHistory(id);
+    await retiriveTestHistory(customerId);
   }
   useEffect(() => {
     init();
