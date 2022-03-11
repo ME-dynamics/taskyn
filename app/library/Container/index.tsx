@@ -11,7 +11,7 @@ function ContainerComponent(props: IContainerProps) {
   const { children, style, loading } = props;
 
   return (
-    <SafeAreaView {...props} style={[styles.container, style]}>
+    <SafeAreaView {...props} style={[styles.container, style]} edges={['top', 'left', 'right']}>
       {loading ? <Loading /> : children}
       <NetInfo />
     </SafeAreaView>

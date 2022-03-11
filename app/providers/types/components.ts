@@ -5,3 +5,7 @@ export interface IProviderCardProps {
   profileImageUrl: string;
   myDoctor: boolean;
 }
+export interface IRemoveSheetProps {
+  onCancelPress: () => void;
+  onRemoveProvider: () => void;
+}

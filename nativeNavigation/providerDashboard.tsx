@@ -12,6 +12,7 @@ import { TestHistory } from "../app/psychologyTests";
 import { headerOptions } from "./headerOptions";
 
 import { NoteNav } from "./noteNav";
+import { TestResultScreen } from "../app/psychologyTests/screens/TestResult";
 const DashboardStack = createNativeStackNavigator();
 
 function ProviderDashboardNavigation() {
@@ -53,6 +54,11 @@ function ProviderDashboardNavigation() {
         name={"testHistory"}
         component={TestHistory}
         options={{ ...headerOptions, title: "تاریخچه تست ها" }}
+      />
+        <DashboardStack.Screen
+        name={"testResultScreen"}
+        component={TestResultScreen}
+        options={{ ...headerOptions, title: "نتیجه تست" }}
       />
     </DashboardStack.Navigator>
   );

@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View, Image } from "react-native";
 import { observer } from "mobx-react-lite";
 import {
+  Avatar,
   Button,
   Caption,
   CustomBackdrop,
@@ -15,10 +16,14 @@ import { IProviderCardProps } from "../../types";
 import { providerState } from "../../entities";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { SuccessAlert } from "../../../library/SuccessAlert";
+import { RemoveSheet } from "../RemoveSheet";
 
 function ProviderCardComponent(props: IProviderCardProps) {
   const { id, fullName, profileImageUrl, description, myDoctor } = props;
   const snapPointsModal = useMemo(() => [150, 180], []);
+  const [modalType, setModalType] = useState<
+    "submitName" | "confirmRemoveConnection"
+  >("submitName");
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const close = useCallback(() => {
     BottomSheetModalRef.current?.close();
@@ -46,27 +51,31 @@ function ProviderCardComponent(props: IProviderCardProps) {
   //   ? cancelConnectionText
   //   : cancelRequestText;
   const [loading, setLoading] = useState<boolean>(false);
+  async function onRemoveProvider() {
+    await removeProvider(id);
+  }
   async function onPress() {
     const mode = buttonMode();
     setLoading(true);
     if (mode === requestText) {
       const nameMustBeDefined = await createRequest(id);
       if (nameMustBeDefined) {
+        setModalType("submitName");
         onCollapsePressModal();
       }
     } else if (mode === cancelRequestText) {
       await removeRequest();
     } else if (mode === cancelConnectionText) {
-      await removeProvider(id);
+      setModalType("confirmRemoveConnection");
+      onCollapsePressModal();
+      // await removeProvider(id);
     }
     // myDoctor ? await removeRequest() : await createRequest(id);
     setLoading(false);
   }
   function renderAvatar() {
     if (profileImageUrl) {
-      return (
-        <Image style={styles.profileImage} source={{ uri: profileImageUrl }} />
-      );
+      return <Avatar size={52} imageUri={profileImageUrl} />;
     }
     return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;
   }
@@ -104,10 +113,17 @@ function ProviderCardComponent(props: IProviderCardProps) {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert
-          onClosePress={close}
-          title={"در بخش پروفایل و یا پرونده بیمار، اسم خود را وارد کنید"}
-        />
+        {modalType === "confirmRemoveConnection" ? (
+          <RemoveSheet
+            onCancelPress={close}
+            onRemoveProvider={onRemoveProvider}
+          />
+        ) : (
+          <SuccessAlert
+            onClosePress={close}
+            title={"در بخش پروفایل و یا پرونده بیمار، اسم خود را وارد کنید"}
+          />
+        )}
       </BottomSheetModal>
     </View>
   );

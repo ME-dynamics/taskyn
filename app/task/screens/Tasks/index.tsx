@@ -8,17 +8,10 @@ import React, {
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useRoute } from "@react-navigation/native";
-import { getRole } from "../../../authentication";
-import {
-  Button,
-  Container,
-  CustomBackdrop,
-  Scroller,
-  tScrollerRef,
-} from "../../../library";
+import { Button, Container, CustomBackdrop, Scroller } from "../../../library";
 import { TaskItem } from "../../components/TaskItem";
 import { taskState } from "../../entities";
-import { retrieveTasks, addEmptyTask } from "../../usecases";
+import { retrieveTasks } from "../../usecases";
 import { styles } from "./styles";
 import { Entypo } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";

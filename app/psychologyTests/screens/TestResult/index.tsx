@@ -1,12 +1,13 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Container, Scroller } from "../../../library";
+import { Container, logger, Scroller } from "../../../library";
 import { styles } from "./styles";
 import { TestResultCard } from "../../components";
 import { testResultState } from "../../entities";
 import { retrieveTestResult } from "../../usecases";
 import { useRoute } from "@react-navigation/native";
+
 export function TestResultScreen() {
   const route = useRoute();
   //@ts-ignore
@@ -14,11 +15,18 @@ export function TestResultScreen() {
   const isTestHistory = mode === "testHistory";
   const [loading, setLoading] = useState(isTestHistory);
 
-  //@ts-ignore
-  const id = route.params?.id || "";
+  const testId = route.params?.testId || "";
+  const customerId = route.params?.customerId || "";
+
   async function init() {
     // console.log(id);
-    await retrieveTestResult(id);
+    logger({
+      container: "psychologyTests",
+      path: { section: "screens", file: "TestResult" },
+      type: "debug",
+      logMessage: `test id is : ${testId}`,
+    });
+    await retrieveTestResult(testId, customerId);
     setLoading(false);
   }
 
