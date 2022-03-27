@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Gesture, GestureDetector, State } from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useDoublePress } from "../doublePress";
 import { ITapProps } from "./types";
 
