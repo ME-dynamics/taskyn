@@ -3,7 +3,7 @@ import { Image, ImageProps } from "react-native";
 import { observer } from "mobx-react-lite";
 import { secureStorage } from "../storage";
 
-export function TaskynImageComponent(props: ImageProps) {
+function TaskynImageComponent(props: ImageProps) {
   const { source } = props;
   const [token, setToken] = useState<string>("");
   const init = useCallback(async function init() {
