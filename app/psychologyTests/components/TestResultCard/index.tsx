@@ -47,18 +47,24 @@ function TestResultCardComponent(props: ITestResultProps) {
       return null;
     }
     return (
-      <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-        {`نرخ تبدیل پایه = `}
-        <Subheading>{baseRate}</Subheading>
-      </Subheading>
+      <View style={{ flex: 1, paddingVertical: 6 }}>
+        <Subheading>
+          {`نرخ تبدیل پایه: `}
+          <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+            {baseRate}
+          </Subheading>
+        </Subheading>
+      </View>
     );
   }
   function interpretRenderer() {
     if (interpret) {
       return (
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+        <Subheading>
           {`وضعیت: `}
-          <Subheading>{interpret}</Subheading>
+          <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+            {interpret}
+          </Subheading>
         </Subheading>
       );
     }
@@ -67,6 +73,44 @@ function TestResultCardComponent(props: ITestResultProps) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.textContainer}>
+          <View style={{ flex: 1, paddingVertical: 6 }}>
+            <Headline>{typeToTitle(type)}</Headline>
+          </View>
+          <View style={{ flex: 1, paddingVertical: 6 }}>
+            <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+              <Subheading>
+                {faName}
+                <Subheading
+                  style={{ color: THEME.COLORS.GREY.DARK }}
+                >{` ( ${enName} )`}</Subheading>
+              </Subheading>
+            </Subheading>
+          </View>
+          <View style={{ flex: 1, paddingVertical: 6 }}>
+            <Subheading style={{ textAlign: "right" }}>
+              {`نماد: `}
+              <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+                {variable.toUpperCase()}
+              </Subheading>
+            </Subheading>
+          </View>
+          {baseRateCal()}
+          <View style={{ flex: 1, paddingVertical: 6 }}>
+            <Subheading>
+              {`نمره خام: `}
+              <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
+                {rawScore}
+              </Subheading>
+            </Subheading>
+          </View>
+
+          <View style={{ flex: 1, paddingVertical: 6 }}>
+            {interpretRenderer()}
+          </View>
+        </View>
+      </View>
       <View
         style={[
           type
@@ -74,31 +118,6 @@ function TestResultCardComponent(props: ITestResultProps) {
             : styles.sideBarColor,
         ]}
       />
-      <View style={styles.textContainer}>
-        <Headline>{typeToTitle(type)}</Headline>
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-          {`نام فارسی:`} <Subheading>{faName}</Subheading>
-        </Subheading>
-
-        <Subheading
-          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
-        >
-          {`نام انگلیسی: `}
-          <Subheading>{enName}</Subheading>
-        </Subheading>
-        <Subheading
-          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
-        >
-          {`نماد: `}
-          <Subheading>{variable.toUpperCase()}</Subheading>
-        </Subheading>
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-          {`نمره خام: `}
-          <Subheading>{rawScore}</Subheading>
-        </Subheading>
-        {baseRateCal()}
-        {interpretRenderer()}
-      </View>
     </View>
   );
 }
