@@ -4,7 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import { Button, Title, Container, Scroller, toString } from "../../../library";
+import { Button, Subheading, Container, Scroller } from "../../../library";
 
 import { NoteCard } from "../../components/NoteCard";
 import { retrieveNotes } from "../../usecases";
@@ -15,14 +15,12 @@ import { noteListState } from "../../entities";
 function NoteListScreen() {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
+  // @ts-expect-error
   const customerId = route.params?.id || "";
   const [loading, setLoading] = useState<boolean>(true);
 
   async function init() {
-    console.log(route.params);
-    // @ts-expect-error
-    await retrieveNotes(toString(route?.params?.id));
-    // await retrieveNotes("3c959478-8333-4d90-8ede-05d4c9226488");
+    await retrieveNotes(customerId);
     setLoading(false);
   }
   useEffect(() => {
@@ -33,7 +31,7 @@ function NoteListScreen() {
     if (length === 0) {
       return (
         <View style={styles.empty}>
-          <Title>{"شما هنوز یادداشتی ایجاد نکردید."}</Title>
+          <Subheading>{"شما هنوز یادداشتی ایجاد نکردید."}</Subheading>
         </View>
       );
     }
@@ -67,7 +65,7 @@ function NoteListScreen() {
           }}
           fullRadius
           onPress={() => {
-            navigator.push("createNote",{customerId});
+            navigator.push("createNote", { customerId });
           }}
         >
           {"ایجاد یادداشت جدید"}
