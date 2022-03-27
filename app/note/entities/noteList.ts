@@ -1,4 +1,5 @@
 import { observable, action, makeObservable } from "mobx";
+import { logger } from "../../library"
 import type { INote } from "../types";
 
 export class NoteListState {
@@ -28,7 +29,7 @@ export class NoteListState {
         return;
       }
     }
-    this.notes.push(note);
+    this.notes.unshift(note);
   }
   updateNote(note: INote) {
     for (let index = 0; index < this.notes.length; index++) {
@@ -47,6 +48,12 @@ export class NoteListState {
         return;
       }
     }
+    logger({
+      container: "notes",
+      path: {section: "entities", file: "noteList"},
+      type: 'state',
+      logMessage: `current note with given id not found. id: ${id}`
+    })
     this.currentNote = undefined;
   }
   setCurrentNoteTitle(title: string) {

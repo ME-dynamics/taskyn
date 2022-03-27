@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import { Note, NoteList, CreateNote } from "../app/note";
+import { Note, NoteList, CreateNote, NoteGallery } from "../app/note";
 import { headerOptions } from "./headerOptions";
 
 const NoteStack = createNativeStackNavigator();
@@ -28,6 +28,11 @@ function NoteNavigation() {
       <NoteStack.Screen
         name={"note"}
         component={Note}
+        options={{ headerShown: false }}
+      />
+      <NoteStack.Screen
+        name={"noteGallery"}
+        component={NoteGallery}
         options={{ headerShown: false }}
       />
     </NoteStack.Navigator>

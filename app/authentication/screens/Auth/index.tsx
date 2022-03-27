@@ -13,7 +13,7 @@ import {
   SelectButton,
   Container,
   Scroller,
-  logger
+  logger,
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
@@ -35,9 +35,9 @@ function AuthenticationScreen() {
       logger({
         type: "error",
         container: "authentication",
-        path: {section: "screens", file: "Auth/index.tsx"},
-        logMessage: `passwordless start error: ${error}`
-      })
+        path: { section: "screens", file: "Auth/index.tsx" },
+        logMessage: `passwordless start error: ${error}`,
+      });
       setLoading(false);
     }
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { Image } from "react-native";
 import { TaskynIcon } from "../TaskynIcon";
-
+import { TaskynImage } from "../TaskynImage"
 import { borderRadius, color, styleGen } from "./styles";
 
 import type { IAvatarProps } from "./types";
@@ -12,7 +12,7 @@ function AvatarComponent(props: IAvatarProps) {
   const styles = styleGen(size);
   if (imageUri) {
     return (
-      <Image
+      <TaskynImage
         source={{ uri: imageUri }}
         style={styles.image}
         borderRadius={borderRadius}

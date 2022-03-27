@@ -1,42 +1,76 @@
 import React, { useEffect, useState } from "react";
-import { View, Image } from "react-native";
+import {
+  View,
+  ImageLoadEventData,
+  NativeSyntheticEvent,
+  StyleSheet,
+} from "react-native";
 import { observer } from "mobx-react-lite";
 import { Skeleton } from "moti/skeleton";
-import { IconButton, Tap, TaskynIcon, storage } from "../../../library";
+import { IconButton, Tap, TaskynIcon, TaskynImage } from "../../../library";
+
+import { noteListState } from "../../entities";
+import { retrievePrivateImage } from "../../usecases";
+
 import { styles, iconButtonStyle } from "./styles";
 import { INoteImageProps } from "../../types";
-import { noteListState } from "../../entities";
 function NoteImageComponent(props: INoteImageProps) {
-  const { id, onImagePress, onRemovePress } = props;
+  const { id, galleryMode, onImagePress, onRemovePress, setImageDimensions } =
+    props;
   const [imageUrl, setImageUrl] = useState<string>("");
   function imagePress() {
-    onImagePress(id);
+    if (!galleryMode && onImagePress) {
+      onImagePress(id);
+    }
   }
   function removePress() {
-    onRemovePress(id);
+    if (!galleryMode && onRemovePress) {
+      onRemovePress(id);
+    }
+  }
+  function onImageLoad(event: NativeSyntheticEvent<ImageLoadEventData>) {
+    if (setImageDimensions) {
+      const { width, height } = event.nativeEvent.source;
+      setImageDimensions({ width, height });
+    }
+  }
+  async function init() {
+    const url = await retrievePrivateImage(id);
+    setImageUrl(url);
   }
   useEffect(() => {
-    const imagePath = storage.retrieve(id, "string");
-    if (typeof imagePath === "string") {
-      console.log(imagePath);
-      setImageUrl(imagePath);
-    }
+    init();
   }, []);
-  // get the url
-  // wait with moti skeleton
-  // render image
+  function renderImage() {
+    if (galleryMode && imageUrl) {
+      return (
+        <TaskynImage
+          source={{ uri: imageUrl }}
+          style={styles.image}
+          resizeMode={"contain"}
+          onLoad={onImageLoad}
+        />
+      );
+    }
+    if (imageUrl) {
+      return (
+        <Tap onPress={imagePress}>
+          <TaskynImage
+            source={{ uri: imageUrl }}
+            style={styles.image}
+            // onLoad={onImageLoad}
+          />
+        </Tap>
+      );
+    }
+    return <View style={styles.image} />;
+  }
   return (
-    <View style={styles.container}>
-      <Skeleton show={!imageUrl} radius={4} colorMode={"light"}>
-        {imageUrl ? (
-          <Tap onPress={imagePress}>
-            <Image source={{ uri: imageUrl }} style={styles.image} />
-          </Tap>
-        ) : (
-          <View style={styles.image} />
-        )}
+    <View style={galleryMode ? styles.galleryContainer : styles.container}>
+      <Skeleton show={!galleryMode && !imageUrl} radius={4} colorMode={"light"}>
+        {renderImage()}
       </Skeleton>
-      {noteListState.currentNote?.edit ? (
+      {!galleryMode && noteListState.currentNote?.edit ? (
         <View style={styles.closeIcon}>
           <IconButton
             onPress={removePress}

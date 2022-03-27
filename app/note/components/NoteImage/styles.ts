@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     alignSelf: "center",
   },
+  galleryContainer: StyleSheet.absoluteFillObject,
   image: {
     width: "100%",
     height: "100%",
