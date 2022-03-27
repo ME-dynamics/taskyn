@@ -49,7 +49,7 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
         </Paragraph>
       )}
 
-      {disabled ? null : (
+      {disabled || loading ? null : (
         <Touchable ref={ref} onPress={onPress} rippleColor={rippleColor} />
       )}
     </View>
