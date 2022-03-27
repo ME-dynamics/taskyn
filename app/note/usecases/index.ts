@@ -7,3 +7,4 @@ export { onContentChange } from "./onContentChange";
 export { createNote } from "./createNote";
 export { retrieveNotes } from "./retrieveNotes";
 export { updateNote } from "./updateNote";
+export { retrievePrivateImage } from "./retrievePrivateImage";
