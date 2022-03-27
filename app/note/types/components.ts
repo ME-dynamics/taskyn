@@ -1,7 +1,9 @@
 export interface INoteImageProps {
   id: string;
-  onRemovePress: (id: string) => void;
-  onImagePress: (id: string) => void;
+  galleryMode?: boolean;
+  onRemovePress?: (id: string) => void;
+  onImagePress?: (id: string) => void;
+  setImageDimensions?: (args: { width: number; height: number }) => void;
 }
 
 export interface ICreateNoteImageProps {
