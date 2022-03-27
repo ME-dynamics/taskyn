@@ -1,7 +1,6 @@
 import React, { useRef, useMemo } from "react";
 import { View } from "react-native";
-import Gallery from "react-native-awesome-gallery";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import {
   BottomSheetModalProvider,
   BottomSheetModal,
@@ -16,7 +15,10 @@ import { updateNote } from "../../usecases";
 
 import { styles } from "./styles";
 
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 function NoteScreen() {
+  const navigator = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["30%", "30%"], []);
@@ -29,7 +31,7 @@ function NoteScreen() {
     bottomSheetRef.current?.present();
   }
   function onImagePress(id: string) {
-    console.log(id, "open gallery here");
+    navigator.push("noteGallery");
   }
   function onRemovePress(id: string) {
     const imageIds =
