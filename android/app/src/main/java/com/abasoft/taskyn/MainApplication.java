@@ -46,7 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected JSIModulePackage getJSIModulePackage() {
-      return new TaskynJSIPackage();
+      return new ReanimatedJSIModulePackage();
     }
   });
 
