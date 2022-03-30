@@ -9,12 +9,14 @@ import { noteListState } from "../../entities";
 function NoteGalleryScreen() {
   if (!noteListState.currentNote) return null;
   const imageIds = noteListState.currentNote.imageIds;
+  const initialImageIndex = noteListState.currentNoteImageIndex;
   const keyExtractor = useCallback(function keyExtract(item) {
     return item;
   }, []);
   return (
     <Container>
       <Gallery
+        initialIndex={initialImageIndex}
         data={imageIds}
         keyExtractor={keyExtractor}
         renderItem={({ index, item, setImageDimensions }) => {
