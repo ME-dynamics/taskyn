@@ -1,12 +1,14 @@
 import { observable, action, makeObservable } from "mobx";
-import { logger } from "../../library"
+import { logger } from "../../library";
 import type { INote } from "../types";
 
 export class NoteListState {
   constructor() {
     makeObservable(this, {
       currentNote: observable,
+      currentNoteImageIndex: observable,
       notes: observable,
+      setCurrentNoteImageIndex: action,
       setNotes: action,
       addNote: action,
       updateNote: action,
@@ -14,11 +16,31 @@ export class NoteListState {
       setCurrentNoteTitle: action,
       setCurrentNoteContent: action,
       setEditable: action,
-      updateCurrentNoteImageIds: action
+      updateCurrentNoteImageIds: action,
     });
   }
   notes: INote[] = [];
   currentNote: (INote & { edit: boolean }) | undefined = undefined;
+  currentNoteImageIndex: number = 0;
+  setCurrentNoteImageIndex(id: string) {
+    if (!this.currentNote) {
+      logger({
+        container: "note",
+        path: { section: "entities", file: "noteList" },
+        type: "error",
+        logMessage: `current note Image is not defined.`,
+      });
+      return;
+    }
+    const indexFound = this.currentNote?.imageIds;
+    for (let index = 0; index < indexFound.length; index++) {
+      if (id === indexFound[index]) {
+        this.currentNoteImageIndex = index;
+        return;
+      }
+    }
+  }
+
   setNotes(notes: INote[]) {
     this.notes = notes;
   }
@@ -49,11 +71,11 @@ export class NoteListState {
       }
     }
     logger({
-      container: "notes",
-      path: {section: "entities", file: "noteList"},
-      type: 'state',
-      logMessage: `current note with given id not found. id: ${id}`
-    })
+      container: "note",
+      path: { section: "entities", file: "noteList" },
+      type: "error",
+      logMessage: `current note with given id not found. id: ${id}`,
+    });
     this.currentNote = undefined;
   }
   setCurrentNoteTitle(title: string) {
