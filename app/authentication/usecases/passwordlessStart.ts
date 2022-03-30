@@ -50,8 +50,14 @@ export async function passwordlessStart() {
     deviceName: toString(Device.deviceName),
   });
   if (error) {
+    logger({
+      container: "authnz",
+      path: { section: "usecases", file: "passwordlessStart" },
+      type: "error",
+      logMessage: `error in passwordlessStart is ${error}`,
+    })
     // TODO: handle server errors in snack bar
-    inputState.setPhoneValidation([error]);
+    // inputState.setPhoneValidation([error]);
     return;
   }
   if (!otpToken) {
