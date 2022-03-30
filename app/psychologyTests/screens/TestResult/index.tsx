@@ -1,12 +1,12 @@
-import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Container, logger, Scroller } from "../../../library";
+import { Button, Container, logger, Scroller } from "../../../library";
 import { styles } from "./styles";
 import { TestResultCard } from "../../components";
 import { testResultState } from "../../entities";
 import { retrieveTestResult } from "../../usecases";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function TestResultScreen() {
   const route = useRoute();
@@ -14,10 +14,27 @@ export function TestResultScreen() {
   const mode = route.params?.mode || "";
   const isTestHistory = mode === "testHistory";
   const [loading, setLoading] = useState(isTestHistory);
-
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  //@ts-ignore
   const testId = route.params?.testId || "";
+  //@ts-ignore
   const customerId = route.params?.customerId || "";
-
+  navigation.setOptions({
+    headerRight: () => (
+      <Button
+        mode={"text"}
+        size={"growWithText"}
+        rippleColor={"lightGrey"}
+        textColor={"white"}
+        onPress={() => {
+          navigation.push("chart");
+        }}
+        loading={loading}
+      >
+        {"نمودار"}
+      </Button>
+    ),
+  });
   async function init() {
     // console.log(id);
     logger({
