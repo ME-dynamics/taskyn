@@ -8,7 +8,9 @@ import { uploadProfilePicture } from "../../usecases";
 
 import { styles } from "./styles";
 
-function PickImageSheetComponent() {
+function PickImageSheetComponent(props: any) {
+  const { onClosePress } = props;
+
   return (
     <BottomSheetView style={styles.container}>
       <Title>{"انتخاب عکس پروفایل"}</Title>
@@ -19,7 +21,9 @@ function PickImageSheetComponent() {
         Icon={({ size, color }) => {
           return <TaskynIcon name={"camera"} size={size} color={color} />;
         }}
-        onPress={() => uploadProfilePicture("camera")}
+        onPress={async () => {
+          await uploadProfilePicture("camera", onClosePress);
+        }}
       >
         {"عکس از دوربین"}
       </Button>
@@ -30,7 +34,9 @@ function PickImageSheetComponent() {
         Icon={({ size, color }) => {
           return <TaskynIcon name={"image"} size={size} color={color} />;
         }}
-        onPress={() => uploadProfilePicture("gallery")}
+        onPress={() => {
+          uploadProfilePicture("gallery", onClosePress);
+        }}
       >
         {"عکس از گالری"}
       </Button>

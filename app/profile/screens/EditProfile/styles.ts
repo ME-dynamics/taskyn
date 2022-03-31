@@ -8,6 +8,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  loading: {
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 100,
+    backgroundColor: "rgba(255,255,255,0.8)",
+  },
   inputContainer: {
     width: "100%",
     height: heightPercentageToDP(46),

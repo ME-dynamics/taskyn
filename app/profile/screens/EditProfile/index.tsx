@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import BottomSheet, { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { observer } from "mobx-react-lite";
 import {
@@ -8,6 +8,7 @@ import {
   Container,
   Scroller,
   CustomBackdrop,
+  THEME,
 } from "../../../library";
 
 import { Avatar, PickImageSheet } from "../../components";
@@ -27,6 +28,9 @@ function EditProfileScreen() {
     bottomSheetRef.current?.collapse();
   }, []);
   const close = useCallback(() => {
+    bottomSheetRef.current?.close();
+  }, []);
+  const closeModal = useCallback(() => {
     BottomSheetModalRef.current?.close();
   }, []);
   const onCollapsePressModal = useCallback(() => {
@@ -39,11 +43,25 @@ function EditProfileScreen() {
     onCollapsePressModal();
     return;
   }
+  function uploadImageLoading() {
+    if (profileState.uploadLoadingImage) {
+      return (
+        <View style={[StyleSheet.absoluteFill, styles.loading]}>
+          <ActivityIndicator
+            color={THEME.COLORS.PRIMARY.NORMAL}
+            size={"large"}
+          />
+        </View>
+      );
+    }
+    return null;
+  }
   return (
     <>
       <Container>
         <Scroller gestureScroll>
           <View style={styles.profileImageContainer}>
+            {uploadImageLoading()}
             <Avatar
               uri={profileState.profilePictureUrl}
               size={120}
@@ -100,7 +118,7 @@ function EditProfileScreen() {
         backdropComponent={CustomBackdrop}
         enablePanDownToClose
       >
-        <PickImageSheet />
+        <PickImageSheet onClosePress={close} />
       </BottomSheet>
       <BottomSheetModal
         ref={BottomSheetModalRef}
@@ -112,7 +130,7 @@ function EditProfileScreen() {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert onClosePress={close} />
+        <SuccessAlert onClosePress={closeModal} />
       </BottomSheetModal>
     </>
   );
