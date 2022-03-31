@@ -1,7 +1,7 @@
 import { request } from "../../../library";
 import { parseTest } from "../utils";
 
-export async function fetchTestById(testId:string) {
+export async function fetchTestById(testId: string) {
   const { success, error, httpStatus, payload } = await request({
     endpoint: `/tests/${testId}`,
     method: "GET",
@@ -18,6 +18,7 @@ export async function fetchTestById(testId:string) {
         },
         description: "",
         fields: {},
+        minutesToFill: 0,
       },
     };
   }
