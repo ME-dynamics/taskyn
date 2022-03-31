@@ -53,8 +53,8 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     alignItems: "center",
-    // justifyContent: "center",
     zIndex: 0,
+    marginBottom: 12,
   },
 });
 
