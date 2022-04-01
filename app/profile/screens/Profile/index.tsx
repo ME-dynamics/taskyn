@@ -109,7 +109,7 @@ function ProfileScreen() {
               return <TaskynIcon name={"law"} size={size} color={color} />;
             }}
             title="شرایط و قوانین"
-            onPress={() => Alert.alert("hi1")}
+            onPress={() => navigation.push("Terms")}
             line
           />
 
