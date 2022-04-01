@@ -2,6 +2,7 @@ import { toString } from "../../../library";
 import { IPsychologyTest, tQuestionFields } from "../../types";
 
 export function parseTest(payload: Record<string, unknown>): IPsychologyTest {
+  // TODO: refactor 
   const id = toString(payload?.id);
   const title = Object(payload?.title);
   const faTitle = toString(title?.fa);
@@ -34,5 +35,6 @@ export function parseTest(payload: Record<string, unknown>): IPsychologyTest {
     description,
     minutesToFill,
     fields: parsedFields,
+    shortName: toString(payload?.shortName),
   };
 }

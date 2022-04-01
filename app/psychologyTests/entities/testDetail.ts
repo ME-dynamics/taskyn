@@ -18,6 +18,7 @@ export class TestDetailState {
     description: "",
     fields: {},
     minutesToFill: 0,
+    shortName: ""
   };
   setTest(test: IPsychologyTest) {
     this.test = test;
@@ -32,6 +33,7 @@ export class TestDetailState {
       description: "",
       fields: {},
       minutesToFill: 0,
+      shortName: ""
     };
   }
   get fieldSize(): number {
