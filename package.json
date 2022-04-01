@@ -7,7 +7,8 @@
     "start": "react-native start",
     "test": "jest",
     "ar": "adb reverse tcp:8081 tcp:8081",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -35,15 +36,15 @@
     "fast-memoize": "^2.5.2",
     "fuse.js": "^6.5.3",
     "jalaali-js": "^1.2.3",
-    "libphonenumber-js": "^1.9.49",
-    "mobx": "^6.4.2",
+    "libphonenumber-js": "^1.9.50",
+    "mobx": "^6.5.0",
     "mobx-react-lite": "^3.3.0",
     "moti": "^0.17.1",
-    "nanoid": "^3.3.1",
+    "nanoid": "^3.3.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-awesome-gallery": "^0.2.6",
+    "react-native-awesome-gallery": "^0.3.4",
     "react-native-chart-kit": "^6.12.0",
     "react-native-communications": "^2.2.1",
     "react-native-confirmation-code-field": "^7.3.0",
@@ -52,7 +53,7 @@
     "react-native-image-crop-picker": "^0.36.4",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-logs": "^4.0.1",
-    "react-native-mmkv": "^2.2.0",
+    "react-native-mmkv": "^2.3.0",
     "react-native-pager-view": "5.4.9",
     "react-native-reanimated": "~2.4.1",
     "react-native-redash": "^16.2.3",
@@ -79,7 +80,8 @@
     "jest-expo": "^44.0.0",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "husky": "^7.0.0"
   },
   "jest": {
     "preset": "react-native"
