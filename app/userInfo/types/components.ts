@@ -29,7 +29,7 @@ export interface IScrollPickerProps {
 export interface IBirthDayInputProps {
   editable?: boolean;
 }
-export interface IBirthDay {
+export interface IBirthDayProps {
   day: string;
   month: string;
   year: string;
