@@ -15,6 +15,7 @@ import ColorHash from "color-hash";
 function TestHistoryScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
+  // @ts-expect-error
   const customerId = route.params?.id || "";
   function renderTestResultCard() {
     const result: JSX.Element[] = [];

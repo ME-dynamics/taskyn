@@ -15,6 +15,7 @@ export interface ITest {
   };
   description: string;
   minutesToFill: number;
+  shortName: string;
 }
 
 export interface IPsychologyTest extends ITest {

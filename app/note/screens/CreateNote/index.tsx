@@ -35,6 +35,7 @@ import type { tScrollerRef } from "../../types";
 function CreateNoteScreen() {
   const navigator = useNavigation();
   const route = useRoute();
+  // @ts-expect-error
   const customerId = route.params?.customerId || "";
   const scrollRef = useRef<tScrollerRef>(null);
   const { keyboardShown } = useKeyboard();
