@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import React from "react";
 import { observer } from "mobx-react-lite";
 import {
@@ -9,7 +9,8 @@ import {
   warningColor,
 } from "./styles";
 import { ITestResultProps } from "../../types";
-import { Headline, Subheading, THEME, Title } from "../../../library";
+import { Headline, Subheading } from "../../../library";
+import { error, warning } from "../../assets";
 function TestResultCardComponent(props: ITestResultProps) {
   const { faName, enName, variable, rawScore, baseRate, type, interpret } =
     props;
@@ -27,6 +28,111 @@ function TestResultCardComponent(props: ITestResultProps) {
       default:
         return "#ffffff";
     }
+  }
+  function renderer() {
+    if (type === "error") {
+      return errorCardRenderer();
+    }
+    if (type === "warning") {
+      return warningCardRenderer();
+    }
+    return (
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <View style={styles.textContainer}>
+            <View style={styles.itemContainer}>
+              <Headline>{typeToTitle(type)}</Headline>
+            </View>
+            <View style={styles.itemContainer}>
+              <Subheading style={styles.darkGreyColor}>
+                <Subheading>
+                  {faName}
+                  <Subheading
+                    style={styles.darkGreyColor}
+                  >{` ( ${enName} )`}</Subheading>
+                </Subheading>
+              </Subheading>
+            </View>
+            <View style={styles.itemContainer}>
+              <Subheading style={{ textAlign: "right" }}>
+                {`نماد: `}
+                <Subheading style={styles.darkGreyColor}>
+                  {variable.toUpperCase()}
+                </Subheading>
+              </Subheading>
+            </View>
+            {baseRateCal()}
+            <View style={styles.itemContainer}>
+              <Subheading>
+                {`نمره خام: `}
+                <Subheading style={styles.darkGreyColor}>{rawScore}</Subheading>
+              </Subheading>
+            </View>
+
+            <View style={styles.itemContainer}>{interpretRenderer()}</View>
+          </View>
+        </View>
+        <View
+          style={[
+            type
+              ? { ...styles.sideBarColor, backgroundColor: typeToColor(type) }
+              : styles.sideBarColor,
+          ]}
+        />
+      </View>
+    );
+  }
+  function errorCardRenderer() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.errorAndwarningCard}>
+          <View style={styles.titleWithIcon}>
+            <View style={styles.errorContainer}>
+              <Image source={error} style={styles.iconImage} />
+            </View>
+            <Headline style={{ paddingRight: 16, color: typeToColor(type) }}>
+              {`${typeToTitle(type)}!`}
+            </Headline>
+          </View>
+          <Subheading style={styles.errorAndwarningBodyPadding}>
+            {faName}
+          </Subheading>
+        </View>
+        <View
+          style={[
+            type
+              ? { ...styles.sideBarColor, backgroundColor: typeToColor(type) }
+              : styles.sideBarColor,
+          ]}
+        />
+      </View>
+    );
+  }
+  function warningCardRenderer() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.errorAndwarningCard}>
+          <View style={styles.titleWithIcon}>
+            <View style={styles.warningContainer}>
+              <Image source={warning} style={styles.iconImage} />
+            </View>
+            <Headline style={{ paddingRight: 16, color: typeToColor(type) }}>
+              {`${typeToTitle(type)}!`}
+            </Headline>
+          </View>
+          <Subheading style={styles.errorAndwarningBodyPadding}>
+            {faName}
+          </Subheading>
+        </View>
+        <View
+          style={[
+            type
+              ? { ...styles.sideBarColor, backgroundColor: typeToColor(type) }
+              : styles.sideBarColor,
+          ]}
+        />
+      </View>
+    );
   }
   function typeToTitle(value: string) {
     switch (value) {
@@ -47,59 +153,28 @@ function TestResultCardComponent(props: ITestResultProps) {
       return null;
     }
     return (
-      <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-        {`نرخ تبدیل پایه = `}
-        <Subheading>{baseRate}</Subheading>
-      </Subheading>
+      <View style={styles.itemContainer}>
+        <Subheading>
+          {`نرخ تبدیل پایه: `}
+          <Subheading style={styles.darkGreyColor}>{baseRate}</Subheading>
+        </Subheading>
+      </View>
     );
   }
   function interpretRenderer() {
     if (interpret) {
       return (
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-          {`وضعیت: `}
-          <Subheading>{interpret}</Subheading>
-        </Subheading>
+        <View style={styles.itemContainer}>
+          <Subheading>
+            {`وضعیت: `}
+            <Subheading style={styles.darkGreyColor}>{interpret}</Subheading>
+          </Subheading>
+        </View>
       );
     }
     return null;
   }
 
-  return (
-    <View style={styles.container}>
-      <View
-        style={[
-          type
-            ? { ...styles.sideBarColor, backgroundColor: typeToColor(type) }
-            : styles.sideBarColor,
-        ]}
-      />
-      <View style={styles.textContainer}>
-        <Headline>{typeToTitle(type)}</Headline>
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-          {`نام فارسی:`} <Subheading>{faName}</Subheading>
-        </Subheading>
-
-        <Subheading
-          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
-        >
-          {`نام انگلیسی: `}
-          <Subheading>{enName}</Subheading>
-        </Subheading>
-        <Subheading
-          style={{ textAlign: "right", color: THEME.COLORS.GREY.DARK }}
-        >
-          {`نماد: `}
-          <Subheading>{variable.toUpperCase()}</Subheading>
-        </Subheading>
-        <Subheading style={{ color: THEME.COLORS.GREY.DARK }}>
-          {`نمره خام: `}
-          <Subheading>{rawScore}</Subheading>
-        </Subheading>
-        {baseRateCal()}
-        {interpretRenderer()}
-      </View>
-    </View>
-  );
+  return renderer();
 }
 export const TestResultCard = observer(TestResultCardComponent);

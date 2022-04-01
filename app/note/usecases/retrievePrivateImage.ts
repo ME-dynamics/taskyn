@@ -12,11 +12,11 @@ export async function retrievePrivateImage(imageId: string) {
     });
     return "";
   }
-  logger({
-    container: "note",
-    path: { section: "usecases", file: "retrievePrivateImage" },
-    type: "debug",
-    logMessage: `image private url: ${url}`,
-  });
+  // logger({
+  //   container: "note",
+  //   path: { section: "usecases", file: "retrievePrivateImage" },
+  //   type: "debug",
+  //   logMessage: `image private url: ${url}`,
+  // });
   return url;
 }

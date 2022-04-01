@@ -3,8 +3,8 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   container: {
-    width: THEME.WIDTH.WIDE,
-    height: 196,
+    width: 100,
+    height: 100,
     marginTop: 34,
     marginBottom: 16,
     alignSelf: "center",

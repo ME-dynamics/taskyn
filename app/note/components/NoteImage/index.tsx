@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ImageLoadEventData,
-  NativeSyntheticEvent,
-  StyleSheet,
-} from "react-native";
+import { View, ImageLoadEventData, NativeSyntheticEvent } from "react-native";
 import { observer } from "mobx-react-lite";
 import { Skeleton } from "moti/skeleton";
-import { IconButton, Tap, TaskynIcon, TaskynImage } from "../../../library";
+import {
+  IconButton,
+  logger,
+  Tap,
+  TaskynIcon,
+  TaskynImage,
+} from "../../../library";
 
 import { noteListState } from "../../entities";
 import { retrievePrivateImage } from "../../usecases";
@@ -19,7 +20,15 @@ function NoteImageComponent(props: INoteImageProps) {
     props;
   const [imageUrl, setImageUrl] = useState<string>("");
   function imagePress() {
+    logger({
+      container: "note",
+      path: { section: "components", file: "NoteImage" },
+      type: "state",
+      logMessage: `image showing with url: ${imageUrl}`,
+    });
+
     if (!galleryMode && onImagePress) {
+      noteListState.setCurrentNoteImageIndex(id);
       onImagePress(id);
     }
   }
@@ -53,6 +62,12 @@ function NoteImageComponent(props: INoteImageProps) {
       );
     }
     if (imageUrl) {
+      logger({
+        container: "note",
+        path: { section: "components", file: "NoteImage" },
+        type: "info",
+        logMessage: `rendering image with url: ${imageUrl}`,
+      });
       return (
         <Tap onPress={imagePress}>
           <TaskynImage

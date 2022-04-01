@@ -74,16 +74,18 @@ function NoteScreen() {
               }}
             />
           </View>
-          {noteListState.currentNote?.imageIds.map((item) => {
-            return (
-              <NoteImage
-                key={item}
-                id={item}
-                onImagePress={onImagePress}
-                onRemovePress={onRemovePress}
-              />
-            );
-          })}
+          <View style={styles.imageContainer}>
+            {noteListState.currentNote?.imageIds.map((item) => {
+              return (
+                <NoteImage
+                  key={item}
+                  id={item}
+                  onImagePress={onImagePress}
+                  onRemovePress={onRemovePress}
+                />
+              );
+            })}
+          </View>
           {/* note images */}
         </Scroller>
         <BottomSheetModal

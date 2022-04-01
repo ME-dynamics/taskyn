@@ -7,16 +7,22 @@ export class ProfileState {
       firstName: observable,
       lastName: observable,
       description: observable,
+      uploadLoadingImage: observable,
+      setUploadLoadingImage: action,
       setProfilePictureUrl: action,
       setFirstName: action,
       setLastName: action,
       setDescription: action,
     });
   }
+  uploadLoadingImage: boolean = false;
   profilePictureUrl: string = "";
   firstName: string = "";
   lastName: string = "";
   description: string = "";
+  setUploadLoadingImage(loading: boolean) {
+    this.uploadLoadingImage = loading;
+  }
   setProfilePictureUrl(avatar: string) {
     this.profilePictureUrl = avatar;
   }

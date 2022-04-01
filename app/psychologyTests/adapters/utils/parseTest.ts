@@ -9,6 +9,7 @@ export function parseTest(payload: Record<string, unknown>): IPsychologyTest {
   const description = toString(payload?.description);
   const fields = Object(payload?.fields);
   const fieldKeys = Object.keys(fields);
+  const minutesToFill = Number(payload?.minutesToFill);
   const parsedFields: tQuestionFields = {};
   for (let index = 0; index < fieldKeys.length; index++) {
     const key = fieldKeys[index];
@@ -31,6 +32,7 @@ export function parseTest(payload: Record<string, unknown>): IPsychologyTest {
       en: enTitle,
     },
     description,
+    minutesToFill,
     fields: parsedFields,
   };
 }

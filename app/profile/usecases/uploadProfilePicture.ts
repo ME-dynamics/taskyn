@@ -2,9 +2,11 @@ import { openGallery, openCamera } from "../../library";
 
 import { uploadProfile } from "../adapters";
 import { profileState } from "../entities";
-import { updateUser } from "./updateUser";
 
-export async function uploadProfilePicture(mode: "camera" | "gallery") {
+export async function uploadProfilePicture(
+  mode: "camera" | "gallery",
+  onClosePress: () => void
+) {
   try {
     const image =
       mode === "gallery"
@@ -13,11 +15,13 @@ export async function uploadProfilePicture(mode: "camera" | "gallery") {
     if (!Array.isArray(image)) {
       const path = image.path;
       profileState.setProfilePictureUrl(path);
+
+      profileState.setUploadLoadingImage(true);
+      onClosePress();
       const url = await uploadProfile(path);
-      console.log(url);
+      profileState.setUploadLoadingImage(false);
       profileState.setProfilePictureUrl(url);
     }
-    await updateUser();
   } catch (error) {
     // TODO: log event req cancelled
   }

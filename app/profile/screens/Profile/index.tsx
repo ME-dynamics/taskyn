@@ -17,7 +17,6 @@ import {
   Scroller,
   TaskynIcon,
   CustomBackdrop,
-  THEME,
 } from "../../../library";
 
 import { MenuItem, Avatar, ExitSheet } from "../../components";

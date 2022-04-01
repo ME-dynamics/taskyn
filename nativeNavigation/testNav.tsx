@@ -8,6 +8,7 @@ import {
   TestDetails,
   MbtiResult,
   TestHistory,
+  Chart,
 } from "../app/psychologyTests";
 import { TestResultScreen } from "../app/psychologyTests/screens/TestResult";
 type TestStackParamList = {
@@ -16,7 +17,8 @@ type TestStackParamList = {
   testDetails: { id: string };
   questionnaire: { id: string };
   mbtiResult: undefined; //TODO: remove this screen from stack
-  testResultScreen: { id: string };
+  testResultScreen: { id: string }; //TODO: what's id?
+  chart: { id: string }; //TODO: what's id?
 };
 
 const TestStack = createNativeStackNavigator<TestStackParamList>();
@@ -33,6 +35,11 @@ function TestNavigator() {
         name={"testResultScreen"}
         component={TestResultScreen}
         options={{ ...headerOptions, title: "نتیجه تست" }}
+      />
+      <TestStack.Screen
+        name={"chart"}
+        component={Chart}
+        options={{ ...headerOptions, title: "نمودار تست" }}
       />
 
       <TestStack.Screen

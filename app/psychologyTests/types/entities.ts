@@ -13,7 +13,8 @@ export interface ITest {
     fa: string;
     en: string;
   };
-  shortName: string;
+  description: string;
+  minutesToFill: number;
 }
 
 export interface IPsychologyTest extends ITest {

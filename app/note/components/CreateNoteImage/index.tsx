@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { View, Image, ActivityIndicator, StyleSheet } from "react-native";
 import { MotiView } from "moti";
 import { observer } from "mobx-react-lite";
 import { MaterialIcons } from "@expo/vector-icons";
-import { IconButton, TaskynIcon } from "../../../library";
+import { IconButton, TaskynIcon, THEME, Title } from "../../../library";
 
 import { styles, iconButtonStyle } from "./styles";
 import { ICreateNoteImageProps } from "../../types";
@@ -15,6 +15,19 @@ function CreateNoteImageComponent(props: ICreateNoteImageProps) {
   }
   function removePress() {
     onRemovePress(path);
+  }
+  function uploadImageLoading() {
+    if (!imageId) {
+      return (
+        <View style={[StyleSheet.absoluteFill, styles.loading]}>
+          <ActivityIndicator
+            color={THEME.COLORS.PRIMARY.NORMAL}
+            size={"large"}
+          />
+        </View>
+      );
+    }
+    return null;
   }
   return (
     <MotiView
@@ -42,6 +55,7 @@ function CreateNoteImageComponent(props: ICreateNoteImageProps) {
           onPress={cropPress}
         />
       </View>
+      {uploadImageLoading()}
     </MotiView>
   );
 }

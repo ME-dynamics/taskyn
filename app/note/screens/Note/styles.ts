@@ -1,8 +1,4 @@
 import { StyleSheet } from "react-native";
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from "react-native-responsive-screen";
 import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
@@ -22,5 +18,13 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.GREY.LIGHT,
     alignSelf: "center",
     // top: -heightPercentageToDP(2),
+  },
+  imageContainer: {
+    width: "98%",
+    alignSelf: "center",
+    justifyContent: "space-evenly",
+    minHeight: 40,
+    flexDirection: "row-reverse",
+    flexWrap: "wrap",
   },
 });

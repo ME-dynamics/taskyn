@@ -55,7 +55,7 @@ export async function fetchPasswordlessStart(
       container: "authnz",
       path: { section: "adapters", file: "fetchPasswordlessStart" },
       type: "network",
-      logMessage: `fetchPasswordlessStart failed with httpStatus: ${httpStatus}. error: ${error}`,
+      logMessage: `fetchPasswordlessStart failed with httpStatus: ${httpStatus}`,
     });
     return {
       error: error,
