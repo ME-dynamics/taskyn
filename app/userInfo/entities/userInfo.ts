@@ -36,6 +36,7 @@ export class UserInfoState {
       siblingsPosition: observable,
       siblingDiseases: observable,
       siblings: observable,
+      setReset: action,
       setEditable: action,
       setFirstName: action,
       setLastName: action,
@@ -99,6 +100,7 @@ export class UserInfoState {
   cousinMarriage: boolean | undefined = undefined;
   siblingsPosition: string = "";
   siblings: string = "";
+
   setEditable(editable: boolean) {
     this.editable = editable;
   }
@@ -325,5 +327,37 @@ export class UserInfoState {
       return "بله";
     }
     return "خیر";
+  }
+  setReset() {
+    this.editable = false;
+    this.firstName = "";
+    this.lastName = "";
+    this.birthday = {
+      day: 0,
+      month: 0,
+      year: 0,
+    };
+    this.problemDescription = "";
+    this.gender = undefined;
+    this.address = "";
+    this.telephone = "";
+    this.maritalStatus = undefined;
+    this.maritalState = undefined;
+    this.education = undefined;
+    this.academicField = "";
+    this.religion = undefined;
+    this.job = "";
+    this.bodyDiseases = "";
+    this.mindDiseases = "";
+    this.drugUse = "";
+    this.addiction = "";
+    this.isFatherAlive = undefined;
+    this.isMotherAlive = undefined;
+    this.fatherDeathReason = "";
+    this.motherDeathReason = "";
+    this.cousinMarriage = undefined;
+    this.siblingsPosition = "";
+    this.siblingDiseases = "";
+    this.siblings = "";
   }
 }
