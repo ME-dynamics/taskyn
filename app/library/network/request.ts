@@ -14,7 +14,7 @@ export function buildRequest() {
   async function setToken() {
     const jwtToken = await secureStorage.retrieve("token");
     const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
-    tokenCache = jwtToken ? jwtToken : "";
+    tokenCache = jwtToken || "";
     tokenCacheValidTime =
       typeof tokenExpiresAt === "number" ? tokenExpiresAt : 0;
   }
@@ -26,7 +26,7 @@ export function buildRequest() {
    */
   async function getJwtToken() {
     if (tokenCache && tokenCacheValidTime) {
-      if (tokenCacheValidTime > Date.now()) {
+      if (tokenCacheValidTime < Date.now() - 8000) {
         await setToken();
       }
       return tokenCache;
