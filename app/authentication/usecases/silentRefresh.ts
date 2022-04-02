@@ -15,7 +15,7 @@ let refreshTimer: NodeJS.Timer;
 export function isTokenExpired() {
   const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
   if (typeof tokenExpiresAt === "number") {
-    return tokenExpiresAt < Date.now() - 4000;
+    return tokenExpiresAt < Date.now() - 60000; // use one minute
   }
   return true;
 }
