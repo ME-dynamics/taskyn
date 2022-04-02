@@ -7,6 +7,7 @@ import { AboutUs } from "../app/aboutUs";
 import { FAQ } from "../app/FAQ";
 
 import { headerOptions } from "./headerOptions";
+import { Terms } from "../app/terms";
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -37,6 +38,11 @@ function ProfileNavigation() {
         name={"FAQ"}
         component={FAQ}
         options={{ ...headerOptions, title: "سوالات متداول" }}
+      />
+      <ProfileStack.Screen
+        name={"Terms"}
+        component={Terms}
+        options={{ ...headerOptions, title: "شرایط و قوانین" }}
       />
     </ProfileStack.Navigator>
   );
