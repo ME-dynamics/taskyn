@@ -72,7 +72,6 @@ export function TestResultScreen() {
 
   useEffect(() => {
     if (isTestHistory) {
-      // console.log(mode);
       init();
     }
   }, []);

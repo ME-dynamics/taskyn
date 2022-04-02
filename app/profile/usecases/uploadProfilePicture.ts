@@ -1,4 +1,4 @@
-import { openGallery, openCamera } from "../../library";
+import { openGallery, openCamera, logger } from "../../library";
 
 import { uploadProfile } from "../adapters";
 import { profileState } from "../entities";
@@ -24,5 +24,11 @@ export async function uploadProfilePicture(
     }
   } catch (error) {
     // TODO: log event req cancelled
+    logger({
+      container: "profile",
+      path: { section: "usecases", file: "uploadProfilePicture" },
+      type: "error",
+      logMessage: `error in uploadProfilePicture is ${error}`,
+    });
   }
 }

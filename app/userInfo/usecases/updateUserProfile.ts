@@ -6,9 +6,9 @@ export async function updateUserProfile(customerId: string) {
   if (!userInfoState.maritalStatus) {
     return "marital status is required";
   }
-  if (!userInfoState.maritalState) {
-    return "marital state is required";
-  }
+  // if (!userInfoState.maritalState) {
+  //   return "marital state is required";
+  // }
   if (!userInfoState.education) {
     return "education is required";
   }

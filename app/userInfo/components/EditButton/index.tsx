@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Button } from "../../../library";
+import { Button, logger } from "../../../library";
 
 import { userInfoState } from "../../entities";
 import { updateUserProfile } from "../../usecases";
@@ -20,7 +20,13 @@ function EditButtonComponent(props: {
   async function onPress() {
     if (userInfoState.editable) {
       setLoading(true);
-      await updateUserProfile(userId); // TODO: handle error
+      const error = await updateUserProfile(userId); // TODO: handle error
+      logger({
+        container: "userInfo",
+        path: { section: "components", file: "EditButtonComponent" },
+        type: "error",
+        logMessage: `error in updateUserProfile ${error}`,
+      });
       setLoading(false);
       onCollapsePress();
       userInfoState.setEditable(false);

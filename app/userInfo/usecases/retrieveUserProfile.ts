@@ -1,16 +1,24 @@
+import { logger } from "../../library";
 import { fetchPatient, fetchUser } from "../adapters";
 import { userInfoState } from "../entities";
 
 export async function retrieveUserProfile(customerId: string | undefined) {
+  userInfoState.setReset();
   const [patient, user] = await Promise.all([
     fetchPatient(customerId),
     fetchUser(customerId),
   ]);
   const userData = user.user;
   if (!userData || user.error) {
-    // console.log("user data not found");
+    logger({
+      container: "userInfo",
+      path: { section: "usecases", file: "retrieveUserProfile" },
+      type: "error",
+      logMessage: `Error retrieving user profile: ${user.error}`,
+    });
     return;
   }
+
   // console.log(userData);
   userInfoState.setFirstName(userData.firstName);
   userInfoState.setLastName(userData.lastName);

@@ -12,7 +12,7 @@ export async function onTestSubmit(
       testResult: [],
     };
   }
-  console.log(testResult)
+  // console.log(testResult)
   testResultState.setTestResult(testResult);
   return {
     error: "",
