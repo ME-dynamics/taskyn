@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   },
   detailsContainer: {
     width: "100%",
-    height: 90,
+    height: 110,
     padding: 16,
   },
   enTitle: {
