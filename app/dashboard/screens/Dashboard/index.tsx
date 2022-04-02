@@ -66,7 +66,7 @@ function DashboardScreen() {
       <>
         <View style={styles.row}>
           <Tile
-            title={"نوت برداری"}
+            title={"یادداشت برداری"}
             Icon={({ size, color }) => {
               return <TaskynIcon name={"note"} color={color} size={size} svg />;
             }}
