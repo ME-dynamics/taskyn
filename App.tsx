@@ -9,7 +9,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthNav, TabNav } from "./nativeNavigation";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
-import { registerAppState, removeAppStateListeners } from "./app/library";
+import {
+  registerAppState,
+  removeAppStateListeners,
+  logger,
+} from "./app/library";
 import {
   getLoggedIn,
   initToken,
@@ -32,11 +36,19 @@ function AppComponent() {
     async function prepare() {
       try {
         registerAppState();
-
+        const shouldRefresh = isTokenExpired();
+        if (shouldRefresh) {
+          logger({
+            container: "root",
+            path: { section: "screens", file: "App.tsx" },
+            type: "info",
+            logMessage: "Token expired, refreshing token at startup",
+          });
+        }
         await Promise.all([
           SplashScreen.preventAutoHideAsync(),
           initToken(),
-          isTokenExpired() ? refresh() : undefined,
+          shouldRefresh ? refresh() : undefined,
         ]);
         removeSilentRefreshAutoRun = registerSilentRefresh();
       } catch (error) {
