@@ -199,7 +199,7 @@ export function registerSilentRefresh() {
         timeToRefresh > oneMinutesInMsc ? oneMinutesInMsc : timeToRefresh;
 
       refreshTimer = setInterval(() => {
-        // const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
+        const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
         if (timeToRefresh < 1e4) {
           // if time to refresh is less than 10 seconds, then refresh
           logger({
@@ -211,12 +211,12 @@ export function registerSilentRefresh() {
           refresh();
           return;
         }
-        // logger({
-        //   container: "authentication",
-        //   path: { section: "usecases", file: "silentRefresh" },
-        //   type: "info",
-        //   logMessage: `interval ran, but token is not refreshed, time to refresh: ${timeToRefresh}`,
-        // });
+        logger({
+          container: "authentication",
+          path: { section: "usecases", file: "silentRefresh" },
+          type: "info",
+          logMessage: `interval ran, but token is not refreshed, time to refresh: ${timeToRefresh}`,
+        });
       }, interval);
     }
   });
