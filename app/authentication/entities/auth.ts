@@ -57,6 +57,7 @@ export class AuthState {
     this.refreshToken = "";
     this.tokenExpiresAt = 0;
     this.refreshExpiresAt = 0;
+    this.role = "customer";
   }
   get loggedIn(): boolean {
     return !!this.refreshToken && !!this.token;
