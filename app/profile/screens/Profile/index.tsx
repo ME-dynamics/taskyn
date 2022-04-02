@@ -5,10 +5,10 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { View, Alert, ActivityIndicator } from "react-native";
+import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import {
@@ -30,6 +30,8 @@ function ProfileScreen() {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const snapPoints = useMemo(() => ["40%", "40%"], []);
+  const isFocused = useIsFocused();
+
   async function init() {
     setLoading(true);
     await retrieveUser();
@@ -55,7 +57,7 @@ function ProfileScreen() {
   }, []);
   useEffect(() => {
     init();
-  }, []);
+  }, [isFocused]);
   return (
     <Container loading={loading}>
       <View style={styles.header}>
