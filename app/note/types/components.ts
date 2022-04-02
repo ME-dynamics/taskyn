@@ -24,3 +24,7 @@ export interface INoteProps {
   description: string;
   createdAt: string;
 }
+
+export interface IDeleteSheetComponentProps {
+  onClosePress: () => void;
+}

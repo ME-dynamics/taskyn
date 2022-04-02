@@ -47,20 +47,18 @@ function NoteHeaderComponent(props: INoteHeaderProps) {
             onPress={onDeletePress}
           />
         </View>
-        {noteListState.currentNote?.edit ? (
-          <IconButton
-            color={iconButtonStyle.color}
-            size={iconButtonStyle.size}
-            Icon={({ size, color }) => {
-              return (
-                <TaskynIcon name={"paperclip"} size={size} color={color} />
-              );
-            }}
-            onPress={() => {
-              console.log("attach");
-            }}
-          />
-        ) : (
+        {noteListState.currentNote?.edit ? //   size={iconButtonStyle.size} //   color={iconButtonStyle.color} // <IconButton
+        //   Icon={({ size, color }) => {
+        //     return (
+        //       <TaskynIcon name={"paperclip"} size={size} color={color} />
+        //     );
+        //   }}
+        //   onPress={() => {
+        //     console.log("attach");
+        //   }}
+        // />
+
+        null : (
           <IconButton
             color={iconButtonStyle.color}
             size={iconButtonStyle.size}

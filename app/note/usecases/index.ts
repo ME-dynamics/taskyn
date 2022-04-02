@@ -8,3 +8,4 @@ export { createNote } from "./createNote";
 export { retrieveNotes } from "./retrieveNotes";
 export { updateNote } from "./updateNote";
 export { retrievePrivateImage } from "./retrievePrivateImage";
+export { onRemoveNote } from "./onRemoveNote";

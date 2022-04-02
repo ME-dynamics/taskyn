@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useCallback } from "react";
 import { View } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import {
@@ -27,13 +27,16 @@ function NoteScreen() {
       await updateNote(noteListState.currentNote);
     }
   }
+  const onClosePress = useCallback(() => {
+    bottomSheetRef.current?.close();
+  }, []);
   function onDeletePress() {
     bottomSheetRef.current?.present();
   }
   function onImagePress(id: string) {
     navigator.push("noteGallery");
   }
-  function onRemovePress(id: string) {
+  function onImageRemovePress(id: string) {
     const imageIds =
       noteListState.currentNote?.imageIds.filter((imageId) => imageId !== id) ||
       [];
@@ -81,7 +84,7 @@ function NoteScreen() {
                   key={item}
                   id={item}
                   onImagePress={onImagePress}
-                  onRemovePress={onRemovePress}
+                  onRemovePress={onImageRemovePress}
                 />
               );
             })}
@@ -94,7 +97,7 @@ function NoteScreen() {
           index={1}
           snapPoints={snapPoints}
         >
-          <DeleteSheet />
+          <DeleteSheet onClosePress={onClosePress} />
         </BottomSheetModal>
       </Container>
     </BottomSheetModalProvider>

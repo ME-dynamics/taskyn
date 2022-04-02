@@ -3,6 +3,8 @@ import { observer } from "mobx-react-lite";
 import { Authentication, Identify } from "../app/authentication";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Title, THEME } from "../app/library";
+import { Terms } from "../app/terms";
+import { headerOptions } from "./headerOptions";
 
 const AuthStack = createNativeStackNavigator();
 
@@ -24,8 +26,13 @@ function AuthNavigation() {
           headerTitle: () => <Title>{"تایید شماره"}</Title>,
         }}
       />
+      <AuthStack.Screen
+        name={"Terms"}
+        component={Terms}
+        options={{ ...headerOptions, title: "شرایط و قوانین" }}
+      />
     </AuthStack.Navigator>
   );
 }
 
-export const AuthNav = observer(AuthNavigation)
+export const AuthNav = observer(AuthNavigation);

@@ -41,8 +41,8 @@ export const styles = StyleSheet.create({
   },
   terms: {
     width: widthPercentageToDP("80"),
+    alignSelf: "center",
     color: THEME.COLORS.GREY.DARK,
-    textDecorationLine: "underline",
   },
 });
 
