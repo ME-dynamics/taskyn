@@ -9,6 +9,7 @@ import {
   Touchable,
   TaskynIcon,
   CustomBackdrop,
+  TaskynImage
 } from "../../../library";
 import { styles, iconColor } from "./styles";
 import { ICustomerCardProps } from "../../types";
@@ -46,7 +47,7 @@ function CustomerCardComponent(props: ICustomerCardProps) {
   function renderAvatar() {
     if (profileImageUrl) {
       return (
-        <Image style={styles.profileImage} source={{ uri: profileImageUrl }} />
+        <TaskynImage style={styles.profileImage} source={{ uri: profileImageUrl }} />
       );
     }
     return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;

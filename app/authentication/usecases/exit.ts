@@ -14,5 +14,4 @@ export async function exit() {
   // authState.setTokenExpire(0);
   // authState.setRefreshExpire(0);
   authState.resetCredentials();
-  authState.setRole("customer");
 }

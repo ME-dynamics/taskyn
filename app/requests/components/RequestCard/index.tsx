@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import { Button, Caption, Paragraph, TaskynIcon } from "../../../library";
+import {
+  Button,
+  Caption,
+  Paragraph,
+  TaskynIcon,
+  TaskynImage,
+} from "../../../library";
 import { rejectRequest, confirmRequest } from "../../usecases";
 
 import { styles, iconColor } from "./styles";
@@ -25,7 +31,10 @@ function RequestCardComponent(props: IRequestCardProps) {
   function renderAvatar() {
     if (profileImageUrl) {
       return (
-        <Image style={styles.profileImage} source={{ uri: profileImageUrl }} />
+        <TaskynImage
+          style={styles.profileImage}
+          source={{ uri: profileImageUrl }}
+        />
       );
     }
     return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;

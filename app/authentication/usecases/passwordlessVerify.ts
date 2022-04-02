@@ -1,4 +1,10 @@
-import { secureStorage, toString, storage, logger } from "../../library";
+import {
+  secureStorage,
+  toString,
+  storage,
+  logger,
+  resetNetworkCredentialsEvent,
+} from "../../library";
 import { fetchPasswordlessVerify } from "../adapters";
 import { inputState, authState } from "../entities";
 
@@ -96,4 +102,5 @@ export async function passwordlessVerify() {
   });
   authState.setOtpToken("");
   inputState.reset();
+  // resetNetworkCredentialsEvent();
 }
