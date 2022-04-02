@@ -74,7 +74,9 @@ export function TestDetailsScreen() {
       </View>
       <Scroller>
         <View style={styles.descriptionContainer}>
-          <Paragraph>{testDetailState.test.description}</Paragraph>
+          <Paragraph style={{ lineHeight: 24 }}>
+            {testDetailState.test.description}
+          </Paragraph>
         </View>
       </Scroller>
 
