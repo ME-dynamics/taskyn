@@ -84,10 +84,16 @@ export async function passwordlessVerify() {
     });
     authState.setRole("customer");
   }
-  authState.setRefreshToken(refreshToken);
-  authState.setToken(jwt);
-  authState.setRefreshExpire(refreshExpires);
-  authState.setTokenExpire(jwtExpires);
+  // authState.setRefreshToken(refreshToken);
+  // authState.setToken(jwt);
+  // authState.setRefreshExpire(refreshExpires);
+  // authState.setTokenExpire(jwtExpires);
+  authState.setCredentials({
+    token: jwt,
+    refreshToken: refreshToken,
+    tokenExpiresAt: jwtExpires,
+    refreshExpiresAt: refreshExpires,
+  });
   authState.setOtpToken("");
   inputState.reset();
 }

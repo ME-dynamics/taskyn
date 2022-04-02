@@ -12,7 +12,15 @@ import { authState } from "../entities";
 import { exit } from "./exit";
 let refreshTimer: NodeJS.Timer;
 
-async function refresh() {
+export function isTokenExpired() {
+  const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
+  if (typeof tokenExpiresAt === "number") {
+    return tokenExpiresAt < Date.now() - 60000; // use one minute
+  }
+  return true;
+}
+
+export async function refresh() {
   logger({
     container: "authentication",
     type: "info",
@@ -27,7 +35,8 @@ async function refresh() {
       path: { section: "usecases", file: "silentRefresh" },
       logMessage: "user id is not defined",
     });
-    return;
+    clearInterval(refreshTimer);
+    return await exit();
   }
   const deviceId = toString(storage.retrieve("device_id", "string"));
   if (!deviceId) {
@@ -37,8 +46,27 @@ async function refresh() {
       path: { section: "usecases", file: "silentRefresh" },
       logMessage: "device id is not defined",
     });
-    return;
+    clearInterval(refreshTimer);
+    return await exit();
   }
+  const [xToken, xRefreshToken] = await Promise.all([
+    secureStorage.retrieve("token"),
+    secureStorage.retrieve("refresh_token"),
+  ]);
+  if (!xToken || !xRefreshToken) {
+    // token or refresh token is not defined
+    // should exit the app;
+    logger({
+      container: "authentication",
+      type: "error",
+      path: { section: "usecases", file: "silentRefresh" },
+      logMessage: `token or refresh token is not defined.
+       xToken: ${xToken}, xRefresh token: ${xRefreshToken}`,
+    });
+    clearInterval(refreshTimer);
+    return await exit();
+  }
+  // console.log({ refreshTokenLength: xRefreshToken.length, xRefreshToken });
   const {
     error,
     shouldLogout,
@@ -49,9 +77,20 @@ async function refresh() {
   } = await fetchRefresh({
     userId,
     deviceId,
-    jwtToken: authState.token,
-    refreshToken: authState.refreshToken,
+    jwtToken: xToken,
+    refreshToken: xRefreshToken,
   });
+
+  if (shouldLogout) {
+    logger({
+      container: "authnz",
+      type: "info",
+      path: { section: "usecases", file: "silentRefresh" },
+      logMessage: "refresh invalidated token, logging out",
+    });
+    clearInterval(refreshTimer);
+    return await exit();
+  }
   if (error) {
     logger({
       container: "authnz",
@@ -60,15 +99,8 @@ async function refresh() {
       logMessage: "refresh error: " + error,
     });
     // TODO: show error
-  }
-  if (shouldLogout) {
-    logger({
-      container: "authnz",
-      type: "info",
-      path: { section: "usecases", file: "silentRefresh" },
-      logMessage: "refresh invalidated token, logging out",
-    });
-    await exit();
+    clearInterval(refreshTimer);
+    return await exit();
   }
   try {
     await Promise.all([
@@ -82,13 +114,21 @@ async function refresh() {
       path: { section: "usecases", file: "silentRefresh" },
       logMessage: "secure storage add refresh and jwt error: " + error,
     });
+    clearInterval(refreshTimer);
+    return await exit();
   }
   storage.add("token_expires_at", jwtExpires);
   storage.add("refresh_expires_at", refreshExpires);
-  authState.setToken(jwtToken);
-  authState.setRefreshToken(refreshToken);
-  authState.setRefreshExpire(jwtExpires);
-  authState.setRefreshExpire(refreshExpires);
+  // authState.setToken(jwtToken);
+  // authState.setRefreshToken(refreshToken);
+  // authState.setTokenExpire(jwtExpires);
+  // authState.setRefreshExpire(refreshExpires);
+  authState.setCredentials({
+    token: jwtToken,
+    refreshToken: refreshToken,
+    tokenExpiresAt: jwtExpires,
+    refreshExpiresAt: refreshExpires,
+  });
 }
 
 export function registerSilentRefresh() {
@@ -116,6 +156,7 @@ export function registerSilentRefresh() {
         logMessage: `token or refresh token is not defined, or token expire time is zero. token: ${authState.token}, refreshToken: ${authState.refreshToken},
         token expires at: ${authState.tokenExpiresAt}`,
       });
+      clearInterval(refreshTimer);
       return;
     }
 
@@ -158,22 +199,23 @@ export function registerSilentRefresh() {
         timeToRefresh > oneMinutesInMsc ? oneMinutesInMsc : timeToRefresh;
 
       refreshTimer = setInterval(() => {
-        const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
+        // const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
         if (timeToRefresh < 1e4) {
           // if time to refresh is less than 10 seconds, then refresh
-          // logger({
-          //   container: "authentication",
-          //   path: { section: "usecases", file: "silentRefresh" },
-          //   type: "info",
-          //   logMessage: `token expires in less than 10 seconds, refreshing in timer`,
-          // });
+          logger({
+            container: "authentication",
+            path: { section: "usecases", file: "silentRefresh" },
+            type: "info",
+            logMessage: `token expires in less than 10 seconds, refreshing in timer`,
+          });
           refresh();
+          return;
         }
         // logger({
         //   container: "authentication",
         //   path: { section: "usecases", file: "silentRefresh" },
         //   type: "info",
-        //   logMessage: `interval ran, but token is not refreshed`,
+        //   logMessage: `interval ran, but token is not refreshed, time to refresh: ${timeToRefresh}`,
         // });
       }, interval);
     }

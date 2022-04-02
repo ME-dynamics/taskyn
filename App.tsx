@@ -14,7 +14,11 @@ import {
   getLoggedIn,
   initToken,
   registerSilentRefresh,
+  isTokenExpired,
+  refresh,
 } from "./app/authentication";
+
+import type { IReactionDisposer } from "mobx";
 
 function AppComponent() {
   I18nManager.allowRTL(false);
@@ -24,12 +28,17 @@ function AppComponent() {
     TaskynIcon: require("./assets/fonts/icomoon.ttf"),
   });
   useEffect(() => {
-    const removeSilentRefreshAutoRun = registerSilentRefresh();
+    let removeSilentRefreshAutoRun: IReactionDisposer | undefined = undefined;
     async function prepare() {
       try {
         registerAppState();
 
-        await Promise.all([SplashScreen.preventAutoHideAsync(), initToken()]);
+        await Promise.all([
+          SplashScreen.preventAutoHideAsync(),
+          initToken(),
+          isTokenExpired() ? refresh() : undefined,
+        ]);
+        removeSilentRefreshAutoRun = registerSilentRefresh();
       } catch (error) {
         console.warn(error);
       } finally {
@@ -39,7 +48,9 @@ function AppComponent() {
     prepare();
     return () => {
       removeAppStateListeners();
-      removeSilentRefreshAutoRun();
+      if (removeSilentRefreshAutoRun) {
+        removeSilentRefreshAutoRun();
+      }
     };
   }, []);
   const onLayoutRootView = useCallback(async () => {

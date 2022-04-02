@@ -9,9 +9,10 @@ export async function exit() {
   storage.remove("token_expires_at");
   storage.remove("refresh_expires_at");
   storage.remove("role");
-  authState.setRefreshToken("");
-  authState.setToken("");
-  authState.setTokenExpire(0);
-  authState.setRefreshExpire(0);
+  // authState.setRefreshToken("");
+  // authState.setToken("");
+  // authState.setTokenExpire(0);
+  // authState.setRefreshExpire(0);
+  authState.resetCredentials();
   authState.setRole("customer");
 }
