@@ -15,6 +15,8 @@ export class AuthState {
       setRole: action,
       setRefreshExpire: action,
       setTokenExpire: action,
+      setCredentials: action,
+      resetCredentials: action,
       loggedIn: computed,
     });
   }
@@ -41,6 +43,20 @@ export class AuthState {
   }
   setRole(role: entityTypes.tRole) {
     this.role = role;
+  }
+  setCredentials(credentials: entityTypes.ICredentials) {
+    const { token, refreshToken, tokenExpiresAt, refreshExpiresAt } =
+      credentials;
+    this.token = token;
+    this.refreshToken = refreshToken;
+    this.tokenExpiresAt = tokenExpiresAt;
+    this.refreshExpiresAt = refreshExpiresAt;
+  }
+  resetCredentials() {
+    this.token = "";
+    this.refreshToken = "";
+    this.tokenExpiresAt = 0;
+    this.refreshExpiresAt = 0;
   }
   get loggedIn(): boolean {
     return !!this.refreshToken && !!this.token;
