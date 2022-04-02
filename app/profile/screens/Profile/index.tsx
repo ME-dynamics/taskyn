@@ -33,7 +33,7 @@ function ProfileScreen() {
   const isFocused = useIsFocused();
 
   async function init() {
-    setLoading(true);
+    // setLoading(true);
     await retrieveUser();
     setLoading(false);
   }
