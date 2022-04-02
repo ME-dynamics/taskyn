@@ -8,6 +8,8 @@ export function buildRequest() {
   // cache token and token validation time
   let tokenCache = "";
   let tokenCacheValidTime = 0;
+  const refreshTimeThreshold = 45 * 60 * 1000; // 45 minutes
+  const refreshTimeSkew = 30 * 1000; // 30 seconds
   /**
    * retrieve token and expire time and set them to cache
    */
@@ -26,7 +28,10 @@ export function buildRequest() {
    */
   async function getJwtToken() {
     if (tokenCache && tokenCacheValidTime) {
-      if (tokenCacheValidTime < Date.now() - 8000) {
+      if (
+        tokenCacheValidTime <
+        Date.now() + refreshTimeThreshold + refreshTimeSkew
+      ) {
         await setToken();
       }
       return tokenCache;
