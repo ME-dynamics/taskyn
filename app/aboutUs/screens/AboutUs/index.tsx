@@ -33,7 +33,7 @@ export function AboutUs() {
               <MaterialCommunityIcons name={"web"} size={size} color={color} />
             );
           }}
-          onPress={() => Communications.web("https://taskyn.ir")}
+          onPress={() => Communications.web("http://taskyn.net")}
           size={buttonIconSize}
         />
         <IconButton
@@ -49,7 +49,7 @@ export function AboutUs() {
           Icon={({ size, color }) => {
             return <TaskynIcon name={"linkedin"} size={size} color={color} />;
           }}
-          onPress={() => Communications.web("http://google.com")}
+          onPress={() => Communications.web("http://taskyn.net")}
           size={buttonIconSize}
         />
         <IconButton

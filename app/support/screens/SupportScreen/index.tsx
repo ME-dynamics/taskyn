@@ -43,7 +43,7 @@ export function Support() {
           mode={"contained"}
           rippleColor={"lightGrey"}
           size={"big"}
-          onPress={() => Communications.phonecall("09162426104", true)}
+          onPress={() => Communications.phonecall("09226294277", true)}
         >
           {"تماس با ما"}
         </Button>
