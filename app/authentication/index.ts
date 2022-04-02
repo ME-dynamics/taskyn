@@ -1,6 +1,6 @@
 import { authState } from "./entities";
 export * from "./screens";
-export { initToken, exit, registerSilentRefresh } from "./usecases";
+export { initToken, exit, registerSilentRefresh, isTokenExpired, refresh } from "./usecases";
 export function getLoggedIn() {
   return authState.loggedIn;
 }
