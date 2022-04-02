@@ -19,7 +19,7 @@ function ChoicesListComponent() {
     const { label, value } = choices[index];
     answerCards.push(
       <AnswerCard
-        key={label}
+        key={value}
         id={`${value}`}
         selected={
           questionnaireState.answers[questionnaireState.currentQuestion] ===
