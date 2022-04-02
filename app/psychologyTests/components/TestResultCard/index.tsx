@@ -8,9 +8,11 @@ import {
   factorColor,
   warningColor,
 } from "./styles";
-import { ITestResultProps } from "../../types";
+import { getRole } from "../../../authentication";
 import { Headline, Subheading } from "../../../library";
+
 import { error, warning } from "../../assets";
+import { ITestResultProps } from "../../types";
 function TestResultCardComponent(props: ITestResultProps) {
   const { faName, enName, variable, rawScore, baseRate, type, interpret } =
     props;
@@ -30,12 +32,14 @@ function TestResultCardComponent(props: ITestResultProps) {
     }
   }
   function renderer() {
+    const isProvider = getRole() === "provider";
     if (type === "error") {
-      return errorCardRenderer();
+      return isProvider ? errorCardRenderer() : null;
     }
     if (type === "warning") {
-      return warningCardRenderer();
+      return isProvider ? warningCardRenderer() : null;
     }
+    // TODO: move this to component
     return (
       <View style={styles.container}>
         <View style={styles.card}>
