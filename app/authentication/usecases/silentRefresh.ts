@@ -12,10 +12,12 @@ import { authState } from "../entities";
 import { exit } from "./exit";
 let refreshTimer: NodeJS.Timer;
 
+const refreshTimeSkew = 60 * 1000; // 60 seconds
+const refreshTimeThreshold = 45 * 60 * 1000; // 45 minutes
 export function isTokenExpired() {
   const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
   if (typeof tokenExpiresAt === "number") {
-    return tokenExpiresAt < Date.now() - 60000; // use one minute
+    return tokenExpiresAt < Date.now() + refreshTimeThreshold + refreshTimeSkew;
   }
   return true;
 }
@@ -160,7 +162,7 @@ export function registerSilentRefresh() {
       return;
     }
 
-    if (authState.tokenExpiresAt < Date.now() - 4000) {
+    if (isTokenExpired()) {
       logger({
         container: "authentication",
         path: { section: "usecases", file: "silentRefresh" },
@@ -179,13 +181,19 @@ export function registerSilentRefresh() {
       });
       // time to refresh the token is : time token expires minus now minus four seconds
       // refresh request is going to be done four seconds before token expires
-      const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
-      if (timeToRefresh < 1e4) {
+      const timeToRefresh =
+        authState.tokenExpiresAt -
+        Date.now() +
+        refreshTimeThreshold +
+        refreshTimeSkew;
+      if (timeToRefresh < refreshTimeThreshold) {
         logger({
           container: "authentication",
           path: { section: "usecases", file: "silentRefresh" },
           type: "info",
-          logMessage: `token expires in less than 10 seconds, refreshing`,
+          logMessage: `before interval, token expires in less than ${
+            refreshTimeThreshold / (60 * 1000)
+          } minutes, refreshing. time to refresh: ${timeToRefresh}`,
         });
         // if time to refresh is less than 10 seconds, then refresh
         refresh();
@@ -199,14 +207,20 @@ export function registerSilentRefresh() {
         timeToRefresh > oneMinutesInMsc ? oneMinutesInMsc : timeToRefresh;
 
       refreshTimer = setInterval(() => {
-        const timeToRefresh = authState.tokenExpiresAt - Date.now() - 4000;
-        if (timeToRefresh < 1e4) {
-          // if time to refresh is less than 10 seconds, then refresh
+        const timeToRefresh =
+          authState.tokenExpiresAt -
+          Date.now() +
+          refreshTimeThreshold +
+          refreshTimeSkew;
+        if (timeToRefresh < refreshTimeThreshold) {
+          // if time to refresh is less than 45 minutes, then refresh
           logger({
             container: "authentication",
             path: { section: "usecases", file: "silentRefresh" },
             type: "info",
-            logMessage: `token expires in less than 10 seconds, refreshing in timer`,
+            logMessage: `in interval, token expires in less than ${
+              refreshTimeThreshold / (60 * 1000)
+            } minutes, refreshing. time to refresh: ${timeToRefresh}`,
           });
           refresh();
           return;
@@ -215,7 +229,9 @@ export function registerSilentRefresh() {
           container: "authentication",
           path: { section: "usecases", file: "silentRefresh" },
           type: "info",
-          logMessage: `interval ran, but token is not refreshed, time to refresh: ${timeToRefresh}`,
+          logMessage: `interval ran, but token is not refreshed, time to refresh in minutes: ${
+            timeToRefresh / (60 * 1000)
+          }`,
         });
       }, interval);
     }
