@@ -8,6 +8,7 @@ export class NoteListState {
       currentNote: observable,
       currentNoteImageIndex: observable,
       notes: observable,
+      setRemoveNote: action,
       setCurrentNoteImageIndex: action,
       setNotes: action,
       addNote: action,
@@ -22,6 +23,9 @@ export class NoteListState {
   notes: INote[] = [];
   currentNote: (INote & { edit: boolean }) | undefined = undefined;
   currentNoteImageIndex: number = 0;
+  setRemoveNote(id: string) {
+    this.notes = this.notes.filter((note) => note.id !== id);
+  }
   setCurrentNoteImageIndex(id: string) {
     if (!this.currentNote) {
       logger({
