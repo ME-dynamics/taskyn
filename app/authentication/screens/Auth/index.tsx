@@ -10,10 +10,11 @@ import {
   Title,
   Logo,
   Paragraph,
-  SelectButton,
   Container,
   Scroller,
   logger,
+  Subheading,
+  THEME,
 } from "../../../library";
 
 import { authState, inputState } from "../../entities";
@@ -22,8 +23,8 @@ import { styles, logoSize } from "./styles";
 import { phone } from "./constant";
 
 function AuthenticationScreen() {
-  const navigator = useNavigation<NativeStackNavigationProp<any>>();
-  const [agreed, setAgreed] = useState<boolean>(false);
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  // const [agreed, setAgreed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   async function start() {
     try {
@@ -41,13 +42,13 @@ function AuthenticationScreen() {
       setLoading(false);
     }
   }
-  function toggleAgreement() {
-    setAgreed(!agreed);
-  }
+  // function toggleAgreement() {
+  //   setAgreed(!agreed);
+  // }
   useEffect(() => {
     const disposer = autorun(() => {
-      if (authState.otpToken && navigator.isFocused()) {
-        navigator.push("Identify");
+      if (authState.otpToken && navigation.isFocused()) {
+        navigation.push("Identify");
       }
     });
     return () => {
@@ -79,18 +80,25 @@ function AuthenticationScreen() {
               />
             </View>
             <View style={styles.termsContainer}>
-              <SelectButton
+              {/* <SelectButton
                 mode={"checkbox"}
                 selected={agreed}
                 size={24}
                 onPress={toggleAgreement}
+              > */}
+              <Paragraph
+                style={styles.terms}
+                onPress={() => {
+                  navigation.push("Terms");
+                }}
               >
-                <Paragraph style={styles.terms}>
-                  {
-                    "حریم خصوصی و شرایط و قوانین استفاده از سرویس های تسکین موافقم."
-                  }
-                </Paragraph>
-              </SelectButton>
+                {"با ثبت نام و ورود با"}
+                <Subheading style={{ color: THEME.COLORS.PRIMARY.NORMAL }}>
+                  {" قوانین تسکین "}
+                </Subheading>
+                {"موافقت می کنید."}
+              </Paragraph>
+              {/* </SelectButton> */}
             </View>
             <View style={styles.itemsMargin}>
               <Button
@@ -99,7 +107,7 @@ function AuthenticationScreen() {
                 rippleColor={"lightGrey"}
                 size={"wide"}
                 loading={loading}
-                disabled={!agreed}
+                // disabled={!agreed}
               >
                 {phone.button}
               </Button>
