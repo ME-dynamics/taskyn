@@ -6,7 +6,7 @@ import { Tasks } from "../app/task";
 import { Dashboard } from "../app/dashboard";
 import { Requests } from "../app/requests";
 import { Customers } from "../app/customers";
-import { TestHistory } from "../app/psychologyTests";
+import { Chart, TestHistory } from "../app/psychologyTests";
 // import { } from "../app/"
 
 import { headerOptions } from "./headerOptions";
@@ -37,7 +37,7 @@ function ProviderDashboardNavigation() {
       <DashboardStack.Screen
         name={"userInfo"}
         component={UserInfo}
-        options={{ ...headerOptions, title: "پرونده بیمار" }}
+        options={{ ...headerOptions, title: "پرونده من" }}
       />
       <DashboardStack.Screen
         name={"tasks"}
@@ -55,11 +55,18 @@ function ProviderDashboardNavigation() {
         component={TestHistory}
         options={{ ...headerOptions, title: "تاریخچه تست ها" }}
       />
-        <DashboardStack.Screen
+      <DashboardStack.Screen
+        name={"chart"}
+        component={Chart}
+        options={{ ...headerOptions, title: "تاریخچه تست ها" }}
+      />
+      <DashboardStack.Screen
         name={"testResultScreen"}
         component={TestResultScreen}
         options={{ ...headerOptions, title: "نتیجه تست" }}
       />
+
+      
     </DashboardStack.Navigator>
   );
 }
