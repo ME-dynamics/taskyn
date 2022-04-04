@@ -22,25 +22,16 @@ export function buildRequest() {
     tokenCacheValidTime =
       typeof tokenExpiresAt === "number" ? tokenExpiresAt : 0;
   }
-  // registerResetNetworkCredentialsEvents(() => {
-  //   setToken()
-  //     .then(() => {
-  //       logger({
-  //         container: "app",
-  //         path: { section: "library", file: "network/request.ts" },
-  //         type: "info",
-  //         logMessage: "network credentials reset",
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       logger({
-  //         container: "app",
-  //         path: { section: "library", file: "network/request.ts" },
-  //         type: "error",
-  //         logMessage: `network credentials reset error: ${error}`,
-  //       });
-  //     });
-  // });
+  registerResetNetworkCredentialsEvents(() => {
+    tokenCache = "";
+    tokenCacheValidTime = 0;
+    logger({
+      container: "app",
+      path: {section: "library", file: "network/request.ts"},
+      type: "info",
+      logMessage: "reset network credentials done"
+    })
+  });
   /**
    * get token from cache
    * if token expire time is not greater than now, cache is stale
@@ -48,20 +39,20 @@ export function buildRequest() {
    * token is refreshed by default with silent refresh
    */
   async function getJwtToken() {
-    // if (tokenCache && tokenCacheValidTime) {
-    //   if (
-    //     tokenCacheValidTime <
-    //     Date.now() + refreshTimeThreshold + refreshTimeSkew
-    //   ) {
-    //     await setToken();
-    //   }
-    //   return tokenCache;
-    // }
-    // // if there are no token here
-    // await setToken();
-    // return tokenCache;
-    const jwtToken = await secureStorage.retrieve("token");
-    return jwtToken;
+    if (tokenCache && tokenCacheValidTime) {
+      if (
+        tokenCacheValidTime <
+        Date.now() + refreshTimeThreshold + refreshTimeSkew
+      ) {
+        await setToken();
+      }
+      return tokenCache;
+    }
+    // if there are no token here
+    await setToken();
+    return tokenCache;
+    // const jwtToken = await secureStorage.retrieve("token");
+    // return jwtToken;
   }
   return async function request(info: IRequest): Promise<IResponse> {
     if (!netInfoState.hasAccess) {
