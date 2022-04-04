@@ -13,6 +13,7 @@ import {
   registerAppState,
   removeAppStateListeners,
   logger,
+  unsubscribeNetInfo,
 } from "./app/library";
 import {
   getLoggedIn,
@@ -63,6 +64,7 @@ function AppComponent() {
       if (removeSilentRefreshAutoRun) {
         removeSilentRefreshAutoRun();
       }
+      unsubscribeNetInfo();
     };
   }, []);
   const onLayoutRootView = useCallback(async () => {

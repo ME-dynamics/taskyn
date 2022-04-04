@@ -29,4 +29,5 @@ export {
   registerAppState,
   removeAppStateListeners,
 } from "./appState";
-export { TaskynImage } from "./TaskynImage"
+export { TaskynImage } from "./TaskynImage";
+export { unsubscribeNetInfo } from "./netInfo";
