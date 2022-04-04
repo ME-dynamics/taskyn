@@ -120,6 +120,7 @@ function UserInfoScreen() {
           mode={"with-label"}
           title={"تلفن ثابت"}
           textAlign={"right"}
+          keyboardType={"number-pad"}
           placeholder={"مثال: ۰۲۱۲۳۴۵۶۷۸۹"}
           // textAlign={"center"}
           value={userInfoState.telephone}

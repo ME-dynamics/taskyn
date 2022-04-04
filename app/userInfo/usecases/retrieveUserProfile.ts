@@ -3,7 +3,6 @@ import { fetchPatient, fetchUser } from "../adapters";
 import { userInfoState } from "../entities";
 
 export async function retrieveUserProfile(customerId: string | undefined) {
-  userInfoState.setReset();
   const [patient, user] = await Promise.all([
     fetchPatient(customerId),
     fetchUser(customerId),
@@ -29,6 +28,8 @@ export async function retrieveUserProfile(customerId: string | undefined) {
   const patientData = patient.patient;
   if (!patientData || patient.error) {
     // console.log(patientData);
+    userInfoState.resetPatient();
+
     return "error";
   }
 
