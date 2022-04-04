@@ -1,4 +1,5 @@
 export interface ISuccessAlertProps {
-  onClosePress: () => void;
+  onPress: () => void;
   title?: string;
+  buttonText: string;
 }
