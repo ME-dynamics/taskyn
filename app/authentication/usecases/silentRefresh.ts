@@ -11,9 +11,19 @@ import { fetchRefresh } from "../adapters";
 import { authState } from "../entities";
 import { exit } from "./exit";
 let refreshTimer: NodeJS.Timer;
+let refreshRetryCount = 0;
 
+const refreshRetryLimit = 3;
 const refreshTimeSkew = 60 * 1000; // 60 seconds
 const refreshTimeThreshold = 45 * 60 * 1000; // 45 minutes
+const refreshRetryTime = 5 * 1000;
+
+function wait() {
+  return new Promise((resolve) => {
+    setTimeout(resolve, refreshRetryTime);
+  });
+}
+
 export function isTokenExpired() {
   const tokenExpiresAt = storage.retrieve("token_expires_at", "number");
   if (typeof tokenExpiresAt === "number") {
@@ -22,7 +32,7 @@ export function isTokenExpired() {
   return true;
 }
 
-export async function refresh() {
+export async function refresh(): Promise<void> {
   logger({
     container: "authentication",
     type: "info",
@@ -100,10 +110,20 @@ export async function refresh() {
       path: { section: "usecases", file: "silentRefresh" },
       logMessage: "refresh error: " + error,
     });
+    if (error.includes("زمان") || error.includes("دسترسی")) {
+      return;
+    }
+    await wait();
+    if (refreshRetryCount < refreshRetryLimit) {
+      refreshRetryCount++;
+      return await refresh();
+    }
     // TODO: show error
     clearInterval(refreshTimer);
     return await exit();
   }
+  // reset refresh retry count if success full
+  refreshRetryCount = 0;
   try {
     await Promise.all([
       secureStorage.add("token", jwtToken),
