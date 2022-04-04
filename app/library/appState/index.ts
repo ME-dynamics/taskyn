@@ -1,6 +1,6 @@
 import { AppState as rnAppState, Platform } from "react-native";
+import { updateNetInfo } from "../netInfo";
 import { AppState } from "./state";
-import { logger } from "../logger";
 
 const appState = new AppState();
 
@@ -9,7 +9,10 @@ export function getAppState() {
 }
 
 export function removeAppStateListeners() {
-  rnAppState.removeEventListener("change", () => {
+  rnAppState.removeEventListener("change", (event) => {
+    if (event === "active") {
+      updateNetInfo();
+    }
     // logger({
     //   container: "app",
     //   type: "info",
