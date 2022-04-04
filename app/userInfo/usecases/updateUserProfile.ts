@@ -18,7 +18,11 @@ export async function updateUserProfile(customerId: string) {
   if (!userInfoState.telephone) {
     return "لطفا تلفن خود را وارد کنید";
   }
-  if (!userInfoState.birthday) {
+  if (
+    !userInfoState.birthday.day ||
+    !userInfoState.birthday.month ||
+    !userInfoState.birthday.year
+  ) {
     return "لطفا تاریخ تولد خود را وارد کنید";
   }
   if (!userInfoState.maritalStatus) {

@@ -10,9 +10,9 @@ function EditButtonComponent(props: {
   tintColor?: string;
   onCollapsePress: () => void;
   userId: string;
-  onclosePress: () => void;
+  errorRenderer: (error: string | undefined) => void;
 }) {
-  const { tintColor, onCollapsePress, userId, onclosePress } = props;
+  const { tintColor, onCollapsePress, userId, errorRenderer } = props;
   const [loading, setLoading] = useState<boolean>(false);
 
   const save = "ذخیره";
@@ -29,19 +29,11 @@ function EditButtonComponent(props: {
         logMessage: `error in updateUserProfile ${error}`,
       });
       setLoading(false);
-      // onCollapsePress();
-
+      // remove these lines and refactor
       if (error === undefined) {
-        console.log("true");
-        onCollapsePress();
+        errorRenderer(error);
       } else {
-        return (
-          <SuccessAlert
-            buttonText={"متوحه شدم"}
-            onPress={onclosePress}
-            title={error}
-          />
-        );
+        return errorRenderer(error);
       }
 
       userInfoState.setEditable(false);
