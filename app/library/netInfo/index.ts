@@ -1,5 +1,6 @@
 import { registerNetInfo } from "./netListener";
 
-const unsubscribe = registerNetInfo();
+export const unsubscribeNetInfo = registerNetInfo();
 
 export { netInfoState } from "./netInfoState";
+export { updateNetInfo } from "./netListener";
