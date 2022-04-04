@@ -60,6 +60,7 @@ function BirthDayInputComponent(props: IBirthDayInputProps) {
       >
         <Input
           mode={"no-style"}
+          keyboardType={"number-pad"}
           style={{ textAlign: "center" }}
           placeholder={"روز"}
           value={`${
@@ -89,6 +90,7 @@ function BirthDayInputComponent(props: IBirthDayInputProps) {
       >
         <Input
           mode={"no-style"}
+          keyboardType={"number-pad"}
           placeholder={"ماه"}
           style={{ textAlign: "center" }}
           value={`${
@@ -120,6 +122,7 @@ function BirthDayInputComponent(props: IBirthDayInputProps) {
       >
         <Input
           mode={"no-style"}
+          keyboardType={"number-pad"}
           value={`${
             userInfoState.birthday.year === 0 ? "" : userInfoState.birthday.year
           }`}

@@ -3,58 +3,74 @@ import { fetchCreatePatient, fetchUpdateUser } from "../adapters";
 import { userInfoState } from "../entities";
 
 export async function updateUserProfile(customerId: string) {
-  if (!userInfoState.maritalStatus) {
-    return "marital status is required";
+  if (!userInfoState.telephone) {
+    return "لطفا تلفن خود را وارد کنید";
   }
-  // if (!userInfoState.maritalState) {
-  //   return "marital state is required";
-  // }
+  if (!userInfoState.firstName) {
+    return "لطفا نام خود را وارد کنید";
+  }
+  if (!userInfoState.lastName) {
+    return "لطفا نام خانوادگی خود را وارد کنید";
+  }
+  if (!userInfoState.address) {
+    return "لطفا آدرس خود را وارد کنید";
+  }
+  if (!userInfoState.telephone) {
+    return "لطفا تلفن خود را وارد کنید";
+  }
+  if (
+    !userInfoState.birthday.day ||
+    !userInfoState.birthday.month ||
+    !userInfoState.birthday.year
+  ) {
+    return "لطفا تاریخ تولد خود را وارد کنید";
+  }
+  if (!userInfoState.maritalStatus) {
+    return "لطفا وضعیت تاهل خود را وارد کنید";
+  }
   if (!userInfoState.education) {
-    return "education is required";
+    return "لطفا سطح تحصیلات خود را وارد کنید";
   }
   if (!userInfoState.religion) {
-    return "religion is required";
+    return "لطفا مذهب خود را وارد کنید";
   }
   if (typeof userInfoState.isFatherAlive === "undefined") {
-    return "isFatherAlive is required";
+    return "لطفا در قید حیات بودن پدر خود را وارد کنید";
   }
   if (typeof userInfoState.isMotherAlive === "undefined") {
-    return "isMotherAlive is required";
+    return "لطفا در قید حیات بودن مادر خود را وارد کنید";
   }
   if (typeof userInfoState.cousinMarriage === "undefined") {
-    return "cousinMarriage is required";
+    return "وضعیت ازدواج فامیلی را مشخص کنید";
   }
   if (!userInfoState.siblingsPosition) {
-    return "siblingsPosition is required";
+    return "فرزند چندم بودن خود را مشخص کنید";
   }
   if (!userInfoState.gender) {
-    return "gender is required";
-  }
-  if (!userInfoState.siblingDiseases) {
-    return "siblingDiseases is required";
+    return "لطفا جنسیت خود را مشخص کنید";
   }
   // console.log("update user usecase");
   const { error, patient } = await fetchCreatePatient(
     {
       siblingDiseases: userInfoState.siblingDiseases,
       problemDescription: userInfoState.problemDescription,
-      maritalStatus: userInfoState.maritalStatus,
+      maritalStatus: userInfoState.maritalStatus, //
       maritalState: userInfoState.maritalState,
-      education: userInfoState.education,
+      education: userInfoState.education, //
       academicField: userInfoState.academicField,
-      religion: userInfoState.religion,
+      religion: userInfoState.religion, //
       job: userInfoState.job,
       bodyDiseases: userInfoState.bodyDiseases,
       mindDiseases: userInfoState.mindDiseases,
       drugUse: userInfoState.drugUse,
       addiction: userInfoState.addiction,
-      isFatherAlive: userInfoState.isFatherAlive,
-      isMotherAlive: userInfoState.isMotherAlive,
+      isFatherAlive: userInfoState.isFatherAlive, //
+      isMotherAlive: userInfoState.isMotherAlive, //
       fatherDeathReason: userInfoState.fatherDeathReason,
       motherDeathReason: userInfoState.motherDeathReason,
       cousinMarriage: userInfoState.cousinMarriage,
-      siblingsPosition: userInfoState.siblingsPosition,
-      siblings: userInfoState.siblings,
+      siblingsPosition: userInfoState.siblingsPosition, //
+      siblings: userInfoState.siblings, //
     },
     customerId
   );
@@ -62,12 +78,12 @@ export async function updateUserProfile(customerId: string) {
   const { gy, gm, gd } = toGregorian(year, month, day);
   const { error: userError, user } = await fetchUpdateUser(
     {
-      firstName: userInfoState.firstName,
-      lastName: userInfoState.lastName,
-      address: userInfoState.address,
-      telephone: userInfoState.telephone,
-      birthday: new Date(gy, gm - 1, gd).toISOString(),
-      gender: userInfoState.gender,
+      firstName: userInfoState.firstName, //
+      lastName: userInfoState.lastName, //
+      address: userInfoState.address, //
+      telephone: userInfoState.telephone, //
+      birthday: new Date(gy, gm - 1, gd).toISOString(), //
+      gender: userInfoState.gender, //
     },
     customerId
   );

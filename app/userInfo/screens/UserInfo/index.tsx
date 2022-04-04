@@ -39,7 +39,9 @@ function UserInfoScreen() {
 
   const snapPoints = useMemo(() => [150, 180], []);
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
+    // remove this state and refactor
 
+  const [isError, setIsError] = useState<string | undefined>("");
   const close = useCallback(() => {
     BottomSheetModalRef.current?.close();
   }, []);
@@ -47,13 +49,28 @@ function UserInfoScreen() {
     BottomSheetModalRef.current?.present();
   }, []);
 
+  // remove this function and refactor
+  function onErrorPress(error: string | undefined) {
+    console.log(error);
+    if (error === undefined) {
+      setIsError("");
+    } else {
+      setIsError(error);
+    }
+    console.log("isError", isError);
+    onCollapsePress();
+  }
   useEffect(() => {
     async function prepare() {
       // @ts-expect-error
       const id = route.params?.id;
       navigation.setOptions({
         headerRight: () => (
-          <EditButton onCollapsePress={onCollapsePress} userId={id} />
+          <EditButton
+            onCollapsePress={onCollapsePress}
+            errorRenderer={onErrorPress}
+            userId={id}
+          />
         ),
       });
       await retrieveUserProfile(id);
@@ -417,7 +434,11 @@ function UserInfoScreen() {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert onPress={close} buttonText={"متوجه شدم!"} />
+        <SuccessAlert
+          onPress={close}
+          buttonText={"متوجه شدم!"}
+          title={isError ? isError : undefined}
+        />
       </BottomSheetModal>
     </Container>
   );

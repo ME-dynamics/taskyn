@@ -126,6 +126,7 @@ function ProviderCardComponent(props: IProviderCardProps) {
           <SuccessAlert
             onPress={() => {
               navigation.push("EditProfile");
+              close();
             }}
             buttonText={"برو به پروفایل"}
             title={"در بخش پروفایل و یا پرونده بیمار، اسم خود را وارد کنید"}

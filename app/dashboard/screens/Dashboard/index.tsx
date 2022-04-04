@@ -75,7 +75,7 @@ function DashboardScreen() {
             }}
           />
           <Tile
-            title={"پرونده من"}
+            title={"پرونده مراجع"}
             Icon={({ size, color }) => {
               return <TaskynIcon name={"file"} color={color} size={size} svg />;
             }}
@@ -113,19 +113,21 @@ function DashboardScreen() {
     return (
       <>
         <View style={styles.row}>
+          {dashboardState.provider?.id ? (
+            <Tile
+              title={"تمرینات"}
+              Icon={({ size, color }) => {
+                return (
+                  <TaskynIcon name={"practice"} color={color} size={size} svg />
+                );
+              }}
+              onPress={() => {
+                navigation.push("tasks", { id });
+              }}
+            />
+          ) : null}
           <Tile
-            title={"تمرینات"}
-            Icon={({ size, color }) => {
-              return (
-                <TaskynIcon name={"practice"} color={color} size={size} svg />
-              );
-            }}
-            onPress={() => {
-              navigation.push("tasks", { id });
-            }}
-          />
-          <Tile
-            title={"پرونده بیمار"}
+            title={"پرونده من"}
             Icon={({ size, color }) => {
               return <TaskynIcon name={"file"} color={color} size={size} svg />;
             }}

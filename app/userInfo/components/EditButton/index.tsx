@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Button, logger } from "../../../library";
+import { Button, logger, SuccessAlert } from "../../../library";
 
 import { userInfoState } from "../../entities";
 import { updateUserProfile } from "../../usecases";
@@ -10,8 +10,9 @@ function EditButtonComponent(props: {
   tintColor?: string;
   onCollapsePress: () => void;
   userId: string;
+  errorRenderer: (error: string | undefined) => void;
 }) {
-  const { tintColor, onCollapsePress, userId } = props;
+  const { tintColor, onCollapsePress, userId, errorRenderer } = props;
   const [loading, setLoading] = useState<boolean>(false);
 
   const save = "ذخیره";
@@ -28,7 +29,13 @@ function EditButtonComponent(props: {
         logMessage: `error in updateUserProfile ${error}`,
       });
       setLoading(false);
-      onCollapsePress();
+      // remove these lines and refactor
+      if (error === undefined) {
+        errorRenderer(error);
+      } else {
+        return errorRenderer(error);
+      }
+
       userInfoState.setEditable(false);
       return;
     }
