@@ -15,6 +15,7 @@ export async function fetchGetNotes(
   if (!success || !Array.isArray(payload)) {
     return {
       error,
+      httpStatus,
       notes: [],
     };
   }
@@ -27,5 +28,6 @@ export async function fetchGetNotes(
   return {
     error: "",
     notes,
+    httpStatus,
   };
 }
