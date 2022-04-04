@@ -102,5 +102,5 @@ export async function passwordlessVerify() {
   });
   authState.setOtpToken("");
   inputState.reset();
-  // resetNetworkCredentialsEvent();
+  resetNetworkCredentialsEvent();
 }
