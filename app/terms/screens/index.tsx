@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { View } from "react-native";
-import { Logo, Paragraph, Scroller, Container } from "../../library";
+import { Paragraph, Scroller, Container } from "../../library";
 import { termsText } from "../constant";
 import { styles } from "./styles";
 function TermsScreen() {
