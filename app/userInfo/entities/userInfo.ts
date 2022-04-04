@@ -36,7 +36,7 @@ export class UserInfoState {
       siblingsPosition: observable,
       siblingDiseases: observable,
       siblings: observable,
-      setReset: action,
+      resetPatient: action,
       setEditable: action,
       setFirstName: action,
       setLastName: action,
@@ -328,19 +328,9 @@ export class UserInfoState {
     }
     return "خیر";
   }
-  setReset() {
+  resetPatient() {
     this.editable = false;
-    this.firstName = "";
-    this.lastName = "";
-    this.birthday = {
-      day: 0,
-      month: 0,
-      year: 0,
-    };
     this.problemDescription = "";
-    this.gender = undefined;
-    this.address = "";
-    this.telephone = "";
     this.maritalStatus = undefined;
     this.maritalState = undefined;
     this.education = undefined;

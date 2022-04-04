@@ -17,8 +17,12 @@ import { providerState } from "../../entities";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { SuccessAlert } from "../../../library/SuccessAlert";
 import { RemoveSheet } from "../RemoveSheet";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 function ProviderCardComponent(props: IProviderCardProps) {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   const { id, fullName, profileImageUrl, description, myDoctor } = props;
   const snapPointsModal = useMemo(() => [150, 180], []);
   const [modalType, setModalType] = useState<
@@ -120,7 +124,10 @@ function ProviderCardComponent(props: IProviderCardProps) {
           />
         ) : (
           <SuccessAlert
-            onClosePress={close}
+            onPress={() => {
+              navigation.push("EditProfile");
+            }}
+            buttonText={"برو به پروفایل"}
             title={"در بخش پروفایل و یا پرونده بیمار، اسم خود را وارد کنید"}
           />
         )}

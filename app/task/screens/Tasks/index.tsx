@@ -8,7 +8,13 @@ import React, {
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import { useRoute } from "@react-navigation/native";
-import { Button, Container, CustomBackdrop, Scroller } from "../../../library";
+import {
+  Button,
+  Container,
+  CustomBackdrop,
+  Scroller,
+  Subheading,
+} from "../../../library";
 import { TaskItem } from "../../components/TaskItem";
 import { taskState } from "../../entities";
 import { retrieveTasks } from "../../usecases";
@@ -19,6 +25,7 @@ import { EditModal } from "../../components/EditModal";
 
 function TasksScreen() {
   const [loading, setLoading] = useState<boolean>(true);
+  const [empty, setEmpty] = useState<boolean>(true);
   // const scrollRef = useRef<tScrollerRef>(null);
   const route = useRoute();
   const snapPoints = useMemo(() => [200, 230], []);
@@ -57,6 +64,10 @@ function TasksScreen() {
   }
   async function init() {
     await retrieveTasks(customerId);
+    //Check if state is empty or not
+    if (taskState.taskList.length != 0) {
+      setEmpty(false);
+    }
     setLoading(false);
   }
   useEffect(() => {
@@ -65,15 +76,20 @@ function TasksScreen() {
 
   return (
     <Container loading={loading}>
-      <Scroller
-        // ref={scrollRef}
-        contentContainerStyle={styles.containerContentStyle}
-        keyboard
-        enableOnAndroid
-        extraHeight={256}
-      >
-        {renderTaskItems()}
-      </Scroller>
+      {empty ? (
+        <Subheading style={{ alignSelf: "center", paddingTop: 20 }}>
+          {"شما تمرینی ندارید!"}
+        </Subheading>
+      ) : (
+        <Scroller
+          contentContainerStyle={styles.containerContentStyle}
+          keyboard
+          enableOnAndroid
+          extraHeight={256}
+        >
+          {renderTaskItems()}
+        </Scroller>
+      )}
       <View style={[styles.buttonContainer]}>
         <Button
           mode={"contained"}
@@ -83,7 +99,10 @@ function TasksScreen() {
             return <Entypo name="plus" size={24} color="white" />;
           }}
           fullRadius
-          onPress={onCollapsePress}
+          onPress={() => {
+            taskState.setCurrentEditTask(undefined);
+            onCollapsePress();
+          }}
         >
           {"افزودن تمرین جدید"}
         </Button>

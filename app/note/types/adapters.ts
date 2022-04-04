@@ -8,6 +8,7 @@ export interface IUploadImageResult {
 export interface IFetchGetNotesResult {
   error: string;
   notes: INote[];
+  httpStatus: number;
 }
 
 export interface IFetchCreateNote {

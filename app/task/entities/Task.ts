@@ -9,7 +9,7 @@ export class TaskState {
       setTasks: action,
       addTask: action,
       updateTask: action,
-      // updateEmptyTask: action,
+      setRemoveList: action,
       removeTask: action,
       setTaskDone: action,
       taskList: computed,
@@ -18,6 +18,9 @@ export class TaskState {
   }
   tasks: ITask[] = [];
   currentEditTask: ITask | undefined = undefined;
+  setRemoveList() {
+    this.tasks = [];
+  }
   setTasks(list: ITask[]) {
     this.tasks = list;
   }

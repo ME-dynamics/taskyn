@@ -12,6 +12,7 @@ export async function fetchPatient(customerId: string | undefined) {
     return {
       error,
       patient: undefined,
+      httpStatus,
     };
   }
   return {

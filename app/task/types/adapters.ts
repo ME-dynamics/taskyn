@@ -2,6 +2,7 @@ import { ITask } from "./entities";
 export interface IFetchTasksPayload {
   error: string;
   tasks: ITask[];
+  httpStatus: number;
 }
 
 export interface IFetchCreateTaskPayload {

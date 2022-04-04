@@ -120,6 +120,7 @@ function UserInfoScreen() {
           mode={"with-label"}
           title={"تلفن ثابت"}
           textAlign={"right"}
+          keyboardType={"number-pad"}
           placeholder={"مثال: ۰۲۱۲۳۴۵۶۷۸۹"}
           // textAlign={"center"}
           value={userInfoState.telephone}
@@ -416,7 +417,7 @@ function UserInfoScreen() {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert onClosePress={close} />
+        <SuccessAlert onPress={close} buttonText={"متوجه شدم!"} />
       </BottomSheetModal>
     </Container>
   );

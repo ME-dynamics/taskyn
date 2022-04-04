@@ -14,6 +14,7 @@ export async function fetchTasks(
     return {
       error: error,
       tasks: [],
+      httpStatus,
     };
   }
   if (Array.isArray(payload)) {
@@ -41,10 +42,12 @@ export async function fetchTasks(
     return {
       error: "",
       tasks: result,
+      httpStatus,
     };
   }
   return {
     error: "must be array",
     tasks: [],
+    httpStatus,
   };
 }

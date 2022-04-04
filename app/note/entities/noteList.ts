@@ -8,6 +8,7 @@ export class NoteListState {
       currentNote: observable,
       currentNoteImageIndex: observable,
       notes: observable,
+      serRemoveList: action,
       setRemoveNote: action,
       setCurrentNoteImageIndex: action,
       setNotes: action,
@@ -44,7 +45,9 @@ export class NoteListState {
       }
     }
   }
-
+  serRemoveList() {
+    this.notes = [];
+  }
   setNotes(notes: INote[]) {
     this.notes = notes;
   }

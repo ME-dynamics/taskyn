@@ -69,7 +69,7 @@ export function buildRequest() {
       const { method, endpoint, body } = info;
       const url = `${serverUrl}${endpoint}`;
       const token = `Bearer ${await getJwtToken()}`;
-      timeoutId = setTimeout(() => controller.abort(), 4000);
+      timeoutId = setTimeout(() => controller.abort(), 10000);
       const response: Response = await fetch(url, {
         method,
         headers: {

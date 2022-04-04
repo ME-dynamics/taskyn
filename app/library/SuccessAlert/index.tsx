@@ -6,7 +6,7 @@ import type { ISuccessAlertProps } from "./types";
 import { Button } from "../Button";
 import { Title } from "../Typography";
 function SuccessAlertComponent(props: ISuccessAlertProps) {
-  const { onClosePress, title } = props;
+  const { onPress, title, buttonText } = props;
   return (
     <BottomSheetView style={styles.container}>
       <Title style={{ textAlign: "center" }}>
@@ -16,9 +16,9 @@ function SuccessAlertComponent(props: ISuccessAlertProps) {
         mode={"contained"}
         size={"medium"}
         rippleColor={"lightGrey"}
-        onPress={onClosePress}
+        onPress={onPress}
       >
-        {"متوجه شدم"}
+        {buttonText}
       </Button>
     </BottomSheetView>
   );

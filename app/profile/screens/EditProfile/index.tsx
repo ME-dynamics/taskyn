@@ -91,7 +91,7 @@ function EditProfileScreen() {
             <Input
               mode={"outlined"}
               textAlign={"right"}
-              title={"درباره ی خود"}
+              title={"درباره خود"}
               value={profileState.description}
               onChangeText={(text) => {
                 profileState.setDescription(text);
@@ -130,7 +130,7 @@ function EditProfileScreen() {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert onClosePress={closeModal} />
+        <SuccessAlert onPress={closeModal} buttonText={"متوجه شدم"} />
       </BottomSheetModal>
     </>
   );

@@ -7,9 +7,11 @@ export async function fetchGetTestData(customerId: string) {
     method: "GET",
     body: undefined,
   });
+
   if (!success || !Array.isArray(payload)) {
     return {
       error,
+      httpStatus,
       testHistory: [],
     };
   }

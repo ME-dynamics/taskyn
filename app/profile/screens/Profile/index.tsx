@@ -114,6 +114,14 @@ function ProfileScreen() {
             onPress={() => navigation.push("Terms")}
             line
           />
+          <MenuItem
+            Icon={({ size, color }) => {
+              return <TaskynIcon name={"document"} size={size} color={color} />;
+            }}
+            title="حریم خصوصی"
+            onPress={() => navigation.push("Privacy")}
+            line
+          />
 
           <MenuItem
             Icon={({ size, color }) => {
@@ -121,7 +129,7 @@ function ProfileScreen() {
             }}
             title="خروج از حساب کاربری"
             onPress={onCollapsePress}
-            line
+            // line
             logout
           />
         </Scroller>

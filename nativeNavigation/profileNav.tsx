@@ -8,6 +8,7 @@ import { FAQ } from "../app/FAQ";
 
 import { headerOptions } from "./headerOptions";
 import { Terms } from "../app/terms";
+import { Privacy } from "../app/privacy";
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -43,6 +44,12 @@ function ProfileNavigation() {
         name={"Terms"}
         component={Terms}
         options={{ ...headerOptions, title: "شرایط و قوانین" }}
+      />
+
+      <ProfileStack.Screen
+        name={"Privacy"}
+        component={Privacy}
+        options={{ ...headerOptions, title: "حریم خصوصی" }}
       />
     </ProfileStack.Navigator>
   );

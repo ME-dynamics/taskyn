@@ -27,9 +27,9 @@ export function TestResultScreen() {
         rippleColor={"lightGrey"}
         textColor={"white"}
         onPress={() => {
+          console.log("chart");
           navigation.push("chart");
         }}
-        loading={loading}
       >
         {"نمودار"}
       </Button>
