@@ -75,7 +75,7 @@ function DashboardScreen() {
             }}
           />
           <Tile
-            title={"پرونده بیمار"}
+            title={"پرونده من"}
             Icon={({ size, color }) => {
               return <TaskynIcon name={"file"} color={color} size={size} svg />;
             }}
