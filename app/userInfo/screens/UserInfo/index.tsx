@@ -53,7 +53,11 @@ function UserInfoScreen() {
       const id = route.params?.id;
       navigation.setOptions({
         headerRight: () => (
-          <EditButton onCollapsePress={onCollapsePress} userId={id} />
+          <EditButton
+            onCollapsePress={onCollapsePress}
+            onclosePress={close}
+            userId={id}
+          />
         ),
       });
       await retrieveUserProfile(id);
