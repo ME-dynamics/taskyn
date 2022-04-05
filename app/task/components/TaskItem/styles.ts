@@ -13,29 +13,22 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     width: "100%",
-    minHeight: 56,
-    paddingTop: 8,
+    minHeight: 88,
+    paddingTop: 32,
     paddingHorizontal: 16,
-  },
-  header: {
-    height: 32,
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 8,
   },
   footer: {
     height: 46,
-    alignItems: "center",
-    justifyContent: "center",
   },
   doneParagraph: {
     color: THEME.COLORS.GREEN,
     alignSelf: "flex-start",
     marginLeft: 12,
+    marginTop: 10,
   },
   makeDoneContainer: {
-    alignSelf: "flex-start",
+    justifyContent: "space-between",
+    flexDirection: "row-reverse",
   },
   makeDoneParagraph: {
     color: THEME.COLORS.SECONDARY.NORMAL,
@@ -46,6 +39,14 @@ export const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     lineHeight: 24,
+  },
+  dateContainer: {
+    position: "absolute",
+    left: 12,
+    top: 6,
+  },
+  modal: {
+    marginHorizontal: "5%",
   },
 });
 
