@@ -30,3 +30,7 @@ export interface IEditModalProps {
   onClosePress: () => void;
   customerId: string | undefined; // TODO: fix this type
 }
+export interface IConfirmSheetProps {
+  onCancelPress: () => void;
+  onRemovePress: () => void;
+}
