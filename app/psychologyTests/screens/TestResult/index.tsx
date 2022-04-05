@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Button, Container, logger, Scroller } from "../../../library";
+import {
+  Button,
+  Container,
+  Headline,
+  logger,
+  Scroller,
+  Title,
+} from "../../../library";
 import { styles } from "./styles";
 import { TestResultCard } from "../../components";
 import { testResultState } from "../../entities";
 import { retrieveTestResult } from "../../usecases";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { View } from "react-native";
 
 export function TestResultScreen() {
   const route = useRoute();
   //@ts-ignore
   const mode = route.params?.mode || "";
+  const [resultSummary, setResultSummary] = useState<string>("");
   const isTestHistory = mode === "testHistory";
   const [loading, setLoading] = useState(isTestHistory);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -43,12 +52,30 @@ export function TestResultScreen() {
       type: "debug",
       logMessage: `test id is : ${testId}`,
     });
-    await retrieveTestResult(testId, customerId);
+    const resultSummaryForMBTI = await retrieveTestResult(testId, customerId);
+    if (resultSummaryForMBTI) {
+      //@ts-expect-error
+      setResultSummary(resultSummaryForMBTI);
+    } else {
+      setResultSummary("");
+    }
     setLoading(false);
   }
-
+  function renderResultSummaryForMBTI() {
+    return resultSummary ? (
+      <View style={styles.cardConttainerForMBTIResult}>
+        <View style={styles.sideBarColor} />
+        <View style={styles.MBTIResultCard}>
+          <View style={styles.textContainer}>
+            <Headline>{`نتیجه نهایی: ${resultSummary}`}</Headline>
+          </View>
+        </View>
+      </View>
+    ) : null;
+  }
   function renderTestResult() {
-    const result: JSX.Element[] = [];
+    //@ts-expect-error
+    const result: JSX.Element[] = [renderResultSummaryForMBTI()];
     const length = testResultState.testResult.length;
     for (let index = 0; index < length; index++) {
       const element = testResultState.testResult[index];
