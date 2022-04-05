@@ -1,4 +1,4 @@
-import { request } from "../../../library";
+import { request, toString } from "../../../library";
 import { IFetchGetTestResultById } from "../../types";
 import { parseTestResult } from "../utils";
 
@@ -15,10 +15,11 @@ export async function fetchGetTestResultById(
     return {
       error,
       testResult: [],
+      resultSummary: "",
     };
   }
   const testResult = [];
-  // console.log("payload", payload.results);
+
   //TODO: refactor
   const length = Array.isArray(payload?.results) ? payload?.results.length : 0;
   const results = Array.isArray(payload?.results) ? payload?.results : [];
@@ -26,8 +27,10 @@ export async function fetchGetTestResultById(
     const element = results[index];
     testResult.push(parseTestResult(element));
   }
+
   return {
     error,
     testResult,
+    resultSummary: toString(payload.resultSummary),
   };
 }
