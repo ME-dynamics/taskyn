@@ -3,7 +3,7 @@ import { fetchGetTestResultById } from "../adapters";
 import { testResultState } from "../entities";
 
 export async function retrieveTestResult(testId: string, customerId: string) {
-  const { error, testResult } = await fetchGetTestResultById(
+  const { error, testResult, resultSummary } = await fetchGetTestResultById(
     testId,
     customerId
   );
@@ -26,4 +26,5 @@ export async function retrieveTestResult(testId: string, customerId: string) {
     logMessage: `Test result retrieved for testId: ${testId}`,
   });
   testResultState.setTestResult(testResult);
+  return resultSummary;
 }
