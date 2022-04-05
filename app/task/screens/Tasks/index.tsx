@@ -25,7 +25,6 @@ import { EditModal } from "../../components/EditModal";
 
 function TasksScreen() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [empty, setEmpty] = useState<boolean>(true);
   // const scrollRef = useRef<tScrollerRef>(null);
   const route = useRoute();
   const snapPoints = useMemo(() => [200, 230], []);
@@ -66,7 +65,6 @@ function TasksScreen() {
     await retrieveTasks(customerId);
     //Check if state is empty or not
     if (taskState.taskList.length != 0) {
-      setEmpty(false);
     }
     setLoading(false);
   }
@@ -76,7 +74,7 @@ function TasksScreen() {
 
   return (
     <Container loading={loading}>
-      {empty ? (
+      {taskState.taskList.length === 0 ? (
         <Subheading style={{ alignSelf: "center", paddingTop: 20 }}>
           {"شما تمرینی ندارید!"}
         </Subheading>
