@@ -18,5 +18,6 @@ export interface IFetchCreateMbti {
 
 export interface IFetchGetTestResultById {
   error: string;
+  resultSummary: string;
   testResult: ITestResult[];
 }
