@@ -23,7 +23,7 @@ function ExitSheetComponent(props: IExitSheetProps) {
           flexDirection: "row-reverse",
           alignItems: "center",
           justifyContent: "space-evenly",
-          top: 40,
+          paddingTop: 20,
         }}
       >
         <Button

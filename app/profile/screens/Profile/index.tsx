@@ -29,26 +29,13 @@ function ProfileScreen() {
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const snapPoints = useMemo(() => ["40%", "40%"], []);
+  const snapPoints = useMemo(() => ["30%", "30%"], []);
   const isFocused = useIsFocused();
 
   async function init() {
-    // setLoading(true);
     await retrieveUser();
     setLoading(false);
   }
-  // function nameRenderer() {
-  //   if (loading) {
-  //     return (
-  //       <ActivityIndicator
-  //         size="small"
-  //         color={THEME.COLORS.PRIMARY.NORMAL}
-  //         style={{ width: 100, height: 110 }}
-  //       />
-  //     );
-  //   }
-
-  // }
   const close = useCallback(() => {
     BottomSheetModalRef.current?.close();
   }, []);
