@@ -3,10 +3,10 @@ import { THEME } from "../../../library";
 
 export const styles = StyleSheet.create({
   empty: {
-    width: "100%",
-    height: 256,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 60,
   },
   buttonContainer: {
     alignItems: "flex-end",
