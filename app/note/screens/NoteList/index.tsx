@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -11,6 +11,7 @@ import { retrieveNotes } from "../../usecases";
 
 import { styles } from "./styles";
 import { noteListState } from "../../entities";
+import { Note } from "../../assets";
 
 function NoteListScreen() {
   const navigator = useNavigation<NativeStackNavigationProp<any>>();
@@ -31,6 +32,11 @@ function NoteListScreen() {
     if (length === 0) {
       return (
         <View style={styles.empty}>
+          <Image
+            source={Note}
+            resizeMode={"contain"}
+            style={{ width: 250, height: 250 }}
+          />
           <Subheading>{"شما هنوز یادداشتی ایجاد نکردید."}</Subheading>
         </View>
       );
