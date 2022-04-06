@@ -1,5 +1,5 @@
 import { MMKV } from "react-native-mmkv";
-import type { tStorage, tStorageResult } from "./types";
+import type { tStorageType, tStorageResult } from "./types";
 const mmkv = new MMKV();
 function remove(key: string) {
   try {
@@ -9,8 +9,7 @@ function remove(key: string) {
   }
 }
 
-function retrieve<T extends tStorage>(args: T): tStorageResult<T> {
-  const { key, type } = args;
+function retrieve<T extends tStorageType>(key: string, type: T): tStorageResult<T> {
   try {
     if (type === "string") {
       return mmkv.getString(key) as tStorageResult<T>;

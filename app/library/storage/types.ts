@@ -1,24 +1,9 @@
-export interface IStringStorage {
-  key: string;
-  type: "string";
-}
+export type tStorageType = "string" | "number" | "boolean";
 
-export interface INumberStorage {
-  key: string;
-  type: "number";
-}
-
-export interface IBooleanStorage {
-  key: string;
-  type: "boolean";
-}
-
-export type tStorage = IStringStorage | INumberStorage | IBooleanStorage;
-
-export type tStorageResult<T> = T extends IStringStorage
+export type tStorageResult<T> = T extends "string"
   ? string | undefined
-  : T extends INumberStorage
+  : T extends "number"
   ? number | undefined
-  : T extends IBooleanStorage
+  : T extends "boolean"
   ? boolean | undefined
   : never;
