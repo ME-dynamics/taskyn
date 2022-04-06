@@ -23,6 +23,7 @@ function EditProfileScreen() {
   const [updateUserLoading, setUpdateUserLoading] = useState(false);
   const snapPoints = useMemo(() => ["30%", "30%"], []);
   const snapPointsModal = useMemo(() => [150, 180], []);
+  const [title, setTitle] = useState<"error" | "success">();
   const BottomSheetModalRef = useRef<BottomSheetModal>(null);
   const onCollapsePress = useCallback(() => {
     bottomSheetRef.current?.collapse();
@@ -39,6 +40,15 @@ function EditProfileScreen() {
   async function onPress() {
     setUpdateUserLoading(true);
     await updateUser(); // TODO: handle error
+    if (
+      profileState.firstName === "" ||
+      profileState.lastName === "" ||
+      profileState.description === ""
+    ) {
+      setTitle("error");
+    } else {
+      setTitle("success");
+    }
     setUpdateUserLoading(false);
     onCollapsePressModal();
     return;
@@ -130,7 +140,15 @@ function EditProfileScreen() {
         index={1}
         enablePanDownToClose
       >
-        <SuccessAlert onPress={closeModal} buttonText={"متوجه شدم"} />
+        <SuccessAlert
+          onPress={closeModal}
+          buttonText={"متوجه شدم"}
+          title={
+            title === "error"
+              ? "یکی از فیلدها خالی می باشد!"
+              : "اطلاعات با موفقیت ذخیره شد."
+          }
+        />
       </BottomSheetModal>
     </>
   );

@@ -9,7 +9,6 @@ export async function updateUser() {
     description: profileState.description,
   });
   if (error) {
-    console.log(error);
     return;
   }
 }
