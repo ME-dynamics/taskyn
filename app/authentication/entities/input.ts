@@ -7,6 +7,7 @@ export class InputState {
       otpNumber: observable,
       phoneValidation: observable,
       otpValidation: observable,
+      setPhoneValidationErrorReset: action,
       setPhoneNumber: action,
       setOtpNumber: action,
       setPhoneValidation: action,
@@ -19,6 +20,9 @@ export class InputState {
   otpNumber: string = "";
   phoneValidation: string[] = [];
   otpValidation: string[] = [];
+  setPhoneValidationErrorReset() {
+    this.phoneValidation = [];
+  }
   setPhoneNumber(phone: string) {
     this.phoneNumber = phone;
   }

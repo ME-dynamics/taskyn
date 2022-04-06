@@ -6,6 +6,7 @@ import { storage, logger, toString } from "../../library";
 import { fetchPasswordlessStart } from "../adapters";
 import { inputState, authState } from "../entities";
 export async function passwordlessStart() {
+  inputState.setPhoneValidationErrorReset();
   if (!inputState.isPhoneValid) {
     logger({
       container: "authnz",
@@ -55,9 +56,9 @@ export async function passwordlessStart() {
       path: { section: "usecases", file: "passwordlessStart" },
       type: "error",
       logMessage: `error in passwordlessStart is ${error}`,
-    })
+    });
     // TODO: handle server errors in snack bar
-    // inputState.setPhoneValidation([error]);
+    inputState.setPhoneValidation([error]);
     return;
   }
   if (!otpToken) {
