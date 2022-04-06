@@ -1,4 +1,5 @@
 import { MMKV } from "react-native-mmkv";
+import type { tStorage, tStorageResult } from "./types";
 const mmkv = new MMKV();
 function remove(key: string) {
   try {
@@ -8,20 +9,23 @@ function remove(key: string) {
   }
 }
 
-function retrieve(key: string, type: "string" | "number" | "boolean") {
+function retrieve<T extends tStorage>(args: T): tStorageResult<T> {
+  const { key, type } = args;
   try {
     if (type === "string") {
-      return mmkv.getString(key);
+      return mmkv.getString(key) as tStorageResult<T>;
     }
     if (type === "number") {
-      return mmkv.getNumber(key);
+      return mmkv.getNumber(key) as tStorageResult<T>;
     }
     if (type === "boolean") {
-      return mmkv.getBoolean(key);
+      return mmkv.getBoolean(key) as tStorageResult<T>;
     }
+    return undefined as tStorageResult<T>
   } catch (error) {
+    return undefined as tStorageResult<T>
     // send error to sentry
-    return undefined;
+    // return undefined;
   }
 }
 
