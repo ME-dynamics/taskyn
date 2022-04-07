@@ -7,7 +7,6 @@ import {
   Caption,
   CustomBackdrop,
   Paragraph,
-  TaskynIcon,
 } from "../../../library";
 import { createRequest, removeProvider, removeRequest } from "../../usecases";
 
@@ -77,16 +76,18 @@ function ProviderCardComponent(props: IProviderCardProps) {
     // myDoctor ? await removeRequest() : await createRequest(id);
     setLoading(false);
   }
-  function renderAvatar() {
-    if (profileImageUrl) {
-      return <Avatar size={52} imageUri={profileImageUrl} />;
-    }
-    return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;
-  }
+  // function renderAvatar() {
+  //   if (profileImageUrl) {
+  //     return;
+  //   }
+  //   return <TaskynIcon name={"profile"} color={iconColor} size={24} boxed />;
+  // }
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
-        <View style={styles.profileContainer}>{renderAvatar()}</View>
+        <View style={styles.profileContainer}>
+          <Avatar size={52} imageUri={profileImageUrl} />
+        </View>
         <View style={styles.infoContainer}>
           <Paragraph>{fullName}</Paragraph>
           <Caption>{description}</Caption>
