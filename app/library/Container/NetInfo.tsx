@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback } from "react";
-import { View, Linking, Platform } from "react-native";
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -21,6 +21,10 @@ function NetInfoComponent() {
   });
   useEffect(() => {
     const disposer = autorun(() => {
+      if (netInfoState.vpn) {
+        translateY.value = withTiming(0, { duration: 500 });
+        return;
+      }
       if (netInfoState.hasAccess) {
         translateY.value = withTiming(translateNetInfoStart, { duration: 500 });
       } else {
@@ -31,7 +35,12 @@ function NetInfoComponent() {
       };
     });
   }, []);
-
+  function contentGen(): string {
+    if (netInfoState.vpn) {
+      return "وی پی ان شما روشن است، ممکن است در کار با تسکین اختلال ایجاد کند";
+    }
+    return "شما آفلاین هستید، لطفا اینترنت خود را روشن کنید.";
+  }
   return (
     <Animated.View style={[styles.netInfoContainer, netInfoStyles]}>
       <View style={styles.iconContainer}>
@@ -40,9 +49,7 @@ function NetInfoComponent() {
         </View>
       </View>
       <View style={styles.infoContainer}>
-        <Subheading style={styles.infoText}>
-          {"شما آفلاین هستید، لطفا اینترنت خود را روشن کنید."}
-        </Subheading>
+        <Subheading style={styles.infoText}>{contentGen()}</Subheading>
       </View>
     </Animated.View>
   );
