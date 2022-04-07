@@ -1,5 +1,4 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react-lite";
 import { NetInfo } from "./NetInfo";
@@ -11,7 +10,11 @@ function ContainerComponent(props: IContainerProps) {
   const { children, style, loading } = props;
 
   return (
-    <SafeAreaView {...props} style={[styles.container, style]} edges={['top', 'left', 'right']}>
+    <SafeAreaView
+      {...props}
+      style={[styles.container, style]}
+      edges={["top", "left", "right"]}
+    >
       {loading ? <Loading /> : children}
       <NetInfo />
     </SafeAreaView>
