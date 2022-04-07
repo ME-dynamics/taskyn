@@ -41,7 +41,7 @@ export function AboutUs() {
           Icon={({ size, color }) => {
             return <TaskynIcon name={"telegram"} size={size} color={color} />;
           }}
-          onPress={() => Communications.web("https://telegram.com")}
+          onPress={() => Communications.web("https://t.me/taskynSupport")}
           size={buttonIconSize}
         />
         <IconButton
@@ -49,7 +49,7 @@ export function AboutUs() {
           Icon={({ size, color }) => {
             return <TaskynIcon name={"linkedin"} size={size} color={color} />;
           }}
-          onPress={() => Communications.web("http://taskyn.net")}
+          onPress={() => Communications.web("https://www.linkedin.com/in/taskyn-app-766979220/")}
           size={buttonIconSize}
         />
         <IconButton
@@ -59,7 +59,7 @@ export function AboutUs() {
               <TaskynIcon name={"instagram"} size={size} color={color} svg />
             );
           }}
-          onPress={() => Communications.web("https://instagram.com/taskyn")}
+          onPress={() => Communications.web("https://www.instagram.com/taskyn.app/")}
           size={buttonIconSize}
         />
       </View>
