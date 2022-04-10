@@ -5,13 +5,15 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { observer } from "mobx-react-lite";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Tap } from "../Tap";
 import { Caption, Subheading } from "../Typography";
 import { IconButton } from "../IconButton";
+
+import { InputPress } from "./InputPress";
+
 import { styleGen, inputHeightGen } from "./styles";
 import { IInputProps, tOnContentSize, tNativeEvent } from "./types";
 
@@ -219,7 +221,6 @@ function InputComponent(props: IInputProps) {
     }
   }
 
-  const tap = Gesture.Tap().onEnd(onPress);
   function renderPlaceHolder() {
     if (isRaw && focused) {
       return placeholder;
@@ -233,7 +234,7 @@ function InputComponent(props: IInputProps) {
     <View style={containerStyles}>
       {renderLimit()}
       {renderTitle()}
-      <GestureDetector gesture={tap}>
+      <InputPress onPress={onPress}>
         <View
           pointerEvents={focused ? "box-none" : "box-only"}
           style={inputContainerStyles}
@@ -252,8 +253,7 @@ function InputComponent(props: IInputProps) {
             onContentSizeChange={multiline ? onContentSize : undefined}
           />
         </View>
-      </GestureDetector>
-
+      </InputPress>
       <View style={styles.errorContainer}>{renderErrors()}</View>
     </View>
   );

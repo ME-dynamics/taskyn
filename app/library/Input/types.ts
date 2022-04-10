@@ -1,4 +1,5 @@
-import {
+import type { ReactChild } from "react";
+import type {
   NativeSyntheticEvent,
   StyleProp,
   TextInputContentSizeChangeEventData,
@@ -7,7 +8,12 @@ import {
   TextStyle,
 } from "react-native";
 
-export type tInputMode = "outlined" | "flat" | "with-label" | "raw" | "no-style";
+export type tInputMode =
+  | "outlined"
+  | "flat"
+  | "with-label"
+  | "raw"
+  | "no-style";
 export interface IInputProps extends TextInputProps {
   title?: string;
   mode: tInputMode;
@@ -31,3 +37,8 @@ export interface IInputStyleGen {
 export type tOnContentSize =
   NativeSyntheticEvent<TextInputContentSizeChangeEventData>;
 export type tNativeEvent = NativeSyntheticEvent<TextInputFocusEventData>;
+
+export interface IInputPress {
+  children: ReactChild;
+  onPress: () => void;
+}
