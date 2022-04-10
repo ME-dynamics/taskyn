@@ -1,9 +1,10 @@
 import React from "react";
 import { View, TouchableWithoutFeedback } from "react-native";
+import { observer } from "mobx-react-lite";
 import { useDoublePress } from "../doublePress";
 import { ITapProps } from "./types";
 
-export function Tap(props: ITapProps) {
+function TapComponent(props: ITapProps) {
   const { children, onPress, waitFor } = props;
   const { onTouchablePress } = useDoublePress(onPress);
   return (
@@ -16,3 +17,5 @@ export function Tap(props: ITapProps) {
     </TouchableWithoutFeedback>
   );
 }
+
+export const Tap = observer(TapComponent);
