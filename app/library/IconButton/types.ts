@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { ReactChild, ReactElement } from "react";
+import type { BorderlessButtonProps } from "react-native-gesture-handler";
 
 export interface IIconProps {
   size: number;
@@ -15,4 +16,8 @@ export interface IIconButtonProps {
 export interface IIconStyleGen {
   color?: string;
   size?: number;
+}
+
+export interface IBorderlessProps extends BorderlessButtonProps {
+  children: ReactChild;
 }
