@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 12,
     shadowRadius: 2,
-    shadowColor: "red",
     elevation: 2,
     overflow: "hidden",
     alignItems: "center",
