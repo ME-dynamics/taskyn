@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { I18nManager } from "react-native";
+import { I18nManager, Platform } from "react-native";
 import { observer } from "mobx-react-lite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SplashScreen from "expo-splash-screen";
@@ -31,6 +31,16 @@ function AppComponent() {
   const [isAppReady, setAppReady] = useState<boolean>(false);
   const [fontsLoaded] = useFonts({
     TaskynIcon: require("./assets/fonts/icomoon.ttf"),
+    ...Platform.select({
+      web: {
+        " Vazir-Regular-UI": require("./assets/fonts/Vazir-Regular-UI.ttf"),
+        "Vazir-Light-UI": require("./assets/fonts/Vazir-Light-UI.ttf"),
+        "Vazir-Thin-UI": require("./assets/fonts/Vazir-Thin-UI.ttf"),
+        "Vazir-Medium-UI": require("./assets/fonts/Vazir-Medium-UI.ttf"),
+        "Vazir-Bold-UI": require("./assets/fonts/Vazir-Bold-UI.ttf"),
+        "Vazir-Black-UI": require("./assets/fonts/Vazir-Black-UI.ttf"),
+      },
+    }),
   });
   useEffect(() => {
     let removeSilentRefreshAutoRun: IReactionDisposer | undefined = undefined;
