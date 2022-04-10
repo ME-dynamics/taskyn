@@ -33,7 +33,7 @@ function AppComponent() {
     TaskynIcon: require("./assets/fonts/icomoon.ttf"),
     ...Platform.select({
       web: {
-        " Vazir-Regular-UI": require("./assets/fonts/Vazir-Regular-UI.ttf"),
+        "Vazir-Regular-UI": require("./assets/fonts/Vazir-Regular-UI.ttf"),
         "Vazir-Light-UI": require("./assets/fonts/Vazir-Light-UI.ttf"),
         "Vazir-Thin-UI": require("./assets/fonts/Vazir-Thin-UI.ttf"),
         "Vazir-Medium-UI": require("./assets/fonts/Vazir-Medium-UI.ttf"),
