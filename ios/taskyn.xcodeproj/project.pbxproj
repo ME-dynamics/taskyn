@@ -21,6 +21,7 @@
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		C54DCC84986647178BAB9FE2 /* Vazir-Medium-UI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31B8066F112B4C5BAFCFD37D /* Vazir-Medium-UI.ttf */; };
 		DD2B5CAD71944776A4D6197B /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DC735777AE49F09F299A32 /* noop-file.swift */; };
+		B62FFF65FCDA4823A38E08D8 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E352E5C2B42441D68A574AC4 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		ECB2D50B40604967B41BC573 /* Vazir-Thin-UI.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Thin-UI.ttf"; path = "../assets/fonts/Vazir-Thin-UI.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-taskyn/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		E352E5C2B42441D68A574AC4 /* icomoon.ttf */ = {isa = PBXFileReference; name = "icomoon.ttf"; path = "../assets/fonts/icomoon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				31B8066F112B4C5BAFCFD37D /* Vazir-Medium-UI.ttf */,
 				7EC41C0A0A9B42F6BF8E37D0 /* Vazir-Regular-UI.ttf */,
 				ECB2D50B40604967B41BC573 /* Vazir-Thin-UI.ttf */,
+				E352E5C2B42441D68A574AC4 /* icomoon.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				C54DCC84986647178BAB9FE2 /* Vazir-Medium-UI.ttf in Resources */,
 				27BA256B466448068E4299BF /* Vazir-Regular-UI.ttf in Resources */,
 				A878510C4A9F4BB6A530E557 /* Vazir-Thin-UI.ttf in Resources */,
+				B62FFF65FCDA4823A38E08D8 /* icomoon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
