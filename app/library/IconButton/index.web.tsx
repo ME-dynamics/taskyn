@@ -18,7 +18,7 @@ function IconButtonComponent(
   });
   const { onTouchablePress } = useDoublePress(onPress);
   return (
-    <TouchableWithoutFeedback ref={ref} onPress={() => console.log("ssa")}>
+    <TouchableWithoutFeedback ref={onTouchablePress}>
       <View style={styles.container}>
         <Icon color={iconColor} size={iconSize} />
       </View>
